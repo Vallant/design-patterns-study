@@ -18,42 +18,26 @@
 package db.postgres;
 
 import db.interfaces.ActivityRepository;
-import db.interfaces.DatabaseEngine;
+import db.common.DBConnection;
 import db.interfaces.ProjectMemberRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import db.interfaces.UserRepository;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * @created $date
  * @author stephan
  */
-public class DatabaseEnginePostgres extends DatabaseEngine
+public class DBConnectionPostgres extends DBConnection
 {
-    static DatabaseEnginePostgres theInstance;
-    public static DatabaseEnginePostgres getInstance()
+    public DBConnectionPostgres(String driver_, String url_, String username_, String password_) throws Exception
     {
-        if(theInstance == null)
-            theInstance = new DatabaseEnginePostgres();
-        return theInstance;
-    }
-    private DatabaseEnginePostgres()
-    {
-        
+        super(driver_, url_, username_, password_);
     }
     
-    @Override
-    public boolean connect()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean disconnect()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public UserRepository getUserRepository()
     {

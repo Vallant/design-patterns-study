@@ -15,13 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package db.interfaces;
+package db.postgres;
+
+import db.interfaces.ActivityRepository;
 
 /**
  * @created $date
  * @author stephan
  */
-public interface DatabaseFactory
+public class ActivityRepositoryPostgres implements ActivityRepository
 {
-    public DatabaseEngine Instanciate();
+
 }
