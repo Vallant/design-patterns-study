@@ -16,11 +16,14 @@
  */
 package db.interfaces;
 
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author stephan
  */
-public interface ProjectPhaseRepository
+public interface Criteria
 {
-    
+    public String toSqlClause();
+    public int prepareStatement(PreparedStatement ps, int startIndex) throws Exception;
 }
