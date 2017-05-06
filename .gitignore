@@ -21,7 +21,10 @@ hs_err_pid*
 *.synctex.gz
 *.toc
 *.log
+*.lof
 
 nbproject/
 manifest.mf
 build.xml
+/src/best-practice/dist/
+/src/best-practice/build/

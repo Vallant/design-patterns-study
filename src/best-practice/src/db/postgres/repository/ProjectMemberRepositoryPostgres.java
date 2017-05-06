@@ -15,57 +15,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package db.postgres;
+package db.postgres.repository;
 
-import db.interfaces.ActivityRepository;
-import db.common.DBConnection;
-import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
-import db.interfaces.UserRepository;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import data.ProjectMember;
+import data.User;
+import db.interfaces.Repository;
+import java.util.ArrayList;
+import db.interfaces.Criteria;
+
 
 /**
  * @created $date
  * @author stephan
  */
-public class DBConnectionPostgres extends DBConnection
+public class ProjectMemberRepositoryPostgres implements Repository<ProjectMember>
 {
-    public DBConnectionPostgres(String driver_, String url_, String username_, String password_) throws Exception
+    @Override
+    public void add(ProjectMember item) throws Exception
     {
-        super(driver_, url_, username_, password_);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(ProjectMember item) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void remove(ProjectMember item) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ProjectMember getByID(int ID) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<ProjectMember> getBySpecification(Criteria criterias) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
-    public UserRepository getUserRepository()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ProjectRepository getProjectRepository()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ProjectMemberRepository getProjectMemberRepository()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ProjectPhaseRepository getProjectPhaseRepository()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ActivityRepository getActivityRepository()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
 }

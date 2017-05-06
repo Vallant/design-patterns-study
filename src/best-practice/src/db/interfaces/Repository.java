@@ -24,10 +24,10 @@ import java.util.ArrayList;
  */
 public interface Repository<T>
 {
-    void add(T item);
-    void update(T item);
-    void remove(T item);
-    T getByID(int ID);
+    void add(T item) throws Exception;
+    void update(T item) throws Exception;
+    void remove(T item) throws Exception;
     
-    ArrayList<T> getBySpecification(Specification<T> criterias);
+    T getByID(int ID) throws Exception;
+    ArrayList<T> getBySpecification(Criteria criterias) throws Exception;
 }

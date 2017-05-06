@@ -17,11 +17,156 @@
 
 package data;
 
+import java.time.ZonedDateTime;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @created $date
  * @author stephan
  */
 public class Activity 
 {
+    private Integer hash;
+    private Integer id;
+    private Integer projectId;
+    private Integer phaseId;
+    private Integer userId;
+    private String description;
+    private ZonedDateTime start;
+    private ZonedDateTime stop;
+    private String comments;
+
+    public Activity(Integer hash, Integer id, Integer projectId, Integer phaseId, Integer userId, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    {
+        this.hash = hash;
+        this.id = id;
+        this.projectId = projectId;
+        this.phaseId = phaseId;
+        this.userId = userId;
+        this.description = description;
+        this.start = start;
+        this.stop = stop;
+        this.comments = comments;
+    }
+
+    public Activity(Integer projectId, Integer phaseId, Integer userId, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    {
+        this.projectId = projectId;
+        this.phaseId = phaseId;
+        this.userId = userId;
+        this.description = description;
+        this.start = start;
+        this.stop = stop;
+        this.comments = comments;
+    }
+    
+    
+
+    @Override
+    public int hashCode()
+    {
+        return new HashCodeBuilder()
+                .append(id)
+                .append(projectId)
+                .append(phaseId)
+                .append(userId)
+                .append(description)
+                .append(start)
+                .append(stop)
+                .append(comments).hashCode();
+    }
+    
+    
+
+    public Integer getHash()
+    {
+        return hash;
+    }
+
+    public void setHash(Integer hash)
+    {
+        this.hash = hash;
+    }
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
+    public Integer getProjectId()
+    {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId)
+    {
+        this.projectId = projectId;
+    }
+
+    public Integer getPhaseId()
+    {
+        return phaseId;
+    }
+
+    public void setPhaseId(Integer phaseId)
+    {
+        this.phaseId = phaseId;
+    }
+
+    public Integer getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(Integer userId)
+    {
+        this.userId = userId;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public ZonedDateTime getStart()
+    {
+        return start;
+    }
+
+    public void setStart(ZonedDateTime start)
+    {
+        this.start = start;
+    }
+
+    public ZonedDateTime getStop()
+    {
+        return stop;
+    }
+
+    public void setStop(ZonedDateTime stop)
+    {
+        this.stop = stop;
+    }
+
+    public String getComments()
+    {
+        return comments;
+    }
+
+    public void setComments(String comments)
+    {
+        this.comments = comments;
+    }
+    
     
 }
