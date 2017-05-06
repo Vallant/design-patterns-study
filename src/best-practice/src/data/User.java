@@ -17,23 +17,33 @@
 
 package data;
 
+import db.interfaces.DBEntity;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @author stephan
  */
 
-public class User 
+public class User implements DBEntity
 {
-    private Integer id; 
+    public static enum ROLE
+    {
+        ADMIN,
+        USER
+    }
+    
+    private int hash;
+    private int id; 
     private String userName;
     
     private String firstName;
     private String lastName;
-    private String role;
+    private ROLE role;
     private String email;
-    
-    
-    // Constructors
-    public User(Integer id, String userName, String firstName, String lastName, String role, String email) {
+
+    public User(int hash, int id, String userName, String firstName, String lastName, ROLE role, String email)
+    {
+        this.hash = hash;
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
@@ -42,15 +52,15 @@ public class User
         this.email = email;
     }
 
-    public User(Integer id) {
-        this.id = id;
-    }
-
-    public User(String userName) {
+    public User(String userName, String firstName, String lastName, ROLE role, String email)
+    {
         this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.email = email;
     }
-    
-    
+     
     //Getters, Setters
     public Integer getId() {
         return id;
@@ -84,11 +94,11 @@ public class User
         this.lastName = lastName;
     }
 
-    public String getRole() {
+    public ROLE getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(ROLE role) {
         this.role = role;
     }
 
@@ -98,5 +108,29 @@ public class User
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean isChanged()
+    {
+        return getLocalHash() != getRemoteHash();
+    }
+
+    @Override
+    public int getLocalHash()
+    {
+        return new HashCodeBuilder().
+                append(firstName).
+                append(lastName).
+                append(role).
+                append(userName).
+                append(email).
+                hashCode();
+    }
+
+    @Override
+    public int getRemoteHash()
+    {
+        return hash;
     }
 }

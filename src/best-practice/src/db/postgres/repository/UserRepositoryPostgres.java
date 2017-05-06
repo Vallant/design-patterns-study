@@ -54,7 +54,7 @@ public class UserRepositoryPostgres implements Repository<User>
     }
 
     @Override
-    public ArrayList<User> getBySpecification(Criteria criterias) throws Exception
+    public ArrayList<User> getByCriteria(Criteria criterias) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

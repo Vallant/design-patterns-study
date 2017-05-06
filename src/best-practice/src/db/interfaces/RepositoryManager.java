@@ -26,4 +26,6 @@ public interface RepositoryManager
     public Criteria getAndCriteria(Criteria left, Criteria right);
     public Criteria getOrCriteria(Criteria left, Criteria right);
     public Criteria getIdAndHashCriteria(int id, int hash);
+    public Criteria createIdCriteria(int id);
+    public Criteria createHashCriteria(int hash);
 }

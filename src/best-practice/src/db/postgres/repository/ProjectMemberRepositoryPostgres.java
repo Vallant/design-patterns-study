@@ -19,9 +19,16 @@ package db.postgres.repository;
 
 import data.ProjectMember;
 import data.User;
+import db.common.DBManager;
 import db.interfaces.Repository;
 import java.util.ArrayList;
 import db.interfaces.Criteria;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 /**
@@ -55,7 +62,7 @@ public class ProjectMemberRepositoryPostgres implements Repository<ProjectMember
     }
 
     @Override
-    public ArrayList<ProjectMember> getBySpecification(Criteria criterias) throws Exception
+    public ArrayList<ProjectMember> getByCriteria(Criteria criterias) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

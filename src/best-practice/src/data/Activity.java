@@ -17,6 +17,8 @@
 
 package data;
 
+import db.interfaces.DBEntity;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -24,7 +26,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @created $date
  * @author stephan
  */
-public class Activity 
+public class Activity implements DBEntity
 {
     private Integer hash;
     private Integer id;
@@ -44,8 +46,8 @@ public class Activity
         this.phaseId = phaseId;
         this.userId = userId;
         this.description = description;
-        this.start = start;
-        this.stop = stop;
+        this.start = ZonedDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault());
+        this.stop = ZonedDateTime.ofInstant(stop.toInstant(), ZoneId.systemDefault());
         this.comments = comments;
     }
 
@@ -55,15 +57,14 @@ public class Activity
         this.phaseId = phaseId;
         this.userId = userId;
         this.description = description;
-        this.start = start;
-        this.stop = stop;
+        this.start = ZonedDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault());
+        this.stop = ZonedDateTime.ofInstant(stop.toInstant(), ZoneId.systemDefault());
         this.comments = comments;
     }
     
     
-
     @Override
-    public int hashCode()
+    public int getLocalHash()
     {
         return new HashCodeBuilder()
                 .append(id)
@@ -76,9 +77,8 @@ public class Activity
                 .append(comments).hashCode();
     }
     
-    
-
-    public Integer getHash()
+    @Override
+    public int getRemoteHash()
     {
         return hash;
     }
@@ -166,6 +166,12 @@ public class Activity
     public void setComments(String comments)
     {
         this.comments = comments;
+    }
+
+    @Override
+    public boolean isChanged()
+    {
+        return getLocalHash() != getRemoteHash();
     }
     
     

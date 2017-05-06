@@ -29,5 +29,5 @@ public interface Repository<T>
     void remove(T item) throws Exception;
     
     T getByID(int ID) throws Exception;
-    ArrayList<T> getBySpecification(Criteria criterias) throws Exception;
+    ArrayList<T> getByCriteria(Criteria criterias) throws Exception;
 }

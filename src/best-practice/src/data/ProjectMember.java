@@ -17,16 +17,26 @@
 
 package data;
 
+import db.interfaces.DBEntity;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @created $date
  * @author stephan
  */
-public class ProjectMember
+public class ProjectMember implements DBEntity
 {
-    private final User user;
-    private final Project project;
+
+    public static enum ROLE
+    {
+        MEMBER,
+        LEADER
+    }
     
-    private String role;
+    private User user;
+    private Project project;
+    private int hash;
+    private ROLE role;
 
     public User getUser()
     {
@@ -38,12 +48,12 @@ public class ProjectMember
         return project;
     }
 
-    public String getRole()
+    public ROLE getRole()
     {
         return role;
     }
 
-    public void setRole(String role)
+    public void setRole(ROLE role)
     {
         this.role = role;
     }
@@ -53,6 +63,38 @@ public class ProjectMember
         this.user = user;
         this.project = project;
     }
+
+    public ProjectMember(User user, Project project, int hash, ROLE role)
+    {
+        this.user = user;
+        this.project = project;
+        this.hash = hash;
+        this.role = role;
+    }
+    
+    
+    @Override
+    public boolean isChanged()
+    {
+        return getLocalHash() != getRemoteHash();
+    }
+
+    @Override
+    public int getLocalHash()
+    {
+        return new HashCodeBuilder().
+                append(user).
+                append(project.getLocalHash()).
+                append(role).hashCode();
+                
+    }
+
+    @Override
+    public int getRemoteHash()
+    {
+        return hash;
+    }
+    
     
 
 }

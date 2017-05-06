@@ -126,4 +126,18 @@ public class DBManager implements RepositoryManager
     {
         return repositoryManager.getIdAndHashCriteria(id, hash);
     }
+
+    @Override
+    public Criteria createIdCriteria(int id)
+    {
+        return repositoryManager.createIdCriteria(id);
+    }
+
+    @Override
+    public Criteria createHashCriteria(int hash)
+    {
+        return repositoryManager.createHashCriteria(hash);
+    }
+    
+    
 }

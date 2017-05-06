@@ -53,7 +53,7 @@ public class ProjectPhaseRepositoryPostres implements Repository<ProjectPhase>
     }
 
     @Override
-    public ArrayList<ProjectPhase> getBySpecification(Criteria criterias) throws Exception
+    public ArrayList<ProjectPhase> getByCriteria(Criteria criterias) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

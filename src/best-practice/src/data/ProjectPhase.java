@@ -17,10 +17,85 @@
 
 package data;
 
+import db.interfaces.DBEntity;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * @created $date
  * @author stephan
  */
-public class ProjectPhase {
+public class ProjectPhase implements DBEntity
+{
+    private int hash;
+    private int id;
+    private Project project;
+    private String name;
+
+    public ProjectPhase(int hash, int id, Project project, String name)
+    {
+        this.hash = hash;
+        this.id = id;
+        this.project = project;
+        this.name = name;
+    }
+
+    public ProjectPhase(Project project, String name)
+    {
+        this.project = project;
+        this.name = name;
+    }
+    
+    
+    
+    @Override
+    public boolean isChanged()
+    {
+        return getLocalHash() != getRemoteHash();
+    }
+
+    @Override
+    public int getLocalHash()
+    {
+        return new HashCodeBuilder().
+                append(project.getLocalHash()).
+                append(name).
+                hashCode();
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public Project getProject()
+    {
+        return project;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public int getRemoteHash()
+    {
+        return hash;
+    }
 
 }

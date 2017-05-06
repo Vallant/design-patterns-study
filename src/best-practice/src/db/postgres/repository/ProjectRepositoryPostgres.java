@@ -56,10 +56,9 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next())
             {
-                int h = rs.getInt(1);
-                int id = rs.getInt(2);
+                int id = rs.getInt("ID");
                 item.setId(id);
-                item.setHash(h);
+                item.setHash(item.hashCode());
             }
         }
     }
@@ -113,15 +112,16 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public Project getByID(int ID) throws Exception
     {
-        Criteria c = createIdCriteria(ID);
-        ArrayList<Project> l = getBySpecification(c);
+        DBManager db = DBManager.getInstance();
+        Criteria c = db.createIdCriteria(ID);
+        ArrayList<Project> l = getByCriteria(c);
         if(l.isEmpty())
             throw new Exception("No such item");
         return l.get(0);
     }
 
     @Override
-    public ArrayList<Project> getBySpecification(Criteria criterias) throws Exception
+    public ArrayList<Project> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<Project> list = new ArrayList<>();
         try(Connection con = DBManager.getInstance().getConnection())
@@ -142,19 +142,5 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             }
         }
         return list;
-    }
-
-    @Override
-    public Criteria createIdCriteria(int id)
-    {
-        return new IdCriteriaPostgres(id);
-    }
-
-    @Override
-    public Criteria createHashCriteria(int hash)
-    {
-        return new HashCriteriaPostgres(hash);
-    }
-
-    
+    }    
 }

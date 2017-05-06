@@ -17,13 +17,14 @@
 
 package data;
 
+import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * @created $date
  * @author stephan
  */
-public class Project 
+public class Project implements DBEntity
 {
     
     private int hash;
@@ -31,13 +32,17 @@ public class Project
     private String name;
     private String description;
 
-    @Override
-    public int hashCode()
+    public int getLocalHash()
     {
         return new HashCodeBuilder()
                 .append(name.hashCode())
-                .append(description).hashCode();
+                .append(description.hashCode()).hashCode();
     }
+    public int getRemoteHash()
+    {
+        return hash;
+    }
+    
 
     public Project(int hash, int id, String name, String description)
     {
@@ -92,5 +97,11 @@ public class Project
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    @Override
+    public boolean isChanged()
+    {
+        return getLocalHash() != getRemoteHash();
     }
 }

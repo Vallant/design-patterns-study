@@ -13,6 +13,5 @@ import data.Project;
  */
 public interface ProjectRepository extends Repository<Project>
 {
-    Criteria createIdCriteria(int id);
-    Criteria createHashCriteria(int hash);
+    
 }

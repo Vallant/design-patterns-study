@@ -74,5 +74,18 @@ public class RepositoryManagerPostgres implements RepositoryManager
     {
         return new AndCriteriaPostres(new IdCriteriaPostgres(id), new HashCriteriaPostgres(hash));
     }
+
+    @Override
+    public Criteria createIdCriteria(int id)
+    {
+        return new IdCriteriaPostgres(id);
+    }
+
+    @Override
+    public Criteria createHashCriteria(int hash)
+    {
+        return new HashCriteriaPostgres(hash);
+    }
+    
     
 }
