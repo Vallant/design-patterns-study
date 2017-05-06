@@ -10,8 +10,9 @@ CREATE TABLE IF NOT EXISTS PROJECT(
     );
 
 CREATE TABLE IF NOT EXISTS USERS(
-    ID          SERIAL      NOT NULL, 
-    NAME        TEXT        NOT NULL, 
+    ID          SERIAL      NOT NULL,
+    FIRST_NAME  TEXT        NOT NULL, 
+    LAST_NAME   TEXT        NOT NULL, 
     ROLE        TEXT        NOT NULL, 
     SALT        CHAR(8)     NOT NULL, 
     PASSWORD    CHAR(32)    NOT NULL, 
