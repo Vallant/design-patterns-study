@@ -28,6 +28,6 @@ public interface Repository<T>
     void update(T item) throws Exception;
     void remove(T item) throws Exception;
     
-    T getByID(int ID) throws Exception;
+    T getByPrimaryKey(Criteria c) throws Exception;
     ArrayList<T> getByCriteria(Criteria criterias) throws Exception;
 }

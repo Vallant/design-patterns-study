@@ -16,11 +16,13 @@
  */
 package db.interfaces;
 
+import data.ProjectPhase;
+
 /**
  *
  * @author stephan
  */
-public interface Criteria
+public interface ProjectPhaseRepository extends Repository<ProjectPhase>
 {
-    //Nothing to do.
+    
 }

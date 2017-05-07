@@ -18,51 +18,125 @@
 package db.postgres.repository;
 
 import data.ProjectMember;
-import data.User;
 import db.common.DBManager;
-import db.interfaces.Repository;
-import java.util.ArrayList;
+import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
+import java.util.ArrayList;
+import db.interfaces.ProjectMemberRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import db.interfaces.SQLCriteria;
 
 
 /**
  * @created $date
  * @author stephan
  */
-public class ProjectMemberRepositoryPostgres implements Repository<ProjectMember>
+public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
 {
     @Override
     public void add(ProjectMember item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
+        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
+        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_ID, PROJECT_ID, ROLE) "
+                            + "VALUES "
+                            + "(?, ?, ?, ?) "
+                            + "WHERE "
+                            + a.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setInt(index++, item.getUser().getId());
+            ps.setInt(index++, item.getProject().getId());
+            ps.setString(index++, item.getRole().name());
+            a.prepareStatement(ps, index);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Update failed!");
+            item.setRemoteHash(item.getLocalHash());
+            
+        }
     }
 
     @Override
     public void update(ProjectMember item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
+        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
+        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_ID = ?, PROJECT_ID = ?, ROLE = ? "
+                            + "WHERE "
+                            + a.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setInt(index++, item.getUser().getId());
+            ps.setInt(index++, item.getProject().getId());
+            ps.setString(index++, item.getRole().name());
+            a.prepareStatement(ps, index);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+            item.setRemoteHash(item.getLocalHash());
+            
+        }
     }
 
     @Override
     public void remove(ProjectMember item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
+        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
+        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "DELETE FROM PROJECT_MEMBER "
+                            + "WHERE "
+                            + a.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            int index = 1;
+            ps.setInt(index++, item.getRemoteHash());
+            ps.setInt(index++, item.getUser().getId());
+            ps.setInt(index++, item.getProject().getId());
+            ps.setString(index++, item.getRole().name());
+            a.prepareStatement(ps, index);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+        }
     }
 
     @Override
-    public ProjectMember getByID(int ID) throws Exception
+    public ProjectMember getByPrimaryKey(Criteria c) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ArrayList<ProjectMember> getByCriteria(Criteria criterias) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public Criteria getPrimaryKeyCriteria(int projectId, int userId)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

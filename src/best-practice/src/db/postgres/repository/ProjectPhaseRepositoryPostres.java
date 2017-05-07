@@ -17,15 +17,15 @@
 package db.postgres.repository;
 
 import data.ProjectPhase;
-import db.interfaces.Repository;
-import java.util.ArrayList;
 import db.interfaces.Criteria;
+import db.interfaces.ProjectPhaseRepository;
+import java.util.ArrayList;
 
 /**
  *
  * @author stephan
  */
-public class ProjectPhaseRepositoryPostres implements Repository<ProjectPhase>
+public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
 {
 
     @Override
@@ -47,7 +47,7 @@ public class ProjectPhaseRepositoryPostres implements Repository<ProjectPhase>
     }
 
     @Override
-    public ProjectPhase getByID(int ID) throws Exception
+    public ProjectPhase getByPrimaryKey(Criteria c) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

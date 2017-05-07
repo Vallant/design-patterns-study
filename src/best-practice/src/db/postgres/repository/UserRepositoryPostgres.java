@@ -18,15 +18,15 @@
 package db.postgres.repository;
 
 import data.User;
-import db.interfaces.Repository;
-import java.util.ArrayList;
 import db.interfaces.Criteria;
+import java.util.ArrayList;
+import db.interfaces.UserRepository;
 
 /**
  * @created $date
  * @author stephan
  */
-public class UserRepositoryPostgres implements Repository<User>
+public class UserRepositoryPostgres implements UserRepository
 {
 
     @Override
@@ -48,7 +48,7 @@ public class UserRepositoryPostgres implements Repository<User>
     }
 
     @Override
-    public User getByID(int ID) throws Exception
+    public User getByPrimaryKey(Criteria c) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

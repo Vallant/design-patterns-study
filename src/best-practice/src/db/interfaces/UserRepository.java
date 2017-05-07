@@ -16,11 +16,13 @@
  */
 package db.interfaces;
 
+import data.User;
+
 /**
  *
  * @author stephan
  */
-public interface Criteria
+public interface UserRepository extends Repository<User>
 {
-    //Nothing to do.
+    
 }

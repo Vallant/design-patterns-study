@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db.postgres;
+package db.postgres.criteria;
 
-import java.sql.PreparedStatement;
 import db.interfaces.Criteria;
+import java.sql.PreparedStatement;
+import db.interfaces.SQLCriteria;
 
 /**
  *
  * @author stephan
  */
-public class OrCriteriaPostgres implements Criteria
+public class AndCriteriaPostres implements SQLCriteria
 {
-    private final Criteria left;
-    private final Criteria right;
 
-    public OrCriteriaPostgres(Criteria left, Criteria right)
+    private final SQLCriteria left;
+    private final SQLCriteria right;
+
+    public AndCriteriaPostres(Criteria left, Criteria right)
     {
-        this.left = left;
-        this.right = right;
+        this.left = (SQLCriteria) left;
+        this.right = (SQLCriteria) right;
     }
     
     @Override
     public String toSqlClause()
     {
-        return " ( " + left.toSqlClause() + " ) " + " OR " + "( " + right.toSqlClause() + " ) ";
+        return " ( " + left.toSqlClause() + " ) " + " AND " + "( " + right.toSqlClause() + " ) ";
     }
 
     @Override
@@ -35,5 +37,4 @@ public class OrCriteriaPostgres implements Criteria
         int nextIndex = left.prepareStatement(ps, startIndex);
         return right.prepareStatement(ps, nextIndex);
     }
-    
 }

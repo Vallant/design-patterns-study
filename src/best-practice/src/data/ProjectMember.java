@@ -33,9 +33,10 @@ public class ProjectMember implements DBEntity
         LEADER
     }
     
+    private int id;
     private User user;
     private Project project;
-    private int hash;
+    private int remoteHash;
     private ROLE role;
 
     public User getUser()
@@ -68,7 +69,7 @@ public class ProjectMember implements DBEntity
     {
         this.user = user;
         this.project = project;
-        this.hash = hash;
+        this.remoteHash = hash;
         this.role = role;
     }
     
@@ -92,8 +93,27 @@ public class ProjectMember implements DBEntity
     @Override
     public int getRemoteHash()
     {
-        return hash;
+        return remoteHash;
     }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public void setRemoteHash(int remoteHash)
+    {
+        this.remoteHash = remoteHash;
+    }
+    
+    
+    
+    
     
     
 

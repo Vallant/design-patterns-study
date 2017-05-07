@@ -18,16 +18,15 @@ package db.postgres.repository;
 
 import data.Project;
 import db.common.DBManager;
-import db.interfaces.Repository;
-import db.postgres.specification.IdCriteriaPostgres;
+import db.common.DBManagerPostgres;
+import db.interfaces.Criteria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import db.postgres.specification.HashCriteriaPostgres;
-import db.interfaces.Criteria;
 import db.interfaces.ProjectRepository;
+import db.interfaces.SQLCriteria;
 
 /**
  *
@@ -40,7 +39,8 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     public void add(Project item) throws Exception
     {
         assert(item != null);
-        try(Connection con = DBManager.getInstance().getConnection())
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO PROJECT(HASH, NAME, "
                             + "DESCRIPTION) "
@@ -66,10 +66,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public void update(Project item) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            Criteria sum = db.getIdAndHashCriteria(item.getId(), item.getHash());
+            SQLCriteria sum = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getHash());
             
             String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
                     + "WHERE " + sum.toSqlClause();
@@ -92,10 +92,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public void remove(Project item) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            Criteria sum = db.getIdAndHashCriteria(item.getId(), item.getHash());
+            SQLCriteria sum = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getHash());
             
             String sql = "DELETE FROM PROJECT "
                     + "WHERE " + sum.toSqlClause();
@@ -110,10 +110,9 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     }
 
     @Override
-    public Project getByID(int ID) throws Exception
+    public Project getByPrimaryKey(Criteria c) throws Exception
     {
         DBManager db = DBManager.getInstance();
-        Criteria c = db.createIdCriteria(ID);
         ArrayList<Project> l = getByCriteria(c);
         if(l.isEmpty())
             throw new Exception("No such item");
@@ -124,12 +123,14 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     public ArrayList<Project> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<Project> list = new ArrayList<>();
-        try(Connection con = DBManager.getInstance().getConnection())
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria sc = (SQLCriteria) criterias;
+        try(Connection con = db.getConnection())
         {
             String sql = "SELECT HASH, ID, NAME, DESCRIPTION FROM PROJECT "
-                    + "WHERE " + criterias.toSqlClause();
+                    + "WHERE " + sc.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
-            criterias.prepareStatement(ps, 1);
+            sc.prepareStatement(ps, 1);
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())

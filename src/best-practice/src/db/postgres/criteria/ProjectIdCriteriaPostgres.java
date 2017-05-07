@@ -14,13 +14,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package db.interfaces;
+
+package db.postgres.criteria;
+
+import java.sql.PreparedStatement;
+import db.interfaces.SQLCriteria;
 
 /**
- *
+ * @created $date
  * @author stephan
  */
-public interface Criteria
+public class ProjectIdCriteriaPostgres implements SQLCriteria
 {
-    //Nothing to do.
+    private final int projectId;
+
+    public ProjectIdCriteriaPostgres(int projectId)
+    {
+        this.projectId = projectId;
+    }
+    
+    
+    @Override
+    public String toSqlClause()
+    {
+        return " PROJECT_ID = ? ";
+    }
+
+    @Override
+    public int prepareStatement(PreparedStatement ps, int startIndex) throws Exception
+    {
+        ps.setInt(startIndex++, projectId);
+        return startIndex;
+    }
+
 }

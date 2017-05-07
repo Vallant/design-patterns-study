@@ -15,7 +15,7 @@ import data.User;
  *
  * @author stephan
  */
-public interface RepositoryManager
+public interface RepositoryFactory
 {
     public Repository<User> getUserRepository();
     public Repository<Project> getProjectRepository();
@@ -26,6 +26,6 @@ public interface RepositoryManager
     public Criteria getAndCriteria(Criteria left, Criteria right);
     public Criteria getOrCriteria(Criteria left, Criteria right);
     public Criteria getIdAndHashCriteria(int id, int hash);
-    public Criteria createIdCriteria(int id);
-    public Criteria createHashCriteria(int hash);
+    public Criteria getIdCriteria(int id);
+    public Criteria getHashCriteria(int hash);
 }

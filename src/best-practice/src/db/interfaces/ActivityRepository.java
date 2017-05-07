@@ -16,11 +16,13 @@
  */
 package db.interfaces;
 
+import data.Activity;
+
 /**
  *
  * @author stephan
  */
-public interface Criteria
+public interface ActivityRepository extends Repository<Activity>
 {
-    //Nothing to do.
+    
 }

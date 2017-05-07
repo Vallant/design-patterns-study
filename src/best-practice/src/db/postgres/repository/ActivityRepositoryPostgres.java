@@ -19,29 +19,29 @@ package db.postgres.repository;
 
 import data.Activity;
 import db.common.DBManager;
-import db.interfaces.Repository;
+import db.common.DBManagerPostgres;
+import db.interfaces.ActivityRepository;
+import db.interfaces.Criteria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory;
-import db.interfaces.Criteria;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import db.interfaces.SQLCriteria;
 
 /**
  * @created $date
  * @author stephan
  */
-public class ActivityRepositoryPostgres implements Repository<Activity>
+public class ActivityRepositoryPostgres implements ActivityRepository
 {
     @Override
     public void add(Activity item) throws Exception
     {
-        try(Connection con = DBManager.getInstance().getConnection())
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_ID, PHASE_ID, USER_ID "
                             + "DESCRIPTION, START_TIME, END_TIME, COMMENTS) "
@@ -74,10 +74,11 @@ public class ActivityRepositoryPostgres implements Repository<Activity>
     @Override
     public void update(Activity item) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            Criteria c = db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+            SQLCriteria c = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+            
             String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_ID = ?, PHASE_ID = ?, USER_ID = ? "
                     + "DESCRIPTION = ?, START_TIME = ?, END_TIME = ?, COMMENTS = ? "
                     + "WHERE " + c.toSqlClause();
@@ -103,10 +104,10 @@ public class ActivityRepositoryPostgres implements Repository<Activity>
     @Override
     public void remove(Activity item) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            Criteria c = db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+            SQLCriteria c = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
             String sql = "DELETE FROM ACTIVITY "
                     + "WHERE " + c.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -121,10 +122,9 @@ public class ActivityRepositoryPostgres implements Repository<Activity>
     }
 
     @Override
-    public Activity getByID(int ID) throws Exception
+    public Activity getByPrimaryKey(Criteria c) throws Exception
     {
         DBManager db = DBManager.getInstance();
-        Criteria c = db.createIdCriteria(ID);
         ArrayList<Activity> l = getByCriteria(c);
         if(l.size() == 0)
             throw new Exception("Record was not found!");
@@ -136,16 +136,17 @@ public class ActivityRepositoryPostgres implements Repository<Activity>
     public ArrayList<Activity> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<Activity> l = new ArrayList<>();
-        DBManager db = DBManager.getInstance();
+        SQLCriteria sc = (SQLCriteria) criterias;
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT HASH, ID, PROJECT_ID, PHASE_ID, USER_ID, DESCRIPTION, "
                          + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY "
-                         + "WHERE " + criterias.toSqlClause();
+                         + "WHERE " + sc.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
             
             int index = 1;
-            criterias.prepareStatement(ps, index);
+            sc.prepareStatement(ps, index);
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())

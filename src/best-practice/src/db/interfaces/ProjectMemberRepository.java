@@ -16,11 +16,13 @@
  */
 package db.interfaces;
 
+import data.ProjectMember;
+
 /**
  *
  * @author stephan
  */
-public interface Criteria
+public interface ProjectMemberRepository extends Repository<ProjectMember>
 {
-    //Nothing to do.
+    Criteria getPrimaryKeyCriteria(int projectId, int userId);
 }

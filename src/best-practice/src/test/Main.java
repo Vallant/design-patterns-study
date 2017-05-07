@@ -7,8 +7,8 @@ package test;
 
 import data.Project;
 import db.common.DBManager;
+import db.interfaces.Criteria;
 import db.interfaces.Repository;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,10 +23,11 @@ public class Main
         try
         {
             DBManager.initInstance("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
+            
             Repository<Project> r = DBManager.getInstance().getProjectRepository();
-            Project p2 = r.getByID(20);
-            TimeUnit.SECONDS.sleep(5);
-            p2 = r.getByID(p2.getId());
+            
+            Criteria c = DBManager.getInstance().getIdCriteria(20);
+            Project p2 = r.getByPrimaryKey(c);
             System.out.println(p2.getName());
         }
         catch (Exception ex)

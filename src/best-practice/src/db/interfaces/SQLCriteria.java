@@ -16,11 +16,14 @@
  */
 package db.interfaces;
 
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author stephan
  */
-public interface Criteria
+public interface SQLCriteria extends Criteria
 {
-    //Nothing to do.
+    public String toSqlClause();
+    public int prepareStatement(PreparedStatement ps, int startIndex) throws Exception;
 }
