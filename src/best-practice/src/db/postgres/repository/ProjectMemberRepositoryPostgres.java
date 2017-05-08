@@ -17,16 +17,27 @@
 
 package db.postgres.repository;
 
+import data.Activity;
+import data.Project;
 import data.ProjectMember;
+import data.ProjectPhase;
+import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
 import java.util.ArrayList;
 import db.interfaces.ProjectMemberRepository;
+import db.interfaces.ProjectPhaseRepository;
+import db.interfaces.ProjectRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import db.interfaces.SQLCriteria;
+import db.interfaces.UserRepository;
+import db.postgres.criteria.AndCriteriaPostres;
+import db.postgres.criteria.StringCriteriaPostgres;
+import java.sql.ResultSet;
+import java.time.ZonedDateTime;
 
 
 /**
@@ -39,24 +50,18 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     public void add(ProjectMember item) throws Exception
     {
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
-        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
-        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_ID, PROJECT_ID, ROLE) "
+            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE) "
                             + "VALUES "
-                            + "(?, ?, ?, ?) "
-                            + "WHERE "
-                            + a.toSqlClause();
+                            + "(?, ?, ?, ?) ";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
-            ps.setInt(index++, item.getUser().getId());
-            ps.setInt(index++, item.getProject().getId());
+            ps.setString(index++, item.getUserLoginName());
+            ps.setString(index++, item.getProjectName());
             ps.setString(index++, item.getRole().name());
-            a.prepareStatement(ps, index);
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -70,22 +75,20 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     public void update(ProjectMember item) throws Exception
     {
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
-        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
-        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
-            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_ID = ?, PROJECT_ID = ?, ROLE = ? "
+            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_NAME = ?, ROLE = ? "
                             + "WHERE "
-                            + a.toSqlClause();
+                            + c.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
-            ps.setInt(index++, item.getUser().getId());
-            ps.setInt(index++, item.getProject().getId());
+            ps.setString(index++, item.getUserLoginName());
+            ps.setString(index++, item.getProjectName());
             ps.setString(index++, item.getRole().name());
-            a.prepareStatement(ps, index);
+            c.prepareStatement(ps, index);
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -99,22 +102,14 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     public void remove(ProjectMember item) throws Exception
     {
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyCriteria(item.getProject().getId(), item.getUser().getId());
-        SQLCriteria h = (SQLCriteria) db.getHashCriteria(item.getRemoteHash());
-        SQLCriteria a = (SQLCriteria) db.getAndCriteria(c, h);
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
             String sql = "DELETE FROM PROJECT_MEMBER "
                             + "WHERE "
-                            + a.toSqlClause();
+                            + c.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            int index = 1;
-            ps.setInt(index++, item.getRemoteHash());
-            ps.setInt(index++, item.getUser().getId());
-            ps.setInt(index++, item.getProject().getId());
-            ps.setString(index++, item.getRole().name());
-            a.prepareStatement(ps, index);
+            c.prepareStatement(ps, 1);
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -125,20 +120,71 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public ProjectMember getByPrimaryKey(Criteria c) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ProjectMember> l = getByCriteria(c);
+        if(l.isEmpty())
+            throw new Exception("Record was not found!");
+        return l.get(0);
+            
     }
 
     @Override
     public ArrayList<ProjectMember> getByCriteria(Criteria criterias) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ProjectMember> l = new ArrayList<>();
+        SQLCriteria sc = (SQLCriteria) criterias;
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE FROM PROJECT_MEMBERS "
+                         + "WHERE " + sc.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int index = 1;
+            sc.prepareStatement(ps, index);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                String projectName = rs.getString("PROJECT_NAME");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String role = rs.getString("ROLE");
+                
+                ProjectRepository p = db.getProjectRepository();
+                Criteria c = db.getNameCriteria(projectName);
+                Project project = p.getByPrimaryKey(c);
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+                
+                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                l.add(m);
+            }
+        }
+        return l;
     }
 
 
     @Override
-    public Criteria getPrimaryKeyCriteria(int projectId, int userId)
+    public Criteria getPrimaryKeyCriteria(String projectName, String userLoginName)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Criteria name = new StringCriteriaPostgres("PROJECT_NAME", projectName);
+        Criteria login = new StringCriteriaPostgres("USER_LOGIN_NAME", userLoginName);
+        return new AndCriteriaPostres(login, name);
+    }
+
+    @Override
+    public Criteria getPrimaryKeyCriteria(ProjectMember item)
+    {
+        return getPrimaryKeyCriteria(item.getProjectName(), item.getUserLoginName());
+    }
+
+    @Override
+    public Criteria getPrimaryKeyAndHashCriteria(ProjectMember item)
+    {
+        DBManager db = DBManager.getInstance();
+        Criteria h = db.getHashCriteria(item.getRemoteHash());
+        Criteria p = getPrimaryKeyCriteria(item);
+        return db.getAndCriteria(p, h);
     }
     
   

@@ -27,27 +27,26 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Project implements DBEntity
 {
     
-    private int hash;
-    private int id;
+    private int remoteHash;
     private String name;
     private String description;
 
+    @Override
     public int getLocalHash()
     {
         return new HashCodeBuilder()
                 .append(name.hashCode())
                 .append(description.hashCode()).hashCode();
     }
+    @Override
     public int getRemoteHash()
     {
-        return hash;
+        return remoteHash;
     }
-    
 
-    public Project(int hash, int id, String name, String description)
+    public Project(int hash, String name, String description)
     {
-        this.hash = hash;
-        this.id = id;
+        this.remoteHash = hash;
         this.name = name;
         this.description = description;
     }
@@ -61,22 +60,12 @@ public class Project implements DBEntity
     
     public int getHash()
     {
-        return hash;
+        return remoteHash;
     }
 
     public void setHash(int hash)
     {
-        this.hash = hash;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
+        this.remoteHash = hash;
     }
 
     public String getName()
@@ -104,4 +93,14 @@ public class Project implements DBEntity
     {
         return getLocalHash() != getRemoteHash();
     }
+
+    @Override
+    public void setRemoteHash(int hash)
+    {
+        this.remoteHash = hash; 
+    }
+    
+    
 }
+
+

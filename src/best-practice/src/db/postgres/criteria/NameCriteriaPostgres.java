@@ -14,16 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package db.interfaces;
 
-import data.User;
+package db.postgres.criteria;
+
+import db.interfaces.SQLCriteria;
+import java.sql.PreparedStatement;
 
 /**
- *
+ * @created $date
  * @author stephan
  */
-public interface UserRepository extends Repository<User>
+public class NameCriteriaPostgres implements SQLCriteria
 {
-    User getByPrimaryKey(String loginName) throws Exception;
+
+    private final String name;
+
+    public NameCriteriaPostgres(String name)
+    {
+        this.name = name;
+    }
     
+    
+    @Override
+    public String toSqlClause()
+    {
+        return " NAME = ? ";
+    }
+
+    @Override
+    public int prepareStatement(PreparedStatement ps, int startIndex) throws Exception
+    {
+        ps.setString(startIndex++, name);
+        return startIndex;
+    }
+
 }

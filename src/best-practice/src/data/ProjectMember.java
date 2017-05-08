@@ -33,7 +33,6 @@ public class ProjectMember implements DBEntity
         LEADER
     }
     
-    private int id;
     private User user;
     private Project project;
     private int remoteHash;
@@ -111,6 +110,16 @@ public class ProjectMember implements DBEntity
         this.remoteHash = remoteHash;
     }
     
+    
+    public String getUserLoginName()
+    {
+        return user.getLoginName();
+    }
+    
+    public String getProjectName()
+    {
+        return project.getName();
+    }
     
     
     

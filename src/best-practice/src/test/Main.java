@@ -27,7 +27,9 @@ public class Main
             Repository<Project> r = DBManager.getInstance().getProjectRepository();
             
             Criteria c = DBManager.getInstance().getIdCriteria(20);
+            
             Project p2 = r.getByPrimaryKey(c);
+            
             System.out.println(p2.getName());
         }
         catch (Exception ex)

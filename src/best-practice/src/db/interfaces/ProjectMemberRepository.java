@@ -24,5 +24,5 @@ import data.ProjectMember;
  */
 public interface ProjectMemberRepository extends Repository<ProjectMember>
 {
-    Criteria getPrimaryKeyCriteria(int projectId, int userId);
+    Criteria getPrimaryKeyCriteria(String projectName, String userLoginName);
 }

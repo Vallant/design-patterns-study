@@ -16,9 +16,23 @@
  */
 package db.postgres.repository;
 
+import data.Project;
+import data.ProjectMember;
 import data.ProjectPhase;
+import data.User;
+import db.common.DBManager;
+import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
 import db.interfaces.ProjectPhaseRepository;
+import db.interfaces.ProjectRepository;
+import db.interfaces.SQLCriteria;
+import db.interfaces.UserRepository;
+import db.postgres.criteria.AndCriteriaPostres;
+import db.postgres.criteria.StringCriteriaPostgres;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -31,31 +45,137 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void add(ProjectPhase item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
+        try(Connection con = db.getConnection())
+        {
+            String sql = "INSERT INTO PROJECT_PHASES(HASH, PROJECT_NAME, NAME) "
+                            + "VALUES "
+                            + "(?, ?, ?) ";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setString(index++, item.getProjectName());
+            ps.setString(index++, item.getName());
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Insert failed!");
+            item.setRemoteHash(item.getLocalHash());
+            
+        }
     }
 
     @Override
     public void update(ProjectPhase item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "UPDATE PROJECT_PHASES SET HASH = ?, PROJECT_NAME = ?, NAME = ? "
+                            + "WHERE "
+                            + c.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setString(index++, item.getProjectName());
+            ps.setString(index++, item.getName());
+            c.prepareStatement(ps, index);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+            item.setRemoteHash(item.getLocalHash());
+            
+        }
     }
 
     @Override
     public void remove(ProjectPhase item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "DELETE FROM PROJECT_PHASES "
+                            + "WHERE "
+                            + c.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            c.prepareStatement(ps, 1);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+            item.setRemoteHash(item.getLocalHash());
+            
+        }
     }
 
     @Override
     public ProjectPhase getByPrimaryKey(Criteria c) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ProjectPhase> l = getByCriteria(c);
+        if(l.isEmpty())
+            throw new Exception("Record was not found!");
+        return l.get(0);
     }
 
     @Override
     public ArrayList<ProjectPhase> getByCriteria(Criteria criterias) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<ProjectPhase> l = new ArrayList<>();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) criterias;
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, PROJECT_NAME, NAME FROM PROJECT_PHASES "
+                            + "WHERE "
+                            + c.toSqlClause();
+            
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                String projectName = rs.getString("PROJECT_NAME");
+                String name = rs.getString("NAME");
+                
+                ProjectRepository p = db.getProjectRepository();
+                Criteria pc = db.getNameCriteria(projectName);
+                Project project = p.getByPrimaryKey(pc);
+                
+                ProjectPhase phase = new ProjectPhase(hash, project, name);
+                l.add(phase);                
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public Criteria getPrimaryKeyCriteria(ProjectPhase item)
+    {
+        Criteria left = new StringCriteriaPostgres("PROJECT_NAME", item.getProjectName());
+        Criteria right = new StringCriteriaPostgres("NAME", item.getName());
+        return new AndCriteriaPostres(left, right);
+    }
+
+    @Override
+    public Criteria getPrimaryKeyAndHashCriteria(ProjectPhase item)
+    {
+        return new AndCriteriaPostres(getPrimaryKeyCriteria(item), DBManager.getInstance().getHashCriteria(item.getRemoteHash()));
+    }
+
+    @Override
+    public ProjectPhase getByPrimaryKey(String projectName, String projectPhaseName) throws Exception
+    {
+        Criteria left = new StringCriteriaPostgres("PROJECT_NAME", projectName);
+        Criteria right = new StringCriteriaPostgres("NAME", projectPhaseName);
+        Criteria a = new AndCriteriaPostres(left, right);
+        return getByPrimaryKey(a);
     }
 
     

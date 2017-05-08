@@ -24,5 +24,5 @@ import data.ProjectPhase;
  */
 public interface ProjectPhaseRepository extends Repository<ProjectPhase>
 {
-    
+    ProjectPhase getByPrimaryKey(String projectName, String projectPhaseName) throws Exception;
 }

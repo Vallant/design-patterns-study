@@ -18,10 +18,16 @@
 package db.postgres.repository;
 
 import data.Activity;
+import data.Project;
+import data.ProjectPhase;
+import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.ActivityRepository;
 import db.interfaces.Criteria;
+import db.interfaces.ProjectPhaseRepository;
+import db.interfaces.ProjectRepository;
+import db.interfaces.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +36,9 @@ import java.util.ArrayList;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import db.interfaces.SQLCriteria;
+import db.interfaces.UserRepository;
+import db.postgres.criteria.NameCriteriaPostgres;
+import db.postgres.criteria.StringCriteriaPostgres;
 
 /**
  * @created $date
@@ -43,7 +52,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_ID, PHASE_ID, USER_ID "
+            String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_NAME, PROJECT_PHASE_NAME, USER_LOGIN_NAME "
                             + "DESCRIPTION, START_TIME, END_TIME, COMMENTS) "
                             + "VALUES "
                             + "(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -51,9 +60,9 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             
             int index = 1;
             ps.setInt(index++, item.getRemoteHash());
-            ps.setInt(index++, item.getProjectId());
-            ps.setInt(index++, item.getPhaseId());
-            ps.setInt(index++, item.getUserId());
+            ps.setString(index++, item.getProjectName());
+            ps.setString(index++, item.getProjectPhaseName());
+            ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
             ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
             ps.setObject(index++, zdtStart);
@@ -79,16 +88,16 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         {
             SQLCriteria c = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
             
-            String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_ID = ?, PHASE_ID = ?, USER_ID = ? "
+            String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_NAME = ?, PROJECT_PHASE_NAME = ?, USER_LOGIN_NAME = ? "
                     + "DESCRIPTION = ?, START_TIME = ?, END_TIME = ?, COMMENTS = ? "
                     + "WHERE " + c.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
             int index = 1;
             
             ps.setInt(index++, item.hashCode());
-            ps.setInt(index++, item.getProjectId());
-            ps.setInt(index++, item.getPhaseId());
-            ps.setInt(index++, item.getUserId());
+            ps.setString(index++, item.getProjectName());
+            ps.setString(index++, item.getProjectPhaseName());
+            ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
             ps.setObject(index++, item.getStart());
             ps.setObject(index++, item.getStop());
@@ -107,7 +116,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            SQLCriteria c = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+            SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
             String sql = "DELETE FROM ACTIVITY "
                     + "WHERE " + c.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -140,7 +149,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, ID, PROJECT_ID, PHASE_ID, USER_ID, DESCRIPTION, "
+            String sql = "SELECT HASH, ID, PROJECT_NAME, PROJECT_PHASE_NAME, USER_LOGIN_NAME, DESCRIPTION, "
                          + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY "
                          + "WHERE " + sc.toSqlClause();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -153,19 +162,52 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             {
                 int hash = rs.getInt("HASH");
                 int id = rs.getInt("ID");
-                int projectId = rs.getInt("PROJECT_ID");
-                int phaseId = rs.getInt("PHASE_ID");
-                int userId = rs.getInt("USER_ID");
+                String projectName = rs.getString("PROJECT_NAME");
+                String projectPhaseName = rs.getString("PROJECT_PHASE_NAME");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
                 String description = rs.getString("DESCRIPTION");
                 ZonedDateTime start = rs.getObject("START_TIME", ZonedDateTime.class);
                 ZonedDateTime end = rs.getObject("END_TIME", ZonedDateTime.class);
                 String comments = rs.getString("COMMENTS");
                 
-                Activity a = new Activity(hash, id, projectId, phaseId, userId, description, start, start, comments);
+                ProjectRepository p = db.getProjectRepository();
+                Criteria c = db.getNameCriteria(projectName);
+                Project project = p.getByPrimaryKey(c);
+                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
+                ProjectPhase phase = pp.getByPrimaryKey(projectName, projectPhaseName);
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+                
+                
+                Activity a = new Activity(hash, id, project, phase, user, description, start, start, comments);
                 l.add(a);
             }
         }
         return l;
+    }
+
+    @Override
+    public Criteria getPrimaryKeyCriteria(Activity item)
+    {
+     return DBManager.getInstance().getIdCriteria(item.getId());
+    }
+
+    @Override
+    public Criteria getPrimaryKeyAndHashCriteria(Activity item)
+    {
+        return DBManager.getInstance().getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+    }
+
+    @Override
+    public Criteria getProjectNameCriteria(String projectName)
+    {
+        return new StringCriteriaPostgres("PROJECT_NAME", projectName);
+    }
+
+    @Override
+    public Criteria getUserLoginNameCriteria(String userLoginName)
+    {
+        return new StringCriteriaPostgres("USER_LOGIN_NAME", userLoginName);
     }
 
 }

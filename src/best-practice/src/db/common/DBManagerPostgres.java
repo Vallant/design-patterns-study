@@ -22,6 +22,7 @@ import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
 import data.User;
+import db.interfaces.ActivityRepository;
 import db.interfaces.Repository;
 import db.postgres.criteria.AndCriteriaPostres;
 import db.postgres.criteria.OrCriteriaPostgres;
@@ -35,6 +36,11 @@ import db.postgres.criteria.IdCriteriaPostgres;
 import java.sql.Connection;
 import org.apache.commons.dbcp2.BasicDataSource;
 import db.interfaces.Criteria;
+import db.interfaces.ProjectMemberRepository;
+import db.interfaces.ProjectPhaseRepository;
+import db.interfaces.ProjectRepository;
+import db.interfaces.UserRepository;
+import db.postgres.criteria.NameCriteriaPostgres;
 
 /**
  * @created $date
@@ -63,31 +69,31 @@ public class DBManagerPostgres extends DBManager
     }  
     
     @Override
-    public Repository<User> getUserRepository()
+    public UserRepository getUserRepository()
     {
         return new UserRepositoryPostgres();
     }
 
     @Override
-    public Repository<Project> getProjectRepository()
+    public ProjectRepository getProjectRepository()
     {
         return new ProjectRepositoryPostgres();
     }
 
     @Override
-    public Repository<ProjectMember> getProjectMemberRepository()
+    public ProjectMemberRepository getProjectMemberRepository()
     {
         return new ProjectMemberRepositoryPostgres();
     }
 
     @Override
-    public Repository<ProjectPhase> getProjectPhaseRepository()
+    public ProjectPhaseRepository getProjectPhaseRepository()
     {
         return new ProjectPhaseRepositoryPostres();
     }
 
     @Override
-    public Repository<Activity> getActivityRepository()
+    public ActivityRepository getActivityRepository()
     {
         return new ActivityRepositoryPostgres();
     }
@@ -120,6 +126,18 @@ public class DBManagerPostgres extends DBManager
     public Criteria getHashCriteria(int hash)
     {
         return new HashCriteriaPostgres(hash);
+    }
+
+    @Override
+    public Criteria getNameAndHashCriteria(String name, int hash)
+    {
+        return new AndCriteriaPostres(new NameCriteriaPostgres(name), new HashCriteriaPostgres(hash));
+    }
+
+    @Override
+    public Criteria getNameCriteria(String name)
+    {
+        return new NameCriteriaPostgres(name);
     }
     
 

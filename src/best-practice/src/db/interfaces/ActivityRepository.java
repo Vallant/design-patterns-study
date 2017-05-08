@@ -24,5 +24,6 @@ import data.Activity;
  */
 public interface ActivityRepository extends Repository<Activity>
 {
-    
+    Criteria getProjectNameCriteria(String projectName);
+    Criteria getUserLoginNameCriteria(String userLoginName);
 }

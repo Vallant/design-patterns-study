@@ -12,7 +12,8 @@ package db.interfaces;
 public interface DBEntity
 {
     public boolean isChanged();
-    public abstract int getLocalHash();
-    public abstract int getRemoteHash();
+    public int getLocalHash();
+    public int getRemoteHash();
+    public void setRemoteHash(int hash);
     
 }

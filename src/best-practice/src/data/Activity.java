@@ -28,39 +28,43 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class Activity implements DBEntity
 {
-    private Integer hash;
-    private Integer id;
-    private Integer projectId;
-    private Integer phaseId;
-    private Integer userId;
+    private int remoteHash;
+    private int id;
+    private Project project;
+    private ProjectPhase phase;
+    private User user;
     private String description;
     private ZonedDateTime start;
     private ZonedDateTime stop;
     private String comments;
 
-    public Activity(Integer hash, Integer id, Integer projectId, Integer phaseId, Integer userId, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
-    {
-        this.hash = hash;
-        this.id = id;
-        this.projectId = projectId;
-        this.phaseId = phaseId;
-        this.userId = userId;
-        this.description = description;
-        this.start = ZonedDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault());
-        this.stop = ZonedDateTime.ofInstant(stop.toInstant(), ZoneId.systemDefault());
-        this.comments = comments;
-    }
 
-    public Activity(Integer projectId, Integer phaseId, Integer userId, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    public Activity(int hash, int id, Project project, ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
     {
-        this.projectId = projectId;
-        this.phaseId = phaseId;
-        this.userId = userId;
+        this.remoteHash = hash;
+        this.id = id;
+        this.project = project;
+        this.phase = phase;
+        this.user = user;
         this.description = description;
         this.start = ZonedDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault());
         this.stop = ZonedDateTime.ofInstant(stop.toInstant(), ZoneId.systemDefault());
         this.comments = comments;
     }
+    
+    
+    public Activity(Project project, ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    {
+        this.project = project;
+        this.phase = phase;
+        this.user = user;
+        this.description = description;
+        this.start = ZonedDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault());
+        this.stop = ZonedDateTime.ofInstant(stop.toInstant(), ZoneId.systemDefault());
+        this.comments = comments;
+    }
+    
+    
     
     
     @Override
@@ -68,9 +72,9 @@ public class Activity implements DBEntity
     {
         return new HashCodeBuilder()
                 .append(id)
-                .append(projectId)
-                .append(phaseId)
-                .append(userId)
+                .append(project.getRemoteHash())
+                .append(phase.getRemoteHash())
+                .append(user.getRemoteHash())
                 .append(description)
                 .append(start)
                 .append(stop)
@@ -80,12 +84,12 @@ public class Activity implements DBEntity
     @Override
     public int getRemoteHash()
     {
-        return hash;
+        return remoteHash;
     }
 
     public void setHash(Integer hash)
     {
-        this.hash = hash;
+        this.remoteHash = hash;
     }
 
     public Integer getId()
@@ -98,35 +102,36 @@ public class Activity implements DBEntity
         this.id = id;
     }
 
-    public Integer getProjectId()
+    public Project getProject()
     {
-        return projectId;
+        return project;
     }
 
-    public void setProjectId(Integer projectId)
+    public void setProject(Project project)
     {
-        this.projectId = projectId;
+        this.project = project;
     }
 
-    public Integer getPhaseId()
+    public ProjectPhase getPhase()
     {
-        return phaseId;
+        return phase;
     }
 
-    public void setPhaseId(Integer phaseId)
+    public void setPhase(ProjectPhase phase)
     {
-        this.phaseId = phaseId;
+        this.phase = phase;
     }
 
-    public Integer getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(Integer userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
+
 
     public String getDescription()
     {
@@ -172,6 +177,27 @@ public class Activity implements DBEntity
     public boolean isChanged()
     {
         return getLocalHash() != getRemoteHash();
+    }
+
+    public String getProjectName()
+    {
+        return project.getName();
+    }
+    
+    public String getProjectPhaseName()
+    {
+        return phase.getName();
+    }
+    
+    public String getUserLoginName()
+    {
+        return user.getLoginName();
+    }
+
+    @Override
+    public void setRemoteHash(int hash)
+    {
+        this.remoteHash = hash;
     }
     
     

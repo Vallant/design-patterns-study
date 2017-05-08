@@ -30,4 +30,7 @@ public interface Repository<T>
     
     T getByPrimaryKey(Criteria c) throws Exception;
     ArrayList<T> getByCriteria(Criteria criterias) throws Exception;
+    
+    Criteria getPrimaryKeyCriteria(T item);
+    Criteria getPrimaryKeyAndHashCriteria(T item);
 }

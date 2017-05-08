@@ -26,56 +26,76 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class User implements DBEntity
 {
+
+    
     public static enum ROLE
     {
         ADMIN,
         USER
     }
     
-    private int hash;
-    private int id; 
-    private String userName;
+    private int remoteHash;
+    private String loginName;
     
     private String firstName;
     private String lastName;
     private ROLE role;
     private String email;
+    private byte[] password;
+    private byte[] salt;
 
-    public User(int hash, int id, String userName, String firstName, String lastName, ROLE role, String email)
+    public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
     {
-        this.hash = hash;
-        this.id = id;
-        this.userName = userName;
+        this.remoteHash = remoteHash;
+        this.loginName = loginName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.email = email;
+        this.password = password;
+        this.salt = salt;
     }
 
-    public User(String userName, String firstName, String lastName, ROLE role, String email)
+    public User(String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
     {
-        this.userName = userName;
+        this.loginName = loginName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.email = email;
+        this.password = password;
+        this.salt = salt;
     }
+
+    public byte[] getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(byte[] password)
+    {
+        this.password = password;
+    }
+
+    public byte[] getSalt()
+    {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt)
+    {
+        this.salt = salt;
+    }
+
+    
      
-    //Getters, Setters
-    public Integer getId() {
-        return id;
+   
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLoginName(String userName) {
+        this.loginName = userName;
     }
 
     public String getFirstName() {
@@ -123,7 +143,7 @@ public class User implements DBEntity
                 append(firstName).
                 append(lastName).
                 append(role).
-                append(userName).
+                append(loginName).
                 append(email).
                 hashCode();
     }
@@ -131,6 +151,12 @@ public class User implements DBEntity
     @Override
     public int getRemoteHash()
     {
-        return hash;
+        return remoteHash;
+    }
+    
+    @Override
+    public void setRemoteHash(int hash)
+    {
+        this.remoteHash = hash;
     }
 }

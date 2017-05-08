@@ -17,10 +17,18 @@
 
 package db.postgres.repository;
 
+import data.Project;
 import data.User;
+import db.common.DBManager;
+import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
+import db.interfaces.SQLCriteria;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
+import db.postgres.criteria.StringCriteriaPostgres;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * @created $date
@@ -32,31 +40,149 @@ public class UserRepositoryPostgres implements UserRepository
     @Override
     public void add(User item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        assert(item != null);
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        try(Connection con = db.getConnection())
+        {
+            String sql = "INSERT INTO USERS(HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                    + "SALT, PASSWORD, LOGIN_NAME, EMAIL) "
+                    + "VALUES "
+                    + "(?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setString(index++, item.getFirstName());
+            ps.setString(index++, item.getLastName());
+            ps.setString(index++, item.getRole().name());
+            ps.setBytes(index++, item.getSalt());
+            ps.setBytes(index++, item.getPassword());
+            ps.setString(index++, item.getLoginName());
+            ps.setString(index++, item.getEmail());
+            
+            ps.executeUpdate();
+            item.setRemoteHash(item.getLocalHash());
+        }
     }
 
     @Override
     public void update(User item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        assert(item != null);
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "UPDATE USERS SET HASH = ?, FIRST_NAME = ?, LAST_NAME = ?, ROLE = ?, "
+                    + "SALT = ?, PASSWORD = ?, LOGIN_NAME = ?, EMAIL = ? "
+                    + "WHERE "
+                    + c.toSqlClause();
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            
+            int index = 1;
+            ps.setInt(index++, item.getLocalHash());
+            ps.setString(index++, item.getFirstName());
+            ps.setString(index++, item.getLastName());
+            ps.setString(index++, item.getRole().name());
+            ps.setBytes(index++, item.getSalt());
+            ps.setBytes(index++, item.getPassword());
+            ps.setString(index++, item.getLoginName());
+            ps.setString(index++, item.getEmail());
+            
+            c.prepareStatement(ps, index);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+        }
     }
 
     @Override
     public void remove(User item) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        assert(item != null);
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "DELETE FROM USERS "
+                    + "WHERE "
+                    + c.toSqlClause();
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            c.prepareStatement(ps, 1);
+            
+            int numRowsAffected = ps.executeUpdate();
+            if(numRowsAffected == 0)
+                throw new Exception("Record has changed or was not found!");
+        }
     }
 
     @Override
     public User getByPrimaryKey(Criteria c) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBManager db = DBManager.getInstance();
+        ArrayList<User> l = getByCriteria(c);
+        if(l.isEmpty())
+            throw new Exception("No such item");
+        return l.get(0);
     }
 
     @Override
     public ArrayList<User> getByCriteria(Criteria criterias) throws Exception
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<User> l = new ArrayList<>();
+        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        SQLCriteria c = (SQLCriteria) criterias;
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                    + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                    + "FROM USERS "
+                    + "WHERE "
+                    + c.toSqlClause();
+            PreparedStatement ps = con.prepareStatement(sql);
+            c.prepareStatement(ps, 1);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                String firstName = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+                String role = rs.getString("ROLE");
+                byte[] salt = rs.getBytes("SALT");
+                byte[] password = rs.getBytes("PASSWORD");
+                String loginName = rs.getString("LOGIN_NAME");
+                String email = rs.getString("EMAIL");
+                
+                l.add(new User(hash, loginName, firstName, lastName, 
+                        User.ROLE.valueOf(role), email, password, salt));
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public Criteria getPrimaryKeyCriteria(User item)
+    {
+        return new StringCriteriaPostgres("LOGIN_NAME", item.getLoginName());
+    }
+
+    @Override
+    public Criteria getPrimaryKeyAndHashCriteria(User item)
+    {
+        Criteria left = getPrimaryKeyCriteria(item);
+        Criteria right = DBManager.getInstance().getHashCriteria(item.getRemoteHash());
+        return DBManager.getInstance().getAndCriteria(left, right);
+    }
+
+    @Override
+    public User getByPrimaryKey(String loginName) throws Exception
+    {
+        return getByPrimaryKey(new StringCriteriaPostgres("LOGIN_NAME", loginName));
     }
 
 }
