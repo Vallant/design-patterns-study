@@ -5,12 +5,6 @@
  */
 package db.interfaces;
 
-import data.Activity;
-import data.Project;
-import data.ProjectMember;
-import data.ProjectPhase;
-import data.User;
-
 /**
  *
  * @author stephan
@@ -31,4 +25,7 @@ public interface RepositoryFactory
     
     public Criteria getNameAndHashCriteria(String name, int hash);
     public Criteria getNameCriteria(String name);
+    
+    public Criteria getIntCriteria(String columnName, int value);
+    public Criteria getStringCriteria(String columnName, String value);
 }

@@ -17,18 +17,13 @@
 package db.postgres.repository;
 
 import data.Project;
-import data.ProjectMember;
 import data.ProjectPhase;
-import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import db.interfaces.SQLCriteria;
-import db.interfaces.UserRepository;
-import db.postgres.criteria.AndCriteriaPostres;
-import db.postgres.criteria.StringCriteriaPostgres;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -158,23 +153,26 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public Criteria getPrimaryKeyCriteria(ProjectPhase item)
     {
-        Criteria left = new StringCriteriaPostgres("PROJECT_NAME", item.getProjectName());
-        Criteria right = new StringCriteriaPostgres("NAME", item.getName());
-        return new AndCriteriaPostres(left, right);
+        DBManager db = DBManager.getInstance();
+        Criteria left = db.getStringCriteria("PROJECT_NAME", item.getProjectName());
+        Criteria right = db.getStringCriteria("NAME", item.getName());
+        return db.getAndCriteria(left, right);
     }
 
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(ProjectPhase item)
     {
-        return new AndCriteriaPostres(getPrimaryKeyCriteria(item), DBManager.getInstance().getHashCriteria(item.getRemoteHash()));
+        DBManager db = DBManager.getInstance();
+        return db.getAndCriteria(getPrimaryKeyCriteria(item), db.getHashCriteria(item.getRemoteHash()));
     }
 
     @Override
     public ProjectPhase getByPrimaryKey(String projectName, String projectPhaseName) throws Exception
     {
-        Criteria left = new StringCriteriaPostgres("PROJECT_NAME", projectName);
-        Criteria right = new StringCriteriaPostgres("NAME", projectPhaseName);
-        Criteria a = new AndCriteriaPostres(left, right);
+        DBManager db = DBManager.getInstance();
+        Criteria left = db.getStringCriteria("PROJECT_NAME", projectName);
+        Criteria right = db.getStringCriteria("NAME", projectPhaseName);
+        Criteria a = db.getAndCriteria(left, right);
         return getByPrimaryKey(a);
     }
 

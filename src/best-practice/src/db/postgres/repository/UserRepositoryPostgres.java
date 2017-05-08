@@ -17,7 +17,6 @@
 
 package db.postgres.repository;
 
-import data.Project;
 import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
@@ -25,7 +24,6 @@ import db.interfaces.Criteria;
 import db.interfaces.SQLCriteria;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
-import db.postgres.criteria.StringCriteriaPostgres;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -168,7 +166,7 @@ public class UserRepositoryPostgres implements UserRepository
     @Override
     public Criteria getPrimaryKeyCriteria(User item)
     {
-        return new StringCriteriaPostgres("LOGIN_NAME", item.getLoginName());
+        return DBManager.getInstance().getStringCriteria("LOGIN_NAME", item.getLoginName());
     }
 
     @Override
@@ -182,7 +180,7 @@ public class UserRepositoryPostgres implements UserRepository
     @Override
     public User getByPrimaryKey(String loginName) throws Exception
     {
-        return getByPrimaryKey(new StringCriteriaPostgres("LOGIN_NAME", loginName));
+        return getByPrimaryKey(DBManager.getInstance().getStringCriteria("LOGIN_NAME", loginName));
     }
 
 }

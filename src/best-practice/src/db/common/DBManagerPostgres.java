@@ -17,13 +17,7 @@
 
 package db.common;
 
-import data.Activity;
-import data.Project;
-import data.ProjectMember;
-import data.ProjectPhase;
-import data.User;
 import db.interfaces.ActivityRepository;
-import db.interfaces.Repository;
 import db.postgres.criteria.AndCriteriaPostres;
 import db.postgres.criteria.OrCriteriaPostgres;
 import db.postgres.repository.ActivityRepositoryPostgres;
@@ -40,7 +34,9 @@ import db.interfaces.ProjectMemberRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import db.interfaces.UserRepository;
+import db.postgres.criteria.IntCriteriaPostgres;
 import db.postgres.criteria.NameCriteriaPostgres;
+import db.postgres.criteria.StringCriteriaPostgres;
 
 /**
  * @created $date
@@ -138,6 +134,18 @@ public class DBManagerPostgres extends DBManager
     public Criteria getNameCriteria(String name)
     {
         return new NameCriteriaPostgres(name);
+    }
+
+    @Override
+    public Criteria getIntCriteria(String columnName, int value)
+    {
+        return new IntCriteriaPostgres(value, columnName);
+    }
+
+    @Override
+    public Criteria getStringCriteria(String columnName, String value)
+    {
+        return new StringCriteriaPostgres(columnName, value);
     }
     
 

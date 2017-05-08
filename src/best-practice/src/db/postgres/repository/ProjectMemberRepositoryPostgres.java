@@ -17,27 +17,21 @@
 
 package db.postgres.repository;
 
-import data.Activity;
 import data.Project;
 import data.ProjectMember;
-import data.ProjectPhase;
 import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.Criteria;
 import java.util.ArrayList;
 import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import db.interfaces.SQLCriteria;
 import db.interfaces.UserRepository;
-import db.postgres.criteria.AndCriteriaPostres;
-import db.postgres.criteria.StringCriteriaPostgres;
 import java.sql.ResultSet;
-import java.time.ZonedDateTime;
 
 
 /**
@@ -167,9 +161,10 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public Criteria getPrimaryKeyCriteria(String projectName, String userLoginName)
     {
-        Criteria name = new StringCriteriaPostgres("PROJECT_NAME", projectName);
-        Criteria login = new StringCriteriaPostgres("USER_LOGIN_NAME", userLoginName);
-        return new AndCriteriaPostres(login, name);
+        DBManager db = DBManager.getInstance();
+        Criteria name = db.getStringCriteria("PROJECT_NAME", projectName);
+        Criteria login = db.getStringCriteria("USER_LOGIN_NAME", userLoginName);
+        return db.getAndCriteria(login, name);
     }
 
     @Override

@@ -23,11 +23,9 @@ import db.interfaces.Criteria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import db.interfaces.ProjectRepository;
 import db.interfaces.SQLCriteria;
-import db.postgres.criteria.StringCriteriaPostgres;
 
 /**
  *
@@ -136,7 +134,6 @@ public class ProjectRepositoryPostgres implements ProjectRepository
                 int hash = rs.getInt("HASH");
                 String name = rs.getString("NAME");
                 String description = rs.getString("DESCRIPTION");
-                
                 
                 list.add(new Project(hash, name, description));
             }

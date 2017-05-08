@@ -27,7 +27,6 @@ import db.interfaces.ActivityRepository;
 import db.interfaces.Criteria;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
-import db.interfaces.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +36,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import db.interfaces.SQLCriteria;
 import db.interfaces.UserRepository;
-import db.postgres.criteria.NameCriteriaPostgres;
-import db.postgres.criteria.StringCriteriaPostgres;
 
 /**
  * @created $date
@@ -201,13 +198,13 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     @Override
     public Criteria getProjectNameCriteria(String projectName)
     {
-        return new StringCriteriaPostgres("PROJECT_NAME", projectName);
+        return DBManager.getInstance().getStringCriteria("PROJECT_NAME", projectName);
     }
 
     @Override
     public Criteria getUserLoginNameCriteria(String userLoginName)
     {
-        return new StringCriteriaPostgres("USER_LOGIN_NAME", userLoginName);
+        return DBManager.getInstance().getStringCriteria("USER_LOGIN_NAME", userLoginName);
     }
 
 }
