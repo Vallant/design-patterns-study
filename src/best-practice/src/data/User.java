@@ -28,6 +28,8 @@ public class User implements DBEntity
 {
 
     
+
+    
     public static enum ROLE
     {
         ADMIN,
@@ -43,6 +45,9 @@ public class User implements DBEntity
     private String email;
     private byte[] password;
     private byte[] salt;
+    
+    private char[] newPassword;
+    private char[] newPasswordAgain;
 
     public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
     {
@@ -65,6 +70,22 @@ public class User implements DBEntity
         this.email = email;
         this.password = password;
         this.salt = salt;
+    }
+
+    public User(String loginName, String firstName, String lastName, ROLE role, String email, char[] password, char[] passwordAgain)
+    {
+        this.loginName = loginName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.email = email;
+        this.newPassword = password;
+        this.newPasswordAgain = passwordAgain;
+    }
+
+    public char[] getNewPasswordAgain()
+    {
+        return newPasswordAgain;
     }
 
     public byte[] getPassword()
@@ -158,5 +179,10 @@ public class User implements DBEntity
     public void setRemoteHash(int hash)
     {
         this.remoteHash = hash;
+    }
+    
+    public char[] getNewPassword()
+    {
+        return newPassword;
     }
 }
