@@ -5,7 +5,10 @@
  */
 package view.interfaces;
 
+import controller.interfaces.ActivityBarController;
 import controller.interfaces.LoginController;
+import controller.interfaces.MainController;
+import controller.interfaces.ProjectController;
 
 /**
  *
@@ -13,5 +16,12 @@ import controller.interfaces.LoginController;
  */
 public interface MainView
 {
-    void showLoginView(LoginController controller);
+    void setMainController(MainController controller);
+    void showLoginView();
+    void showProjectView();
+    
+    void pairLogin(LoginController controller);
+    void pairProject(ProjectController controller);
+    void pairActivityBar(ActivityBarController controller);
+    
 }

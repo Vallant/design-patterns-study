@@ -18,12 +18,11 @@ import view.interfaces.LoginView;
 public class LoginControllerSwing implements LoginController
 {
     private LoginView view;
-    private final LoginModel model;
+    private LoginModel model;
 
-    public LoginControllerSwing(LoginModel model)
+    public LoginControllerSwing()
     {
-        this.model = model;
-        model.setController(this);
+        
     }
     
     @Override
@@ -70,7 +69,7 @@ public class LoginControllerSwing implements LoginController
         else if(!Arrays.equals(u.getNewPassword(), u.getNewPasswordAgain()))
             view.showError("The passwords do not match");
         else
-            model.addUser(u);
+            model.saveNewUser(u);
         
             
         
@@ -107,6 +106,12 @@ public class LoginControllerSwing implements LoginController
                  u.getLastName().isEmpty() ||
                  u.getLoginName().isEmpty() ||
                  u.getNewPassword().length == 0);
+    }
+
+    @Override
+    public void SetModel(LoginModel model)
+    {
+        this.model = model;
     }
     
 }

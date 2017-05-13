@@ -27,7 +27,8 @@ import view.interfaces.LoginView;
  */
 public class LoginViewSwing implements LoginView
 {
-    private final LoginController controller;
+    private LoginController controller;
+    
     private final JFrame frame;
     
     private final JPanel pLogin;
@@ -52,11 +53,9 @@ public class LoginViewSwing implements LoginView
     private final JButton btReset;
     private final JButton btBackReset;
 
-    public LoginViewSwing(LoginController controller, JFrame frame)
+    public LoginViewSwing(JFrame frame)
     {
-        this.controller = controller;
         this.frame = frame;
-        
         
         //Main Login Panel
         pLogin = new JPanel();
@@ -138,11 +137,6 @@ public class LoginViewSwing implements LoginView
         pNewUser.add(buttons3, BorderLayout.SOUTH);
         
         setListeners();
-        frame.add(pLogin);
-        frame.revalidate();
-        
-        
-        this.controller.SetView(this);
     }
     
     @Override
@@ -288,6 +282,12 @@ public class LoginViewSwing implements LoginView
     public void showError(String localizedMessage)
     {
         JOptionPane.showMessageDialog(frame, localizedMessage, "Error!", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void setController(LoginController controller)
+    {
+        this.controller = controller;
     }
     
 }

@@ -34,12 +34,18 @@ import java.sql.ResultSet;
  */
 public class UserRepositoryPostgres implements UserRepository
 {
+    private final DBManagerPostgres db;
 
+    public UserRepositoryPostgres(DBManagerPostgres db)
+    {
+        this.db = db;
+    }
+    
+    
     @Override
     public void add(User item) throws Exception
     {
         assert(item != null);
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO USERS(HASH, FIRST_NAME, LAST_NAME, ROLE, "
@@ -67,7 +73,7 @@ public class UserRepositoryPostgres implements UserRepository
     public void update(User item) throws Exception
     {
         assert(item != null);
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -101,7 +107,7 @@ public class UserRepositoryPostgres implements UserRepository
     public void remove(User item) throws Exception
     {
         assert(item != null);
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -121,7 +127,7 @@ public class UserRepositoryPostgres implements UserRepository
     @Override
     public User getByPrimaryKey(Criteria c) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        
         ArrayList<User> l = getByCriteria(c);
         if(l.isEmpty())
             throw new Exception("No such item");
@@ -132,7 +138,7 @@ public class UserRepositoryPostgres implements UserRepository
     public ArrayList<User> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<User> l = new ArrayList<>();
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) criterias;
         try(Connection con = db.getConnection())
         {
@@ -166,21 +172,21 @@ public class UserRepositoryPostgres implements UserRepository
     @Override
     public Criteria getPrimaryKeyCriteria(User item)
     {
-        return DBManager.getInstance().getStringCriteria("LOGIN_NAME", item.getLoginName());
+        return db.getStringCriteria("LOGIN_NAME", item.getLoginName());
     }
 
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(User item)
     {
         Criteria left = getPrimaryKeyCriteria(item);
-        Criteria right = DBManager.getInstance().getHashCriteria(item.getRemoteHash());
-        return DBManager.getInstance().getAndCriteria(left, right);
+        Criteria right = db.getHashCriteria(item.getRemoteHash());
+        return db.getAndCriteria(left, right);
     }
 
     @Override
     public User getByPrimaryKey(String loginName) throws Exception
     {
-        return getByPrimaryKey(DBManager.getInstance().getStringCriteria("LOGIN_NAME", loginName));
+        return getByPrimaryKey(db.getStringCriteria("LOGIN_NAME", loginName));
     }
 
 }

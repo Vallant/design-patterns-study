@@ -43,10 +43,16 @@ import db.interfaces.UserRepository;
  */
 public class ActivityRepositoryPostgres implements ActivityRepository
 {
+    private final DBManagerPostgres db;
+
+    public ActivityRepositoryPostgres(DBManagerPostgres db)
+    {
+        this.db = db;
+    }
+    
     @Override
     public void add(Activity item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_NAME, PROJECT_PHASE_NAME, USER_LOGIN_NAME "
@@ -80,7 +86,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     @Override
     public void update(Activity item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             SQLCriteria c = (SQLCriteria) db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
@@ -110,7 +116,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     @Override
     public void remove(Activity item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
@@ -130,7 +136,6 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     @Override
     public Activity getByPrimaryKey(Criteria c) throws Exception
     {
-        DBManager db = DBManager.getInstance();
         ArrayList<Activity> l = getByCriteria(c);
         if(l.size() == 0)
             throw new Exception("Record was not found!");
@@ -143,7 +148,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     {
         ArrayList<Activity> l = new ArrayList<>();
         SQLCriteria sc = (SQLCriteria) criterias;
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT HASH, ID, PROJECT_NAME, PROJECT_PHASE_NAME, USER_LOGIN_NAME, DESCRIPTION, "
@@ -186,25 +191,25 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     @Override
     public Criteria getPrimaryKeyCriteria(Activity item)
     {
-     return DBManager.getInstance().getIdCriteria(item.getId());
+     return db.getIdCriteria(item.getId());
     }
 
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(Activity item)
     {
-        return DBManager.getInstance().getIdAndHashCriteria(item.getId(), item.getRemoteHash());
+        return db.getIdAndHashCriteria(item.getId(), item.getRemoteHash());
     }
 
     @Override
     public Criteria getProjectNameCriteria(String projectName)
     {
-        return DBManager.getInstance().getStringCriteria("PROJECT_NAME", projectName);
+        return db.getStringCriteria("PROJECT_NAME", projectName);
     }
 
     @Override
     public Criteria getUserLoginNameCriteria(String userLoginName)
     {
-        return DBManager.getInstance().getStringCriteria("USER_LOGIN_NAME", userLoginName);
+        return db.getStringCriteria("USER_LOGIN_NAME", userLoginName);
     }
 
 }

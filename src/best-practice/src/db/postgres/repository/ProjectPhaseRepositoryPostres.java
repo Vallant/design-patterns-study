@@ -36,11 +36,18 @@ import java.util.ArrayList;
  */
 public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
 {
+    private final DBManagerPostgres db;
 
+    public ProjectPhaseRepositoryPostres(DBManagerPostgres db)
+    {
+        this.db = db;
+    }
+    
+    
     @Override
     public void add(ProjectPhase item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         
         try(Connection con = db.getConnection())
         {
@@ -65,7 +72,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void update(ProjectPhase item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -91,7 +98,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void remove(ProjectPhase item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -123,7 +130,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     public ArrayList<ProjectPhase> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<ProjectPhase> l = new ArrayList<>();
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) criterias;
         try(Connection con = db.getConnection())
         {
@@ -153,7 +160,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public Criteria getPrimaryKeyCriteria(ProjectPhase item)
     {
-        DBManager db = DBManager.getInstance();
+        
         Criteria left = db.getStringCriteria("PROJECT_NAME", item.getProjectName());
         Criteria right = db.getStringCriteria("NAME", item.getName());
         return db.getAndCriteria(left, right);
@@ -162,14 +169,14 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(ProjectPhase item)
     {
-        DBManager db = DBManager.getInstance();
+        
         return db.getAndCriteria(getPrimaryKeyCriteria(item), db.getHashCriteria(item.getRemoteHash()));
     }
 
     @Override
     public ProjectPhase getByPrimaryKey(String projectName, String projectPhaseName) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        
         Criteria left = db.getStringCriteria("PROJECT_NAME", projectName);
         Criteria right = db.getStringCriteria("NAME", projectPhaseName);
         Criteria a = db.getAndCriteria(left, right);

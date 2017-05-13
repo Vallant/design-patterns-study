@@ -33,12 +33,18 @@ import db.interfaces.SQLCriteria;
  */
 public class ProjectRepositoryPostgres implements ProjectRepository
 {
+    private final DBManagerPostgres db;
 
+    public ProjectRepositoryPostgres(DBManagerPostgres db)
+    {
+        this.db = db;
+    }
+    
+    
     @Override
     public void add(Project item) throws Exception
     {
         assert(item != null);
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
         try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO PROJECT(HASH, NAME, "
@@ -60,7 +66,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public void update(Project item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             SQLCriteria c = (SQLCriteria) db.getNameAndHashCriteria(item.getName(), item.getHash());
@@ -86,7 +92,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public void remove(Project item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             SQLCriteria sum = (SQLCriteria) db.getNameAndHashCriteria(item.getName(), item.getHash());
@@ -108,7 +114,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public Project getByPrimaryKey(Criteria c) throws Exception
     {
-        DBManager db = DBManager.getInstance();
+        
         ArrayList<Project> l = getByCriteria(c);
         if(l.isEmpty())
             throw new Exception("No such item");
@@ -119,7 +125,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     public ArrayList<Project> getByCriteria(Criteria criterias) throws Exception
     {
         ArrayList<Project> list = new ArrayList<>();
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria sc = (SQLCriteria) criterias;
         try(Connection con = db.getConnection())
         {
@@ -144,12 +150,12 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     @Override
     public Criteria getPrimaryKeyCriteria(Project item)
     {
-        return DBManager.getInstance().getNameCriteria(item.getName());
+        return db.getNameCriteria(item.getName());
     }
 
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(Project item)
     {
-        return DBManager.getInstance().getNameAndHashCriteria(item.getName(), item.getRemoteHash());
+        return db.getNameAndHashCriteria(item.getName(), item.getRemoteHash());
     }
 }

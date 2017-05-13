@@ -40,10 +40,19 @@ import java.sql.ResultSet;
  */
 public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
 {
+    
+    private final DBManagerPostgres db;
+
+    public ProjectMemberRepositoryPostgres(DBManagerPostgres db)
+    {
+        this.db = db;
+    }
+    
+    
     @Override
     public void add(ProjectMember item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE) "
@@ -68,7 +77,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public void update(ProjectMember item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -95,7 +104,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public void remove(ProjectMember item) throws Exception
     {
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
@@ -126,7 +135,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     {
         ArrayList<ProjectMember> l = new ArrayList<>();
         SQLCriteria sc = (SQLCriteria) criterias;
-        DBManagerPostgres db = (DBManagerPostgres) DBManager.getInstance();
+        
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE FROM PROJECT_MEMBERS "
@@ -161,7 +170,6 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public Criteria getPrimaryKeyCriteria(String projectName, String userLoginName)
     {
-        DBManager db = DBManager.getInstance();
         Criteria name = db.getStringCriteria("PROJECT_NAME", projectName);
         Criteria login = db.getStringCriteria("USER_LOGIN_NAME", userLoginName);
         return db.getAndCriteria(login, name);
@@ -176,7 +184,6 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     @Override
     public Criteria getPrimaryKeyAndHashCriteria(ProjectMember item)
     {
-        DBManager db = DBManager.getInstance();
         Criteria h = db.getHashCriteria(item.getRemoteHash());
         Criteria p = getPrimaryKeyCriteria(item);
         return db.getAndCriteria(p, h);

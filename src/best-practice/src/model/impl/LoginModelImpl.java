@@ -22,6 +22,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import model.interfaces.LoginModel;
+import model.interfaces.MainModel;
 
 /**
  *
@@ -30,6 +31,14 @@ import model.interfaces.LoginModel;
 public class LoginModelImpl implements LoginModel
 {
     private LoginController controller;
+    private MainModel mainModel;
+
+    public LoginModelImpl()
+    {
+        
+    }
+    
+    
     
     @Override
     public void resetPassword(String email)
@@ -40,7 +49,7 @@ public class LoginModelImpl implements LoginModel
     @Override
     public void login(String username, char[] password)
     {
-        UserRepository repo = DBManager.getInstance().getUserRepository();
+        UserRepository repo = mainModel.DB().getUserRepository();
         try
         {
             User u = repo.getByPrimaryKey(username);
@@ -63,7 +72,7 @@ public class LoginModelImpl implements LoginModel
     }
 
     @Override
-    public void addUser(User user)
+    public void saveNewUser(User user)
     {
         try
         {
@@ -76,7 +85,7 @@ public class LoginModelImpl implements LoginModel
             user.setPassword(generateSecret.getEncoded());
             user.setSalt(salt);
             
-            UserRepository repo = DBManager.getInstance().getUserRepository();
+            UserRepository repo = mainModel.DB().getUserRepository();
             repo.add(user);
         }
         catch (NoSuchAlgorithmException ex)
@@ -97,6 +106,12 @@ public class LoginModelImpl implements LoginModel
     public void setController(LoginController controller)
     {
         this.controller = controller;
+    }
+
+    @Override
+    public void setMainModel(MainModel mainModel)
+    {
+        this.mainModel = mainModel;
     }
     
 }

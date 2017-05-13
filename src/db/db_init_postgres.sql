@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS USERS(
     FIRST_NAME  TEXT        NOT NULL, 
     LAST_NAME   TEXT        NOT NULL, 
     ROLE        TEXT        NOT NULL, 
-    SALT        VARCHAR     NOT NULL, 
-    PASSWORD    VARCHAR    NOT NULL, 
+    SALT        BYTEA     NOT NULL, 
+    PASSWORD    BYTEA    NOT NULL, 
     LOGIN_NAME  TEXT        NOT NULL, 
     EMAIL       TEXT        NOT NULL, 
 

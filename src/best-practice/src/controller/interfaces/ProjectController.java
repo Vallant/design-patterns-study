@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.interfaces;
+package controller.interfaces;
 
-import data.User;
-import db.common.DBManager;
+import model.interfaces.ProjectModel;
+import view.interfaces.ProjectView;
 
 /**
  *
  * @author stephan
  */
-public interface MainModel
+public interface ProjectController
 {
-    void loginSuccessfulFor(User user);
-    DBManager DB();
+    void setModel(ProjectModel model);
+    void setView(ProjectView view);
 }

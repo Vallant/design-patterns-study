@@ -67,31 +67,31 @@ public class DBManagerPostgres extends DBManager
     @Override
     public UserRepository getUserRepository()
     {
-        return new UserRepositoryPostgres();
+        return new UserRepositoryPostgres(this);
     }
 
     @Override
     public ProjectRepository getProjectRepository()
     {
-        return new ProjectRepositoryPostgres();
+        return new ProjectRepositoryPostgres(this);
     }
 
     @Override
     public ProjectMemberRepository getProjectMemberRepository()
     {
-        return new ProjectMemberRepositoryPostgres();
+        return new ProjectMemberRepositoryPostgres(this);
     }
 
     @Override
     public ProjectPhaseRepository getProjectPhaseRepository()
     {
-        return new ProjectPhaseRepositoryPostres();
+        return new ProjectPhaseRepositoryPostres(this);
     }
 
     @Override
     public ActivityRepository getActivityRepository()
     {
-        return new ActivityRepositoryPostgres();
+        return new ActivityRepositoryPostgres(this);
     }
 
     @Override

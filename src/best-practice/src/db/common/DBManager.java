@@ -25,25 +25,13 @@ import db.interfaces.RepositoryFactory;
 public abstract class DBManager implements RepositoryFactory
 {
     private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
-    private static DBManager theInstance;
-    
-    public static void initInstance(String driver, String url, String username, String password) throws Exception
+
+    public static DBManager get(String driver, String url, String username, String password) throws Exception
     {
         switch(driver)
         {        
-            case DRIVER_POSTGRES: theInstance = new DBManagerPostgres(driver, url, username, password); break;
+            case DRIVER_POSTGRES: return new DBManagerPostgres(driver, url, username, password);
             default: throw new UnsupportedOperationException("Not yet implemented");
         }
-    }
-
-    public static DBManager getInstance()
-    {
-        assert(theInstance != null);
-        return theInstance;
-    }
-
-    protected DBManager()
-    {
-        
     }
 }

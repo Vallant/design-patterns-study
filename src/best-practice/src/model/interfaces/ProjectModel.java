@@ -5,19 +5,17 @@
  */
 package model.interfaces;
 
-import controller.interfaces.LoginController;
+import controller.interfaces.ProjectController;
 import data.User;
 
 /**
  *
  * @author stephan
  */
-public interface LoginModel
+public interface ProjectModel
 {
-    void resetPassword(String email);
-    void login(String username, char[] password);
-    void saveNewUser(User user);
-
     void setMainModel(MainModel mainModel);
-    void setController(LoginController controller);
+    void setUser(User user);
+    void setController(ProjectController controller);
+    
 }

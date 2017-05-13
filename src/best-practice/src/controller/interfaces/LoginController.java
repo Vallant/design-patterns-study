@@ -5,6 +5,7 @@
  */
 package controller.interfaces;
 
+import model.interfaces.LoginModel;
 import view.interfaces.LoginView;
 
 /**
@@ -13,6 +14,10 @@ import view.interfaces.LoginView;
  */
 public interface LoginController
 {
+    
+    void SetModel(LoginModel model);
+    void SetView(LoginView view);
+    
     void ResetPasswordClicked();
     void LoginClicked();
     void AddUserClicked();
@@ -21,7 +26,7 @@ public interface LoginController
     void AddClicked();
     void ResetClicked();
     
-    void SetView(LoginView view);
+    
 
     void showError(String localizedMessage);
 

@@ -5,11 +5,17 @@
  */
 package view.swing;
 
+import controller.interfaces.ActivityBarController;
 import controller.interfaces.LoginController;
+import controller.interfaces.MainController;
+import controller.interfaces.ProjectController;
+import data.User;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import view.interfaces.ActivityBarView;
 import view.interfaces.LoginView;
 import view.interfaces.MainView;
+import view.interfaces.ProjectView;
 
 /**
  *
@@ -21,19 +27,61 @@ public class MainViewSwing implements MainView
     private final JFrame frame;
     private JPanel loginPanel;
     
+    private final LoginView login;
+    private final ProjectView project;
+    private final ActivityBarView activityBar;
+    
+    
+    
     public MainViewSwing()
     {
         this.frame = new JFrame("Design Pattern Case Study");
         frame.setSize(350,200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        
+        login = new LoginViewSwing(frame);
+        project = new ProjectViewSwing(frame);
+        activityBar = new ActivityBarViewSwing(frame);
     }
 
     @Override
-    public void showLoginView(LoginController controller)
+    public void showLoginView()
     {
-        LoginView login = new LoginViewSwing(controller, frame);
         login.SwitchToLogin();
+    }
+
+    @Override
+    public void showProjectView()
+    {
+        login.RemoveAllComponents();
+    }
+
+    @Override
+    public void setMainController(MainController controller)
+    {
+        
+    }
+
+    @Override
+    public void pairLogin(LoginController controller)
+    {
+        controller.SetView(login);
+        login.setController(controller);
+    }
+
+    @Override
+    public void pairProject(ProjectController controller)
+    {
+        controller.setView(project);
+        project.setController(controller);
+    }
+
+    @Override
+    public void pairActivityBar(ActivityBarController controller)
+    {
+        activityBar.setActivityBarController(controller);
+        controller.setView(activityBar);
     }
     
     

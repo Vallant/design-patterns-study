@@ -5,6 +5,7 @@
  */
 package view.interfaces;
 
+import controller.interfaces.LoginController;
 import data.User;
 
 /**
@@ -25,4 +26,6 @@ public interface LoginView
     char[] getEnteredPassword();
 
     public void showError(String localizedMessage);
+
+    public void setController(LoginController controller);
 }
