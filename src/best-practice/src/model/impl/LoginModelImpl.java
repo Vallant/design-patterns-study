@@ -9,11 +9,13 @@ import controller.interfaces.LoginController;
 import data.User;
 import db.common.DBManager;
 import db.interfaces.UserRepository;
+import db.postgres.repository.UserRepositoryPostgres;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
@@ -52,6 +54,11 @@ public class LoginModelImpl implements LoginModel
         UserRepository repo = mainModel.DB().getUserRepository();
         try
         {
+            //ArrayList<User> l = new ArrayList<>();
+            //UserRepositoryPostgres r = null;
+            //r.get().where("username").Equals(username).toList(l);
+            
+            
             User u = repo.getByPrimaryKey(username);
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
             Random r = new SecureRandom();

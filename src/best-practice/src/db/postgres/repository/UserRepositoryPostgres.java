@@ -24,6 +24,10 @@ import db.interfaces.Criteria;
 import db.interfaces.SQLCriteria;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
+import db.interfaces.WhereBuilder;
+import db.postgres.query.FromBuilderPostgres;
+import db.postgres.query.PostgresQueryItem;
+import db.postgres.query.WhereBuilderPostgres;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -187,6 +191,12 @@ public class UserRepositoryPostgres implements UserRepository
     public User getByPrimaryKey(String loginName) throws Exception
     {
         return getByPrimaryKey(db.getStringCriteria("LOGIN_NAME", loginName));
+    }
+    
+    public WhereBuilder get()
+    {
+        ArrayList<PostgresQueryItem> items = new ArrayList<>();
+        return new FromBuilderPostgres("USERS", items).where();
     }
 
 }
