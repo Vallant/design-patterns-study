@@ -22,11 +22,11 @@ public class Main
     {
         try
         {
-            DBManager.initInstance("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
+            DBManager db = DBManager.get("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
             
-            Repository<Project> r = DBManager.getInstance().getProjectRepository();
+            Repository<Project> r = db.getProjectRepository();
             
-            Criteria c = DBManager.getInstance().getIdCriteria(20);
+            Criteria c = db.getIdCriteria(20);
             
             Project p2 = r.getByPrimaryKey(c);
             
