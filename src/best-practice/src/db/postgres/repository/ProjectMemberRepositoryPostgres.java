@@ -22,16 +22,15 @@ import data.ProjectMember;
 import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
-import db.interfaces.Criteria;
 import java.util.ArrayList;
 import db.interfaces.ProjectMemberRepository;
 import db.interfaces.ProjectRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import db.interfaces.SQLCriteria;
 import db.interfaces.UserRepository;
 import java.sql.ResultSet;
+import java.util.List;
 
 
 /**
@@ -55,7 +54,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE) "
+            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
                             + "VALUES "
                             + "(?, ?, ?, ?) ";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -63,7 +62,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getUserLoginName());
-            ps.setString(index++, item.getProjectName());
+            ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getRole().name());
             
             int numRowsAffected = ps.executeUpdate();
@@ -78,20 +77,17 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     public void update(ProjectMember item) throws Exception
     {
         
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
-            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_NAME = ?, ROLE = ? "
-                            + "WHERE "
-                            + c.toSqlClause();
+            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
+                            + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getUserLoginName());
-            ps.setString(index++, item.getProjectName());
+            ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getRole().name());
-            c.prepareStatement(ps, index);
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -105,14 +101,15 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     public void remove(ProjectMember item) throws Exception
     {
         
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
             String sql = "DELETE FROM PROJECT_MEMBER "
-                            + "WHERE "
-                            + c.toSqlClause();
+                            + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            c.prepareStatement(ps, 1);
+            
+            int index = 1;
+            ps.setInt(index++, item.getProjectId());
+            ps.setString(index++, item.getRole().name());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -120,42 +117,28 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         }
     }
 
+    
     @Override
-    public ProjectMember getByPrimaryKey(Criteria c) throws Exception
+    public List<ProjectMember> getAll() throws Exception
     {
-        ArrayList<ProjectMember> l = getByCriteria(c);
-        if(l.isEmpty())
-            throw new Exception("Record was not found!");
-        return l.get(0);
-            
-    }
-
-    @Override
-    public ArrayList<ProjectMember> getByCriteria(Criteria criterias) throws Exception
-    {
-        ArrayList<ProjectMember> l = new ArrayList<>();
-        SQLCriteria sc = (SQLCriteria) criterias;
+         ArrayList<ProjectMember> l = new ArrayList<>();
         
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_NAME, ROLE FROM PROJECT_MEMBERS "
-                         + "WHERE " + sc.toSqlClause();
+            String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE FROM PROJECT_MEMBERS ";
             PreparedStatement ps = con.prepareStatement(sql);
-            
-            int index = 1;
-            sc.prepareStatement(ps, index);
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
                 int hash = rs.getInt("HASH");
-                String projectName = rs.getString("PROJECT_NAME");
+                int projectId = rs.getInt("PROJECT_ID");
                 String userLoginName = rs.getString("USER_LOGIN_NAME");
                 String role = rs.getString("ROLE");
                 
                 ProjectRepository p = db.getProjectRepository();
-                Criteria c = db.getNameCriteria(projectName);
-                Project project = p.getByPrimaryKey(c);
+                Project project = p.getByPrimaryKey(projectId);
+                
                 UserRepository u = db.getUserRepository();
                 User user = u.getByPrimaryKey(userLoginName);
                 
@@ -166,29 +149,33 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         return l;
     }
 
-
     @Override
-    public Criteria getPrimaryKeyCriteria(String projectName, String userLoginName)
-    {
-        Criteria name = db.getStringCriteria("PROJECT_NAME", projectName);
-        Criteria login = db.getStringCriteria("USER_LOGIN_NAME", userLoginName);
-        return db.getAndCriteria(login, name);
-    }
+    public ProjectMember getByPrimaryKey(String userLoginName, int projectId) throws Exception
+    {   
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE FROM PROJECT_MEMBERS ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() == false)
+                throw new Exception("No such record");
+            
+            
+            int hash = rs.getInt("HASH");
+            String projectIdDb = rs.getString("PROJECT_ID");
+            String userLoginNameDb = rs.getString("USER_LOGIN_NAME");
+            String role = rs.getString("ROLE");
 
-    @Override
-    public Criteria getPrimaryKeyCriteria(ProjectMember item)
-    {
-        return getPrimaryKeyCriteria(item.getProjectName(), item.getUserLoginName());
-    }
+            ProjectRepository p = db.getProjectRepository();
+            Project project = p.getByPrimaryKey(projectId);
 
-    @Override
-    public Criteria getPrimaryKeyAndHashCriteria(ProjectMember item)
-    {
-        Criteria h = db.getHashCriteria(item.getRemoteHash());
-        Criteria p = getPrimaryKeyCriteria(item);
-        return db.getAndCriteria(p, h);
+            UserRepository u = db.getUserRepository();
+            User user = u.getByPrimaryKey(userLoginName);
+
+            return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+        }
+        
     }
-    
-  
 
 }

@@ -28,6 +28,7 @@ public class Project implements DBEntity
 {
     
     private int remoteHash;
+    private int id;
     private String name;
     private String description;
 
@@ -44,11 +45,12 @@ public class Project implements DBEntity
         return remoteHash;
     }
 
-    public Project(int hash, String name, String description)
+    public Project(int hash, int id, String name, String description)
     {
         this.remoteHash = hash;
         this.name = name;
         this.description = description;
+        this.id = id;
     }
 
     public Project(String name, String description)
@@ -99,6 +101,17 @@ public class Project implements DBEntity
     {
         this.remoteHash = hash; 
     }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
     
     
 }

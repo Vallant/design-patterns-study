@@ -19,13 +19,12 @@ package db.postgres.repository;
 import data.Project;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
-import db.interfaces.Criteria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import db.interfaces.ProjectRepository;
-import db.interfaces.SQLCriteria;
+import java.util.List;
 
 /**
  *
@@ -69,18 +68,17 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         
         try(Connection con = db.getConnection())
         {
-            SQLCriteria c = (SQLCriteria) db.getNameAndHashCriteria(item.getName(), item.getHash());
             
             String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
-                    + "WHERE " + c.toSqlClause();
+                    + "WHERE NAME = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getName());
             ps.setString(index++, item.getDescription());
-            
-            c.prepareStatement(ps, index);
+            ps.setString(index++, item.getName());
+            ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -95,12 +93,13 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         
         try(Connection con = db.getConnection())
         {
-            SQLCriteria sum = (SQLCriteria) db.getNameAndHashCriteria(item.getName(), item.getHash());
             
             String sql = "DELETE FROM PROJECT "
-                    + "WHERE " + sum.toSqlClause();
+                    + "WHERE NAME = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            sum.prepareStatement(ps, 1);
+            int index = 1;
+            ps.setString(index++, item.getName());
+            ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();                
             if(numRowsAffected == 0)
@@ -112,50 +111,50 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     }
 
     @Override
-    public Project getByPrimaryKey(Criteria c) throws Exception
+    public Project getByPrimaryKey(int projectId) throws Exception
     {
-        
-        ArrayList<Project> l = getByCriteria(c);
-        if(l.isEmpty())
-            throw new Exception("No such item");
-        return l.get(0);
+       try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH,  NAME, DESCRIPTION FROM PROJECT "
+                    + "WHERE ID = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int index = 1;
+            ps.setInt(index++, projectId);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() == false)
+                throw new Exception("No such record");
+            
+            int hash = rs.getInt("HASH");
+            String name = rs.getString("NAME");
+            String description = rs.getString("DESCRIPTION");
+
+            return new Project(hash, projectId, name, description);
+        }
     }
 
     @Override
-    public ArrayList<Project> getByCriteria(Criteria criterias) throws Exception
+    public List<Project> getAll() throws Exception
     {
-        ArrayList<Project> list = new ArrayList<>();
+         ArrayList<Project> list = new ArrayList<>();
         
-        SQLCriteria sc = (SQLCriteria) criterias;
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH,  NAME, DESCRIPTION FROM PROJECT "
-                    + "WHERE " + sc.toSqlClause();
+            String sql = "SELECT HASH, ID, NAME, DESCRIPTION FROM PROJECT ";
             PreparedStatement ps = con.prepareStatement(sql);
-            sc.prepareStatement(ps, 1);
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
                 int hash = rs.getInt("HASH");
+                int id = rs.getInt("ID");
                 String name = rs.getString("NAME");
                 String description = rs.getString("DESCRIPTION");
                 
-                list.add(new Project(hash, name, description));
+                list.add(new Project(hash, id, name, description));
             }
         }
         return list;
-    }    
-
-    @Override
-    public Criteria getPrimaryKeyCriteria(Project item)
-    {
-        return db.getNameCriteria(item.getName());
-    }
-
-    @Override
-    public Criteria getPrimaryKeyAndHashCriteria(Project item)
-    {
-        return db.getNameAndHashCriteria(item.getName(), item.getRemoteHash());
     }
 }

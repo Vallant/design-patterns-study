@@ -30,7 +30,6 @@ public class Activity implements DBEntity
 {
     private int remoteHash;
     private int id;
-    private Project project;
     private ProjectPhase phase;
     private User user;
     private String description;
@@ -39,11 +38,10 @@ public class Activity implements DBEntity
     private String comments;
 
 
-    public Activity(int hash, int id, Project project, ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    public Activity(int hash, int id, ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
     {
         this.remoteHash = hash;
         this.id = id;
-        this.project = project;
         this.phase = phase;
         this.user = user;
         this.description = description;
@@ -53,9 +51,8 @@ public class Activity implements DBEntity
     }
     
     
-    public Activity(Project project, ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
+    public Activity(ProjectPhase phase, User user, String description, ZonedDateTime start, ZonedDateTime stop, String comments)
     {
-        this.project = project;
         this.phase = phase;
         this.user = user;
         this.description = description;
@@ -72,7 +69,6 @@ public class Activity implements DBEntity
     {
         return new HashCodeBuilder()
                 .append(id)
-                .append(project.getRemoteHash())
                 .append(phase.getRemoteHash())
                 .append(user.getRemoteHash())
                 .append(description)
@@ -100,16 +96,6 @@ public class Activity implements DBEntity
     public void setId(Integer id)
     {
         this.id = id;
-    }
-
-    public Project getProject()
-    {
-        return project;
-    }
-
-    public void setProject(Project project)
-    {
-        this.project = project;
     }
 
     public ProjectPhase getPhase()
@@ -178,15 +164,14 @@ public class Activity implements DBEntity
     {
         return getLocalHash() != getRemoteHash();
     }
-
-    public String getProjectName()
-    {
-        return project.getName();
-    }
     
     public String getProjectPhaseName()
     {
         return phase.getName();
+    }
+    public int getProjectPhaseId()
+    {
+        return phase.getId();
     }
     
     public String getUserLoginName()

@@ -115,10 +115,10 @@ public class ProjectMember implements DBEntity
     {
         return user.getLoginName();
     }
-    
-    public String getProjectName()
+   
+    public int getProjectId()
     {
-        return project.getName();
+        return project.getId();
     }
     
     

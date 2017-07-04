@@ -17,6 +17,7 @@
 package db.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,10 +28,6 @@ public interface Repository<T>
     void add(T item) throws Exception;
     void update(T item) throws Exception;
     void remove(T item) throws Exception;
+    List<T> getAll() throws Exception;
     
-    T getByPrimaryKey(Criteria c) throws Exception;
-    ArrayList<T> getByCriteria(Criteria criterias) throws Exception;
-    
-    Criteria getPrimaryKeyCriteria(T item);
-    Criteria getPrimaryKeyAndHashCriteria(T item);
 }

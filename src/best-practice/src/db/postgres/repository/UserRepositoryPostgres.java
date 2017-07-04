@@ -20,17 +20,12 @@ package db.postgres.repository;
 import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
-import db.interfaces.Criteria;
-import db.interfaces.SQLCriteria;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
-import db.interfaces.WhereBuilder;
-import db.postgres.query.FromBuilderPostgres;
-import db.postgres.query.PostgresQueryItem;
-import db.postgres.query.WhereBuilderPostgres;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  * @created $date
@@ -78,13 +73,11 @@ public class UserRepositoryPostgres implements UserRepository
     {
         assert(item != null);
         
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
             String sql = "UPDATE USERS SET HASH = ?, FIRST_NAME = ?, LAST_NAME = ?, ROLE = ?, "
                     + "SALT = ?, PASSWORD = ?, LOGIN_NAME = ?, EMAIL = ? "
-                    + "WHERE "
-                    + c.toSqlClause();
+                    + "WHERE LOGIN_NAME = ? AND HASH = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -99,7 +92,8 @@ public class UserRepositoryPostgres implements UserRepository
             ps.setString(index++, item.getLoginName());
             ps.setString(index++, item.getEmail());
             
-            c.prepareStatement(ps, index);
+            ps.setString(index++, item.getLoginName());
+            ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -111,16 +105,17 @@ public class UserRepositoryPostgres implements UserRepository
     public void remove(User item) throws Exception
     {
         assert(item != null);
-        
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
+       
         try(Connection con = db.getConnection())
         {
             String sql = "DELETE FROM USERS "
-                    + "WHERE "
-                    + c.toSqlClause();
+                    + "WHERE LOGIN_NAME = ? AND HASH = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            c.prepareStatement(ps, 1);
+            int index = 1;
+            ps.setString(index++, item.getLoginName());
+            ps.setInt(index++, item.getRemoteHash());
+            
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -128,31 +123,47 @@ public class UserRepositoryPostgres implements UserRepository
         }
     }
 
+  
     @Override
-    public User getByPrimaryKey(Criteria c) throws Exception
-    {
-        
-        ArrayList<User> l = getByCriteria(c);
-        if(l.isEmpty())
-            throw new Exception("No such item");
-        return l.get(0);
-    }
-
-    @Override
-    public ArrayList<User> getByCriteria(Criteria criterias) throws Exception
-    {
-        ArrayList<User> l = new ArrayList<>();
-        
-        SQLCriteria c = (SQLCriteria) criterias;
+    public User getByPrimaryKey(String loginName) throws Exception
+    { 
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
                     + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
                     + "FROM USERS "
-                    + "WHERE "
-                    + c.toSqlClause();
+                    + "WHERE LOGIN_NAME = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            c.prepareStatement(ps, 1);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() == false)
+                throw new Exception("No such record");
+            
+            int hash = rs.getInt("HASH");
+            String firstName = rs.getString("FIRST_NAME");
+            String lastName = rs.getString("LAST_NAME");
+            String role = rs.getString("ROLE");
+            byte[] salt = rs.getBytes("SALT");
+            byte[] password = rs.getBytes("PASSWORD");
+            String loginNameDb = rs.getString("LOGIN_NAME");
+            String email = rs.getString("EMAIL");
+
+            return new User(hash, loginName, firstName, lastName, 
+                    User.ROLE.valueOf(role), email, password, salt);
+        }
+    }
+
+    @Override
+    public List<User> getAll() throws Exception
+    {
+         ArrayList<User> l = new ArrayList<>();
+        
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                    + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                    + "FROM USERS ";
+            PreparedStatement ps = con.prepareStatement(sql);
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())
@@ -173,30 +184,5 @@ public class UserRepositoryPostgres implements UserRepository
         return l;
     }
 
-    @Override
-    public Criteria getPrimaryKeyCriteria(User item)
-    {
-        return db.getStringCriteria("LOGIN_NAME", item.getLoginName());
-    }
-
-    @Override
-    public Criteria getPrimaryKeyAndHashCriteria(User item)
-    {
-        Criteria left = getPrimaryKeyCriteria(item);
-        Criteria right = db.getHashCriteria(item.getRemoteHash());
-        return db.getAndCriteria(left, right);
-    }
-
-    @Override
-    public User getByPrimaryKey(String loginName) throws Exception
-    {
-        return getByPrimaryKey(db.getStringCriteria("LOGIN_NAME", loginName));
-    }
-    
-    public WhereBuilder get()
-    {
-        ArrayList<PostgresQueryItem> items = new ArrayList<>();
-        return new FromBuilderPostgres("USERS", items).where();
-    }
 
 }

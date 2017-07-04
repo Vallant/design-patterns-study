@@ -29,12 +29,14 @@ public class ProjectPhase implements DBEntity
     private int remoteHash;
     private Project project;
     private String name;
-
-    public ProjectPhase(int hash, Project project, String name)
+    private int id;
+    
+    public ProjectPhase(int hash, Project project, String name, int id)
     {
         this.remoteHash = hash;
         this.project = project;
         this.name = name;
+        this.id = id;
     }
 
     public ProjectPhase(Project project, String name)
@@ -57,6 +59,7 @@ public class ProjectPhase implements DBEntity
         return new HashCodeBuilder().
                 append(project.getRemoteHash()).
                 append(name).
+                append(id).
                 hashCode();
     }
 
@@ -96,4 +99,16 @@ public class ProjectPhase implements DBEntity
     {
         return project.getName();
     }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
+    
 }

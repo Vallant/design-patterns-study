@@ -13,5 +13,5 @@ import data.Project;
  */
 public interface ProjectRepository extends Repository<Project>
 {
-    //Project getByPrimaryKey(String projectName);
+    Project getByPrimaryKey(int projectId) throws Exception;
 }

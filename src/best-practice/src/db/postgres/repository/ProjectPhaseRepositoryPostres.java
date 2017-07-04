@@ -20,15 +20,14 @@ import data.Project;
 import data.ProjectPhase;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
-import db.interfaces.Criteria;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
-import db.interfaces.SQLCriteria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -72,20 +71,20 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void update(ProjectPhase item) throws Exception
     {
-        
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
             String sql = "UPDATE PROJECT_PHASES SET HASH = ?, PROJECT_NAME = ?, NAME = ? "
-                            + "WHERE "
-                            + c.toSqlClause();
+                            + "WHERE ID = ? AND HASH = ?";
+            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getProjectName());
             ps.setString(index++, item.getName());
-            c.prepareStatement(ps, index);
+            ps.setInt(index++, item.getId());
+            ps.setInt(index++, item.getRemoteHash());
+            
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -98,16 +97,15 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void remove(ProjectPhase item) throws Exception
     {
-        
-        SQLCriteria c = (SQLCriteria) getPrimaryKeyAndHashCriteria(item);
         try(Connection con = db.getConnection())
         {
             String sql = "DELETE FROM PROJECT_PHASES "
-                            + "WHERE "
-                            + c.toSqlClause();
+                            + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            c.prepareStatement(ps, 1);
+            int index = 1;
+            ps.setInt(index++, item.getId());
+            ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -117,71 +115,62 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
         }
     }
 
+
+   
     @Override
-    public ProjectPhase getByPrimaryKey(Criteria c) throws Exception
+    public ProjectPhase getByPrimaryKey(int id) throws Exception
     {
-        ArrayList<ProjectPhase> l = getByCriteria(c);
-        if(l.isEmpty())
-            throw new Exception("Record was not found!");
-        return l.get(0);
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES "
+                    + "WHERE ID = ?";
+            
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int index = 1;
+            ps.setInt(index++, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next() == false)
+                throw new Exception("No such item");
+            
+            int hash = rs.getInt("HASH");
+            int idDb = rs.getInt("ID");
+            int projectId = rs.getInt("PROJECT_ID");
+            String name = rs.getString("NAME");
+
+            ProjectRepository p = db.getProjectRepository();
+            Project project = p.getByPrimaryKey(projectId);
+
+            return new ProjectPhase(hash, project, name, id);
+        }
     }
 
     @Override
-    public ArrayList<ProjectPhase> getByCriteria(Criteria criterias) throws Exception
+    public List<ProjectPhase> getAll() throws Exception
     {
         ArrayList<ProjectPhase> l = new ArrayList<>();
         
-        SQLCriteria c = (SQLCriteria) criterias;
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, PROJECT_NAME, NAME FROM PROJECT_PHASES "
-                            + "WHERE "
-                            + c.toSqlClause();
+            String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES ";
             
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
                 int hash = rs.getInt("HASH");
-                String projectName = rs.getString("PROJECT_NAME");
+                int id = rs.getInt("ID");
+                int projectId = rs.getInt("PROJECT_ID");
                 String name = rs.getString("NAME");
                 
                 ProjectRepository p = db.getProjectRepository();
-                Criteria pc = db.getNameCriteria(projectName);
-                Project project = p.getByPrimaryKey(pc);
+                Project project = p.getByPrimaryKey(projectId);
                 
-                ProjectPhase phase = new ProjectPhase(hash, project, name);
+                ProjectPhase phase = new ProjectPhase(hash, project, name, id);
                 l.add(phase);                
             }
         }
         return l;
     }
 
-    @Override
-    public Criteria getPrimaryKeyCriteria(ProjectPhase item)
-    {
-        
-        Criteria left = db.getStringCriteria("PROJECT_NAME", item.getProjectName());
-        Criteria right = db.getStringCriteria("NAME", item.getName());
-        return db.getAndCriteria(left, right);
-    }
-
-    @Override
-    public Criteria getPrimaryKeyAndHashCriteria(ProjectPhase item)
-    {
-        
-        return db.getAndCriteria(getPrimaryKeyCriteria(item), db.getHashCriteria(item.getRemoteHash()));
-    }
-
-    @Override
-    public ProjectPhase getByPrimaryKey(String projectName, String projectPhaseName) throws Exception
-    {
-        
-        Criteria left = db.getStringCriteria("PROJECT_NAME", projectName);
-        Criteria right = db.getStringCriteria("NAME", projectPhaseName);
-        Criteria a = db.getAndCriteria(left, right);
-        return getByPrimaryKey(a);
-    }
-
-    
 }
