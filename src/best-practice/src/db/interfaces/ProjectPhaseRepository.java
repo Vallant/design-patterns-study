@@ -17,6 +17,9 @@
 package db.interfaces;
 
 import data.ProjectPhase;
+import exception.ElementNotFoundException;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -25,4 +28,6 @@ import data.ProjectPhase;
 public interface ProjectPhaseRepository extends Repository<ProjectPhase>
 {
     ProjectPhase getByPrimaryKey(int id) throws Exception;
+    ArrayList<ProjectPhase> getByProjectId(int projectId) throws Exception;
+    ArrayList<String> getNamesByProjectName(String projectName) throws Exception;
 }

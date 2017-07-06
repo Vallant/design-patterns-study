@@ -29,7 +29,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import db.interfaces.UserRepository;
+import exception.ElementChangedException;
+import exception.ElementNotFoundException;
+
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -91,7 +95,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
             item.setRemoteHash(item.getLocalHash());
             
         }
@@ -113,7 +117,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
         }
     }
 
@@ -159,7 +163,11 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             
             ResultSet rs = ps.executeQuery();
             if(rs.next() == false)
-                throw new Exception("No such record");
+                throw new ElementNotFoundException("ProjectMember",
+                        new ArrayList(Arrays.asList("Username", "ProjectId")),
+                        new ArrayList(Arrays.asList(userLoginName, Integer.toString(projectId)))
+                );
+
             
             
             int hash = rs.getInt("HASH");

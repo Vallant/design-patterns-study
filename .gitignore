@@ -28,3 +28,6 @@ manifest.mf
 build.xml
 /src/best-practice/dist/
 /src/best-practice/build/
+
+src/best-practice/.idea/*
+src/best-practice/*.iml

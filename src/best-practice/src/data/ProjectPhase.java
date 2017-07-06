@@ -57,7 +57,7 @@ public class ProjectPhase implements DBEntity
     public int getLocalHash()
     {
         return new HashCodeBuilder().
-                append(project.getRemoteHash()).
+                append(project.getId()).
                 append(name).
                 append(id).
                 hashCode();
@@ -98,6 +98,10 @@ public class ProjectPhase implements DBEntity
     public String getProjectName()
     {
         return project.getName();
+    }
+    public int getProjectId()
+    {
+        return project.getId();
     }
 
     public int getId()

@@ -16,6 +16,8 @@ import model.interfaces.LoginModel;
 import model.interfaces.MainModel;
 import model.interfaces.ProjectModel;
 
+import javax.swing.*;
+
 /**
  *
  * @author stephan
@@ -70,6 +72,16 @@ public class MainModelImpl implements MainModel
         activityBar.setUser(user);
         project.setUser(user);
         controller.switchToProjectView();
+        controller.showActivityBar();
+
+        project.refresh();
+        activityBar.refresh();
+    }
+
+    @Override
+    public void showError(Exception ex)
+    {
+        controller.showError(ex);
     }
 
     private void pairLogin()
@@ -93,7 +105,7 @@ public class MainModelImpl implements MainModel
     @Override
     public DBManager DB()
     {
-        return DB();
+        return db;
     }
 }
 

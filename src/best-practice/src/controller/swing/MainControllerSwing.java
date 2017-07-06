@@ -59,7 +59,7 @@ public class MainControllerSwing implements MainController
     @Override
     public void switchToProjectView()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mainView.showProjectView();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MainControllerSwing implements MainController
     @Override
     public void showActivityBar()
     {
-        
+        mainView.showActivityBar();
     }
 
     @Override
@@ -104,5 +104,10 @@ public class MainControllerSwing implements MainController
         mainView.pairActivityBar(activityBar);
     }
 
-    
+    @Override
+    public void showError(Exception ex) {
+        mainView.showError(ex.getLocalizedMessage());
+    }
+
+
 }

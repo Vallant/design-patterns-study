@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import db.interfaces.UserRepository;
+import exception.ElementChangedException;
+
 import java.util.List;
 
 /**
@@ -54,15 +56,16 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     {
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_PHASE_ID, USER_LOGIN_NAME "
+            String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, "
                             + "DESCRIPTION, START_TIME, END_TIME, COMMENTS) "
                             + "VALUES "
-                            + "(?, ?, ?, ?, ?, ?, ?)";
+                            + "(?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getRemoteHash());
             ps.setInt(index++, item.getProjectPhaseId());
+            ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
             ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
@@ -87,7 +90,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         
         try(Connection con = db.getConnection())
         {   
-            String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_PHASE_ID = ?, USER_LOGIN_NAME = ? "
+            String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_PHASE_ID = ?, PROJECT_ID = ?, USER_LOGIN_NAME = ?, "
                     + "DESCRIPTION = ?, START_TIME = ?, END_TIME = ?, COMMENTS = ? "
                     + "WHERE HASH = ? AND ID = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -95,17 +98,19 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             
             ps.setInt(index++, item.hashCode());
             ps.setInt(index++, item.getProjectPhaseId());
+            ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
             ps.setObject(index++, item.getStart());
             ps.setObject(index++, item.getStop());
             ps.setString(index++, item.getComments());
+
             ps.setInt(index++, item.getRemoteHash());
             ps.setInt(index++, item.getId());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
         }
     }
 
@@ -126,7 +131,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
         }
     }
 
@@ -135,7 +140,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     {   
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, USER_LOGIN_NAME, DESCRIPTION, "
+            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
                          + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY ";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -146,17 +151,23 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             int hash = rs.getInt("HASH");
             int id_db = rs.getInt("ID");
             int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
+            int projectId = rs.getInt("PROJECT_ID");
             String userLoginName = rs.getString("USER_LOGIN_NAME");
             String description = rs.getString("DESCRIPTION");
             ZonedDateTime start = rs.getObject("START_TIME", ZonedDateTime.class);
             ZonedDateTime end = rs.getObject("END_TIME", ZonedDateTime.class);
             String comments = rs.getString("COMMENTS");
 
+
+
             ProjectPhaseRepository pp = db.getProjectPhaseRepository();
             ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
 
             UserRepository u = db.getUserRepository();
             User user = u.getByPrimaryKey(userLoginName);
+
+            assert(id == id_db);
+            assert(projectId == phase.getProjectId());
 
             Activity a = new Activity(hash, id, phase, user, description, start, start, comments);
             return a;
@@ -170,7 +181,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, USER_LOGIN_NAME, DESCRIPTION, "
+            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
                          + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY ";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -180,6 +191,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                 int hash = rs.getInt("HASH");
                 int id = rs.getInt("ID");
                 int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
+                int projectId = rs.getInt("PROJECT_ID");
                 String userLoginName = rs.getString("USER_LOGIN_NAME");
                 String description = rs.getString("DESCRIPTION");
                 ZonedDateTime start = rs.getObject("START_TIME", ZonedDateTime.class);
@@ -192,6 +204,8 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                 
                 UserRepository u = db.getUserRepository();
                 User user = u.getByPrimaryKey(userLoginName);
+
+                assert(projectId == phase.getProjectId());
                 
                 Activity a = new Activity(hash, id, phase, user, description, start, start, comments);
                 l.add(a);

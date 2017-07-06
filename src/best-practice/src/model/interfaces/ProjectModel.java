@@ -17,5 +17,6 @@ public interface ProjectModel
     void setMainModel(MainModel mainModel);
     void setUser(User user);
     void setController(ProjectController controller);
-    
+
+    void refresh();
 }

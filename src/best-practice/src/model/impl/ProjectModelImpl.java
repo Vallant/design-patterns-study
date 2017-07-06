@@ -42,6 +42,11 @@ public class ProjectModelImpl implements ProjectModel
     {
         this.controller = controller;
     }
-    
-    
+
+    @Override
+    public void refresh() {
+        controller.refresh();
+    }
+
+
 }

@@ -15,5 +15,6 @@ import db.common.DBManager;
 public interface MainModel
 {
     void loginSuccessfulFor(User user);
+    void showError(Exception ex);
     DBManager DB();
 }

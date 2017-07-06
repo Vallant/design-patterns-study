@@ -14,4 +14,5 @@ import controller.interfaces.ProjectController;
 public interface ProjectView
 {
     void setController(ProjectController controller);
+    void show();
 }

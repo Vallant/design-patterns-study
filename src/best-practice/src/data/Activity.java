@@ -74,7 +74,8 @@ public class Activity implements DBEntity
                 .append(description)
                 .append(start)
                 .append(stop)
-                .append(comments).hashCode();
+                .append(comments)
+                .hashCode();
     }
     
     @Override
@@ -177,6 +178,10 @@ public class Activity implements DBEntity
     public String getUserLoginName()
     {
         return user.getLoginName();
+    }
+    public int getProjectId()
+    {
+        return phase.getProject().getId();
     }
 
     @Override

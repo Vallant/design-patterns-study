@@ -17,6 +17,7 @@
 package db.interfaces;
 
 import data.ProjectMember;
+import exception.ElementNotFoundException;
 
 /**
  *

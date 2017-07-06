@@ -25,10 +25,8 @@ public interface LoginController
     void BackToLoginClicked();
     void AddClicked();
     void ResetClicked();
-    
-    
 
-    void showError(String localizedMessage);
+    void showDialog(String message);
 
     public void loginFailed();
 }

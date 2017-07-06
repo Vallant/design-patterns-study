@@ -15,8 +15,8 @@ import data.User;
 public interface LoginModel
 {
     void resetPassword(String email);
-    void login(String username, char[] password);
-    void saveNewUser(User user);
+    void login(String username, char[] password) throws Exception;
+    void saveNewUser(User user) throws Exception;
 
     void setMainModel(MainModel mainModel);
     void setController(LoginController controller);

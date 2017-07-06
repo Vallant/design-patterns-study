@@ -7,7 +7,7 @@ package test;
 
 import data.Project;
 import db.common.DBManager;
-import db.interfaces.Criteria;
+import db.interfaces.ProjectRepository;
 import db.interfaces.Repository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +24,9 @@ public class Main
         {
             DBManager db = DBManager.get("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
             
-            Repository<Project> r = db.getProjectRepository();
-            
-            Criteria c = db.getIdCriteria(20);
-            
-            Project p2 = r.getByPrimaryKey(c);
+            ProjectRepository r = db.getProjectRepository();
+
+            Project p2 = r.getByPrimaryKey(20);
             
             System.out.println(p2.getName());
         }

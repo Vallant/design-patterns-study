@@ -37,11 +37,11 @@ public class LoginModelImpl implements LoginModel
 
     public LoginModelImpl()
     {
-        
+
     }
-    
-    
-    
+
+
+
     @Override
     public void resetPassword(String email)
     {
@@ -49,64 +49,39 @@ public class LoginModelImpl implements LoginModel
     }
 
     @Override
-    public void login(String username, char[] password)
+    public void login(String username, char[] password) throws Exception
     {
         UserRepository repo = mainModel.DB().getUserRepository();
-        try
-        {
-            //ArrayList<User> l = new ArrayList<>();
-            //UserRepositoryPostgres r = null;
-            //r.get().where("username").Equals(username).toList(l);
-            
-            
-            User u = repo.getByPrimaryKey(username);
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            Random r = new SecureRandom();
-            //byte[] salt = new byte[128];
-            //r.nextBytes(salt);
-            KeySpec ks = new PBEKeySpec(password, u.getSalt(), 1000, 512);
-            SecretKey generateSecret = skf.generateSecret(ks);
-            if(!Arrays.equals(generateSecret.getEncoded(), u.getPassword()))
-            {
-                controller.loginFailed();
-            }
-            
-        }
-        catch (Exception ex)
-        {
-            controller.showError(ex.getLocalizedMessage());
-        }
+
+        User u = repo.getByPrimaryKey(username);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        Random r = new SecureRandom();
+        KeySpec ks = new PBEKeySpec(password, u.getSalt(), 1000, 512);
+        SecretKey generateSecret = skf.generateSecret(ks);
+
+        if(!Arrays.equals(generateSecret.getEncoded(), u.getPassword()))
+            controller.loginFailed();
+        else
+            mainModel.loginSuccessfulFor(u);
     }
 
     @Override
-    public void saveNewUser(User user)
+    public void saveNewUser(User user) throws Exception
     {
-        try
-        {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            Random r = new SecureRandom();
-            byte[] salt = new byte[128];
-            r.nextBytes(salt);
-            KeySpec ks = new PBEKeySpec(user.getNewPassword(), salt, 1000, 512);
-            SecretKey generateSecret = skf.generateSecret(ks);
-            user.setPassword(generateSecret.getEncoded());
-            user.setSalt(salt);
-            
-            UserRepository repo = mainModel.DB().getUserRepository();
-            repo.add(user);
-        }
-        catch (NoSuchAlgorithmException ex)
-        {
-            Logger.getLogger(LoginModelImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (InvalidKeySpecException ex)
-        {
-            Logger.getLogger(LoginModelImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (Exception ex)
-        {
-            Logger.getLogger(LoginModelImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        Random r = new SecureRandom();
+        byte[] salt = new byte[128];
+        r.nextBytes(salt);
+        KeySpec ks = new PBEKeySpec(user.getNewPassword(), salt, 1000, 512);
+        SecretKey generateSecret = skf.generateSecret(ks);
+        user.setPassword(generateSecret.getEncoded());
+        user.setSalt(salt);
+
+        UserRepository repo = mainModel.DB().getUserRepository();
+        repo.add(user);
+
+        controller.showDialog("User creation successful");
+        controller.BackToLoginClicked();
     }
 
     @Override

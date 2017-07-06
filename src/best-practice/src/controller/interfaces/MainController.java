@@ -17,18 +17,20 @@ import model.interfaces.ProjectModel;
  */
 public interface MainController
 {
-    public void init(String frontend);
+    void init(String frontend);
     
-    public void setModel(MainModel model);
+    void setModel(MainModel model);
     
-    public void switchToLogin();
-    public void switchToProjectView();
-    public void switchToAdminView();
-    public void switchToStatisticView();
+    void switchToLogin();
+    void switchToProjectView();
+    void switchToAdminView();
+    void switchToStatisticView();
     
-    public void showActivityBar();
+    void showActivityBar();
     
-    public void pairLogin(LoginModel model);
-    public void pairProject(ProjectModel model);
-    public void pairActivityBar(ActivityBarModel model);
+    void pairLogin(LoginModel model);
+    void pairProject(ProjectModel model);
+    void pairActivityBar(ActivityBarModel model);
+    
+    void showError(Exception ex);
 }

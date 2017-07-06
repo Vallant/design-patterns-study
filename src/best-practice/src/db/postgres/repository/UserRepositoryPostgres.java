@@ -133,7 +133,10 @@ public class UserRepositoryPostgres implements UserRepository
                     + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
                     + "FROM USERS "
                     + "WHERE LOGIN_NAME = ?";
+
+            int index = 1;
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(index++, loginName);
             
             ResultSet rs = ps.executeQuery();
             if(rs.next() == false)

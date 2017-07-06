@@ -16,4 +16,6 @@ public interface ProjectController
 {
     void setModel(ProjectModel model);
     void setView(ProjectView view);
+
+    void refresh();
 }

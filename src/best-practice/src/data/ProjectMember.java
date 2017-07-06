@@ -83,9 +83,10 @@ public class ProjectMember implements DBEntity
     public int getLocalHash()
     {
         return new HashCodeBuilder().
-                append(user).
-                append(project.getLocalHash()).
-                append(role).hashCode();
+                append(user.getLoginName()).
+                append(project.getId()).
+                append(role).
+                hashCode();
                 
     }
 

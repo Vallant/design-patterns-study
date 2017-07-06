@@ -5,6 +5,8 @@
  */
 package controller.interfaces;
 
+import data.Project;
+import data.ProjectPhase;
 import model.interfaces.ActivityBarModel;
 import view.interfaces.ActivityBarView;
 
@@ -16,4 +18,10 @@ public interface ActivityBarController
 {
     void setModel(ActivityBarModel model);
     void setView(ActivityBarView view);
+
+    void StartStopClicked();
+    void ProjectSelected(String project);
+    void PhaseSelected(String projectPhase);
+
+    void refresh();
 }

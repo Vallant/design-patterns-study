@@ -10,6 +10,8 @@ import controller.interfaces.LoginController;
 import controller.interfaces.MainController;
 import controller.interfaces.ProjectController;
 
+import java.rmi.server.ExportException;
+
 /**
  *
  * @author stephan
@@ -23,5 +25,8 @@ public interface MainView
     void pairLogin(LoginController controller);
     void pairProject(ProjectController controller);
     void pairActivityBar(ActivityBarController controller);
-    
+
+    void showError(String message);
+
+    void showActivityBar();
 }

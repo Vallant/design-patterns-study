@@ -17,12 +17,17 @@
 package db.postgres.repository;
 
 import data.Project;
+import data.ProjectPhase;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
+
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import java.util.List;
 
@@ -70,14 +75,15 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         {
             
             String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
-                    + "WHERE NAME = ? AND HASH = ?";
+                    + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getName());
             ps.setString(index++, item.getDescription());
-            ps.setString(index++, item.getName());
+
+            ps.setInt(index++, item.getId());
             ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();
@@ -95,10 +101,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         {
             
             String sql = "DELETE FROM PROJECT "
-                    + "WHERE NAME = ? AND HASH = ?";
+                    + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             int index = 1;
-            ps.setString(index++, item.getName());
+            ps.setInt(index++, item.getId());
             ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();                
@@ -115,7 +121,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     {
        try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH,  NAME, DESCRIPTION FROM PROJECT "
+            String sql = "SELECT HASH,  ID, NAME, DESCRIPTION FROM PROJECT "
                     + "WHERE ID = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -127,11 +133,38 @@ public class ProjectRepositoryPostgres implements ProjectRepository
                 throw new Exception("No such record");
             
             int hash = rs.getInt("HASH");
+            int id = rs.getInt("ID");
             String name = rs.getString("NAME");
             String description = rs.getString("DESCRIPTION");
+            ProjectPhaseRepository ppr = db.getProjectPhaseRepository();
+            assert(projectId == id);
 
             return new Project(hash, projectId, name, description);
         }
+    }
+
+    @Override
+    public ArrayList<String> getPhaseNamesByUserName(String loginName) throws Exception{
+        ArrayList<String> list = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, ID, NAME, DESCRIPTION FROM PROJECT " +
+                    "JOIN PROJECT_MEMBERS ON PROJECT_MEMBER.USER_LOGIN_NAME = ? " +
+                    "WHERE 1 = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ps.setString(index++, loginName);
+
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                String name = rs.getString("NAME");
+                list.add(name);
+            }
+        }
+        return list;
     }
 
     @Override
@@ -143,6 +176,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         {
             String sql = "SELECT HASH, ID, NAME, DESCRIPTION FROM PROJECT ";
             PreparedStatement ps = con.prepareStatement(sql);
+
             
             ResultSet rs = ps.executeQuery();
             while(rs.next())
@@ -151,6 +185,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
                 int id = rs.getInt("ID");
                 String name = rs.getString("NAME");
                 String description = rs.getString("DESCRIPTION");
+
                 
                 list.add(new Project(hash, id, name, description));
             }

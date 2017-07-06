@@ -142,21 +142,17 @@ public class LoginViewSwing implements LoginView
     @Override
     public void SwitchToResetPassword()
     {
-        frame.remove(pLogin);
-        frame.remove(pNewUser);
+        removeAll();
         frame.add(pResetPassword);
-        frame.revalidate();
-        frame.repaint();
+        update();
     }
 
     @Override
     public void SwitchToAddNewUser()
     {
-        frame.remove(pLogin);
-        frame.remove(pResetPassword);
+        removeAll();
         frame.add(pNewUser);
-        frame.revalidate();
-        frame.repaint();
+        update();
     }
 
     @Override
@@ -192,22 +188,16 @@ public class LoginViewSwing implements LoginView
     @Override
     public void RemoveAllComponents()
     {
-        frame.remove(pLogin);
-        frame.remove(pNewUser);
-        frame.remove(pResetPassword);
-        frame.revalidate();
-        frame.repaint();
+        removeAll();
+        update();
     }
 
     @Override
     public void SwitchToLogin()
     {
+        removeAll();
         frame.add(pLogin);
-        frame.remove(pNewUser);
-        frame.remove(pResetPassword);
-        
-        frame.revalidate();
-        frame.repaint();
+        update();
     }
     
     private void setListeners()
@@ -278,10 +268,11 @@ public class LoginViewSwing implements LoginView
         
     }
 
+
+
     @Override
-    public void showError(String localizedMessage)
-    {
-        JOptionPane.showMessageDialog(frame, localizedMessage, "Error!", JOptionPane.ERROR_MESSAGE);
+    public void showDialog(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -289,5 +280,23 @@ public class LoginViewSwing implements LoginView
     {
         this.controller = controller;
     }
-    
+
+    @Override
+    public void showError(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    private void removeAll()
+    {
+        frame.remove(pLogin);
+        frame.remove(pNewUser);
+        frame.remove(pResetPassword);
+    }
+
+    private void update()
+    {
+        frame.revalidate();
+        frame.repaint();
+    }
 }

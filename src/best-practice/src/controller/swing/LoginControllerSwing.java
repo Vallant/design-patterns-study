@@ -41,7 +41,11 @@ public class LoginControllerSwing implements LoginController
         else if(password.length == 0)
             view.showError("Please provide a valid password");
         else
-            model.login(username, password);
+            try {
+                model.login(username, password);
+            } catch (Exception e) {
+                view.showError(e.getLocalizedMessage());
+            }
     }
 
     @Override
@@ -69,10 +73,13 @@ public class LoginControllerSwing implements LoginController
         else if(!Arrays.equals(u.getNewPassword(), u.getNewPasswordAgain()))
             view.showError("The passwords do not match");
         else
-            model.saveNewUser(u);
-        
-            
-        
+            try {
+                model.saveNewUser(u);
+            } catch (Exception e) {
+                view.showError(e.getLocalizedMessage());
+            }
+
+
     }
 
     @Override
@@ -88,9 +95,8 @@ public class LoginControllerSwing implements LoginController
     }
 
     @Override
-    public void showError(String localizedMessage)
-    {
-        view.showError(localizedMessage);
+    public void showDialog(String message) {
+        view.showDialog(message);
     }
 
     @Override

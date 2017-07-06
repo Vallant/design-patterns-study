@@ -7,6 +7,8 @@ package db.interfaces;
 
 import data.Project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author stephan
@@ -14,4 +16,6 @@ import data.Project;
 public interface ProjectRepository extends Repository<Project>
 {
     Project getByPrimaryKey(int projectId) throws Exception;
+
+    ArrayList<String> getPhaseNamesByUserName(String loginName) throws Exception;
 }

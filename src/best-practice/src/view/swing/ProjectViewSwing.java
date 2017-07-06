@@ -7,6 +7,8 @@ package view.swing;
 
 import controller.interfaces.ProjectController;
 import javax.swing.JFrame;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.ProjectView;
 
 /**
@@ -28,5 +30,10 @@ public class ProjectViewSwing implements ProjectView
     {
         this.controller = controller;
     }
-    
+
+    @Override
+    public void show() {
+        //throw new NotImplementedException();
+    }
+
 }

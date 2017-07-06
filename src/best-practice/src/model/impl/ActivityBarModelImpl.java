@@ -7,8 +7,12 @@ package model.impl;
 
 import controller.interfaces.ActivityBarController;
 import data.User;
+import db.interfaces.ProjectPhaseRepository;
+import db.interfaces.ProjectRepository;
 import model.interfaces.ActivityBarModel;
 import model.interfaces.MainModel;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -43,5 +47,28 @@ public class ActivityBarModelImpl implements ActivityBarModel
     {
         this.user = user;
     }
-    
+
+    @Override
+    public void startStopClicked() {
+
+    }
+
+    @Override
+    public ArrayList<String> getProjectPhasesFor(String project) throws Exception{
+        ProjectPhaseRepository r = mainModel.DB().getProjectPhaseRepository();
+        return r.getNamesByProjectName(project);
+
+    }
+
+    @Override
+    public void refresh() {
+        controller.refresh();
+    }
+
+    @Override
+    public ArrayList<String> getProjects() throws Exception {
+        ProjectRepository r = mainModel.DB().getProjectRepository();
+        return r.getPhaseNamesByUserName(user.getLoginName());
+    }
+
 }

@@ -6,8 +6,14 @@
 package controller.swing;
 
 import controller.interfaces.ActivityBarController;
+import data.ProjectPhase;
+import exception.ElementNotFoundException;
 import model.interfaces.ActivityBarModel;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.ActivityBarView;
+
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -29,5 +35,39 @@ public class ActivityBarControllerSwing implements ActivityBarController
     {
         this.view = view;
     }
-    
+
+    @Override
+    public void StartStopClicked() {
+        model.startStopClicked();
+    }
+
+    @Override
+    public void ProjectSelected(String project) {
+        ArrayList<String> phases = null;
+        try {
+            phases = model.getProjectPhasesFor(project);
+            view.setProjectPhases(phases);
+        } catch (Exception ex)
+        {
+            view.showError(ex.getLocalizedMessage());
+        }
+
+
+    }
+
+    @Override
+    public void PhaseSelected(String projectPhase)
+    {
+        view.enableStartStop();
+    }
+
+    @Override
+    public void refresh() {
+        try {
+            view.setProjects(model.getProjects());
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+        }
+    }
+
 }

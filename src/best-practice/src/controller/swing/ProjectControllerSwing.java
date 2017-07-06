@@ -29,5 +29,11 @@ public class ProjectControllerSwing implements ProjectController
     {
         this.view = view;
     }
-    
+
+    @Override
+    public void refresh()
+    {
+
+    }
+
 }

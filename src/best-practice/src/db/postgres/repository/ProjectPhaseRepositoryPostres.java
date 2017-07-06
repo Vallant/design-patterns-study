@@ -22,6 +22,9 @@ import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
+import exception.ElementChangedException;
+import exception.ElementNotFoundException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,25 +49,23 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     @Override
     public void add(ProjectPhase item) throws Exception
     {
-        
-        
         try(Connection con = db.getConnection())
         {
             String sql = "INSERT INTO PROJECT_PHASES(HASH, PROJECT_NAME, NAME) "
                             + "VALUES "
                             + "(?, ?, ?) ";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getProjectName());
             ps.setString(index++, item.getName());
-            
+
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
                 throw new Exception("Insert failed!");
             item.setRemoteHash(item.getLocalHash());
-            
+
         }
     }
 
@@ -88,7 +89,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
             item.setRemoteHash(item.getLocalHash());
             
         }
@@ -109,7 +110,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
-                throw new Exception("Record has changed or was not found!");
+                throw new ElementChangedException();
             item.setRemoteHash(item.getLocalHash());
             
         }
@@ -131,7 +132,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             ResultSet rs = ps.executeQuery();
             
             if(rs.next() == false)
-                throw new Exception("No such item");
+                throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id));
             
             int hash = rs.getInt("HASH");
             int idDb = rs.getInt("ID");
@@ -143,6 +144,65 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
 
             return new ProjectPhase(hash, project, name, id);
         }
+    }
+
+    @Override
+    public ArrayList<ProjectPhase> getByProjectId(int projectId) throws Exception {
+        ArrayList<ProjectPhase> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES " +
+                    "WHERE PROJECT_ID = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int index = 1;
+            ps.setInt(index++, projectId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int id = rs.getInt("ID");
+                int projectIdDb = rs.getInt("PROJECT_ID");
+                String name = rs.getString("NAME");
+
+                ProjectRepository p = db.getProjectRepository();
+                Project project = p.getByPrimaryKey(projectId);
+
+                assert(projectIdDb == projectId);
+                ProjectPhase phase = new ProjectPhase(hash, project, name, id);
+                l.add(phase);
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<String> getNamesByProjectName(String projectName) throws Exception {
+        ArrayList<String> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT NAME FROM PROJECT_PHASES " +
+                    "JOIN PROJECT ON PROJECT.NAME = ? " +
+                    "WHERE PROJECT_PHASES.PROJECT_ID = PROJECT.ID ";
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int index = 1;
+            ps.setString(index++, projectName);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next())
+            {
+                String name = rs.getString("NAME");
+
+                l.add(name);
+            }
+        }
+        return l;
     }
 
     @Override

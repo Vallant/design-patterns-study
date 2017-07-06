@@ -10,8 +10,9 @@ import controller.interfaces.LoginController;
 import controller.interfaces.MainController;
 import controller.interfaces.ProjectController;
 import data.User;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import javax.swing.*;
+
 import view.interfaces.ActivityBarView;
 import view.interfaces.LoginView;
 import view.interfaces.MainView;
@@ -30,6 +31,8 @@ public class MainViewSwing implements MainView
     private final LoginView login;
     private final ProjectView project;
     private final ActivityBarView activityBar;
+
+    private MainController controller;
     
     
     
@@ -55,12 +58,13 @@ public class MainViewSwing implements MainView
     public void showProjectView()
     {
         login.RemoveAllComponents();
+        project.show();
     }
 
     @Override
     public void setMainController(MainController controller)
     {
-        
+        this.controller = controller;
     }
 
     @Override
@@ -83,6 +87,16 @@ public class MainViewSwing implements MainView
         activityBar.setActivityBarController(controller);
         controller.setView(activityBar);
     }
-    
-    
+
+    @Override
+    public void showError(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void showActivityBar() {
+        activityBar.show();
+    }
+
+
 }

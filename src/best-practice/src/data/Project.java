@@ -20,6 +20,9 @@ package data;
 import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * @created $date
  * @author stephan
@@ -37,7 +40,9 @@ public class Project implements DBEntity
     {
         return new HashCodeBuilder()
                 .append(name.hashCode())
-                .append(description.hashCode()).hashCode();
+                .append(id)
+                .append(description.hashCode())
+                .hashCode();
     }
     @Override
     public int getRemoteHash()
@@ -89,6 +94,7 @@ public class Project implements DBEntity
     {
         this.description = description;
     }
+
 
     @Override
     public boolean isChanged()
