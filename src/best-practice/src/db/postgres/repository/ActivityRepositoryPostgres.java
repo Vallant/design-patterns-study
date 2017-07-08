@@ -26,10 +26,8 @@ import db.common.DBManagerPostgres;
 import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -69,9 +67,10 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
             ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
-            ps.setObject(index++, zdtStart);
+
+            ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
             ZonedDateTime zdtStop = ZonedDateTime.ofInstant(item.getStop().toInstant(), ZoneId.of("UTC"));
-            ps.setObject(index++, zdtStop);
+            ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
             ps.setString(index++, item.getComments());
             
             ps.executeUpdate();

@@ -19,13 +19,22 @@ public interface ActivityBarView
     void setActivityBarController(ActivityBarController controller);
     void show();
 
-    void enableStartStop();
+    void enableStart();
+    void disableStart();
+    void enableStop();
+    void disableStop();
+
     void setProjectPhases(ArrayList<String> phases);
     void setProjects(ArrayList<String> projects);
     void startTimer();
     void stopTimer();
-    void resetTimer();
-    void toggleButtonText();
 
     void showError(String localizedMessage);
+
+
+    void disableComboBoxes();
+
+    void showCommentDescriptionDialog();
+
+    void enableComboBoxes();
 }

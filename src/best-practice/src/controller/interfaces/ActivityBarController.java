@@ -19,9 +19,30 @@ public interface ActivityBarController
     void setModel(ActivityBarModel model);
     void setView(ActivityBarView view);
 
-    void StartStopClicked();
+    void StartClicked();
+    void StopClicked();
+
+    void ActivityFinished(String project, String projectPhase, String description, String comment);
     void ProjectSelected(String project);
     void PhaseSelected(String projectPhase);
 
     void refresh();
+
+    void disableComboBoxes();
+
+    void showCommentDescriptionDialog();
+
+
+    void startTimer();
+    void stopTimer();
+
+    void disableStartButton();
+    void disableStopButton();
+
+    void enableStartButton();
+    void enableStopButton();
+
+    void enableComboBoxes();
+
+    void discardActivity();
 }

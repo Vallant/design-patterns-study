@@ -6,14 +6,11 @@
 package controller.swing;
 
 import controller.interfaces.ActivityBarController;
-import data.ProjectPhase;
-import exception.ElementNotFoundException;
 import model.interfaces.ActivityBarModel;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.ActivityBarView;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 /**
  *
@@ -37,8 +34,22 @@ public class ActivityBarControllerSwing implements ActivityBarController
     }
 
     @Override
-    public void StartStopClicked() {
-        model.startStopClicked();
+    public void StartClicked() {
+        model.startClicked();
+    }
+
+    @Override
+    public void StopClicked() {
+        model.stopClicked();
+    }
+
+    @Override
+    public void ActivityFinished(String project, String projectPhase, String description, String comment) {
+        try {
+            model.activityFinished(project, projectPhase, description, comment);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
     @Override
@@ -51,14 +62,15 @@ public class ActivityBarControllerSwing implements ActivityBarController
         {
             view.showError(ex.getLocalizedMessage());
         }
-
-
     }
 
     @Override
     public void PhaseSelected(String projectPhase)
     {
-        view.enableStartStop();
+        if(projectPhase.isEmpty())
+            view.disableStart();
+        else
+            view.enableStart();
     }
 
     @Override
@@ -68,6 +80,57 @@ public class ActivityBarControllerSwing implements ActivityBarController
         } catch (Exception e) {
             view.showError(e.getLocalizedMessage());
         }
+    }
+
+    @Override
+    public void disableComboBoxes() {
+        view.disableComboBoxes();
+    }
+
+    @Override
+    public void showCommentDescriptionDialog() {
+        view.showCommentDescriptionDialog();
+    }
+
+    @Override
+    public void startTimer() {
+        view.startTimer();
+    }
+
+    @Override
+    public void stopTimer() {
+        view.stopTimer();
+    }
+
+    @Override
+    public void disableStartButton() {
+        view.disableStart();
+    }
+
+    @Override
+    public void disableStopButton() {
+        view.disableStop();
+    }
+
+    @Override
+    public void enableStartButton() {
+        view.enableStart();
+    }
+
+
+    @Override
+    public void enableStopButton() {
+        view.enableStop();
+    }
+
+    @Override
+    public void enableComboBoxes() {
+        view.enableComboBoxes();
+    }
+
+    @Override
+    public void discardActivity() {
+        model.discardActivity();
     }
 
 }

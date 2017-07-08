@@ -1,0 +1,9 @@
+package view.swing;
+
+import view.interfaces.SideBarView;
+
+/**
+ * Created by stephan on 08.07.17.
+ */
+public class SideBarViewSwing implements SideBarView {
+}

@@ -20,11 +20,16 @@ public interface ActivityBarModel
     void setController(ActivityBarController controller);
     void setUser(User user);
 
-    void startStopClicked();
+    void startClicked();
+    void stopClicked();
 
     ArrayList<String> getProjectPhasesFor(String project) throws Exception;
 
     void refresh();
 
     ArrayList<String> getProjects() throws Exception;
+
+    void activityFinished(String project, String projectPhase, String description, String comment) throws Exception;
+
+    void discardActivity();
 }

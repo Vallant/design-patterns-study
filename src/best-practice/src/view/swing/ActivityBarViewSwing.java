@@ -15,7 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
-import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.Timer;
 
@@ -29,13 +28,18 @@ public class ActivityBarViewSwing implements ActivityBarView
     private ActivityBarController controller;
 
     private final JPanel pMain;
-    private final JComboBox cbProject;
-    private final JComboBox cbPhase;
-    private final JButton btStartStop;
+    private final JComboBox<String> cbProject;
+    private final JComboBox<String> cbPhase;
+    private final JButton btStart;
+    private final JButton btStop;
     private final JLabel lbDuration;
 
+    private final JTextField tfDescription;
+    private final JTextField tfComment;
+
     private Duration duration;
-    private final TimerTask task;
+    private TimerTask task;
+    private Timer timer;
 
 
 
@@ -47,37 +51,30 @@ public class ActivityBarViewSwing implements ActivityBarView
         duration = Duration.ZERO;
 
 
-        this.pMain = new JPanel(new GridLayout(1,4, 5, 5));
-        this.cbProject = new JComboBox();
-        this.cbPhase = new JComboBox();
-        this.btStartStop = new JButton("Start Activity");
+        this.pMain = new JPanel(new GridLayout(1,5, 5, 5));
+        this.cbProject = new JComboBox<>();
+        this.cbPhase = new JComboBox<>();
+        this.btStart = new JButton("Start Activity");
+        this.btStop = new JButton("Stop Activity");
         this.lbDuration = new JLabel();
-        updateDuration();
-        btStartStop.setEnabled(false);
+        btStart.setEnabled(false);
+        btStop.setEnabled(false);
+
+        tfDescription = new JTextField();
+        tfComment = new JTextField();
 
 
         pMain.add(cbProject);
         pMain.add(cbPhase);
-        pMain.add(btStartStop);
+        pMain.add(btStart);
+        pMain.add(btStop);
         pMain.add(lbDuration);
 
 
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                duration.plusSeconds(1);
-                updateDuration();
-            }
-        };
+        resetTimer();
 
+        setListeners();
 
-
-        btStartStop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.StartStopClicked();
-            }
-        });
     }
 
     @Override
@@ -93,8 +90,23 @@ public class ActivityBarViewSwing implements ActivityBarView
     }
 
     @Override
-    public void enableStartStop() {
-        btStartStop.setEnabled(true);
+    public void enableStart() {
+        btStart.setEnabled(true);
+    }
+
+    @Override
+    public void disableStart() {
+        btStart.setEnabled(false);
+    }
+
+    @Override
+    public void enableStop() {
+        btStop.setEnabled(true);
+    }
+
+    @Override
+    public void disableStop() {
+        btStop.setEnabled(false);
     }
 
     @Override
@@ -114,31 +126,62 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     @Override
     public void startTimer() {
-        task.run();
+        timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
     @Override
     public void stopTimer() {
-        task.cancel();
-    }
 
-    @Override
-    public void resetTimer() {
+        resetTimer();
+
         duration = Duration.ZERO;
+        long seconds = duration.getSeconds();
+        lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
+        lbDuration.revalidate();
+        lbDuration.repaint();
     }
 
-    @Override
-    public void toggleButtonText()
-    {
-        if(btStartStop.getText() == "Start")
-            btStartStop.setText("Stop");
-        else
-            btStartStop.setText("Start");
-    }
 
     @Override
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void disableComboBoxes() {
+        cbProject.setEnabled(false);
+        cbPhase.setEnabled(false);
+    }
+
+    @Override
+    public void showCommentDescriptionDialog() {
+        JPanel dialogPanel = getDialogPanel();
+
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
+
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            String project = (String) cbProject.getSelectedItem();
+            String phase = (String) cbPhase.getSelectedItem();
+            controller.ActivityFinished(project, phase, tfDescription.getText(), tfComment.getText());
+        }
+        else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?") == JOptionPane.CANCEL_OPTION)
+        {
+            showCommentDescriptionDialog();
+        }
+        else
+            controller.discardActivity();
+        tfComment.setText("");
+        tfDescription.setText("");
+    }
+
+    @Override
+    public void enableComboBoxes() {
+        cbPhase.setEnabled(true);
+        cbProject.setEnabled(true);
     }
 
     private void removeAll()
@@ -152,9 +195,86 @@ public class ActivityBarViewSwing implements ActivityBarView
         frame.repaint();
     }
 
-    private void updateDuration()
+    private void setListeners()
     {
-        long seconds = duration.getSeconds();
-        lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
+        btStart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.StartClicked();
+            }
+        });
+
+        btStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.StopClicked();
+            }
+        });
+
+
+        cbPhase.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        String selectedPhase = (String) cbPhase.getSelectedItem();
+                        controller.PhaseSelected(selectedPhase);
+                    }
+                }
+        );
+
+        cbProject.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        String selectedProject = (String) cbProject.getSelectedItem();
+                        controller.ProjectSelected(selectedProject);
+                    }
+                }
+        );
+    }
+
+    private JPanel getDialogPanel() {
+        JPanel basePanel = new JPanel();
+        //basePanel.setLayout(new BorderLayout(5, 5));
+        basePanel.setOpaque(true);
+        basePanel.setBackground(Color.BLUE.darker());
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
+        centerPanel.setBorder(
+                BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        centerPanel.setOpaque(true);
+        centerPanel.setBackground(Color.WHITE);
+
+        JLabel lbDescription = new JLabel("Enter Activity Description : ");
+        JLabel lbComment = new JLabel("Enter Activity Comment     : ");
+
+        centerPanel.add(lbDescription);
+        centerPanel.add(tfDescription);
+        centerPanel.add(lbComment);
+        centerPanel.add(tfComment);
+
+        basePanel.add(centerPanel);
+
+        return basePanel;
+    }
+
+    private void resetTimer()
+    {
+        timer.cancel();
+        timer.purge();
+        task.cancel();
+        timer = new Timer();
+
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                duration = duration.plusSeconds(1);
+                long seconds = duration.getSeconds();
+                lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
+                lbDuration.revalidate();
+                lbDuration.repaint();
+
+            }};
     }
 }

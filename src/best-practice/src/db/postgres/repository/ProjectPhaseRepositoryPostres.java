@@ -185,7 +185,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
 
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT NAME FROM PROJECT_PHASES " +
+            String sql = "SELECT PROJECT_PHASES.NAME FROM PROJECT_PHASES " +
                     "JOIN PROJECT ON PROJECT.NAME = ? " +
                     "WHERE PROJECT_PHASES.PROJECT_ID = PROJECT.ID ";
 
@@ -203,6 +203,36 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             }
         }
         return l;
+    }
+
+    @Override
+    public ProjectPhase getByProjectAndPhaseName(String projectName, String projectPhaseName) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_PHASES.HASH, PROJECT_PHASES.ID, PROJECT_PHASES.PROJECT_ID, PROJECT_PHASES.NAME FROM PROJECT_PHASES " +
+                    "JOIN PROJECT ON PROJECT.NAME = ? " +
+                    "WHERE PROJECT_PHASES.NAME = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int index = 1;
+            ps.setString(index++, projectName);
+            ps.setString(index++, projectPhaseName);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next() == false)
+                throw new Exception("Element not found");
+                //throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id)); //TODO change to correct output
+
+            int hash = rs.getInt("HASH");
+            int id = rs.getInt("ID");
+            int projectId = rs.getInt("PROJECT_ID");
+            String name = rs.getString("NAME");
+
+            ProjectRepository p = db.getProjectRepository();
+            Project project = p.getByPrimaryKey(projectId);
+
+            return new ProjectPhase(hash, project, name, id);
+        }
     }
 
     @Override

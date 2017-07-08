@@ -17,5 +17,5 @@ public interface ProjectRepository extends Repository<Project>
 {
     Project getByPrimaryKey(int projectId) throws Exception;
 
-    ArrayList<String> getPhaseNamesByUserName(String loginName) throws Exception;
+    ArrayList<String> getProjectsByUserName(String loginName) throws Exception;
 }

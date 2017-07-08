@@ -144,14 +144,14 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     }
 
     @Override
-    public ArrayList<String> getPhaseNamesByUserName(String loginName) throws Exception{
+    public ArrayList<String> getProjectsByUserName(String loginName) throws Exception{
         ArrayList<String> list = new ArrayList<>();
 
         try(Connection con = db.getConnection())
         {
-            String sql = "SELECT HASH, ID, NAME, DESCRIPTION FROM PROJECT " +
-                    "JOIN PROJECT_MEMBERS ON PROJECT_MEMBER.USER_LOGIN_NAME = ? " +
-                    "WHERE 1 = 1";
+            String sql = "SELECT NAME FROM PROJECT " +
+                    "JOIN PROJECT_MEMBERS ON PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+                    "WHERE PROJECT.ID = PROJECT_MEMBERS.PROJECT_ID";
             PreparedStatement ps = con.prepareStatement(sql);
             int index = 1;
             ps.setString(index++, loginName);

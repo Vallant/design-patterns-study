@@ -6,12 +6,17 @@
 package model.impl;
 
 import controller.interfaces.ActivityBarController;
+import data.Activity;
+import data.Project;
+import data.ProjectPhase;
 import data.User;
+import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import model.interfaces.ActivityBarModel;
 import model.interfaces.MainModel;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -24,10 +29,14 @@ public class ActivityBarModelImpl implements ActivityBarModel
     private ActivityBarController controller;
     private MainModel mainModel;
     private User user;
+
+    ZonedDateTime start;
+    ZonedDateTime stop;
+    boolean ongoingActivity;
     
     ActivityBarModelImpl()
     {
-        
+        ongoingActivity = false;
     }
 
     @Override
@@ -49,8 +58,21 @@ public class ActivityBarModelImpl implements ActivityBarModel
     }
 
     @Override
-    public void startStopClicked() {
+    public void startClicked() {
+        ongoingActivity = true;
+        start = ZonedDateTime.now();
+        controller.startTimer();
+        controller.disableStartButton();
+        controller.enableStopButton();
+    }
 
+    @Override
+    public void stopClicked() {
+        assert(!ongoingActivity);
+        stop = ZonedDateTime.now();
+        controller.disableComboBoxes();
+        controller.showCommentDescriptionDialog();
+        ongoingActivity = false;
     }
 
     @Override
@@ -68,7 +90,30 @@ public class ActivityBarModelImpl implements ActivityBarModel
     @Override
     public ArrayList<String> getProjects() throws Exception {
         ProjectRepository r = mainModel.DB().getProjectRepository();
-        return r.getPhaseNamesByUserName(user.getLoginName());
+        return r.getProjectsByUserName(user.getLoginName());
+    }
+
+    @Override
+    public void activityFinished(String projectName, String projectPhaseName, String description, String comment) throws Exception {
+        controller.disableStopButton();
+        controller.enableStartButton();
+        controller.stopTimer();
+        controller.enableComboBoxes();
+        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhase projectPhase = ppr.getByProjectAndPhaseName(projectName, projectPhaseName);
+        Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
+        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ar.add(activity);
+    }
+
+    @Override
+    public void discardActivity() {
+        controller.disableStopButton();
+        controller.enableStartButton();
+        controller.stopTimer();
+        controller.enableComboBoxes();
+        ongoingActivity = false;
+
     }
 
 }

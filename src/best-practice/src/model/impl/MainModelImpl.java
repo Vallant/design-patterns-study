@@ -73,6 +73,7 @@ public class MainModelImpl implements MainModel
         project.setUser(user);
         controller.switchToProjectView();
         controller.showActivityBar();
+        controller.showSideBar();
 
         project.refresh();
         activityBar.refresh();

@@ -33,4 +33,6 @@ public interface MainController
     void pairActivityBar(ActivityBarModel model);
     
     void showError(Exception ex);
+
+    void showSideBar();
 }
