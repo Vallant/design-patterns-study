@@ -8,6 +8,7 @@ package view.swing;
 import controller.interfaces.ActivityBarController;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import view.interfaces.ActivityBarView;
 
@@ -27,15 +28,8 @@ public class ActivityBarViewSwing implements ActivityBarView
     private final JFrame frame;
     private ActivityBarController controller;
 
-    private final JPanel pMain;
-    private final JComboBox<String> cbProject;
-    private final JComboBox<String> cbPhase;
-    private final JButton btStart;
-    private final JButton btStop;
-    private final JLabel lbDuration;
+    private final ActivityBarPanel pMain;
 
-    private final JTextField tfDescription;
-    private final JTextField tfComment;
 
     private Duration duration;
     private TimerTask task;
@@ -51,26 +45,7 @@ public class ActivityBarViewSwing implements ActivityBarView
         duration = Duration.ZERO;
 
 
-        this.pMain = new JPanel(new GridLayout(1,5, 5, 5));
-        this.cbProject = new JComboBox<>();
-        this.cbPhase = new JComboBox<>();
-        this.btStart = new JButton("Start Activity");
-        this.btStop = new JButton("Stop Activity");
-        this.lbDuration = new JLabel();
-        btStart.setEnabled(false);
-        btStop.setEnabled(false);
-
-        tfDescription = new JTextField();
-        tfComment = new JTextField();
-
-
-        pMain.add(cbProject);
-        pMain.add(cbPhase);
-        pMain.add(btStart);
-        pMain.add(btStop);
-        pMain.add(lbDuration);
-
-
+        pMain = new ActivityBarPanel();
         resetTimer();
 
         setListeners();
@@ -85,43 +60,43 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     @Override
     public void show() {
-        frame.add(pMain, BorderLayout.NORTH);
+        frame.getContentPane().add(pMain, BorderLayout.NORTH);
         update();
     }
 
     @Override
     public void enableStart() {
-        btStart.setEnabled(true);
+        pMain.btStart.setEnabled(true);
     }
 
     @Override
     public void disableStart() {
-        btStart.setEnabled(false);
+        pMain.btStart.setEnabled(false);
     }
 
     @Override
     public void enableStop() {
-        btStop.setEnabled(true);
+        pMain.btStop.setEnabled(true);
     }
 
     @Override
     public void disableStop() {
-        btStop.setEnabled(false);
+        pMain.btStop.setEnabled(false);
     }
 
     @Override
     public void setProjectPhases(ArrayList<String> phases)
     {
-        cbPhase.removeAllItems();
+        pMain.cbPhase.removeAllItems();
         for(String phase : phases)
-            cbPhase.addItem(phase);
+            pMain.cbPhase.addItem(phase);
     }
 
     @Override
     public void setProjects(ArrayList<String> projects) {
-        cbProject.removeAllItems();
+        pMain.cbProject.removeAllItems();
         for(String project : projects)
-            cbProject.addItem(project);
+            pMain.cbProject.addItem(project);
     }
 
     @Override
@@ -136,9 +111,9 @@ public class ActivityBarViewSwing implements ActivityBarView
 
         duration = Duration.ZERO;
         long seconds = duration.getSeconds();
-        lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
-        lbDuration.revalidate();
-        lbDuration.repaint();
+        pMain.lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
+        pMain.lbDuration.revalidate();
+        pMain.lbDuration.repaint();
     }
 
 
@@ -149,13 +124,13 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     @Override
     public void disableComboBoxes() {
-        cbProject.setEnabled(false);
-        cbPhase.setEnabled(false);
+        pMain.cbProject.setEnabled(false);
+        pMain.cbPhase.setEnabled(false);
     }
 
     @Override
     public void showCommentDescriptionDialog() {
-        JPanel dialogPanel = getDialogPanel();
+        JPanel dialogPanel = new ActivityBarDialogPanel(pMain.tfDescription, pMain.tfComment);
 
         int selection = JOptionPane.showConfirmDialog(
                 null, dialogPanel, "Input Form : "
@@ -164,9 +139,9 @@ public class ActivityBarViewSwing implements ActivityBarView
 
         if (selection == JOptionPane.OK_OPTION)
         {
-            String project = (String) cbProject.getSelectedItem();
-            String phase = (String) cbPhase.getSelectedItem();
-            controller.ActivityFinished(project, phase, tfDescription.getText(), tfComment.getText());
+            String project = (String) pMain.cbProject.getSelectedItem();
+            String phase = (String) pMain.cbPhase.getSelectedItem();
+            controller.ActivityFinished(project, phase, pMain.tfDescription.getText(), pMain.tfComment.getText());
         }
         else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?") == JOptionPane.CANCEL_OPTION)
         {
@@ -174,14 +149,14 @@ public class ActivityBarViewSwing implements ActivityBarView
         }
         else
             controller.discardActivity();
-        tfComment.setText("");
-        tfDescription.setText("");
+        pMain.tfComment.setText("");
+        pMain.tfDescription.setText("");
     }
 
     @Override
     public void enableComboBoxes() {
-        cbPhase.setEnabled(true);
-        cbProject.setEnabled(true);
+        pMain.cbPhase.setEnabled(true);
+        pMain.cbProject.setEnabled(true);
     }
 
     private void removeAll()
@@ -197,14 +172,14 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     private void setListeners()
     {
-        btStart.addActionListener(new ActionListener() {
+        pMain.btStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.StartClicked();
             }
         });
 
-        btStop.addActionListener(new ActionListener() {
+        pMain.btStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.StopClicked();
@@ -212,58 +187,37 @@ public class ActivityBarViewSwing implements ActivityBarView
         });
 
 
-        cbPhase.addActionListener(
+        pMain.cbPhase.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        String selectedPhase = (String) cbPhase.getSelectedItem();
+                        String selectedPhase = (String) pMain.cbPhase.getSelectedItem();
                         controller.PhaseSelected(selectedPhase);
                     }
                 }
         );
 
-        cbProject.addActionListener(
+        pMain.cbProject.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        String selectedProject = (String) cbProject.getSelectedItem();
+                        String selectedProject = (String) pMain.cbProject.getSelectedItem();
                         controller.ProjectSelected(selectedProject);
                     }
                 }
         );
     }
 
-    private JPanel getDialogPanel() {
-        JPanel basePanel = new JPanel();
-        //basePanel.setLayout(new BorderLayout(5, 5));
-        basePanel.setOpaque(true);
-        basePanel.setBackground(Color.BLUE.darker());
-
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
-        centerPanel.setBorder(
-                BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        centerPanel.setOpaque(true);
-        centerPanel.setBackground(Color.WHITE);
-
-        JLabel lbDescription = new JLabel("Enter Activity Description : ");
-        JLabel lbComment = new JLabel("Enter Activity Comment     : ");
-
-        centerPanel.add(lbDescription);
-        centerPanel.add(tfDescription);
-        centerPanel.add(lbComment);
-        centerPanel.add(tfComment);
-
-        basePanel.add(centerPanel);
-
-        return basePanel;
-    }
 
     private void resetTimer()
     {
-        timer.cancel();
-        timer.purge();
-        task.cancel();
+        if(timer != null)
+        {
+            timer.cancel();
+            timer.purge();
+            task.cancel();
+        }
+
         timer = new Timer();
 
         task = new TimerTask() {
@@ -271,9 +225,9 @@ public class ActivityBarViewSwing implements ActivityBarView
             public void run() {
                 duration = duration.plusSeconds(1);
                 long seconds = duration.getSeconds();
-                lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
-                lbDuration.revalidate();
-                lbDuration.repaint();
+                pMain.lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
+                pMain.lbDuration.revalidate();
+                pMain.lbDuration.repaint();
 
             }};
     }

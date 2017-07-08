@@ -114,7 +114,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     }
 
     @Override
-    public void remove(Activity item) throws Exception
+    public void delete(Activity item) throws Exception
     {
         
         try(Connection con = db.getConnection())

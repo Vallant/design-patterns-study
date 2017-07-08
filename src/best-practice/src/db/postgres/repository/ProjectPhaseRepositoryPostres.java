@@ -96,7 +96,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     }
 
     @Override
-    public void remove(ProjectPhase item) throws Exception
+    public void delete(ProjectPhase item) throws Exception
     {
         try(Connection con = db.getConnection())
         {

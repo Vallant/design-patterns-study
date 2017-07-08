@@ -27,6 +27,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class ProjectMember implements DBEntity
 {
 
+
+
     public static enum ROLE
     {
         MEMBER,
@@ -120,6 +122,10 @@ public class ProjectMember implements DBEntity
     public int getProjectId()
     {
         return project.getId();
+    }
+
+    public String getProjectName() {
+        return project.getName();
     }
     
     

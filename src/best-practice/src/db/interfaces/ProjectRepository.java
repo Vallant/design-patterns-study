@@ -6,6 +6,7 @@
 package db.interfaces;
 
 import data.Project;
+import data.ProjectMember;
 
 import java.util.ArrayList;
 
@@ -18,4 +19,9 @@ public interface ProjectRepository extends Repository<Project>
     Project getByPrimaryKey(int projectId) throws Exception;
 
     ArrayList<String> getProjectsByUserName(String loginName) throws Exception;
+
+
+
+
+    String getDescriptionByProjectName(String projectName) throws Exception;
 }

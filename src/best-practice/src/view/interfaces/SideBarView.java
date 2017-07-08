@@ -1,6 +1,7 @@
 package view.interfaces;
 
 import controller.interfaces.SideBarController;
+import data.User;
 
 /**
  * Created by stephan on 08.07.17.
@@ -8,4 +9,6 @@ import controller.interfaces.SideBarController;
 public interface SideBarView {
 
     void setController(SideBarController controller);
+
+    void show(User.ROLE role);
 }

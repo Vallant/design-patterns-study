@@ -5,8 +5,13 @@
  */
 package controller.interfaces;
 
+import data.Project;
+import data.ProjectMember;
+import data.ProjectPhase;
 import model.interfaces.ProjectModel;
 import view.interfaces.ProjectView;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -18,4 +23,18 @@ public interface ProjectController
     void setView(ProjectView view);
 
     void refresh();
+
+    void leaveClicked();
+
+    void addClicked();
+
+    void deleteClicked();
+
+    void ownedProjectsHasSelection(boolean hasSelection);
+
+    void involvedProjectsHasSelection(boolean hasSelection);
+
+    void doubleClickedOn(int index);
+
+    void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members);
 }

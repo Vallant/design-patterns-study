@@ -6,7 +6,11 @@
 package model.interfaces;
 
 import controller.interfaces.ProjectController;
+import data.Project;
+import data.ProjectMember;
 import data.User;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -19,4 +23,14 @@ public interface ProjectModel
     void setController(ProjectController controller);
 
     void refresh();
+
+    ArrayList<ProjectMember> getOwnedProjects() throws Exception;
+
+    ArrayList<ProjectMember> getInvolvedProjects() throws Exception;
+
+    void leaveProject(ProjectMember selectedProject) throws Exception;
+
+    void deleteProject(Project selectedProject) throws Exception;
+
+    void requestedDetailForProject(Project project) throws Exception;
 }

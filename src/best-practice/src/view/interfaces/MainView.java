@@ -5,10 +5,8 @@
  */
 package view.interfaces;
 
-import controller.interfaces.ActivityBarController;
-import controller.interfaces.LoginController;
-import controller.interfaces.MainController;
-import controller.interfaces.ProjectController;
+import controller.interfaces.*;
+import data.User;
 
 import java.rmi.server.ExportException;
 
@@ -29,4 +27,16 @@ public interface MainView
     void showError(String message);
 
     void showActivityBar();
+
+    void pairSideBar(SideBarController sideBar);
+
+    void showSideBar(User.ROLE role);
+
+    void hideCenterContent();
+
+    void showAdminView();
+
+    void showStatisticsView();
+
+    void showSettingsView();
 }

@@ -10,4 +10,12 @@ public interface SideBarController
 {
     void setView(SideBarView view);
     void setModel(SideBarModel model);
+
+    void projectsClicked();
+
+    void statisticsClicked();
+
+    void administrationClicked();
+
+    void settingsClicked();
 }

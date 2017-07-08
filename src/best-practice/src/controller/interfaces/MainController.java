@@ -6,10 +6,7 @@
 package controller.interfaces;
 
 import data.User;
-import model.interfaces.ActivityBarModel;
-import model.interfaces.LoginModel;
-import model.interfaces.MainModel;
-import model.interfaces.ProjectModel;
+import model.interfaces.*;
 
 /**
  *
@@ -34,5 +31,9 @@ public interface MainController
     
     void showError(Exception ex);
 
-    void showSideBar();
+    void showSideBar(User.ROLE role);
+
+    void pairSideBar(SideBarModel sideBar);
+
+    void switchToSettingsView();
 }

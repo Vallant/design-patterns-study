@@ -27,7 +27,7 @@ public interface Repository<T>
 {
     void add(T item) throws Exception;
     void update(T item) throws Exception;
-    void remove(T item) throws Exception;
+    void delete(T item) throws Exception;
     List<T> getAll() throws Exception;
     
 }

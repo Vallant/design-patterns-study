@@ -102,7 +102,7 @@ public class UserRepositoryPostgres implements UserRepository
     }
 
     @Override
-    public void remove(User item) throws Exception
+    public void delete(User item) throws Exception
     {
         assert(item != null);
        

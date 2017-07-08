@@ -17,7 +17,10 @@
 package db.interfaces;
 
 import data.ProjectMember;
+import data.User;
 import exception.ElementNotFoundException;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -26,4 +29,9 @@ import exception.ElementNotFoundException;
 public interface ProjectMemberRepository extends Repository<ProjectMember>
 {
     ProjectMember getByPrimaryKey(String userLoginName, int projectId) throws Exception;
+
+    ArrayList<ProjectMember> getMembersByProjectName(String projectName) throws Exception;
+
+    ArrayList<ProjectMember> getInvolvedProjects(String loginName) throws Exception;
+    ArrayList<ProjectMember> getOwnedProject(String loginName) throws Exception;
 }

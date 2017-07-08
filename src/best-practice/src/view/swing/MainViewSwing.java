@@ -5,18 +5,12 @@
  */
 package view.swing;
 
-import controller.interfaces.ActivityBarController;
-import controller.interfaces.LoginController;
-import controller.interfaces.MainController;
-import controller.interfaces.ProjectController;
+import controller.interfaces.*;
 import data.User;
 
 import javax.swing.*;
 
-import view.interfaces.ActivityBarView;
-import view.interfaces.LoginView;
-import view.interfaces.MainView;
-import view.interfaces.ProjectView;
+import view.interfaces.*;
 
 /**
  *
@@ -30,7 +24,11 @@ public class MainViewSwing implements MainView
     
     private final LoginView login;
     private final ProjectView project;
+    //private final SettingsView settings;
+    //private final StatisticsView statistics;
+    //private final AdministrationView administration;
     private final ActivityBarView activityBar;
+    private final SideBarView sideBar;
 
     private MainController controller;
     
@@ -39,6 +37,7 @@ public class MainViewSwing implements MainView
     public MainViewSwing()
     {
         this.frame = new JFrame("Design Pattern Case Study");
+        frame.getRootPane().setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         frame.setSize(350,200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -46,6 +45,7 @@ public class MainViewSwing implements MainView
         login = new LoginViewSwing(frame);
         project = new ProjectViewSwing(frame);
         activityBar = new ActivityBarViewSwing(frame);
+        sideBar = new SideBarViewSwing(frame);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MainViewSwing implements MainView
     public void showProjectView()
     {
         login.RemoveAllComponents();
-        project.show();
+        project.showOverview();
     }
 
     @Override
@@ -96,6 +96,40 @@ public class MainViewSwing implements MainView
     @Override
     public void showActivityBar() {
         activityBar.show();
+    }
+
+    @Override
+    public void pairSideBar(SideBarController controller) {
+        sideBar.setController(controller);
+        controller.setView(sideBar);
+    }
+
+    @Override
+    public void showSideBar(User.ROLE role) {
+        sideBar.show(role);
+    }
+
+    @Override
+    public void hideCenterContent() {
+        project.hide();
+        //settings.hide();
+        //statistics.hide();
+        //administration.hide();
+    }
+
+    @Override
+    public void showAdminView() {
+
+    }
+
+    @Override
+    public void showStatisticsView() {
+
+    }
+
+    @Override
+    public void showSettingsView() {
+
     }
 
 

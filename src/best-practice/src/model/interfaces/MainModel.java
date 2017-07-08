@@ -17,4 +17,10 @@ public interface MainModel
     void loginSuccessfulFor(User user);
     void showError(Exception ex);
     DBManager DB();
+
+    void switchedToStatistics();
+    void switchedToProjects();
+    void switchedToAdministration();
+    void switchedToSettings();
+    //void switchedToHelp();
 }

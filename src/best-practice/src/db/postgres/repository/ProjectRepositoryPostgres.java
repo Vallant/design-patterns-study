@@ -94,12 +94,12 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     }
 
     @Override
-    public void remove(Project item) throws Exception
+    public void delete(Project item) throws Exception
     {
         
         try(Connection con = db.getConnection())
         {
-            
+            //TODO: Delete cascade
             String sql = "DELETE FROM PROJECT "
                     + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -165,6 +165,27 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             }
         }
         return list;
+    }
+
+    @Override
+    public String getDescriptionByProjectName(String projectName) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT DESCRIPTION FROM PROJECT "
+                    + "WHERE NAME = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int index = 1;
+            ps.setString(index++, projectName);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next() == false)
+                throw new Exception("No such record");
+
+            String description = rs.getString("DESCRIPTION");
+            return description;
+
+        }
     }
 
     @Override

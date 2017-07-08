@@ -102,18 +102,19 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     }
 
     @Override
-    public void remove(ProjectMember item) throws Exception
+    public void delete(ProjectMember item) throws Exception
     {
         
         try(Connection con = db.getConnection())
         {
-            String sql = "DELETE FROM PROJECT_MEMBER "
+            String sql = "DELETE FROM PROJECT_MEMBERS "
                             + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
+            ps.setString(index++, item.getUserLoginName());
             ps.setInt(index++, item.getProjectId());
-            ps.setString(index++, item.getRole().name());
+
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)
@@ -167,8 +168,6 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
                         new ArrayList(Arrays.asList("Username", "ProjectId")),
                         new ArrayList(Arrays.asList(userLoginName, Integer.toString(projectId)))
                 );
-
-            
             
             int hash = rs.getInt("HASH");
             String projectIdDb = rs.getString("PROJECT_ID");
@@ -184,6 +183,113 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
         }
         
+    }
+
+    @Override
+    public ArrayList<ProjectMember> getMembersByProjectName(String projectName) throws Exception {
+        ArrayList<ProjectMember> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS.ROLE FROM PROJECT_MEMBERS " +
+                    "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+                    "WHERE PROJECT.NAME = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int index = 1;
+            ps.setString(index++, projectName);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int projectId = rs.getInt("PROJECT_ID");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String role = rs.getString("ROLE");
+
+                ProjectRepository p = db.getProjectRepository();
+                Project project = p.getByPrimaryKey(projectId);
+
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+
+                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                l.add(m);
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<ProjectMember> getInvolvedProjects(String loginName) throws Exception {
+        ArrayList<ProjectMember> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS.ROLE FROM PROJECT_MEMBERS " +
+                    "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+                    "WHERE PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+                    "AND PROJECT_MEMBERS.ROLE = 'MEMBER'";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int index = 1;
+            ps.setString(index++, loginName);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int projectId = rs.getInt("PROJECT_ID");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String role = rs.getString("ROLE");
+
+                ProjectRepository p = db.getProjectRepository();
+                Project project = p.getByPrimaryKey(projectId);
+
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+
+                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                l.add(m);
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public ArrayList<ProjectMember> getOwnedProject(String loginName) throws Exception {
+        ArrayList<ProjectMember> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS.ROLE FROM PROJECT_MEMBERS " +
+                    "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+                    "WHERE PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+                    "AND PROJECT_MEMBERS.ROLE = 'LEADER'";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            int index = 1;
+            ps.setString(index++, loginName);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int projectId = rs.getInt("PROJECT_ID");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String role = rs.getString("ROLE");
+
+                ProjectRepository p = db.getProjectRepository();
+                Project project = p.getByPrimaryKey(projectId);
+
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+
+                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                l.add(m);
+            }
+        }
+        return l;
     }
 
 }

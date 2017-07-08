@@ -5,14 +5,9 @@
  */
 package controller.swing;
 
-import controller.interfaces.ActivityBarController;
-import controller.interfaces.LoginController;
-import controller.interfaces.MainController;
-import controller.interfaces.ProjectController;
-import model.interfaces.ActivityBarModel;
-import model.interfaces.LoginModel;
-import model.interfaces.MainModel;
-import model.interfaces.ProjectModel;
+import controller.interfaces.*;
+import data.User;
+import model.interfaces.*;
 import view.common.ViewManager;
 import view.interfaces.MainView;
 
@@ -28,12 +23,14 @@ public class MainControllerSwing implements MainController
     private final LoginController login;
     private final ActivityBarController activityBar;
     private final ProjectController project;
+    private final SideBarController sideBar;
 
     public MainControllerSwing()
     {
         login = new LoginControllerSwing();
         project = new ProjectControllerSwing();
         activityBar = new ActivityBarControllerSwing();
+        sideBar = new SideBarControllerSwing();
     }
     
     @Override
@@ -59,19 +56,22 @@ public class MainControllerSwing implements MainController
     @Override
     public void switchToProjectView()
     {
+        mainView.hideCenterContent();
         mainView.showProjectView();
     }
 
     @Override
     public void switchToAdminView()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mainView.hideCenterContent();
+        mainView.showAdminView();
     }
 
     @Override
     public void switchToStatisticView()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mainView.hideCenterContent();
+        mainView.showStatisticsView();
     }
 
     @Override
@@ -107,6 +107,24 @@ public class MainControllerSwing implements MainController
     @Override
     public void showError(Exception ex) {
         mainView.showError(ex.getLocalizedMessage());
+    }
+
+    @Override
+    public void showSideBar(User.ROLE role) {
+        mainView.showSideBar(role);
+    }
+
+    @Override
+    public void pairSideBar(SideBarModel model) {
+        sideBar.setModel(model);
+        model.setController(sideBar);
+        mainView.pairSideBar(sideBar);
+    }
+
+    @Override
+    public void switchToSettingsView() {
+        mainView.hideCenterContent();
+        mainView.showSettingsView();
     }
 
 

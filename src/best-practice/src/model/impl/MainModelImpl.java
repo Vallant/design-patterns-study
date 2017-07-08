@@ -11,10 +11,8 @@ import data.User;
 import db.common.DBManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.interfaces.ActivityBarModel;
-import model.interfaces.LoginModel;
-import model.interfaces.MainModel;
-import model.interfaces.ProjectModel;
+
+import model.interfaces.*;
 
 import javax.swing.*;
 
@@ -29,6 +27,7 @@ public class MainModelImpl implements MainModel
     private final LoginModel login;
     private final ProjectModel project;
     private final ActivityBarModel activityBar;
+    private final SideBarModel sideBar;
     
     private User user;
     private final DBManager db;
@@ -49,6 +48,8 @@ public class MainModelImpl implements MainModel
         pairProject();
         activityBar = new ActivityBarModelImpl();
         pairActivityBar();
+        sideBar = new SideBarModelImpl();
+        pairSideBar();
         
         controller.switchToLogin();
     }
@@ -71,12 +72,15 @@ public class MainModelImpl implements MainModel
         this.user = user;
         activityBar.setUser(user);
         project.setUser(user);
+
         controller.switchToProjectView();
         controller.showActivityBar();
-        controller.showSideBar();
+        controller.showSideBar(user.getRole());
+
 
         project.refresh();
         activityBar.refresh();
+        sideBar.refresh();
     }
 
     @Override
@@ -103,10 +107,36 @@ public class MainModelImpl implements MainModel
         controller.pairProject(project);   
     }
 
+    private void pairSideBar()
+    {
+        sideBar.setMainModel(this);
+        controller.pairSideBar(sideBar);
+    }
+
     @Override
     public DBManager DB()
     {
         return db;
+    }
+
+    @Override
+    public void switchedToStatistics() {
+        controller.switchToSettingsView();
+    }
+
+    @Override
+    public void switchedToProjects() {
+        controller.switchToProjectView();
+    }
+
+    @Override
+    public void switchedToAdministration() {
+        controller.switchToAdminView();
+    }
+
+    @Override
+    public void switchedToSettings() {
+        controller.switchToSettingsView();
     }
 }
 
