@@ -24,11 +24,11 @@ public interface ProjectController
 
     void refresh();
 
-    void leaveClicked();
+    void leaveProjectClicked();
 
-    void addClicked();
+    void addProjectClicked();
 
-    void deleteClicked();
+    void deleteProjectClicked();
 
     void ownedProjectsHasSelection(boolean hasSelection);
 
@@ -37,4 +37,22 @@ public interface ProjectController
     void doubleClickedOn(int index);
 
     void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members);
+
+    void backClicked();
+
+    void addProject(String text, String text1);
+
+    void deletePhaseClicked();
+
+    void addMemberClicked();
+
+    void deleteMemberClicked();
+
+    void promoteToAdminClicked();
+
+    void degradeToMemberClicked();
+
+    void addPhaseClicked();
+
+    void addPhase(int projectId, String phaseName);
 }

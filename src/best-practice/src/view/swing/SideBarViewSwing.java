@@ -23,6 +23,7 @@ public class SideBarViewSwing implements SideBarView {
     private final JButton btSettings;
 
     private final JPanel pSideBar;
+    private final JPanel pFloatPanel;
     //private final JButton btHelp;
 
     private SideBarController controller;
@@ -35,10 +36,13 @@ public class SideBarViewSwing implements SideBarView {
         btStatistics = new JButton("Personal Statistics");
         btAdministration = new JButton("Administration");
         btSettings = new JButton("Settings");
+
+        pFloatPanel = new JPanel(new FlowLayout(5));
         pSideBar.add(btProjects);
         pSideBar.add(btStatistics);
         pSideBar.add(btSettings);
 
+        pFloatPanel.add(pSideBar);
         setListeners();
         //pSideBar.add(btAdministration);
 
@@ -84,6 +88,6 @@ public class SideBarViewSwing implements SideBarView {
         else
             pSideBar.remove(btAdministration);
 
-        frame.getContentPane().add(pSideBar, BorderLayout.WEST);
+        frame.getContentPane().add(pFloatPanel, BorderLayout.WEST);
     }
 }

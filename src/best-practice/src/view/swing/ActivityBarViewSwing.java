@@ -130,7 +130,7 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     @Override
     public void showCommentDescriptionDialog() {
-        JPanel dialogPanel = new ActivityBarDialogPanel(pMain.tfDescription, pMain.tfComment);
+        ActivityBarDialogPanel dialogPanel = new ActivityBarDialogPanel();
 
         int selection = JOptionPane.showConfirmDialog(
                 null, dialogPanel, "Input Form : "
@@ -141,7 +141,7 @@ public class ActivityBarViewSwing implements ActivityBarView
         {
             String project = (String) pMain.cbProject.getSelectedItem();
             String phase = (String) pMain.cbPhase.getSelectedItem();
-            controller.ActivityFinished(project, phase, pMain.tfDescription.getText(), pMain.tfComment.getText());
+            controller.ActivityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
         }
         else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?") == JOptionPane.CANCEL_OPTION)
         {
@@ -149,8 +149,8 @@ public class ActivityBarViewSwing implements ActivityBarView
         }
         else
             controller.discardActivity();
-        pMain.tfComment.setText("");
-        pMain.tfDescription.setText("");
+        dialogPanel.tfComment.setText("");
+        dialogPanel.tfDescription.setText("");
     }
 
     @Override

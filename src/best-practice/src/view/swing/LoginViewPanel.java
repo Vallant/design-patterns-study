@@ -16,7 +16,9 @@ public class LoginViewPanel extends JPanel{
 
     public LoginViewPanel()
     {
-        setLayout(new BorderLayout(5, 5));
+        super(new BorderLayout(5, 5));
+        setPreferredSize(new Dimension(100,200));
+
 
         JPanel buttons = new JPanel(new GridLayout(1, 3, 5, 5));
         btAddNewUser = new JButton("Create new Account");

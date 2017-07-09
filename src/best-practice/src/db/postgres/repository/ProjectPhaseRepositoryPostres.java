@@ -61,8 +61,13 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             ps.setString(index++, item.getProjectName());
             ps.setString(index++, item.getName());
 
-            int numRowsAffected = ps.executeUpdate();
-            if(numRowsAffected == 0)
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+            {
+                int id = rs.getInt("ID");
+                item.setId(id);
+            }
+            else
                 throw new Exception("Insert failed!");
             item.setRemoteHash(item.getLocalHash());
 

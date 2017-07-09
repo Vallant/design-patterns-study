@@ -22,5 +22,7 @@ public interface MainModel
     void switchedToProjects();
     void switchedToAdministration();
     void switchedToSettings();
+
+    void refreshActivityBar();
     //void switchedToHelp();
 }

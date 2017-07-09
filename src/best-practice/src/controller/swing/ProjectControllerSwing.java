@@ -28,7 +28,9 @@ public class ProjectControllerSwing implements ProjectController
 
     private ArrayList<ProjectMember> projectMembers;
     private ArrayList<ProjectPhase> projectPhases;
-    
+
+
+
     @Override
     public void setModel(ProjectModel model)
     {
@@ -62,7 +64,7 @@ public class ProjectControllerSwing implements ProjectController
     }
 
     @Override
-    public void leaveClicked()
+    public void leaveProjectClicked()
     {
         int index = view.getSelectedInvolvedProjectIndex();
         try {
@@ -73,13 +75,13 @@ public class ProjectControllerSwing implements ProjectController
     }
 
     @Override
-    public void addClicked()
+    public void addProjectClicked()
     {
         view.showProjectCreationDialog();
     }
 
     @Override
-    public void deleteClicked() {
+    public void deleteProjectClicked() {
         int index = view.getSelectedOwnedProjectIndex();
         try {
             model.deleteProject(ownedProjects.get(index).getProject());
@@ -115,6 +117,9 @@ public class ProjectControllerSwing implements ProjectController
         ArrayList<String> memberNames = new ArrayList<>();
         ArrayList<String> memberRoles = new ArrayList<>();
 
+        projectMembers = members;
+        projectPhases = phases;
+
         for(ProjectPhase pp : phases)
         {
             phaseNames.add(pp.getName());
@@ -127,6 +132,62 @@ public class ProjectControllerSwing implements ProjectController
         }
 
         view.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
+    }
+
+    @Override
+    public void backClicked() {
+        view.showOverview();
+    }
+
+    @Override
+    public void addProject(String name, String description) {
+        try {
+            model.addProject(name, description);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void deletePhaseClicked() {
+        int index = view.getSelectedPhaseIndex();
+    }
+
+    @Override
+    public void addMemberClicked() {
+        view.showAddMemberDialog();
+    }
+
+    @Override
+    public void deleteMemberClicked()
+    {
+        int index = view.getSelectedMemberIndex();
+    }
+
+    @Override
+    public void promoteToAdminClicked()
+    {
+        int index = view.getSelectedMemberIndex();
+    }
+
+    @Override
+    public void degradeToMemberClicked() {
+        int index = view.getSelectedMemberIndex();
+    }
+
+    @Override
+    public void addPhaseClicked() {
+        view.showAddPhaseDialog();
+
+    }
+
+    @Override
+    public void addPhase(int index, String phaseName) {
+        try {
+            model.addPhase(ownedProjects.get(index).getProject(), phaseName);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
 }

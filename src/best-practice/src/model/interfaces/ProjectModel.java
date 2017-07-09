@@ -33,4 +33,8 @@ public interface ProjectModel
     void deleteProject(Project selectedProject) throws Exception;
 
     void requestedDetailForProject(Project project) throws Exception;
+
+    void addProject(String name, String description) throws Exception;
+
+    void addPhase(Project project, String phaseName) throws Exception;
 }

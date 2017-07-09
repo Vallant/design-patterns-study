@@ -10,17 +10,16 @@ import java.awt.*;
 public class ActivityBarPanel extends JPanel
 {
 
+    final JPanel pMain;
     final JComboBox<String> cbProject;
     final JComboBox<String> cbPhase;
     final JButton btStart;
     final JButton btStop;
     final JLabel lbDuration;
 
-    final JTextField tfDescription;
-    final JTextField tfComment;
-
     public ActivityBarPanel() {
-        super(new GridLayout(1,5, 5, 5));
+        super(new FlowLayout(5));
+        pMain = new JPanel(new GridLayout(1,5, 5, 5));
         setBorder(new EmptyBorder(5,5,5,5));
 
         this.cbProject = new JComboBox<>();
@@ -31,16 +30,14 @@ public class ActivityBarPanel extends JPanel
         btStart.setEnabled(false);
         btStop.setEnabled(false);
 
-        tfDescription = new JTextField();
-        tfComment = new JTextField();
 
 
-
-        add(cbProject);
-        add(cbPhase);
-        add(btStart);
-        add(btStop);
-        add(lbDuration);
+        pMain.add(cbProject);
+        pMain.add(cbPhase);
+        pMain.add(btStart);
+        pMain.add(btStop);
+        pMain.add(lbDuration);
+        add(pMain);
 
     }
 }

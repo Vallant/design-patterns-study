@@ -60,10 +60,11 @@ public class ProjectMember implements DBEntity
         this.role = role;
     }
 
-    public ProjectMember(User user, Project project)
+    public ProjectMember(User user, Project project, ROLE role)
     {
         this.user = user;
         this.project = project;
+        this.role = role;
     }
 
     public ProjectMember(User user, Project project, int hash, ROLE role)

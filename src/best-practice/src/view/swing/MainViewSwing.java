@@ -37,6 +37,7 @@ public class MainViewSwing implements MainView
     public MainViewSwing()
     {
         this.frame = new JFrame("Design Pattern Case Study");
+        frame.setLocationRelativeTo(null);
         frame.getRootPane().setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         frame.setSize(350,200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +53,7 @@ public class MainViewSwing implements MainView
     public void showLoginView()
     {
         login.SwitchToLogin();
+        frame.pack();
     }
 
     @Override
@@ -59,6 +61,7 @@ public class MainViewSwing implements MainView
     {
         login.RemoveAllComponents();
         project.showOverview();
+        frame.pack();
     }
 
     @Override

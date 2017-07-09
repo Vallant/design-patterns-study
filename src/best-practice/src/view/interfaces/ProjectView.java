@@ -26,7 +26,6 @@ public interface ProjectView
 
     void showError(String localizedMessage);
 
-    String getSelectedOwnedProject();
 
     void showProjectCreationDialog();
 
@@ -34,9 +33,16 @@ public interface ProjectView
 
     void setInvolvedProjectsButtonsEnabled(boolean enabled);
 
-    String getSelectedInvolvedProject();
 
     int getSelectedOwnedProjectIndex();
 
     int getSelectedInvolvedProjectIndex();
+
+    int getSelectedPhaseIndex();
+
+    void showAddMemberDialog();
+
+    int getSelectedMemberIndex();
+
+    void showAddPhaseDialog();
 }

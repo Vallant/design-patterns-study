@@ -6,10 +6,8 @@
 package model.impl;
 
 import controller.interfaces.ProjectController;
-import data.Project;
-import data.ProjectMember;
-import data.ProjectPhase;
-import data.User;
+import data.*;
+import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectMemberRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
@@ -78,8 +76,11 @@ public class ProjectModelImpl implements ProjectModel
 
     @Override
     public void deleteProject(Project selectedProject) throws Exception {
+
         ProjectRepository pr = mainModel.DB().getProjectRepository();
         pr.delete(selectedProject);
+        controller.refresh();
+        mainModel.refreshActivityBar();
 
     }
 
@@ -92,6 +93,25 @@ public class ProjectModelImpl implements ProjectModel
         ArrayList<ProjectPhase> phases = ppr.getByProjectId(project.getId());
 
         controller.showDetail(project, phases, members);
+    }
+
+    @Override
+    public void addProject(String name, String description) throws Exception {
+        ProjectRepository pr = mainModel.DB().getProjectRepository();
+        Project project = new Project(name, description) ;
+        pr.add(project);
+        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
+        pmr.add(pm);
+        controller.refresh();
+        mainModel.refreshActivityBar();
+    }
+
+    @Override
+    public void addPhase(Project project, String phaseName) throws Exception {
+        ProjectPhase phase = new ProjectPhase(project, phaseName);
+        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ppr.add(phase);
     }
 
 

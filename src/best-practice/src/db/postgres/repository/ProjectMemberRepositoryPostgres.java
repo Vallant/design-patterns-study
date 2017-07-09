@@ -58,7 +58,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO PROJECT_MEMBER(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
+            String sql = "INSERT INTO PROJECT_MEMBERS(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
                             + "VALUES "
                             + "(?, ?, ?, ?) ";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -83,7 +83,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         
         try(Connection con = db.getConnection())
         {
-            String sql = "UPDATE PROJECT_MEMBER SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
+            String sql = "UPDATE PROJECT_MEMBERS SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
                             + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             

@@ -43,19 +43,19 @@ public class ProjectViewSwing implements ProjectView
         pMain.btLeaveProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.leaveClicked();
+                controller.leaveProjectClicked();
             }
         });
         pMain.btAddProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.addClicked();
+                controller.addProjectClicked();
             }
         });
         pMain.btDeleteProject.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.deleteClicked();
+                controller.deleteProjectClicked();
             }
         });
 
@@ -85,6 +85,54 @@ public class ProjectViewSwing implements ProjectView
                 }
             }
         });
+
+        pDetail.btBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.backClicked();
+            }
+        });
+
+        pDetail.btAddPhase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.addPhaseClicked();
+            }
+        });
+        pDetail.btDeletePhase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.deletePhaseClicked();
+            }
+        });
+
+        pDetail.btAddMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.addMemberClicked();
+            }
+        });
+
+        pDetail.btDeleteMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.deleteMemberClicked();
+            }
+        });
+
+        pDetail.btPromoteToAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.promoteToAdminClicked();
+            }
+        });
+
+        pDetail.btDegradeToMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.degradeToMemberClicked();
+            }
+        });
     }
 
     @Override
@@ -106,12 +154,12 @@ public class ProjectViewSwing implements ProjectView
         frame.remove(pMain);
         pDetail.setProjectName(projectName);
         pDetail.setPhases(phases);
-        pDetail.setMembers(members);
-        pDetail.setRoles(roles);
+        pDetail.setMemberInformation(members, roles);
         pDetail.setDescription(description);
         frame.add(pDetail, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
+
     }
 
     @Override
@@ -139,13 +187,19 @@ public class ProjectViewSwing implements ProjectView
     }
 
     @Override
-    public String getSelectedOwnedProject() {
-        return pMain.lstOwned.getSelectedValue();
-    }
+    public void showProjectCreationDialog()
+    {
+        ProjectAddDialogPanel dialogPanel = new ProjectAddDialogPanel();
 
-    @Override
-    public void showProjectCreationDialog() {
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
 
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            controller.addProject(dialogPanel.tfName.getText(), dialogPanel.tfDescription.getText());
+        }
     }
 
     @Override
@@ -160,10 +214,6 @@ public class ProjectViewSwing implements ProjectView
         pMain.btLeaveProject.setEnabled(enabled);
     }
 
-    @Override
-    public String getSelectedInvolvedProject() {
-        return pMain.lstInvolved.getSelectedValue();
-    }
 
     @Override
     public int getSelectedOwnedProjectIndex() {
@@ -173,6 +223,36 @@ public class ProjectViewSwing implements ProjectView
     @Override
     public int getSelectedInvolvedProjectIndex() {
         return pMain.lstInvolved.getSelectedIndex();
+    }
+
+    @Override
+    public int getSelectedPhaseIndex() {
+        return pDetail.lstPhases.getSelectedIndex();
+    }
+
+    @Override
+    public void showAddMemberDialog() {
+
+    }
+
+    @Override
+    public int getSelectedMemberIndex() {
+        return pDetail.tblMembers.getSelectedRow();
+    }
+
+    @Override
+    public void showAddPhaseDialog() {
+        ProjectAddPhasePanel dialogPanel = new ProjectAddPhasePanel();
+
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
+
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            controller.addPhase(getSelectedOwnedProjectIndex(), dialogPanel.tfName.getText());
+        }
     }
 
 }

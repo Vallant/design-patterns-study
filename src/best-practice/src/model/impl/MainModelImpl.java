@@ -138,5 +138,10 @@ public class MainModelImpl implements MainModel
     public void switchedToSettings() {
         controller.switchToSettingsView();
     }
+
+    @Override
+    public void refreshActivityBar() {
+        activityBar.refresh();
+    }
 }
 

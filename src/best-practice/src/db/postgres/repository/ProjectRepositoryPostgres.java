@@ -21,10 +21,7 @@ import data.ProjectPhase;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
 
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 import db.interfaces.ProjectPhaseRepository;
@@ -55,7 +52,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
                             + "DESCRIPTION) "
                             + "VALUES "
                             + "(?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
@@ -63,6 +60,12 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             ps.setString(index++, item.getDescription());
             
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+            {
+                int id = rs.getInt("ID");
+                item.setId(id);
+            }
             item.setRemoteHash(item.getLocalHash());
         }
     }
