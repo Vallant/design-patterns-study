@@ -51,16 +51,17 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
     {
         try(Connection con = db.getConnection())
         {
-            String sql = "INSERT INTO PROJECT_PHASES(HASH, PROJECT_NAME, NAME) "
+            String sql = "INSERT INTO PROJECT_PHASES(HASH, PROJECT_ID, NAME) "
                             + "VALUES "
                             + "(?, ?, ?) ";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
-            ps.setString(index++, item.getProjectName());
+            ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getName());
 
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next())
             {

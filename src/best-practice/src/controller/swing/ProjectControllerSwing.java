@@ -9,6 +9,7 @@ import controller.interfaces.ProjectController;
 import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
+import data.User;
 import model.interfaces.ProjectModel;
 import view.interfaces.ProjectView;
 
@@ -28,6 +29,10 @@ public class ProjectControllerSwing implements ProjectController
 
     private ArrayList<ProjectMember> projectMembers;
     private ArrayList<ProjectPhase> projectPhases;
+
+    private ArrayList<User> availableMembers;
+
+    Project currentProject;
 
 
 
@@ -55,9 +60,15 @@ public class ProjectControllerSwing implements ProjectController
                 owned.add(m.getProjectName());
             for(ProjectMember m : involvedProjects)
                 involved.add(m.getProjectName());
+
             view.setOwnedProjects(owned);
             view.setParticipatingProjects(involved);
+
+            if(currentProject != null)
+                model.requestedDetailForProject(currentProject);
+
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
 
@@ -70,6 +81,7 @@ public class ProjectControllerSwing implements ProjectController
         try {
             model.leaveProject(involvedProjects.get(index));
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }
@@ -86,6 +98,7 @@ public class ProjectControllerSwing implements ProjectController
         try {
             model.deleteProject(ownedProjects.get(index).getProject());
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }
@@ -106,6 +119,7 @@ public class ProjectControllerSwing implements ProjectController
         try {
             model.requestedDetailForProject(ownedProjects.get(index).getProject());
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }
@@ -113,6 +127,7 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members) {
 
+        currentProject = project;
         ArrayList<String> phaseNames = new ArrayList<>();
         ArrayList<String> memberNames = new ArrayList<>();
         ArrayList<String> memberRoles = new ArrayList<>();
@@ -136,6 +151,7 @@ public class ProjectControllerSwing implements ProjectController
 
     @Override
     public void backClicked() {
+        currentProject = null;
         view.showOverview();
     }
 
@@ -144,6 +160,7 @@ public class ProjectControllerSwing implements ProjectController
         try {
             model.addProject(name, description);
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }
@@ -151,43 +168,100 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void deletePhaseClicked() {
         int index = view.getSelectedPhaseIndex();
+        try {
+            model.deletePhase(projectPhases.get(index));
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
     @Override
-    public void addMemberClicked() {
-        view.showAddMemberDialog();
+    public void addPhaseClicked() {
+        view.showAddPhaseDialog();
     }
 
     @Override
     public void deleteMemberClicked()
     {
         int index = view.getSelectedMemberIndex();
+        try {
+            model.deleteMember(projectMembers.get(index));
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void promoteToAdminClicked()
     {
         int index = view.getSelectedMemberIndex();
+        try {
+            model.promoteToLeader(projectMembers.get(index));
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
     @Override
     public void degradeToMemberClicked() {
-        int index = view.getSelectedMemberIndex();
-    }
 
-    @Override
-    public void addPhaseClicked() {
-        view.showAddPhaseDialog();
-
-    }
-
-    @Override
-    public void addPhase(int index, String phaseName) {
         try {
-            model.addPhase(ownedProjects.get(index).getProject(), phaseName);
+            int index = view.getSelectedMemberIndex();
+            model.degradeToMember(projectMembers.get(index));
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
+    }
+
+    @Override
+    public void addMemberClicked() {
+        try {
+            availableMembers = model.getAvailableUsersFor(currentProject.getId());
+
+        ArrayList<String> availableString = new ArrayList<>();
+
+        for(User u : availableMembers)
+            availableString.add(u.getFirstName() + " " + u.getLastName());
+        view.showAddMemberDialog(availableString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
+
+    }
+
+    @Override
+    public void addPhase(String phaseName) {
+        try {
+            assert(currentProject != null);
+            model.addPhase(currentProject, phaseName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void addMembers(int[] selectedIndices)
+    {
+        try {
+        ArrayList<User> toAdd = new ArrayList<>();
+        for(int i : selectedIndices)
+            toAdd.add(availableMembers.get(i));
+        availableMembers = null;
+
+            model.addMembersToProject(toAdd, currentProject);
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+
+        }
+
     }
 
 }

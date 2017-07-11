@@ -120,6 +120,7 @@ public class ProjectViewSwing implements ProjectView
             }
         });
 
+
         pDetail.btPromoteToAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -159,7 +160,6 @@ public class ProjectViewSwing implements ProjectView
         frame.add(pDetail, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
-
     }
 
     @Override
@@ -231,8 +231,19 @@ public class ProjectViewSwing implements ProjectView
     }
 
     @Override
-    public void showAddMemberDialog() {
+    public void showAddMemberDialog(ArrayList<String> names) {
+        ProjectDetailAddMemberPanel dialogPanel = new ProjectDetailAddMemberPanel();
+        dialogPanel.setAvailableNames(names);
 
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
+
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            controller.addMembers(dialogPanel.lstAvailableUsers.getSelectedIndices());
+        }
     }
 
     @Override
@@ -251,7 +262,7 @@ public class ProjectViewSwing implements ProjectView
 
         if (selection == JOptionPane.OK_OPTION)
         {
-            controller.addPhase(getSelectedOwnedProjectIndex(), dialogPanel.tfName.getText());
+            controller.addPhase(dialogPanel.tfName.getText());
         }
     }
 

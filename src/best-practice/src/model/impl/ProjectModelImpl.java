@@ -7,10 +7,7 @@ package model.impl;
 
 import controller.interfaces.ProjectController;
 import data.*;
-import db.interfaces.ActivityRepository;
-import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
+import db.interfaces.*;
 import model.interfaces.MainModel;
 import model.interfaces.ProjectModel;
 
@@ -112,6 +109,56 @@ public class ProjectModelImpl implements ProjectModel
         ProjectPhase phase = new ProjectPhase(project, phaseName);
         ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
         ppr.add(phase);
+        controller.refresh();
+        mainModel.refreshActivityBar();
+    }
+
+    @Override
+    public void deletePhase(ProjectPhase projectPhase) throws Exception {
+        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ppr.delete(projectPhase);
+        controller.refresh();
+        mainModel.refreshActivityBar();
+    }
+
+    @Override
+    public void promoteToLeader(ProjectMember projectMember) throws Exception {
+        projectMember.setRole(ProjectMember.ROLE.LEADER);
+        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        pmr.update(projectMember);
+        controller.refresh();
+    }
+
+    @Override
+    public void degradeToMember(ProjectMember projectMember) throws Exception {
+        projectMember.setRole(ProjectMember.ROLE.MEMBER);
+        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        pmr.update(projectMember);
+        controller.refresh();
+    }
+
+    @Override
+    public void deleteMember(ProjectMember projectMember) throws Exception {
+        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        pmr.delete(projectMember);
+        controller.refresh();
+    }
+
+    @Override
+    public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception {
+        UserRepository ur = mainModel.DB().getUserRepository();
+        return ur.getAvailableUsersFor(projectId);
+    }
+
+    @Override
+    public void addMembersToProject(ArrayList<User> toAdd, Project currentProject) throws Exception {
+        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        for(User u : toAdd)
+        {
+            ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
+            pmr.add(member);
+        }
+        controller.refresh();
     }
 
 

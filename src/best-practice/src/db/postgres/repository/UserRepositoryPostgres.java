@@ -157,6 +157,41 @@ public class UserRepositoryPostgres implements UserRepository
     }
 
     @Override
+    public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception {
+        ArrayList<User> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT USERS.HASH, USERS.FIRST_NAME, USERS.LAST_NAME, USERS.ROLE, " +
+                    "USERS.SALT, USERS.PASSWORD, USERS.LOGIN_NAME, USERS.EMAIL " +
+                    "FROM USERS " +
+                    "RIGHT JOIN PROJECT_MEMBERS " +
+                    "ON PROJECT_MEMBERS.USER_LOGIN_NAME = USERS.LOGIN_NAME " +
+                    "WHERE PROJECT_MEMBERS.PROJECT_ID IS NULL OR PROJECT_MEMBERS.PROJECT_ID != ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ps.setInt(index++, projectId);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                String firstName = rs.getString("FIRST_NAME");
+                String lastName = rs.getString("LAST_NAME");
+                String role = rs.getString("ROLE");
+                byte[] salt = rs.getBytes("SALT");
+                byte[] password = rs.getBytes("PASSWORD");
+                String loginName = rs.getString("LOGIN_NAME");
+                String email = rs.getString("EMAIL");
+
+                l.add(new User(hash, loginName, firstName, lastName,
+                        User.ROLE.valueOf(role), email, password, salt));
+            }
+        }
+        return l;
+    }
+
+    @Override
     public List<User> getAll() throws Exception
     {
          ArrayList<User> l = new ArrayList<>();

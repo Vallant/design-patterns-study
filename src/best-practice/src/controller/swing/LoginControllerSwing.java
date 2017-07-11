@@ -44,6 +44,7 @@ public class LoginControllerSwing implements LoginController
             try {
                 model.login(username, password);
             } catch (Exception e) {
+                e.printStackTrace();
                 view.showError(e.getLocalizedMessage());
             }
     }
@@ -76,6 +77,7 @@ public class LoginControllerSwing implements LoginController
             try {
                 model.saveNewUser(u);
             } catch (Exception e) {
+                e.printStackTrace();
                 view.showError(e.getLocalizedMessage());
             }
 

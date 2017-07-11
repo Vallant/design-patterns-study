@@ -8,6 +8,7 @@ package model.interfaces;
 import controller.interfaces.ProjectController;
 import data.Project;
 import data.ProjectMember;
+import data.ProjectPhase;
 import data.User;
 
 import java.util.ArrayList;
@@ -37,4 +38,15 @@ public interface ProjectModel
     void addProject(String name, String description) throws Exception;
 
     void addPhase(Project project, String phaseName) throws Exception;
+
+    void deletePhase(ProjectPhase projectPhase) throws Exception;
+
+    void promoteToLeader(ProjectMember projectMember) throws Exception;
+    void degradeToMember(ProjectMember projectMember) throws Exception;
+
+    void deleteMember(ProjectMember projectMember) throws Exception;
+
+    ArrayList<User> getAvailableUsersFor(int projectId) throws Exception;
+
+    void addMembersToProject(ArrayList<User> toAdd, Project currentProject) throws Exception;
 }

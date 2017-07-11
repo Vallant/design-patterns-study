@@ -48,6 +48,7 @@ public class ActivityBarControllerSwing implements ActivityBarController
         try {
             model.activityFinished(project, projectPhase, description, comment);
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }
@@ -60,6 +61,7 @@ public class ActivityBarControllerSwing implements ActivityBarController
             view.setProjectPhases(phases);
         } catch (Exception ex)
         {
+            ex.printStackTrace();
             view.showError(ex.getLocalizedMessage());
         }
     }
@@ -67,7 +69,7 @@ public class ActivityBarControllerSwing implements ActivityBarController
     @Override
     public void PhaseSelected(String projectPhase)
     {
-        if(projectPhase.isEmpty())
+        if(projectPhase == null || projectPhase.isEmpty())
             view.disableStart();
         else
             view.enableStart();
@@ -78,6 +80,7 @@ public class ActivityBarControllerSwing implements ActivityBarController
         try {
             view.setProjects(model.getProjects());
         } catch (Exception e) {
+            e.printStackTrace();
             view.showError(e.getLocalizedMessage());
         }
     }

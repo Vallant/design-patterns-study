@@ -1,8 +1,6 @@
 package view.swing;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -80,11 +78,12 @@ public class ProjectDetailViewPanel extends JPanel
         pMembers = new JPanel(new BorderLayout(5,5));
         pMembersHeader = new JPanel(new BorderLayout(5,5));
         lbMembers = new JLabel("Project Members");
-        btAddMember = new JButton("Add Member");
+        btAddMember = new JButton("Add Members");
         btAddMember.setPreferredSize(new Dimension(175,25));
         btDeleteMember = new JButton("Delete Member");
         btDeleteMember.setPreferredSize(new Dimension(175,25));
-        btPromoteToAdmin = new JButton("Promote to admin");
+
+        btPromoteToAdmin = new JButton("Promote to leader");
         btPromoteToAdmin.setPreferredSize(new Dimension(175,25));
         btDegradeToMember = new JButton("Degrade to member");
         btDegradeToMember.setPreferredSize(new Dimension(175,25));

@@ -84,7 +84,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         try(Connection con = db.getConnection())
         {
             String sql = "UPDATE PROJECT_MEMBERS SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
-                            + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
+                            + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             int index = 1;
@@ -92,6 +92,9 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             ps.setString(index++, item.getUserLoginName());
             ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getRole().name());
+            ps.setString(index++, item.getUserLoginName());
+            ps.setInt(index++, item.getProjectId());
+            ps.setInt(index++, item.getRemoteHash());
             
             int numRowsAffected = ps.executeUpdate();
             if(numRowsAffected == 0)

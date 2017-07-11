@@ -43,8 +43,7 @@ public interface ProjectController
     void addProject(String text, String text1);
 
     void deletePhaseClicked();
-
-    void addMemberClicked();
+    void addPhaseClicked();
 
     void deleteMemberClicked();
 
@@ -52,7 +51,10 @@ public interface ProjectController
 
     void degradeToMemberClicked();
 
-    void addPhaseClicked();
+    void addMemberClicked();
 
-    void addPhase(int projectId, String phaseName);
+    void addPhase(String phaseName);
+
+    void addMembers(int[] selectedIndices);
+
 }

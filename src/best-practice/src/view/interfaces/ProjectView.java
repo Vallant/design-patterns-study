@@ -39,10 +39,10 @@ public interface ProjectView
     int getSelectedInvolvedProjectIndex();
 
     int getSelectedPhaseIndex();
-
-    void showAddMemberDialog();
+    
 
     int getSelectedMemberIndex();
 
     void showAddPhaseDialog();
+    void showAddMemberDialog(ArrayList<String> availableMembers);
 }
