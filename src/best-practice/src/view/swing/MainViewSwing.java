@@ -25,7 +25,7 @@ public class MainViewSwing implements MainView
     private final LoginView login;
     private final ProjectView project;
     //private final SettingsView settings;
-    //private final StatisticsView statistics;
+    private final StatisticsView statistics;
     //private final AdministrationView administration;
     private final ActivityBarView activityBar;
     private final SideBarView sideBar;
@@ -47,6 +47,7 @@ public class MainViewSwing implements MainView
         project = new ProjectViewSwing(frame);
         activityBar = new ActivityBarViewSwing(frame);
         sideBar = new SideBarViewSwing(frame);
+        statistics = new StatisticsViewSwing(frame);
     }
 
     @Override
@@ -60,6 +61,7 @@ public class MainViewSwing implements MainView
     public void showProjectView()
     {
         login.RemoveAllComponents();
+        statistics.RemoveAllComponents();
         project.showOverview();
         frame.pack();
     }
@@ -127,12 +129,19 @@ public class MainViewSwing implements MainView
 
     @Override
     public void showStatisticsView() {
+        statistics.showOverview();
 
     }
 
     @Override
     public void showSettingsView() {
 
+    }
+
+    @Override
+    public void pairStatistics(StatisticsController controller) {
+        controller.setView(statistics);
+        statistics.setController(controller);
     }
 
 

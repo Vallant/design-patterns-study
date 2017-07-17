@@ -134,6 +134,13 @@ public class ProjectViewSwing implements ProjectView
                 controller.degradeToMemberClicked();
             }
         });
+
+        pDetail.btUpdateDescription.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.updateDescriptionClicked();
+            }
+        });
     }
 
     @Override
@@ -244,6 +251,11 @@ public class ProjectViewSwing implements ProjectView
         {
             controller.addMembers(dialogPanel.lstAvailableUsers.getSelectedIndices());
         }
+    }
+
+    @Override
+    public String getDescription() {
+        return pDetail.taDescription.getText();
     }
 
     @Override

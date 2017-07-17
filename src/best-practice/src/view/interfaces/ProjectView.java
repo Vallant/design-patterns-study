@@ -45,4 +45,6 @@ public interface ProjectView
 
     void showAddPhaseDialog();
     void showAddMemberDialog(ArrayList<String> availableMembers);
+
+    String getDescription();
 }

@@ -28,6 +28,7 @@ import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 
 import java.sql.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -170,6 +171,41 @@ public class ActivityRepositoryPostgres implements ActivityRepository
 
             Activity a = new Activity(hash, id, phase, user, description, start, start, comments);
             return a;
+        }
+    }
+
+    @Override
+    public void getProjectsAndWorkload(String loginName, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
+                    "FROM ACTIVITY " +
+                    "JOIN PROJECT ON PROJECT.ID = ACTIVITY.PROJECT_ID " +
+                    "AND ACTIVITY.USER_LOGIN_NAME = ? " +
+                    "GROUP BY PROJECT.ID";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ps.setString(index++, loginName);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+
+
+                double seconds = rs.getDouble(2);
+                Duration duration = Duration.ZERO;
+                double test = seconds % 1;
+
+                duration = duration.plusSeconds((long)seconds);
+                duration = duration.plusMillis((long) ((seconds % 1) * 1000));
+                ProjectRepository pr = db.getProjectRepository();
+                Project p = pr.getByPrimaryKey(id);
+
+
+                projects.add(p);
+                durations.add(duration);
+            }
         }
     }
 

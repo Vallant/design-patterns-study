@@ -17,6 +17,10 @@
 package db.interfaces;
 
 import data.Activity;
+import data.Project;
+
+import java.time.Duration;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,4 +29,6 @@ import data.Activity;
 public interface ActivityRepository extends Repository<Activity>
 {
     Activity getByPrimaryKey(int id) throws Exception;
+
+    void getProjectsAndWorkload(String loginName, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
 }

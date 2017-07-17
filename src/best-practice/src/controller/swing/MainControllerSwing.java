@@ -24,6 +24,7 @@ public class MainControllerSwing implements MainController
     private final ActivityBarController activityBar;
     private final ProjectController project;
     private final SideBarController sideBar;
+    private final StatisticsController statistics;
 
     public MainControllerSwing()
     {
@@ -31,6 +32,7 @@ public class MainControllerSwing implements MainController
         project = new ProjectControllerSwing();
         activityBar = new ActivityBarControllerSwing();
         sideBar = new SideBarControllerSwing();
+        statistics = new StatisticsControllerSwing();
     }
     
     @Override
@@ -119,6 +121,13 @@ public class MainControllerSwing implements MainController
         sideBar.setModel(model);
         model.setController(sideBar);
         mainView.pairSideBar(sideBar);
+    }
+
+    @Override
+    public void pairStatistics(StatisticsModel model) {
+        statistics.setModel(model);
+        model.setController(statistics);
+        mainView.pairStatistics(statistics);
     }
 
     @Override

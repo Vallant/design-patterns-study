@@ -264,4 +264,16 @@ public class ProjectControllerSwing implements ProjectController
 
     }
 
+    @Override
+    public void updateDescriptionClicked() {
+        String newDescription = view.getDescription();
+        currentProject.setDescription(newDescription);
+        try {
+            model.updateProject(currentProject);
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
+    }
+
 }

@@ -161,5 +161,12 @@ public class ProjectModelImpl implements ProjectModel
         controller.refresh();
     }
 
+    @Override
+    public void updateProject(Project project) throws Exception {
+        ProjectRepository pr = mainModel.DB().getProjectRepository();
+        pr.update(project);
+        controller.refresh();
+    }
+
 
 }

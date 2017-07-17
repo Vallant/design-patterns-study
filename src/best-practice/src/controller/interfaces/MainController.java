@@ -22,18 +22,18 @@ public interface MainController
     void switchToProjectView();
     void switchToAdminView();
     void switchToStatisticView();
+    void switchToSettingsView();
     
     void showActivityBar();
+    void showSideBar(User.ROLE role);
     
     void pairLogin(LoginModel model);
     void pairProject(ProjectModel model);
     void pairActivityBar(ActivityBarModel model);
+    void pairSideBar(SideBarModel sideBar);
+    void pairStatistics(StatisticsModel model);
     
     void showError(Exception ex);
 
-    void showSideBar(User.ROLE role);
 
-    void pairSideBar(SideBarModel sideBar);
-
-    void switchToSettingsView();
 }

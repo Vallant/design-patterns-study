@@ -49,4 +49,6 @@ public interface ProjectModel
     ArrayList<User> getAvailableUsersFor(int projectId) throws Exception;
 
     void addMembersToProject(ArrayList<User> toAdd, Project currentProject) throws Exception;
+
+    void updateProject(Project project) throws Exception;
 }

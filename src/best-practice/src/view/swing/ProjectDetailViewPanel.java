@@ -1,6 +1,7 @@
 package view.swing;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -39,7 +40,9 @@ public class ProjectDetailViewPanel extends JPanel
     final DefaultTableModel tblMemberModel;
     final JTable tblMembers;
 
-    final JTextPane pFooter;
+    final JPanel pFooter;
+    final JTextArea taDescription;
+    final JButton btUpdateDescription;
 
 
     public ProjectDetailViewPanel() {
@@ -63,6 +66,7 @@ public class ProjectDetailViewPanel extends JPanel
         btDeletePhase.setPreferredSize(new Dimension(175,25));
         lstPhasesModel = new DefaultListModel<>();
         lstPhases = new JList<>(lstPhasesModel);
+        lstPhases.setBorder(new LineBorder(Color.black, 1));
         pPhasesButtons = new JPanel(new GridLayout(2,1,5,5));
 
         pPhases.add(pPhasesHeader, BorderLayout.NORTH);
@@ -89,6 +93,7 @@ public class ProjectDetailViewPanel extends JPanel
         btDegradeToMember.setPreferredSize(new Dimension(175,25));
         tblMemberModel = new DefaultTableModel();
         tblMembers = new JTable(tblMemberModel);
+        tblMembers.setBorder(new LineBorder(Color.black, 1));
         pMembersButtons = new JPanel(new GridLayout(4,1,5,5));
 
         pMembers.add(pMembersHeader, BorderLayout.NORTH);
@@ -101,7 +106,13 @@ public class ProjectDetailViewPanel extends JPanel
         pFlowPanel2.add(pMembersButtons);
         pMembers.add(tblMembers, BorderLayout.CENTER);
 
-        pFooter = new JTextPane();
+        pFooter = new JPanel(new BorderLayout(5,5));
+        taDescription = new JTextArea();
+        btUpdateDescription = new JButton("Update description");
+        btUpdateDescription.setPreferredSize(new Dimension(175,25));
+        pFooter.add(taDescription, BorderLayout.CENTER);
+        pFooter.add(btUpdateDescription, BorderLayout.EAST);
+
 
         pCenter.add(pPhases);
         pCenter.add(pMembers);
@@ -135,6 +146,6 @@ public class ProjectDetailViewPanel extends JPanel
     }
 
     public void setDescription(String description) {
-        pFooter.setText(description);
+        taDescription.setText(description);
     }
 }

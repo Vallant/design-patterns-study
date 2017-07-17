@@ -28,7 +28,8 @@ public class MainModelImpl implements MainModel
     private final ProjectModel project;
     private final ActivityBarModel activityBar;
     private final SideBarModel sideBar;
-    
+    private final StatisticsModel statistics;
+
     private User user;
     private final DBManager db;
     
@@ -50,10 +51,13 @@ public class MainModelImpl implements MainModel
         pairActivityBar();
         sideBar = new SideBarModelImpl();
         pairSideBar();
+        statistics = new StatisticsModelImpl();
+        pairStatistics();
         
         controller.switchToLogin();
     }
-    
+
+
     public static void main(String[] args)
     {
         try
@@ -71,6 +75,7 @@ public class MainModelImpl implements MainModel
     {
         this.user = user;
         activityBar.setUser(user);
+        statistics.setUser(user);
         project.setUser(user);
 
         controller.switchToProjectView();
@@ -80,6 +85,7 @@ public class MainModelImpl implements MainModel
 
         project.refresh();
         activityBar.refresh();
+        statistics.refresh();
         sideBar.refresh();
     }
 
@@ -113,6 +119,11 @@ public class MainModelImpl implements MainModel
         controller.pairSideBar(sideBar);
     }
 
+    private void pairStatistics() {
+        statistics.setMainModel(this);
+        controller.pairStatistics(statistics);
+    }
+
     @Override
     public DBManager DB()
     {
@@ -121,7 +132,7 @@ public class MainModelImpl implements MainModel
 
     @Override
     public void switchedToStatistics() {
-        controller.switchToSettingsView();
+        controller.switchToStatisticView();
     }
 
     @Override

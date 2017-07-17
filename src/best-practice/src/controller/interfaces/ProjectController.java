@@ -57,4 +57,5 @@ public interface ProjectController
 
     void addMembers(int[] selectedIndices);
 
+    void updateDescriptionClicked();
 }

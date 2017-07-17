@@ -39,4 +39,6 @@ public interface MainView
     void showStatisticsView();
 
     void showSettingsView();
+
+    void pairStatistics(StatisticsController statistics);
 }
