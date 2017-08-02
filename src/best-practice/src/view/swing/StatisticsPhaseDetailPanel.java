@@ -16,6 +16,7 @@ public class StatisticsPhaseDetailPanel extends JPanel
     final JButton btBack;
 
     final JPanel pButtons;
+    final JPanel pFlowPanel;
     final JButton btDeleteActivity;
     final JButton btAddActivity;
     final JButton btUpdateActivity;
@@ -40,6 +41,7 @@ public class StatisticsPhaseDetailPanel extends JPanel
 
         tblActivity.setBorder(new LineBorder(Color.black, 1));
 
+        pFlowPanel = new JPanel(new FlowLayout(5));
         pButtons = new JPanel(new GridLayout(3,1,5,5));
         btAddActivity = new JButton("Add Activity");
         btDeleteActivity = new JButton("Delete Activity");
@@ -53,7 +55,8 @@ public class StatisticsPhaseDetailPanel extends JPanel
         pHeader.add(cbPeriod);
         add(pHeader, BorderLayout.NORTH);
         add(scrpTable, BorderLayout.CENTER);
-        add(pButtons, BorderLayout.EAST);
+        pFlowPanel.add(pButtons);
+        add(pFlowPanel, BorderLayout.EAST);
     }
 
 

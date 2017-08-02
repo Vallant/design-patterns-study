@@ -3,6 +3,7 @@ package view.interfaces;
 import controller.interfaces.StatisticsController;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
@@ -31,5 +32,13 @@ public interface StatisticsView {
 
     int getSelectedProjectPeriod();
 
+    int getSelectedActivity();
+
     void hide();
+
+    void showAddActivityDialog();
+
+    boolean confirmDeletion();
+
+    void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end);
 }

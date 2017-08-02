@@ -7,8 +7,7 @@ import data.ProjectPhase;
 import model.interfaces.StatisticsModel;
 import view.interfaces.StatisticsView;
 
-import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
 /**
@@ -111,12 +110,12 @@ public class StatisticsControllerSwing implements StatisticsController {
     }
 
     @Override
-    public void showDetail() {
+    public void showProjectDetail() {
         view.showDetail();
     }
 
     @Override
-    public void backClicked() {
+    public void backToOverviewClicked() {
         showOverview();
     }
 
@@ -165,5 +164,70 @@ public class StatisticsControllerSwing implements StatisticsController {
     @Override
     public void showPhaseDetail() {
         view.showPhaseDetail();
+    }
+
+    @Override
+    public void addActivityClicked() {
+        view.showAddActivityDialog();
+    }
+
+    @Override
+    public void deleteActivityClicked()
+    {
+        if(view.confirmDeletion())
+        {
+            Activity toDelete = currentActivities.get(view.getSelectedActivity());
+            try {
+                model.deleteActivity(toDelete);
+            } catch (Exception e) {
+                view.showError(e.getLocalizedMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void updateActivityClicked()
+    {
+        Activity a = currentActivities.get(view.getSelectedActivity());
+        view.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDate(), a.getStop().toLocalDate());
+    }
+
+    @Override
+    public void addActivity(String description, String comment, LocalDate start, LocalDate end)
+    {
+        ZonedDateTime zdtStart = start.atStartOfDay(ZoneOffset.UTC);
+        ZonedDateTime zdtEnd = end.atStartOfDay(ZoneOffset.UTC);
+
+        try {
+            model.addActivity(detailPhase, description, comment, zdtStart, zdtEnd);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateActivity(String description, String comment, LocalDate start, LocalDate end) {
+        Activity a = currentActivities.get(view.getSelectedActivity());
+
+        ZonedDateTime zdtStart = start.atStartOfDay(ZoneOffset.UTC);
+        ZonedDateTime zdtEnd = end.atStartOfDay(ZoneOffset.UTC);
+        a.setDescription(description);
+        a.setComments(comment);
+        a.setStart(zdtStart);
+        a.setStop(zdtEnd);
+        try {
+            model.updateActivity(a);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void backToProjectDetailClicked() {
+        showProjectDetail();
     }
 }

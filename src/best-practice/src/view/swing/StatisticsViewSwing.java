@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
@@ -21,13 +22,13 @@ public class StatisticsViewSwing implements StatisticsView {
     private final JFrame frame;
     private StatisticsController controller;
     private final StatisticsPanel pMain;
-    private final StatisticsProjectDetailPanel pDetail;
+    private final StatisticsProjectDetailPanel pProjectDetail;
     private final StatisticsPhaseDetailPanel pPhaseDetail;
 
     public StatisticsViewSwing(JFrame frame) {
         this.frame = frame;
         pMain = new StatisticsPanel();
-        pDetail = new StatisticsProjectDetailPanel();
+        pProjectDetail = new StatisticsProjectDetailPanel();
         pPhaseDetail = new StatisticsPhaseDetailPanel();
 
         setListeners();
@@ -40,7 +41,7 @@ public class StatisticsViewSwing implements StatisticsView {
                 controller.projectPeriodChanged(pMain.cbPeriod.getSelectedIndex());
             }
         });
-        pDetail.cbPeriod.addActionListener(new ActionListener() {
+        pProjectDetail.cbPeriod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.phasePeriodChanged(pMain.cbPeriod.getSelectedIndex());
@@ -66,13 +67,13 @@ public class StatisticsViewSwing implements StatisticsView {
             }
         });
 
-        pDetail.btBack.addActionListener(new ActionListener() {
+        pProjectDetail.btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.backClicked();
+                controller.backToOverviewClicked();
             }
         });
-        pDetail.tblPhases.addMouseListener(new MouseAdapter() {
+        pProjectDetail.tblPhases.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 JTable tbl = (JTable) mouseEvent.getSource();
@@ -81,6 +82,33 @@ public class StatisticsViewSwing implements StatisticsView {
                     int index = tbl.rowAtPoint(mouseEvent.getPoint());
                     controller.doubleClickOnPhase(index);
                 }
+            }
+        });
+
+        pPhaseDetail.btAddActivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.addActivityClicked();
+            }
+        });
+        pPhaseDetail.btDeleteActivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.deleteActivityClicked();
+            }
+        });
+
+        pPhaseDetail.btUpdateActivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.updateActivityClicked();
+            }
+        });
+
+        pPhaseDetail.btBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.backToProjectDetailClicked();
             }
         });
     }
@@ -95,14 +123,14 @@ public class StatisticsViewSwing implements StatisticsView {
 
     @Override
     public void setDetailData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
-        pDetail.tblProjectsModel.setFirstColumnContent(phaseNames);
-        pDetail.tblProjectsModel.setWorkloadContent(durations);
-        pDetail.tblPhases.updateUI();
+        pProjectDetail.tblProjectsModel.setFirstColumnContent(phaseNames);
+        pProjectDetail.tblProjectsModel.setWorkloadContent(durations);
+        pProjectDetail.tblPhases.updateUI();
     }
 
     @Override
     public void showPhaseDetail() {
-        frame.remove(pDetail);
+        frame.remove(pProjectDetail);
         frame.remove(pMain);
         frame.add(pPhaseDetail);
         frame.revalidate();
@@ -122,7 +150,7 @@ public class StatisticsViewSwing implements StatisticsView {
 
     @Override
     public void RemoveAllComponents() {
-        frame.remove(pDetail);
+        frame.remove(pProjectDetail);
         frame.remove(pMain);
         frame.remove(pPhaseDetail);
         frame.revalidate();
@@ -138,7 +166,7 @@ public class StatisticsViewSwing implements StatisticsView {
     @Override
     public void showOverview() {
 
-        frame.remove(pDetail);
+        frame.remove(pProjectDetail);
         frame.remove(pPhaseDetail);
         frame.add(pMain, BorderLayout.CENTER);
         frame.revalidate();
@@ -149,7 +177,7 @@ public class StatisticsViewSwing implements StatisticsView {
     public void showDetail() {
         frame.remove(pMain);
         frame.remove(pPhaseDetail);
-        frame.add(pDetail, BorderLayout.CENTER);
+        frame.add(pProjectDetail, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }
@@ -160,8 +188,56 @@ public class StatisticsViewSwing implements StatisticsView {
     }
 
     @Override
+    public int getSelectedActivity() {
+        return pPhaseDetail.tblActivity.getSelectedRow();
+    }
+
+    @Override
     public void hide() {
-        frame.remove(pDetail);
+        frame.remove(pProjectDetail);
         frame.remove(pMain);
+    }
+
+    @Override
+    public void showAddActivityDialog()
+    {
+        StatisticsUpdateActivityDialogPanel dialogPanel = new StatisticsUpdateActivityDialogPanel();
+
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
+
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            controller.addActivity(dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText(),
+                    dialogPanel.dpStartTime.getDatePicker().getDate(),
+                    dialogPanel.dpEndTime.getDatePicker().getDate());
+        }
+    }
+
+    @Override
+    public boolean confirmDeletion() {
+
+        return JOptionPane.showConfirmDialog(null, "Are you sure to delete this activity?","Confirmation",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION;
+    }
+
+    @Override
+    public void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end)
+    {
+        StatisticsUpdateActivityDialogPanel dialogPanel = new StatisticsUpdateActivityDialogPanel(description, comment, start, end);
+
+        int selection = JOptionPane.showConfirmDialog(
+                null, dialogPanel, "Input Form : "
+                , JOptionPane.OK_CANCEL_OPTION
+                , JOptionPane.PLAIN_MESSAGE);
+
+        if (selection == JOptionPane.OK_OPTION)
+        {
+            controller.updateActivity(dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText(),
+                    dialogPanel.dpStartTime.getDatePicker().getDate(),
+                    dialogPanel.dpEndTime.getDatePicker().getDate());
+        }
     }
 }

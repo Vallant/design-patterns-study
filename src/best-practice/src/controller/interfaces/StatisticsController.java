@@ -7,6 +7,7 @@ import model.interfaces.StatisticsModel;
 import view.interfaces.StatisticsView;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -25,10 +26,10 @@ public interface StatisticsController {
 
     void showOverview();
     void setOverviewData(ArrayList<Project> projects, ArrayList<Duration> durations);
-    void showDetail();
+    void showProjectDetail();
     void setDetailData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
 
-    void backClicked();
+    void backToOverviewClicked();
 
     void doubleClickOnPhase(int index);
 
@@ -37,4 +38,16 @@ public interface StatisticsController {
     void setPhaseDetailData(ArrayList<Activity> activities);
 
     void showPhaseDetail();
+
+    void addActivityClicked();
+
+    void deleteActivityClicked();
+
+    void updateActivityClicked();
+
+    void addActivity(String description, String comment, LocalDate start, LocalDate end);
+
+    void updateActivity(String description, String comment, LocalDate start, LocalDate end);
+
+    void backToProjectDetailClicked();
 }

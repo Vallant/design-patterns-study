@@ -26,6 +26,30 @@ public class StatisticsModelImpl implements StatisticsModel
     private User user;
 
     @Override
+    public void deleteActivity(Activity toDelete) throws Exception {
+     ActivityRepository ar = mainModel.DB().getActivityRepository();
+     ar.delete(toDelete);
+    }
+
+    @Override
+    public void addActivity(ProjectPhase detailPhase, String description, String comment, ZonedDateTime zdtStart, ZonedDateTime zdtEnd) throws Exception {
+        if(zdtEnd.isBefore(zdtStart))
+            throw new Exception("Start date has to be before End date");
+        Activity a = new Activity(detailPhase, user, description, zdtStart, zdtEnd, comment);
+
+        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ar.add(a);
+        controller.refresh();
+    }
+
+    @Override
+    public void updateActivity(Activity a) throws Exception {
+        ActivityRepository ar  =mainModel.DB().getActivityRepository();
+        ar.update(a);
+        controller.refresh();
+    }
+
+    @Override
     public void setUser(User user) {
         this.user = user;
     }
@@ -49,7 +73,7 @@ public class StatisticsModelImpl implements StatisticsModel
     public void requestedDetailFor(Project project) throws Exception {
 
         phasePeriodChanged(project.getId(), PERIOD.ALLTIME.ordinal());
-        controller.showDetail();
+        controller.showProjectDetail();
     }
 
     @Override
