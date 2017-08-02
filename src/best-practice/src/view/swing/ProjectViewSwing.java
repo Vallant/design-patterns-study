@@ -172,6 +172,7 @@ public class ProjectViewSwing implements ProjectView
     @Override
     public void hide() {
         frame.remove(pMain);
+        frame.remove(pDetail);
     }
 
     @Override

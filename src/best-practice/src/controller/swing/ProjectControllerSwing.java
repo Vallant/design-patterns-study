@@ -32,7 +32,7 @@ public class ProjectControllerSwing implements ProjectController
 
     private ArrayList<User> availableMembers;
 
-    Project currentProject;
+    Project detailProject;
 
 
 
@@ -64,8 +64,8 @@ public class ProjectControllerSwing implements ProjectController
             view.setOwnedProjects(owned);
             view.setParticipatingProjects(involved);
 
-            if(currentProject != null)
-                model.requestedDetailForProject(currentProject);
+            if(detailProject != null)
+                model.requestedDetailForProject(detailProject);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members) {
 
-        currentProject = project;
+        detailProject = project;
         ArrayList<String> phaseNames = new ArrayList<>();
         ArrayList<String> memberNames = new ArrayList<>();
         ArrayList<String> memberRoles = new ArrayList<>();
@@ -151,7 +151,7 @@ public class ProjectControllerSwing implements ProjectController
 
     @Override
     public void backClicked() {
-        currentProject = null;
+        detailProject = null;
         view.showOverview();
     }
 
@@ -220,7 +220,7 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void addMemberClicked() {
         try {
-            availableMembers = model.getAvailableUsersFor(currentProject.getId());
+            availableMembers = model.getAvailableUsersFor(detailProject.getId());
 
         ArrayList<String> availableString = new ArrayList<>();
 
@@ -238,8 +238,8 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void addPhase(String phaseName) {
         try {
-            assert(currentProject != null);
-            model.addPhase(currentProject, phaseName);
+            assert(detailProject != null);
+            model.addPhase(detailProject, phaseName);
         } catch (Exception e) {
             e.printStackTrace();
             view.showError(e.getLocalizedMessage());
@@ -255,7 +255,7 @@ public class ProjectControllerSwing implements ProjectController
             toAdd.add(availableMembers.get(i));
         availableMembers = null;
 
-            model.addMembersToProject(toAdd, currentProject);
+            model.addMembersToProject(toAdd, detailProject);
         } catch (Exception e) {
             e.printStackTrace();
             view.showError(e.getLocalizedMessage());
@@ -267,9 +267,9 @@ public class ProjectControllerSwing implements ProjectController
     @Override
     public void updateDescriptionClicked() {
         String newDescription = view.getDescription();
-        currentProject.setDescription(newDescription);
+        detailProject.setDescription(newDescription);
         try {
-            model.updateProject(currentProject);
+            model.updateProject(detailProject);
         } catch (Exception e) {
             e.printStackTrace();
             view.showError(e.getLocalizedMessage());

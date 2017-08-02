@@ -38,11 +38,12 @@ class StatisticsTableModel extends AbstractTableModel
 
     @Override
     public Object getValueAt(int row, int column) {
+        Duration current = durations.get(row);
         switch(column)
         {
             case 0: return firstColumn.get(row);
-            case 1: return durations.get(row).getSeconds() * 100 / ((double) getTotalDuration().getSeconds());
-            case 2: return durations.get(row);
+            case 1: return String.format("%.2f", current.toMillis() * 100 / (double) (getTotalDuration().toMillis()));
+            case 2: return String.format("%02d:%02d", current.getSeconds() / 60, current.getSeconds() % 60);
         }
 
         return null;

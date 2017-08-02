@@ -4,6 +4,7 @@ import controller.interfaces.StatisticsController;
 import data.Project;
 import data.User;
 import model.impl.MainModelImpl;
+import model.impl.StatisticsModelImpl;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -13,12 +14,26 @@ import java.util.ArrayList;
  */
 public interface StatisticsModel {
 
+
+
+    enum PERIOD
+    {
+        ALLTIME,
+        YEAR,
+        MONTH,
+        WEEK,
+        DAY
+    };
+
     void setUser(User user);
     void setMainModel(MainModel mainModel);
 
     void setController(StatisticsController statistics);
 
-    void getProjectsAndWorkload(ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
-
     void refresh();
+
+    void requestedDetailFor(Project project) throws Exception;
+
+    void phasePeriodChanged(int projectId, int selectedIndex) throws Exception;
+    void projectPeriodChanged(int selectedIndex) throws Exception;
 }

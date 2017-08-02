@@ -101,8 +101,10 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ps.setInt(index++, item.getProjectId());
             ps.setString(index++, item.getUserLoginName());
             ps.setString(index++, item.getDescription());
-            ps.setObject(index++, item.getStart());
-            ps.setObject(index++, item.getStop());
+            ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
+            ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
+            ZonedDateTime zdtStop = ZonedDateTime.ofInstant(item.getStop().toInstant(), ZoneId.of("UTC"));
+            ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
             ps.setString(index++, item.getComments());
 
             ps.setInt(index++, item.getRemoteHash());
@@ -169,24 +171,29 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             assert(id == id_db);
             assert(projectId == phase.getProjectId());
 
-            Activity a = new Activity(hash, id, phase, user, description, start, start, comments);
+            Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
             return a;
         }
     }
 
     @Override
-    public void getProjectsAndWorkload(String loginName, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
+    public void getProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT PROJECT.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
                     "FROM ACTIVITY " +
                     "JOIN PROJECT ON PROJECT.ID = ACTIVITY.PROJECT_ID " +
                     "AND ACTIVITY.USER_LOGIN_NAME = ? " +
+                    "AND ACTIVITY.START_TIME > ? " +
                     "GROUP BY PROJECT.ID";
             PreparedStatement ps = con.prepareStatement(sql);
             int index = 1;
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
             ps.setString(index++, loginName);
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
 
+
+            ProjectRepository pr = db.getProjectRepository();
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
@@ -195,15 +202,52 @@ public class ActivityRepositoryPostgres implements ActivityRepository
 
                 double seconds = rs.getDouble(2);
                 Duration duration = Duration.ZERO;
-                double test = seconds % 1;
 
                 duration = duration.plusSeconds((long)seconds);
                 duration = duration.plusMillis((long) ((seconds % 1) * 1000));
-                ProjectRepository pr = db.getProjectRepository();
+
                 Project p = pr.getByPrimaryKey(id);
 
 
                 projects.add(p);
+                durations.add(duration);
+            }
+        }
+    }
+
+    @Override
+    public void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_PHASES.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
+                    "FROM ACTIVITY " +
+                    "JOIN PROJECT_PHASES ON PROJECT_PHASES.ID = ACTIVITY.PROJECT_PHASE_ID " +
+                    "AND ACTIVITY.USER_LOGIN_NAME = ? " +
+                    "AND ACTIVITY.START_TIME > ? " +
+                    "AND ACTIVITY.PROJECT_ID = ? " +
+                    "GROUP BY PROJECT_PHASES.ID";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+            ps.setString(index++, loginName);
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
+            ps.setInt(index++, projectId);
+
+            ProjectPhaseRepository ppr = db.getProjectPhaseRepository();
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+
+                double seconds = rs.getDouble(2);
+                Duration duration = Duration.ZERO;
+
+                duration = duration.plusSeconds((long)seconds);
+                duration = duration.plusMillis((long) ((seconds % 1) * 1000));
+
+                ProjectPhase p = ppr.getByPrimaryKey(id);
+
+                phases.add(p);
                 durations.add(duration);
             }
         }
@@ -242,7 +286,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
 
                 assert(projectId == phase.getProjectId());
                 
-                Activity a = new Activity(hash, id, phase, user, description, start, start, comments);
+                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
                 l.add(a);
             }
         }

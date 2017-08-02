@@ -118,7 +118,7 @@ public class MainViewSwing implements MainView
     public void hideCenterContent() {
         project.hide();
         //settings.hide();
-        //statistics.hide();
+        statistics.hide();
         //administration.hide();
     }
 

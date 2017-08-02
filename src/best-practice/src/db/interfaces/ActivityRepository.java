@@ -18,8 +18,10 @@ package db.interfaces;
 
 import data.Activity;
 import data.Project;
+import data.ProjectPhase;
 
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -30,5 +32,7 @@ public interface ActivityRepository extends Repository<Activity>
 {
     Activity getByPrimaryKey(int id) throws Exception;
 
-    void getProjectsAndWorkload(String loginName, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
+    void getProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
+
+    void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception;
 }
