@@ -1,12 +1,14 @@
 package controller.swing;
 
 import controller.interfaces.StatisticsController;
+import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import model.interfaces.StatisticsModel;
 import view.interfaces.StatisticsView;
 
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,9 @@ public class StatisticsControllerSwing implements StatisticsController {
 
     private ArrayList<Project> currentProjects;
     private ArrayList<ProjectPhase> currentPhases;
+    private ArrayList<Activity> currentActivities;
     private Project detailProject;
+    private ProjectPhase detailPhase;
 
     public StatisticsControllerSwing() {
 
@@ -70,7 +74,7 @@ public class StatisticsControllerSwing implements StatisticsController {
     }
 
     @Override
-    public void doubleClickOnRow(int index) {
+    public void doubleClickOnProject(int index) {
         detailProject = currentProjects.get(index);
         try {
             model.requestedDetailFor(detailProject);
@@ -98,7 +102,7 @@ public class StatisticsControllerSwing implements StatisticsController {
         for(ProjectPhase pp : phases)
             phaseNames.add(pp.getName());
 
-        view.setOverviewData(phaseNames, durations);
+        view.setDetailData(phaseNames, durations);
     }
 
     @Override
@@ -114,5 +118,52 @@ public class StatisticsControllerSwing implements StatisticsController {
     @Override
     public void backClicked() {
         showOverview();
+    }
+
+    @Override
+    public void doubleClickOnPhase(int index) {
+        detailPhase = currentPhases.get(index);
+        try {
+            model.requestedDetailFor(detailPhase);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void activityPeriodChanged(int selectedIndex) {
+        try {
+            assert(detailPhase != null);
+            model.activityPeriodChanged(detailPhase.getId(), selectedIndex);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPhaseDetailData(ArrayList<Activity> activities)
+    {
+        currentActivities = activities;
+        ArrayList<String> descriptions = new ArrayList<>();
+        ArrayList<String> comments = new ArrayList<>();
+        ArrayList<ZonedDateTime> startTimes = new ArrayList<>();
+        ArrayList<ZonedDateTime> endTimes = new ArrayList<>();
+        for(Activity a : activities)
+        {
+            descriptions.add(a.getDescription());
+            comments.add(a.getComments());
+            startTimes.add(a.getStart());
+            endTimes.add(a.getStop());
+        }
+        view.setPhaseDetailData(descriptions, comments, startTimes, endTimes);
+
+
+    }
+
+    @Override
+    public void showPhaseDetail() {
+        view.showPhaseDetail();
     }
 }

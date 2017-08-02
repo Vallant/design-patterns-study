@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -20,12 +21,14 @@ public class StatisticsViewSwing implements StatisticsView {
     private final JFrame frame;
     private StatisticsController controller;
     private final StatisticsPanel pMain;
-    private final StatisticsDetailPanel pDetail;
+    private final StatisticsProjectDetailPanel pDetail;
+    private final StatisticsPhaseDetailPanel pPhaseDetail;
 
     public StatisticsViewSwing(JFrame frame) {
         this.frame = frame;
         pMain = new StatisticsPanel();
-        pDetail = new StatisticsDetailPanel();
+        pDetail = new StatisticsProjectDetailPanel();
+        pPhaseDetail = new StatisticsPhaseDetailPanel();
 
         setListeners();
     }
@@ -44,6 +47,13 @@ public class StatisticsViewSwing implements StatisticsView {
             }
         });
 
+        pPhaseDetail.cbPeriod.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.activityPeriodChanged(pMain.cbPeriod.getSelectedIndex());
+            }
+        });
+
         pMain.tblProjects.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -51,7 +61,7 @@ public class StatisticsViewSwing implements StatisticsView {
                 if(mouseEvent.getClickCount() == 2)
                 {
                     int index = tbl.rowAtPoint(mouseEvent.getPoint());
-                    controller.doubleClickOnRow(index);
+                    controller.doubleClickOnProject(index);
                 }
             }
         });
@@ -60,6 +70,17 @@ public class StatisticsViewSwing implements StatisticsView {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.backClicked();
+            }
+        });
+        pDetail.tblPhases.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JTable tbl = (JTable) mouseEvent.getSource();
+                if(mouseEvent.getClickCount() == 2)
+                {
+                    int index = tbl.rowAtPoint(mouseEvent.getPoint());
+                    controller.doubleClickOnPhase(index);
+                }
             }
         });
     }
@@ -76,7 +97,22 @@ public class StatisticsViewSwing implements StatisticsView {
     public void setDetailData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
         pDetail.tblProjectsModel.setFirstColumnContent(phaseNames);
         pDetail.tblProjectsModel.setWorkloadContent(durations);
-        pDetail.tblProjects.updateUI();
+        pDetail.tblPhases.updateUI();
+    }
+
+    @Override
+    public void showPhaseDetail() {
+        frame.remove(pDetail);
+        frame.remove(pMain);
+        frame.add(pPhaseDetail);
+        frame.revalidate();
+        frame.repaint();
+
+    }
+
+    @Override
+    public void setPhaseDetailData(ArrayList<String> descriptions, ArrayList<String> comments, ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes) {
+        pPhaseDetail.tblActivityModel.setValues(descriptions, comments, startTimes, endTimes);
     }
 
     @Override
@@ -88,6 +124,9 @@ public class StatisticsViewSwing implements StatisticsView {
     public void RemoveAllComponents() {
         frame.remove(pDetail);
         frame.remove(pMain);
+        frame.remove(pPhaseDetail);
+        frame.revalidate();
+        frame.repaint();
     }
 
     @Override
@@ -100,6 +139,7 @@ public class StatisticsViewSwing implements StatisticsView {
     public void showOverview() {
 
         frame.remove(pDetail);
+        frame.remove(pPhaseDetail);
         frame.add(pMain, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
@@ -108,6 +148,7 @@ public class StatisticsViewSwing implements StatisticsView {
     @Override
     public void showDetail() {
         frame.remove(pMain);
+        frame.remove(pPhaseDetail);
         frame.add(pDetail, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();

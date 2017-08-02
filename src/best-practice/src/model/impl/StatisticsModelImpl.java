@@ -1,6 +1,7 @@
 package model.impl;
 
 import controller.interfaces.StatisticsController;
+import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import data.User;
@@ -46,25 +47,15 @@ public class StatisticsModelImpl implements StatisticsModel
 
     @Override
     public void requestedDetailFor(Project project) throws Exception {
-        PERIOD period = PERIOD.ALLTIME;
-        ArrayList<ProjectPhase> phases = new ArrayList<>();
-        ArrayList<Duration> durations = new ArrayList<>();
 
-
-        ZonedDateTime since = ZonedDateTime.now();
-        switch(period)
-        {
-            case ALLTIME: since = ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault()); break;
-            case YEAR: since = ZonedDateTime.now().minusYears(1); break;
-            case MONTH: since = ZonedDateTime.now().minusMonths(1); break;
-            case WEEK: since = ZonedDateTime.now().minusWeeks(1); break;
-            case DAY: since = ZonedDateTime.now().minusDays(1); break;
-        }
-
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
-        ar.getPhasesAndWorkloadSince(user.getLoginName(), project.getId(), since, phases, durations);
+        phasePeriodChanged(project.getId(), PERIOD.ALLTIME.ordinal());
         controller.showDetail();
-        controller.setDetailData(phases, durations);
+    }
+
+    @Override
+    public void requestedDetailFor(ProjectPhase detailPhase) throws Exception {
+        activityPeriodChanged(detailPhase.getId(), PERIOD.ALLTIME.ordinal());
+        controller.showPhaseDetail();
     }
 
     @Override
@@ -74,15 +65,7 @@ public class StatisticsModelImpl implements StatisticsModel
         ArrayList<Duration> durations = new ArrayList<>();
 
 
-        ZonedDateTime since = ZonedDateTime.now();
-        switch(period)
-        {
-            case ALLTIME: since = ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault()); break;
-            case YEAR: since = ZonedDateTime.now().minusYears(1); break;
-            case MONTH: since = ZonedDateTime.now().minusMonths(1); break;
-            case WEEK: since = ZonedDateTime.now().minusWeeks(1); break;
-            case DAY: since = ZonedDateTime.now().minusDays(1); break;
-        }
+        ZonedDateTime since = subtract(period);
 
         ActivityRepository ar = mainModel.DB().getActivityRepository();
         ar.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations);
@@ -96,18 +79,36 @@ public class StatisticsModelImpl implements StatisticsModel
         ArrayList<Duration> durations = new ArrayList<>();
 
 
-        ZonedDateTime since = ZonedDateTime.now();
-        switch(period)
-        {
-            case ALLTIME: since = ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault()); break;
-            case YEAR: since = ZonedDateTime.now().minusYears(1); break;
-            case MONTH: since = ZonedDateTime.now().minusMonths(1); break;
-            case WEEK: since = ZonedDateTime.now().minusWeeks(1); break;
-            case DAY: since = ZonedDateTime.now().minusDays(1); break;
-        }
+        ZonedDateTime since = subtract(period);
+
 
         ActivityRepository ar = mainModel.DB().getActivityRepository();
         ar.getProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
         controller.setOverviewData(projects, durations);
+    }
+
+    @Override
+    public void activityPeriodChanged(int phaseId, int selectedIndex) throws Exception {
+        PERIOD period = PERIOD.values()[selectedIndex];
+        ZonedDateTime since = subtract(period);
+
+
+        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ArrayList<Activity> activities = ar.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since);
+        controller.showPhaseDetail();
+        controller.setPhaseDetailData(activities);
+    }
+
+    private ZonedDateTime subtract(PERIOD period)
+    {
+        switch(period)
+        {
+            case ALLTIME: return ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
+            case YEAR: return ZonedDateTime.now().minusYears(1);
+            case MONTH: return ZonedDateTime.now().minusMonths(1);
+            case WEEK: return ZonedDateTime.now().minusWeeks(1);
+            case DAY: return ZonedDateTime.now().minusDays(1);
+            default: return ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
+        }
     }
 }

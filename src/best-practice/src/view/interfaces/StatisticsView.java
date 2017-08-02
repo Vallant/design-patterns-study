@@ -3,6 +3,7 @@ package view.interfaces;
 import controller.interfaces.StatisticsController;
 
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,12 @@ public interface StatisticsView {
 
     void showDetail();
     void setDetailData(ArrayList<String> phaseNames, ArrayList<Duration> durations);
+
+    void showPhaseDetail();
+    void setPhaseDetailData(ArrayList<String> descriptions,
+                            ArrayList<String> comments,
+                            ArrayList<ZonedDateTime> startTimes,
+                            ArrayList<ZonedDateTime> endTimes);
 
     void setController(StatisticsController controller);
 

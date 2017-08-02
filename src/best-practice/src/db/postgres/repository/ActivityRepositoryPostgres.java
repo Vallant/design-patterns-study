@@ -17,6 +17,7 @@
 
 package db.postgres.repository;
 
+import com.sun.org.glassfish.external.statistics.TimeStatistic;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
@@ -156,8 +157,10 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             int projectId = rs.getInt("PROJECT_ID");
             String userLoginName = rs.getString("USER_LOGIN_NAME");
             String description = rs.getString("DESCRIPTION");
-            ZonedDateTime start = rs.getObject("START_TIME", ZonedDateTime.class);
-            ZonedDateTime end = rs.getObject("END_TIME", ZonedDateTime.class);
+            Timestamp tsStart = rs.getTimestamp("START_TIME");
+            ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+            Timestamp tsEnd = rs.getTimestamp("END_TIME");
+            ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
             String comments = rs.getString("COMMENTS");
 
 
@@ -228,8 +231,9 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                     "GROUP BY PROJECT_PHASES.ID";
             PreparedStatement ps = con.prepareStatement(sql);
             int index = 1;
-            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+
             ps.setString(index++, loginName);
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
             ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
             ps.setInt(index++, projectId);
 
@@ -254,6 +258,57 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     }
 
     @Override
+    public ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int phaseId, ZonedDateTime since) throws Exception {
+        ArrayList<Activity> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
+                    + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY " +
+                    "WHERE PROJECT_PHASE_ID = ? " +
+                    "AND START_TIME > ? " +
+                    "AND USER_LOGIN_NAME = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ps.setInt(index++, phaseId);
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
+            ps.setString(index++, loginName);
+
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int id = rs.getInt("ID");
+                int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
+                int projectId = rs.getInt("PROJECT_ID");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String description = rs.getString("DESCRIPTION");
+                Timestamp tsStart = rs.getTimestamp("START_TIME");
+                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+                Timestamp tsEnd = rs.getTimestamp("END_TIME");
+                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
+                String comments = rs.getString("COMMENTS");
+
+
+                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
+                ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
+
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+
+                assert(projectId == phase.getProjectId());
+
+                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+                l.add(a);
+            }
+        }
+        return l;
+    }
+
+    @Override
     public List<Activity> getAll() throws Exception
     {
         ArrayList<Activity> l = new ArrayList<>();
@@ -273,8 +328,10 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                 int projectId = rs.getInt("PROJECT_ID");
                 String userLoginName = rs.getString("USER_LOGIN_NAME");
                 String description = rs.getString("DESCRIPTION");
-                ZonedDateTime start = rs.getObject("START_TIME", ZonedDateTime.class);
-                ZonedDateTime end = rs.getObject("END_TIME", ZonedDateTime.class);
+                Timestamp tsStart = rs.getTimestamp("START_TIME");
+                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+                Timestamp tsEnd = rs.getTimestamp("END_TIME");
+                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
                 String comments = rs.getString("COMMENTS");
                 
                 

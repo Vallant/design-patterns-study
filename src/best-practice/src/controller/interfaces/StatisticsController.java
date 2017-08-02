@@ -1,5 +1,6 @@
 package controller.interfaces;
 
+import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import model.interfaces.StatisticsModel;
@@ -20,7 +21,7 @@ public interface StatisticsController {
     void phasePeriodChanged(int selectedIndex);
     void projectPeriodChanged(int selectedIndex);
 
-    void doubleClickOnRow(int index);
+    void doubleClickOnProject(int index);
 
     void showOverview();
     void setOverviewData(ArrayList<Project> projects, ArrayList<Duration> durations);
@@ -28,4 +29,12 @@ public interface StatisticsController {
     void setDetailData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
 
     void backClicked();
+
+    void doubleClickOnPhase(int index);
+
+    void activityPeriodChanged(int selectedIndex);
+
+    void setPhaseDetailData(ArrayList<Activity> activities);
+
+    void showPhaseDetail();
 }

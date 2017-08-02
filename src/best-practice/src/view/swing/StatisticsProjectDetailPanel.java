@@ -7,18 +7,18 @@ import java.awt.*;
 /**
  * Created by stephan on 17/07/17.
  */
-public class StatisticsDetailPanel extends JPanel{
+public class StatisticsProjectDetailPanel extends JPanel{
 
     final JPanel pHeader;
 
     final JComboBox<String> cbPeriod;
 
     final StatisticsTableModel tblProjectsModel;
-    final JTable tblProjects;
+    final JTable tblPhases;
     final JScrollPane scrpTable;
     final JButton btBack;
 
-    public StatisticsDetailPanel() {
+    public StatisticsProjectDetailPanel() {
         super(new BorderLayout(5,5));
         this.pHeader = new JPanel(new FlowLayout(5));
 
@@ -33,10 +33,10 @@ public class StatisticsDetailPanel extends JPanel{
         btBack = new JButton("Back");
 
         this.tblProjectsModel = new StatisticsTableModel("Phasename");
-        this.tblProjects = new JTable(tblProjectsModel);
-        scrpTable = new JScrollPane(tblProjects);
+        this.tblPhases = new JTable(tblProjectsModel);
+        scrpTable = new JScrollPane(tblPhases);
 
-        tblProjects.setBorder(new LineBorder(Color.black, 1));
+        tblPhases.setBorder(new LineBorder(Color.black, 1));
         pHeader.add(btBack);
         pHeader.add(cbPeriod);
         add(pHeader, BorderLayout.NORTH);

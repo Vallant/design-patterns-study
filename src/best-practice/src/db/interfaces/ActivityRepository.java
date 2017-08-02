@@ -35,4 +35,6 @@ public interface ActivityRepository extends Repository<Activity>
     void getProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
 
     void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception;
+
+    ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int id, ZonedDateTime since) throws Exception;
 }
