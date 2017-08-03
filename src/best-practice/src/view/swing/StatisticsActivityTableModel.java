@@ -10,7 +10,7 @@ public class StatisticsActivityTableModel extends AbstractTableModel {
 
     static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-    String[] columnNames = {"Description", "Comment", "Start", "End"};
+    String[] columnNames = {"Start", "End", "Description", "Comment"};
     ArrayList<String> descriptions;
     ArrayList<String> comments;
     ArrayList<ZonedDateTime> startTimes;
