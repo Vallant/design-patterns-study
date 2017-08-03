@@ -18,11 +18,13 @@ public interface MainModel
     void showError(Exception ex);
     DBManager DB();
 
-    void switchedToStatistics();
-    void switchedToProjects();
-    void switchedToAdministration();
-    void switchedToSettings();
+    void switchToPersonalStatistics();
+    void switchToProjects();
+    void switchToAdministration();
+    void switchToSettings();
 
     void refreshActivityBar();
+
+    void switchToProjectStatistic();
     //void switchedToHelp();
 }

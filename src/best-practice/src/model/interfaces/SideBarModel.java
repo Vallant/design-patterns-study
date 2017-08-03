@@ -15,9 +15,11 @@ public interface SideBarModel
 
     void projectsClicked();
 
-    void statisticsClicked();
+    void personalStatisticClicked();
 
     void administrationClicked();
 
     void settingsClicked();
+
+    void projectStatisticClicked();
 }

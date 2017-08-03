@@ -24,7 +24,8 @@ public class MainControllerSwing implements MainController
     private final ActivityBarController activityBar;
     private final ProjectController project;
     private final SideBarController sideBar;
-    private final PersonalStatisticController statistics;
+    private final PersonalStatisticController personalStatistic;
+    private final ProjectStatisticController projectStatistic;
 
     public MainControllerSwing()
     {
@@ -32,7 +33,8 @@ public class MainControllerSwing implements MainController
         project = new ProjectControllerSwing();
         activityBar = new ActivityBarControllerSwing();
         sideBar = new SideBarControllerSwing();
-        statistics = new PersonalStatisticControllerSwing();
+        personalStatistic = new PersonalStatisticControllerSwing();
+        projectStatistic = new ProjectStatisticControllerSwing();
     }
     
     @Override
@@ -70,11 +72,11 @@ public class MainControllerSwing implements MainController
     }
 
     @Override
-    public void switchToStatisticView()
+    public void switchToPersonalStatisticView()
     {
         mainView.hideCenterContent();
-        mainView.showStatisticsView();
-        statistics.refresh();
+        mainView.showPersonalStatisticView();
+        personalStatistic.refresh();
     }
 
     @Override
@@ -125,16 +127,29 @@ public class MainControllerSwing implements MainController
     }
 
     @Override
-    public void pairStatistics(PersonalStatisticModel model) {
-        statistics.setModel(model);
-        model.setController(statistics);
-        mainView.pairStatistics(statistics);
+    public void pairPersonalStatistic(PersonalStatisticModel model) {
+        personalStatistic.setModel(model);
+        model.setController(personalStatistic);
+        mainView.pairPersonalStatistic(personalStatistic);
+    }
+
+    @Override
+    public void pairProjectStatistic(ProjectStatisticModel model) {
+        projectStatistic.setModel(model);
+        model.setController(projectStatistic);
+        mainView.pairProjectStatistic(projectStatistic);
     }
 
     @Override
     public void switchToSettingsView() {
         mainView.hideCenterContent();
         mainView.showSettingsView();
+    }
+
+    @Override
+    public void switchToProjectStatisticView() {
+        mainView.hideCenterContent();
+        mainView.showProjectStatisticView();
     }
 
 

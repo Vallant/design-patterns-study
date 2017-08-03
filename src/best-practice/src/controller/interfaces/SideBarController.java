@@ -13,9 +13,11 @@ public interface SideBarController
 
     void projectsClicked();
 
-    void statisticsClicked();
+    void personalStatisticClicked();
 
     void administrationClicked();
 
     void settingsClicked();
+
+    void projectStatisticClicked();
 }

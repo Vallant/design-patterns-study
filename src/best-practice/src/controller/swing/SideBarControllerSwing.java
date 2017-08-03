@@ -29,8 +29,8 @@ public class SideBarControllerSwing implements SideBarController
     }
 
     @Override
-    public void statisticsClicked() {
-        model.statisticsClicked();
+    public void personalStatisticClicked() {
+        model.personalStatisticClicked();
     }
 
     @Override
@@ -41,5 +41,10 @@ public class SideBarControllerSwing implements SideBarController
     @Override
     public void settingsClicked() {
         model.settingsClicked();
+    }
+
+    @Override
+    public void projectStatisticClicked() {
+        model.projectStatisticClicked();
     }
 }

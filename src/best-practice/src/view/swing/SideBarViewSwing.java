@@ -18,7 +18,8 @@ public class SideBarViewSwing implements SideBarView {
     private final JFrame frame;
 
     private final JButton btProjects;
-    private final JButton btStatistics;
+    private final JButton btPersonalStatistic;
+    private final JButton btProjectStatistic;
     private final JButton btAdministration;
     private final JButton btSettings;
 
@@ -33,13 +34,15 @@ public class SideBarViewSwing implements SideBarView {
         pSideBar = new JPanel(new GridLayout(4,1,5,5));
         pSideBar.setBorder(new EmptyBorder(5,5,5,5));
         btProjects = new JButton("Manage Projects");
-        btStatistics = new JButton("Personal Statistics");
+        btPersonalStatistic = new JButton("Personal Statistic");
+        btProjectStatistic = new JButton("Project Statistic");
         btAdministration = new JButton("Administration");
         btSettings = new JButton("Settings");
 
         pFloatPanel = new JPanel(new FlowLayout(5));
         pSideBar.add(btProjects);
-        pSideBar.add(btStatistics);
+        pSideBar.add(btPersonalStatistic);
+        pSideBar.add(btProjectStatistic);
         pSideBar.add(btSettings);
 
         pFloatPanel.add(pSideBar);
@@ -55,10 +58,10 @@ public class SideBarViewSwing implements SideBarView {
                 controller.projectsClicked();
             }
         });
-        btStatistics.addActionListener(new ActionListener() {
+        btPersonalStatistic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.statisticsClicked();
+                controller.personalStatisticClicked();
             }
         });
         btAdministration.addActionListener(new ActionListener() {
@@ -72,6 +75,13 @@ public class SideBarViewSwing implements SideBarView {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.settingsClicked();
+            }
+        });
+
+        btProjectStatistic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.projectStatisticClicked();
             }
         });
     }

@@ -26,7 +26,8 @@ public class MainModelImpl implements MainModel
     private final ProjectModel project;
     private final ActivityBarModel activityBar;
     private final SideBarModel sideBar;
-    private final PersonalStatisticModel statistics;
+    private final PersonalStatisticModel personalStatistic;
+    private final ProjectStatisticModel projectStatistic;
 
     private User user;
     private final DBManager db;
@@ -49,8 +50,11 @@ public class MainModelImpl implements MainModel
         pairActivityBar();
         sideBar = new SideBarModelImpl();
         pairSideBar();
-        statistics = new PersonalStatisticModelImpl();
-        pairStatistics();
+        personalStatistic = new PersonalStatisticModelImpl();
+        pairPersonalStatistic();
+
+        projectStatistic = new ProjectStatisticModelImpl();
+        pairProjectStatistic();
         
         controller.switchToLogin();
     }
@@ -73,7 +77,7 @@ public class MainModelImpl implements MainModel
     {
         this.user = user;
         activityBar.setUser(user);
-        statistics.setUser(user);
+        personalStatistic.setUser(user);
         project.setUser(user);
 
         controller.switchToProjectView();
@@ -83,7 +87,7 @@ public class MainModelImpl implements MainModel
 
         project.refresh();
         activityBar.refresh();
-        statistics.refresh();
+        personalStatistic.refresh();
         sideBar.refresh();
     }
 
@@ -117,9 +121,15 @@ public class MainModelImpl implements MainModel
         controller.pairSideBar(sideBar);
     }
 
-    private void pairStatistics() {
-        statistics.setMainModel(this);
-        controller.pairStatistics(statistics);
+    private void pairPersonalStatistic() {
+        personalStatistic.setMainModel(this);
+        controller.pairPersonalStatistic(personalStatistic);
+    }
+
+    private void pairProjectStatistic()
+    {
+        projectStatistic.setMainModel(this);
+        controller.pairProjectStatistic(projectStatistic);
     }
 
     @Override
@@ -129,28 +139,33 @@ public class MainModelImpl implements MainModel
     }
 
     @Override
-    public void switchedToStatistics() {
-        controller.switchToStatisticView();
+    public void switchToPersonalStatistics() {
+        controller.switchToPersonalStatisticView();
     }
 
     @Override
-    public void switchedToProjects() {
+    public void switchToProjects() {
         controller.switchToProjectView();
     }
 
     @Override
-    public void switchedToAdministration() {
+    public void switchToAdministration() {
         controller.switchToAdminView();
     }
 
     @Override
-    public void switchedToSettings() {
+    public void switchToSettings() {
         controller.switchToSettingsView();
     }
 
     @Override
     public void refreshActivityBar() {
         activityBar.refresh();
+    }
+
+    @Override
+    public void switchToProjectStatistic() {
+        controller.switchToProjectStatisticView();
     }
 }
 

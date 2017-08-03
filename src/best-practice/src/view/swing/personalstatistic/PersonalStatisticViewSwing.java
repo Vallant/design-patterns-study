@@ -21,41 +21,41 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     private final JFrame frame;
     private PersonalStatisticController controller;
-    private final PersonalStatisticProjectPanel pMain;
-    private final PersonalStatisticPhasePanel pProjectDetail;
-    private final PersonalStatisticActivityPanel pPhaseDetail;
+    private final PersonalStatisticProjectPanel pProject;
+    private final PersonalStatisticPhasePanel pPhase;
+    private final PersonalStatisticActivityPanel pActivity;
 
     public PersonalStatisticViewSwing(JFrame frame) {
         this.frame = frame;
-        pMain = new PersonalStatisticProjectPanel();
-        pProjectDetail = new PersonalStatisticPhasePanel();
-        pPhaseDetail = new PersonalStatisticActivityPanel();
+        pProject = new PersonalStatisticProjectPanel();
+        pPhase = new PersonalStatisticPhasePanel();
+        pActivity = new PersonalStatisticActivityPanel();
 
         setListeners();
     }
 
     private void setListeners() {
-        pMain.cbPeriod.addActionListener(new ActionListener() {
+        pProject.cbPeriod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.projectPeriodChanged(pMain.cbPeriod.getSelectedIndex());
+                controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex());
             }
         });
-        pProjectDetail.cbPeriod.addActionListener(new ActionListener() {
+        pPhase.cbPeriod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.phasePeriodChanged(pMain.cbPeriod.getSelectedIndex());
-            }
-        });
-
-        pPhaseDetail.cbPeriod.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.activityPeriodChanged(pMain.cbPeriod.getSelectedIndex());
+                controller.phasePeriodChanged(pProject.cbPeriod.getSelectedIndex());
             }
         });
 
-        pMain.tblProjects.addMouseListener(new MouseAdapter() {
+        pActivity.cbPeriod.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.activityPeriodChanged(pProject.cbPeriod.getSelectedIndex());
+            }
+        });
+
+        pProject.tblProjects.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 JTable tbl = (JTable) mouseEvent.getSource();
@@ -67,13 +67,13 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
             }
         });
 
-        pProjectDetail.btBack.addActionListener(new ActionListener() {
+        pPhase.btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.backToOverviewClicked();
             }
         });
-        pProjectDetail.tblPhases.addMouseListener(new MouseAdapter() {
+        pPhase.tblPhases.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 JTable tbl = (JTable) mouseEvent.getSource();
@@ -85,27 +85,27 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
             }
         });
 
-        pPhaseDetail.btAddActivity.addActionListener(new ActionListener() {
+        pActivity.btAddActivity.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.addActivityClicked();
             }
         });
-        pPhaseDetail.btDeleteActivity.addActionListener(new ActionListener() {
+        pActivity.btDeleteActivity.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.deleteActivityClicked();
             }
         });
 
-        pPhaseDetail.btUpdateActivity.addActionListener(new ActionListener() {
+        pActivity.btUpdateActivity.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.updateActivityClicked();
             }
         });
 
-        pPhaseDetail.btBack.addActionListener(new ActionListener() {
+        pActivity.btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.backToProjectDetailClicked();
@@ -116,23 +116,23 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
     @Override
     public void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations) {
 
-        pMain.tblProjectsModel.setFirstColumnContent(projectNames);
-        pMain.tblProjectsModel.setWorkloadContent(durations);
-        pMain.tblProjects.updateUI();
+        pProject.tblProjectsModel.setFirstColumnContent(projectNames);
+        pProject.tblProjectsModel.setWorkloadContent(durations);
+        pProject.tblProjects.updateUI();
     }
 
     @Override
     public void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
-        pProjectDetail.tblProjectsModel.setFirstColumnContent(phaseNames);
-        pProjectDetail.tblProjectsModel.setWorkloadContent(durations);
-        pProjectDetail.tblPhases.updateUI();
+        pPhase.tblProjectsModel.setFirstColumnContent(phaseNames);
+        pPhase.tblProjectsModel.setWorkloadContent(durations);
+        pPhase.tblPhases.updateUI();
     }
 
     @Override
     public void showActivityView() {
-        frame.remove(pProjectDetail);
-        frame.remove(pMain);
-        frame.add(pPhaseDetail);
+        frame.remove(pPhase);
+        frame.remove(pProject);
+        frame.add(pActivity);
         frame.revalidate();
         frame.repaint();
 
@@ -140,7 +140,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     @Override
     public void setActivityData(ArrayList<String> descriptions, ArrayList<String> comments, ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes) {
-        pPhaseDetail.tblActivityModel.setValues(descriptions, comments, startTimes, endTimes);
+        pActivity.tblActivityModel.setValues(descriptions, comments, startTimes, endTimes);
     }
 
     @Override
@@ -150,9 +150,9 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     @Override
     public void RemoveAllComponents() {
-        frame.remove(pProjectDetail);
-        frame.remove(pMain);
-        frame.remove(pPhaseDetail);
+        frame.remove(pPhase);
+        frame.remove(pProject);
+        frame.remove(pActivity);
         frame.revalidate();
         frame.repaint();
     }
@@ -166,36 +166,36 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
     @Override
     public void showProjectView() {
 
-        frame.remove(pProjectDetail);
-        frame.remove(pPhaseDetail);
-        frame.add(pMain, BorderLayout.CENTER);
+        frame.remove(pPhase);
+        frame.remove(pActivity);
+        frame.add(pProject, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }
 
     @Override
     public void showPhaseView() {
-        frame.remove(pMain);
-        frame.remove(pPhaseDetail);
-        frame.add(pProjectDetail, BorderLayout.CENTER);
+        frame.remove(pProject);
+        frame.remove(pActivity);
+        frame.add(pPhase, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
     }
 
     @Override
     public int getSelectedProjectPeriod() {
-        return pMain.cbPeriod.getSelectedIndex();
+        return pProject.cbPeriod.getSelectedIndex();
     }
 
     @Override
     public int getSelectedActivity() {
-        return pPhaseDetail.tblActivity.getSelectedRow();
+        return pActivity.tblActivity.getSelectedRow();
     }
 
     @Override
     public void hide() {
-        frame.remove(pProjectDetail);
-        frame.remove(pMain);
+        frame.remove(pPhase);
+        frame.remove(pProject);
     }
 
     @Override
@@ -243,11 +243,11 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     @Override
     public int getSelectedPhasePeriod() {
-        return pProjectDetail.cbPeriod.getSelectedIndex();
+        return pPhase.cbPeriod.getSelectedIndex();
     }
 
     @Override
     public int getSelectedActivityPeriod() {
-        return pPhaseDetail.cbPeriod.getSelectedIndex();
+        return pActivity.cbPeriod.getSelectedIndex();
     }
 }

@@ -34,9 +34,13 @@ public interface MainView
 
     void showAdminView();
 
-    void showStatisticsView();
+    void showPersonalStatisticView();
+
+    void showProjectStatisticView();
 
     void showSettingsView();
 
-    void pairStatistics(PersonalStatisticController statistics);
+    void pairPersonalStatistic(PersonalStatisticController statistics);
+
+    void pairProjectStatistic(ProjectStatisticController projectStatistic);
 }

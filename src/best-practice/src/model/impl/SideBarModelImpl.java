@@ -1,6 +1,5 @@
 package model.impl;
 
-import controller.interfaces.MainController;
 import controller.interfaces.SideBarController;
 import model.interfaces.MainModel;
 import model.interfaces.SideBarModel;
@@ -28,21 +27,26 @@ public class SideBarModelImpl implements SideBarModel {
 
     @Override
     public void projectsClicked() {
-        mainModel.switchedToProjects();
+        mainModel.switchToProjects();
     }
 
     @Override
-    public void statisticsClicked() {
-        mainModel.switchedToStatistics();
+    public void personalStatisticClicked() {
+        mainModel.switchToPersonalStatistics();
     }
 
     @Override
     public void administrationClicked() {
-        mainModel.switchedToAdministration();
+        mainModel.switchToAdministration();
     }
 
     @Override
     public void settingsClicked() {
-        mainModel.switchedToSettings();
+        mainModel.switchToSettings();
+    }
+
+    @Override
+    public void projectStatisticClicked() {
+        mainModel.switchToProjectStatistic();
     }
 }

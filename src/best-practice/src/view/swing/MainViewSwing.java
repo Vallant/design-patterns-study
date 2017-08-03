@@ -15,6 +15,7 @@ import view.swing.activitybar.ActivityBarViewSwing;
 import view.swing.login.LoginViewSwing;
 import view.swing.project.ProjectViewSwing;
 import view.swing.personalstatistic.PersonalStatisticViewSwing;
+import view.swing.projectstatistic.ProjectStatisticViewSwing;
 
 /**
  *
@@ -29,10 +30,11 @@ public class MainViewSwing implements MainView
     private final LoginView login;
     private final ProjectView project;
     //private final SettingsView settings;
-    private final PersonalStatisticView statistics;
+    private final PersonalStatisticView personalStatistic;
     //private final AdministrationView administration;
     private final ActivityBarView activityBar;
     private final SideBarView sideBar;
+    private final ProjectStatisticView projectStatistic;
 
     private MainController controller;
     
@@ -51,7 +53,8 @@ public class MainViewSwing implements MainView
         project = new ProjectViewSwing(frame);
         activityBar = new ActivityBarViewSwing(frame);
         sideBar = new SideBarViewSwing(frame);
-        statistics = new PersonalStatisticViewSwing(frame);
+        personalStatistic = new PersonalStatisticViewSwing(frame);
+        projectStatistic = new ProjectStatisticViewSwing(frame);
     }
 
     @Override
@@ -65,7 +68,7 @@ public class MainViewSwing implements MainView
     public void showProjectView()
     {
         login.RemoveAllComponents();
-        statistics.RemoveAllComponents();
+        personalStatistic.RemoveAllComponents();
         project.showOverview();
         frame.pack();
     }
@@ -122,7 +125,8 @@ public class MainViewSwing implements MainView
     public void hideCenterContent() {
         project.hide();
         //settings.hide();
-        statistics.hide();
+        personalStatistic.hide();
+        projectStatistic.hide();
         //administration.hide();
     }
 
@@ -132,8 +136,13 @@ public class MainViewSwing implements MainView
     }
 
     @Override
-    public void showStatisticsView() {
-        statistics.showProjectView();
+    public void showPersonalStatisticView() {
+        personalStatistic.showProjectView();
+
+    }
+
+    @Override
+    public void showProjectStatisticView() {
 
     }
 
@@ -143,9 +152,15 @@ public class MainViewSwing implements MainView
     }
 
     @Override
-    public void pairStatistics(PersonalStatisticController controller) {
-        controller.setView(statistics);
-        statistics.setController(controller);
+    public void pairPersonalStatistic(PersonalStatisticController controller) {
+        controller.setView(personalStatistic);
+        personalStatistic.setController(controller);
+    }
+
+    @Override
+    public void pairProjectStatistic(ProjectStatisticController controller) {
+        controller.setView(projectStatistic);
+        projectStatistic.setController(controller);
     }
 
 
