@@ -1,11 +1,11 @@
 package controller.swing;
 
-import controller.interfaces.StatisticsController;
+import controller.interfaces.PersonalStatisticController;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
-import model.interfaces.StatisticsModel;
-import view.interfaces.StatisticsView;
+import model.interfaces.PersonalStatisticModel;
+import view.interfaces.PersonalStatisticView;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class StatisticsControllerSwing implements StatisticsController {
-    private StatisticsModel model;
-    private StatisticsView view;
+public class PersonalStatisticControllerSwing implements PersonalStatisticController {
+    private PersonalStatisticModel model;
+    private PersonalStatisticView view;
 
     private ArrayList<Project> currentProjects;
     private ArrayList<ProjectPhase> currentPhases;
@@ -23,17 +23,17 @@ public class StatisticsControllerSwing implements StatisticsController {
     private Project detailProject;
     private ProjectPhase detailPhase;
 
-    public StatisticsControllerSwing() {
+    public PersonalStatisticControllerSwing() {
 
     }
 
     @Override
-    public void setModel(StatisticsModel model) {
+    public void setModel(PersonalStatisticModel model) {
         this.model = model;
     }
 
     @Override
-    public void setView(StatisticsView view) {
+    public void setView(PersonalStatisticView view) {
         this.view = view;
     }
 
@@ -93,7 +93,7 @@ public class StatisticsControllerSwing implements StatisticsController {
         ArrayList<String> projectNames = new ArrayList<>();
         for(Project p : projects)
             projectNames.add(p.getName());
-        view.setOverviewData(projectNames, durations);
+        view.setProjectData(projectNames, durations);
     }
 
     @Override
@@ -103,17 +103,17 @@ public class StatisticsControllerSwing implements StatisticsController {
         for(ProjectPhase pp : phases)
             phaseNames.add(pp.getName());
 
-        view.setDetailData(phaseNames, durations);
+        view.setPhaseData(phaseNames, durations);
     }
 
     @Override
     public void showOverview() {
-        view.showOverview();
+        view.showProjectView();
     }
 
     @Override
     public void showProjectDetail() {
-        view.showDetail();
+        view.showPhaseView();
     }
 
     @Override
@@ -159,14 +159,14 @@ public class StatisticsControllerSwing implements StatisticsController {
             startTimes.add(a.getStart());
             endTimes.add(a.getStop());
         }
-        view.setPhaseDetailData(descriptions, comments, startTimes, endTimes);
+        view.setActivityData(descriptions, comments, startTimes, endTimes);
 
 
     }
 
     @Override
     public void showPhaseDetail() {
-        view.showPhaseDetail();
+        view.showActivityView();
     }
 
     @Override

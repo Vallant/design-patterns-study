@@ -11,6 +11,10 @@ import data.User;
 import javax.swing.*;
 
 import view.interfaces.*;
+import view.swing.activitybar.ActivityBarViewSwing;
+import view.swing.login.LoginViewSwing;
+import view.swing.project.ProjectViewSwing;
+import view.swing.personalstatistic.PersonalStatisticViewSwing;
 
 /**
  *
@@ -25,7 +29,7 @@ public class MainViewSwing implements MainView
     private final LoginView login;
     private final ProjectView project;
     //private final SettingsView settings;
-    private final StatisticsView statistics;
+    private final PersonalStatisticView statistics;
     //private final AdministrationView administration;
     private final ActivityBarView activityBar;
     private final SideBarView sideBar;
@@ -47,7 +51,7 @@ public class MainViewSwing implements MainView
         project = new ProjectViewSwing(frame);
         activityBar = new ActivityBarViewSwing(frame);
         sideBar = new SideBarViewSwing(frame);
-        statistics = new StatisticsViewSwing(frame);
+        statistics = new PersonalStatisticViewSwing(frame);
     }
 
     @Override
@@ -129,7 +133,7 @@ public class MainViewSwing implements MainView
 
     @Override
     public void showStatisticsView() {
-        statistics.showOverview();
+        statistics.showProjectView();
 
     }
 
@@ -139,7 +143,7 @@ public class MainViewSwing implements MainView
     }
 
     @Override
-    public void pairStatistics(StatisticsController controller) {
+    public void pairStatistics(PersonalStatisticController controller) {
         controller.setView(statistics);
         statistics.setController(controller);
     }

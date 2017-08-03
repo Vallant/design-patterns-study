@@ -1,4 +1,4 @@
-package view.swing;
+package view.swing.personalstatistic;
 
 import javax.swing.table.AbstractTableModel;
 import java.time.Duration;
@@ -7,12 +7,12 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-class StatisticsTableModel extends AbstractTableModel
+class PersonalStatisticTableModel extends AbstractTableModel
 {
     ArrayList<String> firstColumn;
     ArrayList<Duration> durations;
     private final String[] columnNames;
-    public StatisticsTableModel(String firstColumnName)
+    public PersonalStatisticTableModel(String firstColumnName)
     {
         columnNames = new String[3];
         columnNames[0] = firstColumnName;

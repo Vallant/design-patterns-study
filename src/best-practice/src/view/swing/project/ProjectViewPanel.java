@@ -1,4 +1,4 @@
-package view.swing;
+package view.swing.project;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -46,8 +46,7 @@ public class ProjectViewPanel extends JPanel {
         btDeleteProject.setPreferredSize(new Dimension(175,25));
         lstOwnedModel = new DefaultListModel<>();
         lstOwned = new JList<>(lstOwnedModel);
-        spOwned = new JScrollPane();
-        spOwned.setViewportView(lstOwned);
+        spOwned = new JScrollPane(lstOwned);
 
         lstOwned.setBorder(new LineBorder(Color.black, 1));
 
@@ -71,8 +70,7 @@ public class ProjectViewPanel extends JPanel {
         lstInvolvedModel = new DefaultListModel<>();
         lstInvolved = new JList<>(lstInvolvedModel);
         lstInvolved.setBorder(new LineBorder(Color.black, 1));
-        spInvolved = new JScrollPane();
-        spInvolved.setViewportView(lstInvolved);
+        spInvolved = new JScrollPane(lstInvolved);
 
         add(pInvolved);
         pInvolved.add(pInvolvedHeader, BorderLayout.NORTH);

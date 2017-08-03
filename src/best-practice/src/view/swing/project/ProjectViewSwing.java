@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.swing;
+package view.swing.project;
 
 import controller.interfaces.ProjectController;
 
@@ -31,7 +31,7 @@ public class ProjectViewSwing implements ProjectView
 
     
 
-    ProjectViewSwing(JFrame frame)
+    public ProjectViewSwing(JFrame frame)
     {
         this.frame = frame;
         pMain = new ProjectViewPanel();

@@ -1,21 +1,21 @@
-package view.swing;
+package view.swing.activitybar;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by stephan on 09.07.17.
+ * Created by stephan on 08.07.17.
  */
-public class ProjectAddDialogPanel extends JPanel
+public class ActivityBarDialogPanel extends JPanel
 {
-    public final JTextField tfName;
     public final JTextField tfDescription;
+    public final JTextField tfComment;
 
-    public ProjectAddDialogPanel() {
+    public ActivityBarDialogPanel() {
         super();
 
         tfDescription = new JTextField();
-        tfName = new JTextField();
+        tfComment = new JTextField();
         setOpaque(true);
         setBackground(Color.BLUE.darker());
 
@@ -26,13 +26,13 @@ public class ProjectAddDialogPanel extends JPanel
         centerPanel.setOpaque(true);
         centerPanel.setBackground(Color.WHITE);
 
-        JLabel lbDescription = new JLabel(  "Enter Project Name       : ");
-        JLabel lbComment = new JLabel(      "Enter Project Description: ");
+        JLabel lbDescription = new JLabel("Enter Activity Description : ");
+        JLabel lbComment = new JLabel("Enter Activity Comment     : ");
 
         centerPanel.add(lbDescription);
         centerPanel.add(tfDescription);
         centerPanel.add(lbComment);
-        centerPanel.add(tfName);
+        centerPanel.add(tfComment);
 
         add(centerPanel);
     }

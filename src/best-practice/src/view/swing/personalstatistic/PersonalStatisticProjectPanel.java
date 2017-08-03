@@ -1,4 +1,4 @@
-package view.swing;
+package view.swing.personalstatistic;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -7,18 +7,16 @@ import java.awt.*;
 /**
  * Created by stephan on 17/07/17.
  */
-public class StatisticsProjectDetailPanel extends JPanel{
-
+public class PersonalStatisticProjectPanel extends JPanel {
     final JPanel pHeader;
 
     final JComboBox<String> cbPeriod;
 
-    final StatisticsTableModel tblProjectsModel;
-    final JTable tblPhases;
+    final PersonalStatisticTableModel tblProjectsModel;
+    final JTable tblProjects;
     final JScrollPane scrpTable;
-    final JButton btBack;
 
-    public StatisticsProjectDetailPanel() {
+    public PersonalStatisticProjectPanel() {
         super(new BorderLayout(5,5));
         this.pHeader = new JPanel(new FlowLayout(5));
 
@@ -28,19 +26,21 @@ public class StatisticsProjectDetailPanel extends JPanel{
         cbPeriod.addItem("Last Month");
         cbPeriod.addItem("Last Week");
         cbPeriod.addItem("Last Day");
+        cbPeriod.setSelectedIndex(0);
 
 
-        btBack = new JButton("Back");
 
-        this.tblProjectsModel = new StatisticsTableModel("Phasename");
-        this.tblPhases = new JTable(tblProjectsModel);
-        scrpTable = new JScrollPane(tblPhases);
 
-        tblPhases.setBorder(new LineBorder(Color.black, 1));
-        pHeader.add(btBack);
+        this.tblProjectsModel = new PersonalStatisticTableModel("Projectname");
+        this.tblProjects = new JTable(tblProjectsModel);
+        scrpTable = new JScrollPane(tblProjects);
+
+        tblProjects.setBorder(new LineBorder(Color.black, 1));
         pHeader.add(cbPeriod);
         add(pHeader, BorderLayout.NORTH);
         add(scrpTable, BorderLayout.CENTER);
 
     }
+
+
 }

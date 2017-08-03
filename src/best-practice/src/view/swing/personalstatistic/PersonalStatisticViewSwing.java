@@ -1,7 +1,7 @@
-package view.swing;
+package view.swing.personalstatistic;
 
-import controller.interfaces.StatisticsController;
-import view.interfaces.StatisticsView;
+import controller.interfaces.PersonalStatisticController;
+import view.interfaces.PersonalStatisticView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,19 +17,19 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class StatisticsViewSwing implements StatisticsView {
+public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     private final JFrame frame;
-    private StatisticsController controller;
-    private final StatisticsPanel pMain;
-    private final StatisticsProjectDetailPanel pProjectDetail;
-    private final StatisticsPhaseDetailPanel pPhaseDetail;
+    private PersonalStatisticController controller;
+    private final PersonalStatisticProjectPanel pMain;
+    private final PersonalStatisticPhasePanel pProjectDetail;
+    private final PersonalStatisticActivityPanel pPhaseDetail;
 
-    public StatisticsViewSwing(JFrame frame) {
+    public PersonalStatisticViewSwing(JFrame frame) {
         this.frame = frame;
-        pMain = new StatisticsPanel();
-        pProjectDetail = new StatisticsProjectDetailPanel();
-        pPhaseDetail = new StatisticsPhaseDetailPanel();
+        pMain = new PersonalStatisticProjectPanel();
+        pProjectDetail = new PersonalStatisticPhasePanel();
+        pPhaseDetail = new PersonalStatisticActivityPanel();
 
         setListeners();
     }
@@ -114,7 +114,7 @@ public class StatisticsViewSwing implements StatisticsView {
     }
 
     @Override
-    public void setOverviewData(ArrayList<String> projectNames, ArrayList<Duration> durations) {
+    public void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations) {
 
         pMain.tblProjectsModel.setFirstColumnContent(projectNames);
         pMain.tblProjectsModel.setWorkloadContent(durations);
@@ -122,14 +122,14 @@ public class StatisticsViewSwing implements StatisticsView {
     }
 
     @Override
-    public void setDetailData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
+    public void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
         pProjectDetail.tblProjectsModel.setFirstColumnContent(phaseNames);
         pProjectDetail.tblProjectsModel.setWorkloadContent(durations);
         pProjectDetail.tblPhases.updateUI();
     }
 
     @Override
-    public void showPhaseDetail() {
+    public void showActivityView() {
         frame.remove(pProjectDetail);
         frame.remove(pMain);
         frame.add(pPhaseDetail);
@@ -139,12 +139,12 @@ public class StatisticsViewSwing implements StatisticsView {
     }
 
     @Override
-    public void setPhaseDetailData(ArrayList<String> descriptions, ArrayList<String> comments, ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes) {
+    public void setActivityData(ArrayList<String> descriptions, ArrayList<String> comments, ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes) {
         pPhaseDetail.tblActivityModel.setValues(descriptions, comments, startTimes, endTimes);
     }
 
     @Override
-    public void setController(StatisticsController controller) {
+    public void setController(PersonalStatisticController controller) {
         this.controller = controller;
     }
 
@@ -164,7 +164,7 @@ public class StatisticsViewSwing implements StatisticsView {
 
 
     @Override
-    public void showOverview() {
+    public void showProjectView() {
 
         frame.remove(pProjectDetail);
         frame.remove(pPhaseDetail);
@@ -174,7 +174,7 @@ public class StatisticsViewSwing implements StatisticsView {
     }
 
     @Override
-    public void showDetail() {
+    public void showPhaseView() {
         frame.remove(pMain);
         frame.remove(pPhaseDetail);
         frame.add(pProjectDetail, BorderLayout.CENTER);
@@ -201,7 +201,7 @@ public class StatisticsViewSwing implements StatisticsView {
     @Override
     public void showAddActivityDialog()
     {
-        StatisticsUpdateActivityDialogPanel dialogPanel = new StatisticsUpdateActivityDialogPanel();
+        PersonalStatisticUpdateActivityDialogPanel dialogPanel = new PersonalStatisticUpdateActivityDialogPanel();
 
         int selection = JOptionPane.showConfirmDialog(
                 null, dialogPanel, "Input Form : "
@@ -226,7 +226,7 @@ public class StatisticsViewSwing implements StatisticsView {
     @Override
     public void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end)
     {
-        StatisticsUpdateActivityDialogPanel dialogPanel = new StatisticsUpdateActivityDialogPanel(description, comment, start, end);
+        PersonalStatisticUpdateActivityDialogPanel dialogPanel = new PersonalStatisticUpdateActivityDialogPanel(description, comment, start, end);
 
         int selection = JOptionPane.showConfirmDialog(
                 null, dialogPanel, "Input Form : "

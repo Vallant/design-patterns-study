@@ -1,4 +1,4 @@
-package view.swing;
+package view.swing.activitybar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

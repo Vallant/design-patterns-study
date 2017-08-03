@@ -1,21 +1,17 @@
 package model.interfaces;
 
-import controller.interfaces.StatisticsController;
+import controller.interfaces.PersonalStatisticController;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import data.User;
-import model.impl.MainModelImpl;
-import model.impl.StatisticsModelImpl;
 
-import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 
 /**
  * Created by stephan on 17/07/17.
  */
-public interface StatisticsModel {
+public interface PersonalStatisticModel {
 
 
     void deleteActivity(Activity toDelete) throws Exception;
@@ -36,7 +32,7 @@ public interface StatisticsModel {
     void setUser(User user);
     void setMainModel(MainModel mainModel);
 
-    void setController(StatisticsController statistics);
+    void setController(PersonalStatisticController statistics);
 
     void refresh();
 

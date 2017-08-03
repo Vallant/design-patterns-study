@@ -31,7 +31,7 @@ public interface MainController
     void pairProject(ProjectModel model);
     void pairActivityBar(ActivityBarModel model);
     void pairSideBar(SideBarModel sideBar);
-    void pairStatistics(StatisticsModel model);
+    void pairStatistics(PersonalStatisticModel model);
     
     void showError(Exception ex);
 

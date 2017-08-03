@@ -1,12 +1,11 @@
-package view.swing;
+package view.swing.personalstatistic;
 
 import javax.swing.table.AbstractTableModel;
-import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class StatisticsActivityTableModel extends AbstractTableModel {
+public class PersonalStatisticActivityTableModel extends AbstractTableModel {
 
     static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
@@ -16,7 +15,7 @@ public class StatisticsActivityTableModel extends AbstractTableModel {
     ArrayList<ZonedDateTime> startTimes;
     ArrayList<ZonedDateTime> endTimes;
 
-    public StatisticsActivityTableModel() {
+    public PersonalStatisticActivityTableModel() {
         descriptions = new ArrayList<>();
         comments = new ArrayList<>();
         startTimes = new ArrayList<>();

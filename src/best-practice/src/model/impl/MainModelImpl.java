@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 
 import model.interfaces.*;
 
-import javax.swing.*;
-
 /**
  *
  * @author stephan
@@ -28,7 +26,7 @@ public class MainModelImpl implements MainModel
     private final ProjectModel project;
     private final ActivityBarModel activityBar;
     private final SideBarModel sideBar;
-    private final StatisticsModel statistics;
+    private final PersonalStatisticModel statistics;
 
     private User user;
     private final DBManager db;
@@ -51,7 +49,7 @@ public class MainModelImpl implements MainModel
         pairActivityBar();
         sideBar = new SideBarModelImpl();
         pairSideBar();
-        statistics = new StatisticsModelImpl();
+        statistics = new PersonalStatisticModelImpl();
         pairStatistics();
         
         controller.switchToLogin();

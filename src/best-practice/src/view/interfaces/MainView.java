@@ -8,8 +8,6 @@ package view.interfaces;
 import controller.interfaces.*;
 import data.User;
 
-import java.rmi.server.ExportException;
-
 /**
  *
  * @author stephan
@@ -40,5 +38,5 @@ public interface MainView
 
     void showSettingsView();
 
-    void pairStatistics(StatisticsController statistics);
+    void pairStatistics(PersonalStatisticController statistics);
 }

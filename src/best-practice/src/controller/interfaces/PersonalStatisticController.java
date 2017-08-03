@@ -3,8 +3,8 @@ package controller.interfaces;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
-import model.interfaces.StatisticsModel;
-import view.interfaces.StatisticsView;
+import model.interfaces.PersonalStatisticModel;
+import view.interfaces.PersonalStatisticView;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public interface StatisticsController {
+public interface PersonalStatisticController {
 
-    void setModel(StatisticsModel model);
-    void setView(StatisticsView view);
+    void setModel(PersonalStatisticModel model);
+    void setView(PersonalStatisticView view);
     void refresh();
 
     void phasePeriodChanged(int selectedIndex);

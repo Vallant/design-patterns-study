@@ -1,4 +1,4 @@
-package view.swing;
+package view.swing.personalstatistic;
 
 import com.github.lgooddatepicker.components.DateTimePicker;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class StatisticsUpdateActivityDialogPanel extends JPanel
+public class PersonalStatisticUpdateActivityDialogPanel extends JPanel
 {
     final JLabel lbDescription;
     final JLabel lbComment;
@@ -28,7 +28,7 @@ public class StatisticsUpdateActivityDialogPanel extends JPanel
 
     }
 
-    public StatisticsUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)
+    public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)
     {
         this();
         tfDescription.setText(description);
@@ -36,7 +36,7 @@ public class StatisticsUpdateActivityDialogPanel extends JPanel
         dpStartTime.getDatePicker().setDate(start);
         dpEndTime.getDatePicker().setDate(end);
     }
-    public StatisticsUpdateActivityDialogPanel()
+    public PersonalStatisticUpdateActivityDialogPanel()
     {
         lbDescription = new JLabel("Description");
         tfDescription = new JTextField();

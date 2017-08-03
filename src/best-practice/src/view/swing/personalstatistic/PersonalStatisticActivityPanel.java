@@ -1,16 +1,16 @@
-package view.swing;
+package view.swing.personalstatistic;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class StatisticsPhaseDetailPanel extends JPanel
+public class PersonalStatisticActivityPanel extends JPanel
 {
     final JPanel pHeader;
 
     final JComboBox<String> cbPeriod;
 
-    final StatisticsActivityTableModel tblActivityModel;
+    final PersonalStatisticActivityTableModel tblActivityModel;
     final JTable tblActivity;
     final JScrollPane scrpTable;
     final JButton btBack;
@@ -21,7 +21,7 @@ public class StatisticsPhaseDetailPanel extends JPanel
     final JButton btAddActivity;
     final JButton btUpdateActivity;
 
-    public StatisticsPhaseDetailPanel() {
+    public PersonalStatisticActivityPanel() {
         super(new BorderLayout(5,5));
         this.pHeader = new JPanel(new FlowLayout(5));
 
@@ -35,7 +35,7 @@ public class StatisticsPhaseDetailPanel extends JPanel
 
         btBack = new JButton("Back");
 
-        this.tblActivityModel = new StatisticsActivityTableModel();
+        this.tblActivityModel = new PersonalStatisticActivityTableModel();
         this.tblActivity = new JTable(tblActivityModel);
         scrpTable = new JScrollPane(tblActivity);
 
