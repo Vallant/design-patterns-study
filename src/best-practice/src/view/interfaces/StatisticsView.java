@@ -41,4 +41,8 @@ public interface StatisticsView {
     boolean confirmDeletion();
 
     void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end);
+
+    int getSelectedPhasePeriod();
+
+    int getSelectedActivityPeriod();
 }

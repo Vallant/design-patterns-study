@@ -31,6 +31,7 @@ public class StatisticsPanel extends JPanel {
         cbPeriod.addItem("Last Month");
         cbPeriod.addItem("Last Week");
         cbPeriod.addItem("Last Day");
+        cbPeriod.setSelectedIndex(0);
 
 
 

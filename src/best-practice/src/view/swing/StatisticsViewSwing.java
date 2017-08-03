@@ -240,4 +240,14 @@ public class StatisticsViewSwing implements StatisticsView {
                     dialogPanel.dpEndTime.getDatePicker().getDate());
         }
     }
+
+    @Override
+    public int getSelectedPhasePeriod() {
+        return pProjectDetail.cbPeriod.getSelectedIndex();
+    }
+
+    @Override
+    public int getSelectedActivityPeriod() {
+        return pPhaseDetail.cbPeriod.getSelectedIndex();
+    }
 }

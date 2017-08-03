@@ -74,6 +74,7 @@ public class MainControllerSwing implements MainController
     {
         mainView.hideCenterContent();
         mainView.showStatisticsView();
+        statistics.refresh();
     }
 
     @Override

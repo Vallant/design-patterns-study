@@ -41,9 +41,11 @@ public class StatisticsControllerSwing implements StatisticsController {
     public void refresh() {
         try {
             if(detailProject != null)
-                model.phasePeriodChanged(detailProject.getId(), view.getSelectedProjectPeriod());
-            else
-                model.projectPeriodChanged(view.getSelectedProjectPeriod());
+                model.phasePeriodChanged(detailProject.getId(), view.getSelectedPhasePeriod());
+            if(currentActivities != null)
+                model.activityPeriodChanged(detailPhase.getId(), view.getSelectedActivityPeriod());
+
+            model.projectPeriodChanged(view.getSelectedProjectPeriod());
 
         } catch (Exception e) {
             view.showError(e.getLocalizedMessage());
@@ -116,6 +118,7 @@ public class StatisticsControllerSwing implements StatisticsController {
 
     @Override
     public void backToOverviewClicked() {
+        currentPhases = null;
         showOverview();
     }
 
@@ -228,6 +231,7 @@ public class StatisticsControllerSwing implements StatisticsController {
 
     @Override
     public void backToProjectDetailClicked() {
+        currentActivities = null;
         showProjectDetail();
     }
 }
