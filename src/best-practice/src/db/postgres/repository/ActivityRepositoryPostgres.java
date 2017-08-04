@@ -180,7 +180,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     }
 
     @Override
-    public void getProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
+    public void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT PROJECT.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
@@ -306,6 +306,139 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             }
         }
         return l;
+    }
+
+    @Override
+    public ArrayList<Activity> getActivitiesByUserForPhaseSince(String loginName, int phaseId, ZonedDateTime since) throws Exception {
+        ArrayList<Activity> l = new ArrayList<>();
+
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
+                    + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY " +
+                    "WHERE PROJECT_PHASE_ID = ? " +
+                    "AND START_TIME > ? " +
+                    "AND (USER_LOGIN_NAME = ? OR ? = '')";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ps.setInt(index++, phaseId);
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
+            ps.setString(index++, loginName);
+            ps.setString(index++, loginName);
+
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int hash = rs.getInt("HASH");
+                int id = rs.getInt("ID");
+                int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
+                int projectId = rs.getInt("PROJECT_ID");
+                String userLoginName = rs.getString("USER_LOGIN_NAME");
+                String description = rs.getString("DESCRIPTION");
+                Timestamp tsStart = rs.getTimestamp("START_TIME");
+                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+                Timestamp tsEnd = rs.getTimestamp("END_TIME");
+                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
+                String comments = rs.getString("COMMENTS");
+
+
+                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
+                ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
+
+                UserRepository u = db.getUserRepository();
+                User user = u.getByPrimaryKey(userLoginName);
+
+                assert(projectId == phase.getProjectId());
+
+                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+                l.add(a);
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
+                    "FROM ACTIVITY " +
+                    "JOIN PROJECT ON PROJECT.ID = ACTIVITY.PROJECT_ID " +
+                    "JOIN PROJECT_MEMBERS ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+                    "AND PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+                    "AND ACTIVITY.START_TIME > ? " +
+                    "AND PROJECT_MEMBERS.ROLE = 'LEADER' " +
+                    "GROUP BY PROJECT.ID";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+            ps.setString(index++, loginName);
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
+
+
+            ProjectRepository pr = db.getProjectRepository();
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+
+
+                double seconds = rs.getDouble(2);
+                Duration duration = Duration.ZERO;
+
+                duration = duration.plusSeconds((long)seconds);
+                duration = duration.plusMillis((long) ((seconds % 1) * 1000));
+
+                Project p = pr.getByPrimaryKey(id);
+
+
+                projects.add(p);
+                durations.add(duration);
+            }
+        }
+    }
+
+    @Override
+    public void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "SELECT PROJECT_PHASES.ID, EXTRACT(EPOCH FROM SUM(END_TIME - START_TIME)) " +
+                    "FROM ACTIVITY " +
+                    "JOIN PROJECT_PHASES ON PROJECT_PHASES.ID = ACTIVITY.PROJECT_PHASE_ID " +
+                    "AND (ACTIVITY.USER_LOGIN_NAME = ? OR ? = '' ) " +
+                    "AND ACTIVITY.START_TIME > ? " +
+                    "AND ACTIVITY.PROJECT_ID = ? " +
+                    "GROUP BY PROJECT_PHASES.ID";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int index = 1;
+
+            ps.setString(index++, loginName);
+            ps.setString(index++, loginName);
+            ZonedDateTime zdtSince = ZonedDateTime.ofInstant(since.toInstant(), ZoneId.of("UTC"));
+            ps.setTimestamp(index++, Timestamp.from(zdtSince.toInstant()));
+            ps.setInt(index++, projectId);
+
+            ProjectPhaseRepository ppr = db.getProjectPhaseRepository();
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                int id = rs.getInt(1);
+
+                double seconds = rs.getDouble(2);
+                Duration duration = Duration.ZERO;
+
+                duration = duration.plusSeconds((long)seconds);
+                duration = duration.plusMillis((long) ((seconds % 1) * 1000));
+
+                ProjectPhase p = ppr.getByPrimaryKey(id);
+
+                phases.add(p);
+                durations.add(duration);
+            }
+        }
     }
 
     @Override

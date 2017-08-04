@@ -143,7 +143,7 @@ public class MainViewSwing implements MainView
 
     @Override
     public void showProjectStatisticView() {
-
+        projectStatistic.showProjectView();
     }
 
     @Override

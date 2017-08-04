@@ -86,7 +86,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void setOverviewData(ArrayList<Project> projects, ArrayList<Duration> durations) {
+    public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations) {
         currentProjects = projects;
         detailProject = null;
         currentPhases = null;
@@ -97,7 +97,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void setDetailData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) {
+    public void setPhaseData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) {
         currentPhases = phases;
         ArrayList<String> phaseNames = new ArrayList<>();
         for(ProjectPhase pp : phases)
@@ -107,19 +107,19 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void showOverview() {
+    public void showProjectView() {
         view.showProjectView();
     }
 
     @Override
-    public void showProjectDetail() {
+    public void showPhaseView() {
         view.showPhaseView();
     }
 
     @Override
     public void backToOverviewClicked() {
         currentPhases = null;
-        showOverview();
+        showProjectView();
     }
 
     @Override
@@ -145,7 +145,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void setPhaseDetailData(ArrayList<Activity> activities)
+    public void setActivityData(ArrayList<Activity> activities)
     {
         currentActivities = activities;
         ArrayList<String> descriptions = new ArrayList<>();
@@ -165,7 +165,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void showPhaseDetail() {
+    public void showActivityView() {
         view.showActivityView();
     }
 
@@ -230,8 +230,8 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     }
 
     @Override
-    public void backToProjectDetailClicked() {
+    public void backToPhaseViewClicked() {
         currentActivities = null;
-        showProjectDetail();
+        showPhaseView();
     }
 }

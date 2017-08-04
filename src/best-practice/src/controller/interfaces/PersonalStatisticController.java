@@ -24,10 +24,10 @@ public interface PersonalStatisticController {
 
     void doubleClickOnProject(int index);
 
-    void showOverview();
-    void setOverviewData(ArrayList<Project> projects, ArrayList<Duration> durations);
-    void showProjectDetail();
-    void setDetailData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
+    void showProjectView();
+    void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations);
+    void showPhaseView();
+    void setPhaseData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
 
     void backToOverviewClicked();
 
@@ -35,9 +35,9 @@ public interface PersonalStatisticController {
 
     void activityPeriodChanged(int selectedIndex);
 
-    void setPhaseDetailData(ArrayList<Activity> activities);
+    void setActivityData(ArrayList<Activity> activities);
 
-    void showPhaseDetail();
+    void showActivityView();
 
     void addActivityClicked();
 
@@ -49,5 +49,5 @@ public interface PersonalStatisticController {
 
     void updateActivity(String description, String comment, LocalDate start, LocalDate end);
 
-    void backToProjectDetailClicked();
+    void backToPhaseViewClicked();
 }

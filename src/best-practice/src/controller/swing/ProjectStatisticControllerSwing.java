@@ -1,14 +1,28 @@
 package controller.swing;
 
 import controller.interfaces.ProjectStatisticController;
+import data.*;
 import model.interfaces.ProjectStatisticModel;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.ProjectStatisticView;
+
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 
 public class ProjectStatisticControllerSwing implements ProjectStatisticController {
 
     private ProjectStatisticModel model;
     private ProjectStatisticView view;
+
+    ArrayList<Project> projects;
+
+    ArrayList<ProjectPhase> phases;
+    ProjectPhase currentPhase;
+
+    ArrayList<Activity> activities;
+
+    ArrayList<ProjectMember> members;
 
     @Override
     public void setModel(ProjectStatisticModel model) {
@@ -26,32 +40,128 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
     }
 
     @Override
-    public void phasePeriodChanged(int selectedPeriodIndex, int selectedUserIndex) {
-        throw new NotImplementedException();
+    public void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex) {
+        try {
+            model.phaseDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0, members.get(selectedPeriodIndex));
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void projectPeriodChanged(int selectedPeriodIndex, int selectedUserIndex) {
-        throw new NotImplementedException();
+    public void projectPeriodChanged(int selectedPeriodIndex) {
+        try {
+            model.projectPeriodChanged(selectedPeriodIndex);
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void activityPeriodChanged(int selectedPeriodIndex, int selectedUserIndex) {
-        throw new NotImplementedException();
+    public void activityDropDownChanged(int selectedPeriodIndex, int selectedUserIndex) {
+        try {
+            model.activityDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0, members.get(selectedPeriodIndex));
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void showProjectView() {
-        throw new NotImplementedException();
+        view.showProjectView();
+    }
+
+    @Override
+    public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations) {
+        this.projects = projects;
+
+        ArrayList<String> projectNames = new ArrayList<>();
+        for(Project p : projects)
+            projectNames.add(p.getName());
+        view.setProjectData(projectNames, durations);
     }
 
     @Override
     public void showPhaseView() {
-        throw new NotImplementedException();
+        view.showPhaseView();
+    }
+
+    @Override
+    public void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) {
+        this.phases = phases;
+        this.members = members;
+        ArrayList<String> phaseNames = new ArrayList<>();
+
+        for(ProjectPhase pp : phases)
+            phaseNames.add(pp.getName());
+
+        ArrayList<String> memberNames = new ArrayList<>();
+        for(ProjectMember pm : members)
+            memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+
+        view.setPhaseData(phaseNames, durations, memberNames);
     }
 
     @Override
     public void showActivityView() {
-        throw new NotImplementedException();
+        view.showActivityView();
+    }
+
+    @Override
+    public void setActivityData(ArrayList<Activity> activities) {
+        this.activities = activities;
+        ArrayList<String> descriptions = new ArrayList<>();
+        ArrayList<String> comments = new ArrayList<>();
+        ArrayList<ZonedDateTime> startTimes = new ArrayList<>();
+        ArrayList<ZonedDateTime> endTimes = new ArrayList<>();
+        ArrayList<String> userNames = new ArrayList<>();
+        for(Activity a : activities)
+        {
+            descriptions.add(a.getDescription());
+            comments.add(a.getComments());
+            startTimes.add(a.getStart());
+            endTimes.add(a.getStop());
+            userNames.add(a.getUser().getFirstName() + " " + a.getUser().getLastName());
+        }
+
+        ArrayList<String> memberNames = new ArrayList<>();
+        for(ProjectMember pm : members)
+            memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+
+        view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
+    }
+
+    @Override
+    public void doubleClickOnProject(int index) {
+        try {
+            model.requestedDetailFor(projects.get(index));
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void backToProjectClicked() {
+        showProjectView();
+    }
+
+    @Override
+    public void doubleClickOnPhase(int index) {
+        try {
+            currentPhase = phases.get(index);
+            model.requestedDetailFor(phases.get(index));
+        } catch (Exception e) {
+            view.showError(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void backToPhaseClicked() {
+        showPhaseView();
     }
 }

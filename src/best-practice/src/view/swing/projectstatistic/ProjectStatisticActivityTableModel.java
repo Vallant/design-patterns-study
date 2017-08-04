@@ -9,11 +9,12 @@ public class ProjectStatisticActivityTableModel extends AbstractTableModel {
 
     static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-    String[] columnNames = {"Start", "End", "Description", "Comment"};
+    String[] columnNames = {"Member", "Start", "End", "Description", "Comment"};
     ArrayList<String> descriptions;
     ArrayList<String> comments;
     ArrayList<ZonedDateTime> startTimes;
     ArrayList<ZonedDateTime> endTimes;
+    ArrayList<String> users;
 
     public ProjectStatisticActivityTableModel() {
         descriptions = new ArrayList<>();
@@ -36,15 +37,16 @@ public class ProjectStatisticActivityTableModel extends AbstractTableModel {
     public Object getValueAt(int row, int column) {
         switch (column)
         {
-            case 0: return startTimes.get(row).format(formatter);
-            case 1: return endTimes.get(row).format(formatter);
-            case 2: return descriptions.get(row);
-            case 3: return comments.get(row);
+            case 0: return users.get(row);
+            case 1: return startTimes.get(row).format(formatter);
+            case 2: return endTimes.get(row).format(formatter);
+            case 3: return descriptions.get(row);
+            case 4: return comments.get(row);
             default: return "ERROR";
         }
     }
 
-    public void setValues(ArrayList<String> descriptions,
+    public void setValues(ArrayList<String> users, ArrayList<String> descriptions,
                    ArrayList<String> comments,
                    ArrayList<ZonedDateTime> startTimes,
                    ArrayList<ZonedDateTime> endTimes)
@@ -53,6 +55,7 @@ public class ProjectStatisticActivityTableModel extends AbstractTableModel {
         this.comments = comments;
         this.startTimes = startTimes;
         this.endTimes = endTimes;
+        this.users = users;
     }
 
     @Override

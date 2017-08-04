@@ -84,7 +84,7 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public void requestedDetailForProject(Project project) throws Exception {
         ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
-        ArrayList<ProjectMember> members = pmr.getMembersByProjectName (project.getName());
+        ArrayList<ProjectMember> members = pmr.getMembersByProjectId(project.getId());
 
         ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
         ArrayList<ProjectPhase> phases = ppr.getByProjectId(project.getId());

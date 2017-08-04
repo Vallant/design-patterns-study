@@ -79,6 +79,7 @@ public class MainModelImpl implements MainModel
         activityBar.setUser(user);
         personalStatistic.setUser(user);
         project.setUser(user);
+        projectStatistic.setUser(user);
 
         controller.switchToProjectView();
         controller.showActivityBar();

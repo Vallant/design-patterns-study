@@ -1,8 +1,12 @@
 package controller.interfaces;
 
+import data.*;
 import model.interfaces.PersonalStatisticModel;
 import model.interfaces.ProjectStatisticModel;
 import view.interfaces.ProjectStatisticView;
+
+import java.time.Duration;
+import java.util.ArrayList;
 
 public interface ProjectStatisticController {
 
@@ -10,12 +14,24 @@ public interface ProjectStatisticController {
     void setView(ProjectStatisticView view);
     void refresh();
 
-    void phasePeriodChanged(int selectedPeriodIndex, int selectedUserIndex);
-    void projectPeriodChanged(int selectedPeriodIndex, int selectedUserIndex);
-    void activityPeriodChanged(int selectedPeriodIndex, int selectedUserIndex);
+    void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex);
+    void projectPeriodChanged(int selectedPeriodIndex);
+    void activityDropDownChanged(int selectedPeriodIndex, int selectedUserIndex);
 
     void showProjectView();
-    void showPhaseView();
-    void showActivityView();
+    void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations);
 
+    void showPhaseView();
+    void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
+
+    void showActivityView();
+    void setActivityData(ArrayList<Activity> activities);
+
+    void doubleClickOnProject(int index);
+
+    void backToProjectClicked();
+
+    void doubleClickOnPhase(int index);
+
+    void backToPhaseClicked();
 }

@@ -3,12 +3,14 @@ package view.swing.projectstatistic;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ProjectStatisticActivityPanel extends JPanel
 {
     final JPanel pHeader;
 
     final JComboBox<String> cbPeriod;
+    final JComboBox<String> cbMembers;
 
     final ProjectStatisticActivityTableModel tblActivityModel;
     final JTable tblActivity;
@@ -32,6 +34,9 @@ public class ProjectStatisticActivityPanel extends JPanel
         cbPeriod.addItem("Last Week");
         cbPeriod.addItem("Last Day");
 
+        cbMembers = new JComboBox<>();
+        cbMembers.addItem("All Members");
+
 
         btBack = new JButton("Back");
 
@@ -53,6 +58,7 @@ public class ProjectStatisticActivityPanel extends JPanel
 
         pHeader.add(btBack);
         pHeader.add(cbPeriod);
+        pHeader.add(cbMembers);
         add(pHeader, BorderLayout.NORTH);
         add(scrpTable, BorderLayout.CENTER);
         pFlowPanel.add(pButtons);
@@ -60,4 +66,9 @@ public class ProjectStatisticActivityPanel extends JPanel
     }
 
 
+    public void setMembers(ArrayList<String> members) {
+        cbMembers.removeAll();
+        for (String m : members)
+            cbMembers.addItem(m);
+    }
 }

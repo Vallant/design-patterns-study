@@ -44,14 +44,14 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         pPhase.cbPeriod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.phasePeriodChanged(pProject.cbPeriod.getSelectedIndex());
+                controller.phasePeriodChanged(pPhase.cbPeriod.getSelectedIndex());
             }
         });
 
         pActivity.cbPeriod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.activityPeriodChanged(pProject.cbPeriod.getSelectedIndex());
+                controller.activityPeriodChanged(pActivity.cbPeriod.getSelectedIndex());
             }
         });
 
@@ -108,7 +108,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         pActivity.btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.backToProjectDetailClicked();
+                controller.backToPhaseViewClicked();
             }
         });
     }

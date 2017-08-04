@@ -30,7 +30,6 @@ public class ProjectStatisticProjectPanel extends JPanel {
 
 
 
-
         this.tblProjectsModel = new ProjectStatisticTableModel("Projectname");
         this.tblProjects = new JTable(tblProjectsModel);
         scrpTable = new JScrollPane(tblProjects);

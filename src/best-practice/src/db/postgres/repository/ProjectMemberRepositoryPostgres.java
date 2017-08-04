@@ -189,24 +189,23 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     }
 
     @Override
-    public ArrayList<ProjectMember> getMembersByProjectName(String projectName) throws Exception {
+    public ArrayList<ProjectMember> getMembersByProjectId(int projectId) throws Exception {
         ArrayList<ProjectMember> l = new ArrayList<>();
 
         try(Connection con = db.getConnection())
         {
             String sql = "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS.ROLE FROM PROJECT_MEMBERS " +
                     "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
-                    "WHERE PROJECT.NAME = ?";
+                    "WHERE PROJECT.Id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             int index = 1;
-            ps.setString(index++, projectName);
+            ps.setInt(index++, projectId);
 
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
                 int hash = rs.getInt("HASH");
-                int projectId = rs.getInt("PROJECT_ID");
                 String userLoginName = rs.getString("USER_LOGIN_NAME");
                 String role = rs.getString("ROLE");
 

@@ -73,13 +73,13 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
     public void requestedDetailFor(Project project) throws Exception {
 
         phasePeriodChanged(project.getId(), PERIOD.ALLTIME.ordinal());
-        controller.showProjectDetail();
+        controller.showPhaseView();
     }
 
     @Override
     public void requestedDetailFor(ProjectPhase detailPhase) throws Exception {
         activityPeriodChanged(detailPhase.getId(), PERIOD.ALLTIME.ordinal());
-        controller.showPhaseDetail();
+        controller.showActivityView();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
 
         ActivityRepository ar = mainModel.DB().getActivityRepository();
         ar.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations);
-        controller.setDetailData(phases, durations);
+        controller.setPhaseData(phases, durations);
     }
 
     @Override
@@ -107,8 +107,8 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
 
 
         ActivityRepository ar = mainModel.DB().getActivityRepository();
-        ar.getProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
-        controller.setOverviewData(projects, durations);
+        ar.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
+        controller.setProjectData(projects, durations);
     }
 
     @Override
@@ -119,8 +119,8 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
 
         ActivityRepository ar = mainModel.DB().getActivityRepository();
         ArrayList<Activity> activities = ar.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since);
-        controller.showPhaseDetail();
-        controller.setPhaseDetailData(activities);
+        controller.showActivityView();
+        controller.setActivityData(activities);
     }
 
     private ZonedDateTime subtract(PERIOD period)

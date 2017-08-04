@@ -16,14 +16,15 @@ public interface ProjectStatisticView {
     void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations);
 
     void showPhaseView();
-    void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations);
+    void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations, ArrayList<String> memberNames);
 
     void showActivityView();
     void setActivityData(ArrayList<String> users,
                          ArrayList<String> descriptions,
                          ArrayList<String> comments,
                          ArrayList<ZonedDateTime> startTimes,
-                         ArrayList<ZonedDateTime> endTimes);
+                         ArrayList<ZonedDateTime> endTimes,
+                         ArrayList<String> memberNames);
 
 
     int getSelectedPhasePeriod();
