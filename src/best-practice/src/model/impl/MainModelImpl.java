@@ -28,6 +28,7 @@ public class MainModelImpl implements MainModel
     private final SideBarModel sideBar;
     private final PersonalStatisticModel personalStatistic;
     private final ProjectStatisticModel projectStatistic;
+    private final SettingsModel settings;
 
     private User user;
     private final DBManager db;
@@ -55,9 +56,14 @@ public class MainModelImpl implements MainModel
 
         projectStatistic = new ProjectStatisticModelImpl();
         pairProjectStatistic();
+
+        settings = new SettingsModelImpl();
+        pairSettings();
         
         controller.switchToLogin();
     }
+
+
 
 
     public static void main(String[] args)
@@ -133,6 +139,11 @@ public class MainModelImpl implements MainModel
         controller.pairProjectStatistic(projectStatistic);
     }
 
+    private void pairSettings() {
+        settings.setMainModel(this);
+        controller.pairSettings(settings);
+    }
+
     @Override
     public DBManager DB()
     {
@@ -157,6 +168,8 @@ public class MainModelImpl implements MainModel
     @Override
     public void switchToSettings() {
         controller.switchToSettingsView();
+        settings.setUser(user);
+        settings.refresh();
     }
 
     @Override

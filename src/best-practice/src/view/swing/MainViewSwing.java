@@ -18,6 +18,7 @@ import view.swing.login.LoginViewSwing;
 import view.swing.project.ProjectViewSwing;
 import view.swing.personalstatistic.PersonalStatisticViewSwing;
 import view.swing.projectstatistic.ProjectStatisticViewSwing;
+import view.swing.settings.SettingsViewSwing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,7 @@ public class MainViewSwing implements MainView
     
     private final LoginView login;
     private final ProjectView project;
-    //private final SettingsView settings;
+    private final SettingsView settings;
     private final PersonalStatisticView personalStatistic;
     //private final AdministrationView administration;
     private final ActivityBarView activityBar;
@@ -62,6 +63,7 @@ public class MainViewSwing implements MainView
         sideBar = new SideBarViewSwing(frame);
         personalStatistic = new PersonalStatisticViewSwing(frame);
         projectStatistic = new ProjectStatisticViewSwing(frame);
+        settings = new SettingsViewSwing(frame);
     }
 
 
@@ -134,7 +136,7 @@ public class MainViewSwing implements MainView
     @Override
     public void hideCenterContent() {
         project.hide();
-        //settings.hide();
+        settings.hide();
         personalStatistic.hide();
         projectStatistic.hide();
         //administration.hide();
@@ -158,7 +160,8 @@ public class MainViewSwing implements MainView
 
     @Override
     public void showSettingsView() {
-
+        hideCenterContent();
+        settings.show();
     }
 
     @Override
@@ -178,6 +181,12 @@ public class MainViewSwing implements MainView
         hideCenterContent();
         sideBar.hide();
         activityBar.hide();
+    }
+
+    @Override
+    public void pairSettings(SettingsController controller) {
+     controller.setView(settings);
+     settings.setController(controller);
     }
 
 

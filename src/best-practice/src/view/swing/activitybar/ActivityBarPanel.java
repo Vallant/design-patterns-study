@@ -37,6 +37,7 @@ public class ActivityBarPanel extends JPanel
         this.btStart = new JButton("Start Activity");
         this.btStop = new JButton("Stop Activity");
         this.lbDuration = new JLabel();
+        lbDuration.setPreferredSize(new Dimension(50,20));
         btStart.setEnabled(false);
         btStop.setEnabled(false);
 

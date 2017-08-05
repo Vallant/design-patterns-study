@@ -1,6 +1,7 @@
 package view.swing.projectstatistic;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ProjectStatisticActivityPanel extends JPanel
 
     public ProjectStatisticActivityPanel() {
         super(new BorderLayout(5,5));
+        setBorder(new EtchedBorder());
         this.pHeader = new JPanel(new FlowLayout(5));
 
         this.cbPeriod = new JComboBox<>();
@@ -67,7 +69,8 @@ public class ProjectStatisticActivityPanel extends JPanel
 
 
     public void setMembers(ArrayList<String> members) {
-        cbMembers.removeAll();
+        cbMembers.removeAllItems();
+        cbMembers.addItem("All Members");
         for (String m : members)
             cbMembers.addItem(m);
     }

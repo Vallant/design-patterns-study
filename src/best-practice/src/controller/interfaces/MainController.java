@@ -34,9 +34,12 @@ public interface MainController
     void pairSideBar(SideBarModel sideBar);
     void pairPersonalStatistic(PersonalStatisticModel model);
     void pairProjectStatistic(ProjectStatisticModel projectStatistic);
+    void pairSettings(SettingsModel settings);
     
     void showError(Exception ex);
 
 
     void logout();
+
+
 }

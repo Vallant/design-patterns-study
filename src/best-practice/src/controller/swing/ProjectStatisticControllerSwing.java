@@ -49,7 +49,8 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
     @Override
     public void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex) {
         try {
-            model.phaseDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0, members.get(selectedPeriodIndex));
+            if(members != null && currentPhase != null)
+                model.phaseDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0, members.get(selectedPeriodIndex));
         } catch (Exception e) {
             view.showError(e.getLocalizedMessage());
             e.printStackTrace();

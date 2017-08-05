@@ -27,9 +27,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class User implements DBEntity
 {
 
-    
 
-    
+    public void setOldPassword(char[] oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
     public static enum ROLE
     {
         ADMIN,
@@ -48,6 +50,12 @@ public class User implements DBEntity
     
     private char[] newPassword;
     private char[] newPasswordAgain;
+
+    public char[] getOldPassword() {
+        return oldPassword;
+    }
+
+    private char[] oldPassword;
 
     public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
     {
@@ -184,5 +192,8 @@ public class User implements DBEntity
     public char[] getNewPassword()
     {
         return newPassword;
+    }
+    public void setNewPassword(char[] newPassword) {
+        this.newPassword = newPassword;
     }
 }

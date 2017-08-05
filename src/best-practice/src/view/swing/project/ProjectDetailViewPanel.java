@@ -50,6 +50,7 @@ public class ProjectDetailViewPanel extends JPanel
 
     public ProjectDetailViewPanel() {
         super(new BorderLayout(5,5));
+        setBorder(new EtchedBorder());
         //setPreferredSize(new Dimension(700, 700));
         pCenter = new JPanel(new GridLayout(3,1,5,5));
 

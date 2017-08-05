@@ -2,6 +2,7 @@ package view.swing.project;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -31,6 +32,7 @@ public class ProjectViewPanel extends JPanel {
     public ProjectViewPanel() {
 
         super(new GridLayout(2,1,5,5));
+        setBorder(new EtchedBorder());
         setPreferredSize(new Dimension(700, 400));
         //setBorder(new EmptyBorder(5,5,5,5));
         pOwned = new JPanel(new BorderLayout(5,5));

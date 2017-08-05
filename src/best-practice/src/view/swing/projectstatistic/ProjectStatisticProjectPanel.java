@@ -1,6 +1,7 @@
 package view.swing.projectstatistic;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class ProjectStatisticProjectPanel extends JPanel {
 
     public ProjectStatisticProjectPanel() {
         super(new BorderLayout(5,5));
+        setBorder(new EtchedBorder());
         this.pHeader = new JPanel(new FlowLayout(5));
 
         this.cbPeriod = new JComboBox<>();
