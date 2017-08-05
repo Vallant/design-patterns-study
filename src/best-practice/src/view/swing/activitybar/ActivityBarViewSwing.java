@@ -158,6 +158,21 @@ public class ActivityBarViewSwing implements ActivityBarView
         pMain.cbProject.setEnabled(true);
     }
 
+    @Override
+    public void hide() {
+        frame.remove(pMain);
+    }
+
+    @Override
+    public void showFinishActivityDialog() {
+        if (JOptionPane.showConfirmDialog(null, "Do you want to discard the ongoing Activity?","Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
+        {
+            showCommentDescriptionDialog();
+        }
+        else
+            controller.discardActivity();
+    }
+
     private void removeAll()
     {
         frame.remove(pMain);

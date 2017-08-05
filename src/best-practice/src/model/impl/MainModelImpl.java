@@ -171,6 +171,7 @@ public class MainModelImpl implements MainModel
 
     @Override
     public void logout() {
+        activityBar.finishActivity();
         controller.switchToLogin();
     }
 }

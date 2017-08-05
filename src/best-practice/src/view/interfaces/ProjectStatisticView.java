@@ -30,7 +30,7 @@ public interface ProjectStatisticView {
     int getSelectedPhasePeriod();
     int getSelectedActivityPeriod();
     int getSelectedProjectPeriod();
-    int getSelectedUserPeriod();
+    int getSelectedUser();
 
     boolean confirmDeletion();
     void showError(String error);

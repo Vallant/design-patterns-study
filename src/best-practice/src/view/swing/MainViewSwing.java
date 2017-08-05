@@ -173,5 +173,12 @@ public class MainViewSwing implements MainView
         projectStatistic.setController(controller);
     }
 
+    @Override
+    public void hideAll() {
+        hideCenterContent();
+        sideBar.hide();
+        activityBar.hide();
+    }
+
 
 }

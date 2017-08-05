@@ -37,4 +37,8 @@ public interface ActivityBarView
     void showCommentDescriptionDialog();
 
     void enableComboBoxes();
+
+    void hide();
+
+    void showFinishActivityDialog();
 }

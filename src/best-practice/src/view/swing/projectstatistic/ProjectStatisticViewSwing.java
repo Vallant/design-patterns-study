@@ -142,6 +142,7 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView {
     public void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations) {
         pProject.tblProjectsModel.setFirstColumnContent(projectNames);
         pProject.tblProjectsModel.setWorkloadContent(durations);
+        pProject.tblProjects.updateUI();
     }
 
     @Override
@@ -158,6 +159,8 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView {
         pPhase.tblPhaseModel.setFirstColumnContent(phaseNames);
         pPhase.tblPhaseModel.setWorkloadContent(durations);
         pPhase.setMemberNames(memberNames);
+        frame.revalidate();
+        frame.repaint();
     }
 
     @Override
@@ -196,7 +199,7 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView {
     }
 
     @Override
-    public int getSelectedUserPeriod() {
+    public int getSelectedUser() {
         throw new NotImplementedException();
     }
 

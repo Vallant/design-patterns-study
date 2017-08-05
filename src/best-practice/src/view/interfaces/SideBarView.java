@@ -11,4 +11,6 @@ public interface SideBarView {
     void setController(SideBarController controller);
 
     void show(User.ROLE role);
+
+    void hide();
 }

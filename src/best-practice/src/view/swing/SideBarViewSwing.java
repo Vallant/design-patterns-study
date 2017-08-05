@@ -111,4 +111,9 @@ public class SideBarViewSwing implements SideBarView {
 
         frame.getContentPane().add(pFloatPanel, BorderLayout.WEST);
     }
+
+    @Override
+    public void hide() {
+        frame.remove(pFloatPanel);
+    }
 }

@@ -54,6 +54,8 @@ public class MainControllerSwing implements MainController
     public void switchToLogin()
     {
         assert(mainView != null);
+        mainView.hideAll();
+
         mainView.showLoginView();
     }
 
@@ -155,6 +157,7 @@ public class MainControllerSwing implements MainController
     public void switchToProjectStatisticView() {
         mainView.hideCenterContent();
         mainView.showProjectStatisticView();
+        projectStatistic.refresh();
     }
 
 

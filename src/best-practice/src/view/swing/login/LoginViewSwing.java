@@ -104,6 +104,8 @@ public class LoginViewSwing implements LoginView
     {
         hide();
         frame.add(pLogin);
+        pLogin.tfUsername.setText("");
+        pLogin.tfPassword.setText("");
         update();
     }
     

@@ -46,7 +46,13 @@ public class ActivityBarControllerSwing implements ActivityBarController
     @Override
     public void ActivityFinished(String project, String projectPhase, String description, String comment) {
         try {
-            model.activityFinished(project, projectPhase, description, comment);
+            if(description.isEmpty())
+            {
+                view.showError("Activity Description cannot be empty");
+                view.showCommentDescriptionDialog();
+            }
+            else
+                model.activityFinished(project, projectPhase, description, comment);
         } catch (Exception e) {
             e.printStackTrace();
             view.showError(e.getLocalizedMessage());
@@ -134,6 +140,11 @@ public class ActivityBarControllerSwing implements ActivityBarController
     @Override
     public void discardActivity() {
         model.discardActivity();
+    }
+
+    @Override
+    public void finishActivity() {
+        view.showFinishActivityDialog();
     }
 
 }

@@ -29,6 +29,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
     public void deleteActivity(Activity toDelete) throws Exception {
      ActivityRepository ar = mainModel.DB().getActivityRepository();
      ar.delete(toDelete);
+     controller.refresh();
     }
 
     @Override

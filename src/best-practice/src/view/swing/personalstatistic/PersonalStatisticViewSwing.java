@@ -196,6 +196,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
     public void hide() {
         frame.remove(pPhase);
         frame.remove(pProject);
+        frame.remove(pActivity);
     }
 
     @Override
@@ -249,5 +250,12 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
     @Override
     public int getSelectedActivityPeriod() {
         return pActivity.cbPeriod.getSelectedIndex();
+    }
+
+    @Override
+    public void updateUI() {
+        pProject.tblProjects.updateUI();
+        pPhase.tblPhases.updateUI();
+        pActivity.tblActivity.updateUI();
     }
 }

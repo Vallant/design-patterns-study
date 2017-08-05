@@ -45,4 +45,6 @@ public interface PersonalStatisticView {
     int getSelectedPhasePeriod();
 
     int getSelectedActivityPeriod();
+
+    void updateUI();
 }

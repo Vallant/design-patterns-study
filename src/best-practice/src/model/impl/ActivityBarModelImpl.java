@@ -116,4 +116,10 @@ public class ActivityBarModelImpl implements ActivityBarModel
 
     }
 
+    @Override
+    public void finishActivity() {
+        if(ongoingActivity)
+            controller.finishActivity();
+    }
+
 }

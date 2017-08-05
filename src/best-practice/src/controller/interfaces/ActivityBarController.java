@@ -45,4 +45,6 @@ public interface ActivityBarController
     void enableComboBoxes();
 
     void discardActivity();
+
+    void finishActivity();
 }

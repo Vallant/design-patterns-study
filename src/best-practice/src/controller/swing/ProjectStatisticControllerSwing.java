@@ -3,7 +3,6 @@ package controller.swing;
 import controller.interfaces.ProjectStatisticController;
 import data.*;
 import model.interfaces.ProjectStatisticModel;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.ProjectStatisticView;
 
 import java.time.Duration;
@@ -36,7 +35,15 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
 
     @Override
     public void refresh() {
-        throw new NotImplementedException();
+        try {
+            model.projectPeriodChanged(view.getSelectedProjectPeriod());
+            if(currentPhase!= null)
+                model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUser()== 0, members.get(view.getSelectedUser()));
+            if(activities != null)
+                model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(), view.getSelectedUser()== 0, members.get(view.getSelectedUser()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -72,6 +79,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
     @Override
     public void showProjectView() {
         view.showProjectView();
+        refresh();
     }
 
     @Override

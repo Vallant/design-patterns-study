@@ -47,6 +47,8 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
 
             model.projectPeriodChanged(view.getSelectedProjectPeriod());
 
+            view.updateUI();
+
         } catch (Exception e) {
             view.showError(e.getLocalizedMessage());
             e.printStackTrace();

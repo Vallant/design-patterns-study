@@ -43,4 +43,6 @@ public interface MainView
     void pairPersonalStatistic(PersonalStatisticController statistics);
 
     void pairProjectStatistic(ProjectStatisticController projectStatistic);
+
+    void hideAll();
 }

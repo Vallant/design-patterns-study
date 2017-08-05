@@ -32,4 +32,6 @@ public interface ActivityBarModel
     void activityFinished(String project, String projectPhase, String description, String comment) throws Exception;
 
     void discardActivity();
+
+    void finishActivity();
 }
