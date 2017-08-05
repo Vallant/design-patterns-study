@@ -141,6 +141,20 @@ public class ProjectViewSwing implements ProjectView
                 controller.updateDescriptionClicked();
             }
         });
+
+        pDetail.lstPhases.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                controller.projectPhaseHasSelection(listSelectionEvent.getFirstIndex() != -1);
+            }
+        });
+
+        pDetail.lstMembers.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                controller.memberTableHasSelection(listSelectionEvent.getFirstIndex() != -1);
+            }
+        });
     }
 
     @Override
@@ -153,6 +167,10 @@ public class ProjectViewSwing implements ProjectView
     public void showOverview() {
         frame.remove(pDetail);
         frame.add(pMain, BorderLayout.CENTER);
+        if(pMain.lstInvolved.getSelectedIndex() == -1)
+            pMain.btLeaveProject.setEnabled(false);
+        if(pMain.lstOwned.getSelectedIndex() == -1)
+            pMain.btDeleteProject.setEnabled(false);
         frame.revalidate();
         frame.repaint();
     }
@@ -165,8 +183,14 @@ public class ProjectViewSwing implements ProjectView
         pDetail.setMemberInformation(members, roles);
         pDetail.setDescription(description);
         frame.add(pDetail, BorderLayout.CENTER);
+        setMemberListButtonsEnabled(pDetail.lstMembers.getSelectedIndex() != -1);
+        setProjectPhaseButtonsEnabled(pDetail.lstPhases.getSelectedIndex() != -1);
+
+
+        frame.pack();
         frame.revalidate();
         frame.repaint();
+
     }
 
     @Override
@@ -200,7 +224,7 @@ public class ProjectViewSwing implements ProjectView
         ProjectAddDialogPanel dialogPanel = new ProjectAddDialogPanel();
 
         int selection = JOptionPane.showConfirmDialog(
-                null, dialogPanel, "Input Form : "
+                null, dialogPanel, "Create new Project: "
                 , JOptionPane.OK_CANCEL_OPTION
                 , JOptionPane.PLAIN_MESSAGE);
 
@@ -213,7 +237,6 @@ public class ProjectViewSwing implements ProjectView
     @Override
     public void setOwnedProjectsButtonsEnabled(boolean enabled) {
         pMain.btDeleteProject.setEnabled(enabled);
-        pMain.btLeaveProject.setEnabled(enabled);
     }
 
     @Override
@@ -244,7 +267,7 @@ public class ProjectViewSwing implements ProjectView
         dialogPanel.setAvailableNames(names);
 
         int selection = JOptionPane.showConfirmDialog(
-                null, dialogPanel, "Input Form : "
+                null, dialogPanel, "Add Members to Project"
                 , JOptionPane.OK_CANCEL_OPTION
                 , JOptionPane.PLAIN_MESSAGE);
 
@@ -260,8 +283,20 @@ public class ProjectViewSwing implements ProjectView
     }
 
     @Override
+    public void setProjectPhaseButtonsEnabled(boolean hasSelection) {
+        pDetail.btDeletePhase.setEnabled(hasSelection);
+    }
+
+    @Override
+    public void setMemberListButtonsEnabled(boolean hasSelection) {
+        pDetail.btDegradeToMember.setEnabled(hasSelection);
+        pDetail.btPromoteToAdmin.setEnabled(hasSelection);
+        pDetail.btDeleteMember.setEnabled(hasSelection);
+    }
+
+    @Override
     public int getSelectedMemberIndex() {
-        return pDetail.tblMembers.getSelectedRow();
+        return pDetail.lstMembers.getSelectedIndex();
     }
 
     @Override
@@ -269,7 +304,7 @@ public class ProjectViewSwing implements ProjectView
         ProjectAddPhasePanel dialogPanel = new ProjectAddPhasePanel();
 
         int selection = JOptionPane.showConfirmDialog(
-                null, dialogPanel, "Input Form : "
+                null, dialogPanel, "Add Phase"
                 , JOptionPane.OK_CANCEL_OPTION
                 , JOptionPane.PLAIN_MESSAGE);
 

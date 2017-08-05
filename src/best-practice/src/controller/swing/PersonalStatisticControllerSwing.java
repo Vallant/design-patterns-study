@@ -199,6 +199,12 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
     @Override
     public void addActivity(String description, String comment, LocalDate start, LocalDate end)
     {
+        if(description.isEmpty())
+        {
+            view.showError("Description of the Activity cannot be empty.");
+            view.showAddActivityDialog();
+            return;
+        }
         ZonedDateTime zdtStart = start.atStartOfDay(ZoneOffset.UTC);
         ZonedDateTime zdtEnd = end.atStartOfDay(ZoneOffset.UTC);
 

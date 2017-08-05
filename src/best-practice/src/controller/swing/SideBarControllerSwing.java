@@ -47,4 +47,9 @@ public class SideBarControllerSwing implements SideBarController
     public void projectStatisticClicked() {
         model.projectStatisticClicked();
     }
+
+    @Override
+    public void logoutClicked() {
+        model.logoutClicked();
+    }
 }

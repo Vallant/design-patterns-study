@@ -170,12 +170,8 @@ public class LoginViewSwing implements LoginView
                 controller.ResetClicked();
             }
         });
-        
-        
-        
+
     }
-
-
 
     @Override
     public void showDialog(String message) {
@@ -205,5 +201,6 @@ public class LoginViewSwing implements LoginView
     {
         frame.revalidate();
         frame.repaint();
+        frame.pack();
     }
 }

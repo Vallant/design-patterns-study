@@ -1,6 +1,7 @@
 package view.swing.activitybar;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -16,15 +17,10 @@ public class ActivityBarDialogPanel extends JPanel
 
         tfDescription = new JTextField();
         tfComment = new JTextField();
-        setOpaque(true);
-        setBackground(Color.BLUE.darker());
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
-        centerPanel.setBorder(
-                BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        centerPanel.setOpaque(true);
-        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         JLabel lbDescription = new JLabel("Enter Activity Description : ");
         JLabel lbComment = new JLabel("Enter Activity Comment     : ");

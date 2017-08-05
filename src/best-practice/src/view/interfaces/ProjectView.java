@@ -47,4 +47,8 @@ public interface ProjectView
     void showAddMemberDialog(ArrayList<String> availableMembers);
 
     String getDescription();
+
+    void setProjectPhaseButtonsEnabled(boolean hasSelection);
+
+    void setMemberListButtonsEnabled(boolean hasSelection);
 }

@@ -49,4 +49,9 @@ public class SideBarModelImpl implements SideBarModel {
     public void projectStatisticClicked() {
         mainModel.switchToProjectStatistic();
     }
+
+    @Override
+    public void logoutClicked() {
+        mainModel.logout();
+    }
 }

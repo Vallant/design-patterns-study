@@ -22,4 +22,6 @@ public interface SideBarModel
     void settingsClicked();
 
     void projectStatisticClicked();
+
+    void logoutClicked();
 }

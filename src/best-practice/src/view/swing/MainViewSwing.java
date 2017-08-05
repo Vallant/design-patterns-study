@@ -9,6 +9,8 @@ import controller.interfaces.*;
 import data.User;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import view.interfaces.*;
 import view.swing.activitybar.ActivityBarViewSwing;
@@ -16,6 +18,9 @@ import view.swing.login.LoginViewSwing;
 import view.swing.project.ProjectViewSwing;
 import view.swing.personalstatistic.PersonalStatisticViewSwing;
 import view.swing.projectstatistic.ProjectStatisticViewSwing;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -35,7 +40,9 @@ public class MainViewSwing implements MainView
     private final ActivityBarView activityBar;
     private final SideBarView sideBar;
     private final ProjectStatisticView projectStatistic;
-
+    private JMenuBar menuBar;
+    private JMenu file;
+    private JMenuItem logout;
     private MainController controller;
     
     
@@ -45,7 +52,7 @@ public class MainViewSwing implements MainView
         this.frame = new JFrame("Design Pattern Case Study");
         frame.setLocationRelativeTo(null);
         frame.getRootPane().setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-        frame.setSize(350,200);
+        //frame.setSize(500,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         
@@ -57,9 +64,11 @@ public class MainViewSwing implements MainView
         projectStatistic = new ProjectStatisticViewSwing(frame);
     }
 
+
     @Override
     public void showLoginView()
     {
+        hideCenterContent();
         login.SwitchToLogin();
         frame.pack();
     }
@@ -69,6 +78,7 @@ public class MainViewSwing implements MainView
     {
         login.RemoveAllComponents();
         personalStatistic.RemoveAllComponents();
+        projectStatistic.hide();
         project.showOverview();
         frame.pack();
     }

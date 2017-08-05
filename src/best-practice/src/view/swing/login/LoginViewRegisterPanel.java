@@ -20,11 +20,12 @@ public class LoginViewRegisterPanel extends JPanel
 
     public LoginViewRegisterPanel()
     {
-        super(new BorderLayout());
+        super(new BorderLayout(5,5));
         JPanel main3 = new JPanel(new GridLayout(12,1,5,5));
 
         JLabel lb4 = new JLabel("Username");
         tfLoginName = new JTextField();
+        tfLoginName.setPreferredSize(new Dimension(125,25));
         JLabel lb5 = new JLabel("First Name");
         tfFirstName = new JTextField();
         JLabel lb6 = new JLabel("Last Name");

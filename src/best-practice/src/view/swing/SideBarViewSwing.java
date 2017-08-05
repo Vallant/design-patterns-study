@@ -6,6 +6,7 @@ import view.interfaces.SideBarView;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ public class SideBarViewSwing implements SideBarView {
     private final JButton btProjectStatistic;
     private final JButton btAdministration;
     private final JButton btSettings;
+    private final JButton btLogout;
 
     private final JPanel pSideBar;
     private final JPanel pFloatPanel;
@@ -31,22 +33,25 @@ public class SideBarViewSwing implements SideBarView {
     public SideBarViewSwing(JFrame frame) {
         this.frame = frame;
 
-        pSideBar = new JPanel(new GridLayout(4,1,5,5));
+        pSideBar = new JPanel(new GridLayout(5,1,5,5));
         pSideBar.setBorder(new EmptyBorder(5,5,5,5));
         btProjects = new JButton("Manage Projects");
         btPersonalStatistic = new JButton("Personal Statistic");
         btProjectStatistic = new JButton("Project Statistic");
         btAdministration = new JButton("Administration");
         btSettings = new JButton("Settings");
+        btLogout = new JButton("Logout");
 
         pFloatPanel = new JPanel(new FlowLayout(5));
         pSideBar.add(btProjects);
         pSideBar.add(btPersonalStatistic);
         pSideBar.add(btProjectStatistic);
         pSideBar.add(btSettings);
+        pSideBar.add(btLogout);
 
         pFloatPanel.add(pSideBar);
         setListeners();
+        pFloatPanel.setBorder(new EtchedBorder());
         //pSideBar.add(btAdministration);
 
     }
@@ -82,6 +87,12 @@ public class SideBarViewSwing implements SideBarView {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.projectStatisticClicked();
+            }
+        });
+        btLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                controller.logoutClicked();
             }
         });
     }

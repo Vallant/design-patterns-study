@@ -276,4 +276,14 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
+    @Override
+    public void projectPhaseHasSelection(boolean hasSelection) {
+        view.setProjectPhaseButtonsEnabled(hasSelection);
+    }
+
+    @Override
+    public void memberTableHasSelection(boolean hasSelection) {
+        view.setMemberListButtonsEnabled(hasSelection);
+    }
+
 }

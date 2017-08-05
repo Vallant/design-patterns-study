@@ -45,7 +45,7 @@ public class ActivityBarViewSwing implements ActivityBarView
 
 
         pMain = new ActivityBarPanel();
-        resetTimer();
+        stopTimer();
 
         setListeners();
 
@@ -132,7 +132,7 @@ public class ActivityBarViewSwing implements ActivityBarView
         ActivityBarDialogPanel dialogPanel = new ActivityBarDialogPanel();
 
         int selection = JOptionPane.showConfirmDialog(
-                null, dialogPanel, "Input Form : "
+                null, dialogPanel, "Enter Activity"
                 , JOptionPane.OK_CANCEL_OPTION
                 , JOptionPane.PLAIN_MESSAGE);
 
@@ -142,7 +142,7 @@ public class ActivityBarViewSwing implements ActivityBarView
             String phase = (String) pMain.cbPhase.getSelectedItem();
             controller.ActivityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
         }
-        else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?") == JOptionPane.CANCEL_OPTION)
+        else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?","Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
         {
             showCommentDescriptionDialog();
         }

@@ -26,5 +26,8 @@ public interface MainModel
     void refreshActivityBar();
 
     void switchToProjectStatistic();
+
+    void logout();
+
     //void switchedToHelp();
 }

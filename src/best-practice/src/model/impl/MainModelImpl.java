@@ -168,5 +168,10 @@ public class MainModelImpl implements MainModel
     public void switchToProjectStatistic() {
         controller.switchToProjectStatisticView();
     }
+
+    @Override
+    public void logout() {
+        controller.switchToLogin();
+    }
 }
 

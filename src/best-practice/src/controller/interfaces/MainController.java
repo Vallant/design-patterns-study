@@ -38,5 +38,5 @@ public interface MainController
     void showError(Exception ex);
 
 
-
+    void logout();
 }

@@ -1,6 +1,7 @@
 package view.swing.project;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -9,21 +10,17 @@ import java.awt.*;
 public class ProjectAddPhasePanel extends JPanel
 {
 
-    public final JTextField tfName;
+    final JTextField tfName;
 
     public ProjectAddPhasePanel() {
         super();
 
         tfName = new JTextField();
-        setOpaque(true);
-        setBackground(Color.BLUE.darker());
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(1, 2, 5, 5));
-        centerPanel.setBorder(
-                BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        centerPanel.setOpaque(true);
-        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(new EmptyBorder(5,5,5,5));
+
 
         JLabel lbName = new JLabel(  "Enter Phase Name       : ");
 

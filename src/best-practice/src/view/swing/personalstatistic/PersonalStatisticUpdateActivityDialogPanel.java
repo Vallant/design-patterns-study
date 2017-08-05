@@ -23,10 +23,6 @@ public class PersonalStatisticUpdateActivityDialogPanel extends JPanel
     final JButton btOk;
 
 
-    final private void initComponents()
-    {
-
-    }
 
     public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)
     {
@@ -53,13 +49,8 @@ public class PersonalStatisticUpdateActivityDialogPanel extends JPanel
         btOk = new JButton("OK");
 
 
-        setOpaque(true);
-        setBackground(Color.BLUE.darker());
-
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(4, 2, 5, 5));
-        centerPanel.setOpaque(true);
-        centerPanel.setBackground(Color.WHITE);
 
         centerPanel.add(lbDescription);
         centerPanel.add(tfDescription);

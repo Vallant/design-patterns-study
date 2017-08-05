@@ -115,6 +115,11 @@ public class MainControllerSwing implements MainController
     }
 
     @Override
+    public void logout() {
+
+    }
+
+    @Override
     public void showSideBar(User.ROLE role) {
         mainView.showSideBar(role);
     }

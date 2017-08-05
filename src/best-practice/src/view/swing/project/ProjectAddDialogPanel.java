@@ -1,6 +1,7 @@
 package view.swing.project;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -8,23 +9,17 @@ import java.awt.*;
  */
 public class ProjectAddDialogPanel extends JPanel
 {
-    public final JTextField tfName;
-    public final JTextField tfDescription;
+    final JTextField tfName;
+    final JTextField tfDescription;
 
     public ProjectAddDialogPanel() {
         super();
-
         tfDescription = new JTextField();
         tfName = new JTextField();
-        setOpaque(true);
-        setBackground(Color.BLUE.darker());
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
-        centerPanel.setBorder(
-                BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        centerPanel.setOpaque(true);
-        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         JLabel lbDescription = new JLabel(  "Enter Project Name       : ");
         JLabel lbComment = new JLabel(      "Enter Project Description: ");

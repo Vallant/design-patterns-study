@@ -58,4 +58,8 @@ public interface ProjectController
     void addMembers(int[] selectedIndices);
 
     void updateDescriptionClicked();
+
+    void projectPhaseHasSelection(boolean hasSelection);
+
+    void memberTableHasSelection(boolean hasSelection);
 }

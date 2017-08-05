@@ -20,4 +20,6 @@ public interface SideBarController
     void settingsClicked();
 
     void projectStatisticClicked();
+
+    void logoutClicked();
 }
