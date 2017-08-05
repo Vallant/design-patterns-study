@@ -17,21 +17,16 @@ public interface ProjectStatisticController {
     void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex);
     void projectPeriodChanged(int selectedPeriodIndex);
     void activityDropDownChanged(int selectedPeriodIndex, int selectedUserIndex);
+    void doubleClickOnProject(int index);
+    void backToProjectClicked();
+    void doubleClickOnPhase(int index);
+    void backToPhaseClicked();
 
     void showProjectView();
-    void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations);
-
     void showPhaseView();
-    void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
-
     void showActivityView();
+
+    void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations);
+    void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations);
     void setActivityData(ArrayList<Activity> activities);
-
-    void doubleClickOnProject(int index);
-
-    void backToProjectClicked();
-
-    void doubleClickOnPhase(int index);
-
-    void backToPhaseClicked();
 }

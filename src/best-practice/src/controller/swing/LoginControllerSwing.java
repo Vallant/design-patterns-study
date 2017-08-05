@@ -9,6 +9,7 @@ import controller.interfaces.LoginController;
 import data.User;
 import java.util.Arrays;
 import model.interfaces.LoginModel;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.interfaces.LoginView;
 
 /**
@@ -26,13 +27,13 @@ public class LoginControllerSwing implements LoginController
     }
     
     @Override
-    public void ResetPasswordClicked()
+    public void resetPasswordClicked()
     {
-        view.SwitchToResetPassword();
+        view.switchToResetPassword();
     }
 
     @Override
-    public void LoginClicked()
+    public void loginClicked()
     {
         String username = view.getEnteredUsername();
         char[] password = view.getEnteredPassword();
@@ -50,19 +51,19 @@ public class LoginControllerSwing implements LoginController
     }
 
     @Override
-    public void AddUserClicked()
+    public void addUserClicked()
     {
-        view.SwitchToAddNewUser();
+        view.switchToAddNewUser();
     }
 
     @Override
-    public void BackToLoginClicked()
+    public void backToLoginClicked()
     {
-        view.SwitchToLogin();
+        view.switchToLogin();
     }
 
     @Override
-    public void AddClicked()
+    public void addClicked()
     {
         User u = view.getEnteredUser();
         if((u.getEmail().isEmpty() ||
@@ -85,13 +86,13 @@ public class LoginControllerSwing implements LoginController
     }
 
     @Override
-    public void ResetClicked()
+    public void resetClicked()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new NotImplementedException();
     }
 
     @Override
-    public void SetView(LoginView view)
+    public void setView(LoginView view)
     {
         this.view = view;
     }
@@ -104,7 +105,7 @@ public class LoginControllerSwing implements LoginController
     @Override
     public void loginFailed()
     {
-        view.ShowLoginFailed();
+        view.showLoginFailed();
     }
 
     private boolean isValid(User u)
@@ -117,7 +118,7 @@ public class LoginControllerSwing implements LoginController
     }
 
     @Override
-    public void SetModel(LoginModel model)
+    public void setModel(LoginModel model)
     {
         this.model = model;
     }

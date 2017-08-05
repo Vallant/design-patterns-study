@@ -42,8 +42,8 @@ public class MainControllerSwing implements MainController
     @Override
     public void init(String frontend)
     {
-        ViewManager.InitInstance(frontend);
-        mainView = ViewManager.GetInstance();
+        ViewManager.initInstance(frontend);
+        mainView = ViewManager.getInstance();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class MainControllerSwing implements MainController
     @Override
     public void pairLogin(LoginModel model)
     {
-        login.SetModel(model);
+        login.setModel(model);
         model.setController(login);
         mainView.pairLogin(login);
     }
@@ -116,11 +116,6 @@ public class MainControllerSwing implements MainController
     @Override
     public void showError(Exception ex) {
         mainView.showError(ex.getLocalizedMessage());
-    }
-
-    @Override
-    public void logout() {
-
     }
 
     @Override

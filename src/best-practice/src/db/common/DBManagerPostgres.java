@@ -20,7 +20,7 @@ package db.common;
 import db.interfaces.ActivityRepository;
 import db.postgres.repository.ActivityRepositoryPostgres;
 import db.postgres.repository.ProjectMemberRepositoryPostgres;
-import db.postgres.repository.ProjectPhaseRepositoryPostres;
+import db.postgres.repository.ProjectPhaseRepositoryPostgres;
 import db.postgres.repository.ProjectRepositoryPostgres;
 import db.postgres.repository.UserRepositoryPostgres;
 import java.sql.Connection;
@@ -77,7 +77,7 @@ public class DBManagerPostgres extends DBManager
     @Override
     public ProjectPhaseRepository getProjectPhaseRepository()
     {
-        return new ProjectPhaseRepositoryPostres(this);
+        return new ProjectPhaseRepositoryPostgres(this);
     }
 
     @Override

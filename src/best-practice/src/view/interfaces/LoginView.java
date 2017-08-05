@@ -14,11 +14,11 @@ import data.User;
  */
 public interface LoginView
 {
-    void SwitchToResetPassword();
-    void SwitchToAddNewUser();
-    void SwitchToLogin();
-    void ShowLoginFailed();
-    void RemoveAllComponents();
+    void switchToResetPassword();
+    void switchToAddNewUser();
+    void switchToLogin();
+    void showLoginFailed();
+    void removeAllComponents();
             
     User getEnteredUser();
     String getEnteredEmail();

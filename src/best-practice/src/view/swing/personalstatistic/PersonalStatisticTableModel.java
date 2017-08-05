@@ -22,9 +22,6 @@ class PersonalStatisticTableModel extends AbstractTableModel
         durations = new ArrayList<>();
     }
 
-
-
-
     @Override
     public int getRowCount() {
         assert(firstColumn.size() == durations.size());

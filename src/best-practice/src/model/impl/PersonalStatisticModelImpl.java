@@ -27,7 +27,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
 
     @Override
     public void deleteActivity(Activity toDelete) throws Exception {
-     ActivityRepository ar = mainModel.DB().getActivityRepository();
+     ActivityRepository ar = mainModel.db().getActivityRepository();
      ar.delete(toDelete);
      controller.refresh();
     }
@@ -38,14 +38,14 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
             throw new Exception("Start date has to be before End date");
         Activity a = new Activity(detailPhase, user, description, zdtStart, zdtEnd, comment);
 
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ActivityRepository ar = mainModel.db().getActivityRepository();
         ar.add(a);
         controller.refresh();
     }
 
     @Override
     public void updateActivity(Activity a) throws Exception {
-        ActivityRepository ar  =mainModel.DB().getActivityRepository();
+        ActivityRepository ar  =mainModel.db().getActivityRepository();
         ar.update(a);
         controller.refresh();
     }
@@ -92,7 +92,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
 
         ZonedDateTime since = subtract(period);
 
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ActivityRepository ar = mainModel.db().getActivityRepository();
         ar.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations);
         controller.setPhaseData(phases, durations);
     }
@@ -107,7 +107,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
         ZonedDateTime since = subtract(period);
 
 
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ActivityRepository ar = mainModel.db().getActivityRepository();
         ar.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
         controller.setProjectData(projects, durations);
     }
@@ -118,7 +118,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
         ZonedDateTime since = subtract(period);
 
 
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ActivityRepository ar = mainModel.db().getActivityRepository();
         ArrayList<Activity> activities = ar.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since);
         controller.showActivityView();
         controller.setActivityData(activities);

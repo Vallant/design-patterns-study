@@ -7,19 +7,12 @@ package model.impl;
 
 import controller.interfaces.LoginController;
 import data.User;
-import db.common.DBManager;
 import db.interfaces.UserRepository;
-import db.postgres.repository.UserRepositoryPostgres;
-import java.security.NoSuchAlgorithmException;
+
 import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -51,7 +44,7 @@ public class LoginModelImpl implements LoginModel
     @Override
     public void login(String username, char[] password) throws Exception
     {
-        UserRepository repo = mainModel.DB().getUserRepository();
+        UserRepository repo = mainModel.db().getUserRepository();
 
         User u = repo.getByPrimaryKey(username);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
@@ -77,11 +70,11 @@ public class LoginModelImpl implements LoginModel
         user.setPassword(generateSecret.getEncoded());
         user.setSalt(salt);
 
-        UserRepository repo = mainModel.DB().getUserRepository();
+        UserRepository repo = mainModel.db().getUserRepository();
         repo.add(user);
 
         controller.showDialog("User creation successful");
-        controller.BackToLoginClicked();
+        controller.backToLoginClicked();
     }
 
     @Override

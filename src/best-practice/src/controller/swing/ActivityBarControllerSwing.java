@@ -20,7 +20,12 @@ public class ActivityBarControllerSwing implements ActivityBarController
 {
     private ActivityBarModel model;
     private ActivityBarView view;
-    
+
+
+    public ActivityBarControllerSwing() {
+    }
+
+
     @Override
     public void setModel(ActivityBarModel model)
     {
@@ -34,25 +39,9 @@ public class ActivityBarControllerSwing implements ActivityBarController
     }
 
     @Override
-    public void StartClicked() {
-        model.startClicked();
-    }
-
-    @Override
-    public void StopClicked() {
-        model.stopClicked();
-    }
-
-    @Override
-    public void ActivityFinished(String project, String projectPhase, String description, String comment) {
+    public void refresh() {
         try {
-            if(description.isEmpty())
-            {
-                view.showError("Activity Description cannot be empty");
-                view.showCommentDescriptionDialog();
-            }
-            else
-                model.activityFinished(project, projectPhase, description, comment);
+            view.setProjects(model.getProjects());
         } catch (Exception e) {
             e.printStackTrace();
             view.showError(e.getLocalizedMessage());
@@ -60,7 +49,19 @@ public class ActivityBarControllerSwing implements ActivityBarController
     }
 
     @Override
-    public void ProjectSelected(String project) {
+    public void startClicked() {
+        model.startClicked();
+    }
+
+    @Override
+    public void stopClicked() {
+        model.stopClicked();
+    }
+
+
+
+    @Override
+    public void projectSelected(String project) {
         ArrayList<String> phases = null;
         try {
             phases = model.getProjectPhasesFor(project);
@@ -73,22 +74,12 @@ public class ActivityBarControllerSwing implements ActivityBarController
     }
 
     @Override
-    public void PhaseSelected(String projectPhase)
+    public void phaseSelected(String projectPhase)
     {
         if(projectPhase == null || projectPhase.isEmpty())
             view.disableStart();
         else
             view.enableStart();
-    }
-
-    @Override
-    public void refresh() {
-        try {
-            view.setProjects(model.getProjects());
-        } catch (Exception e) {
-            e.printStackTrace();
-            view.showError(e.getLocalizedMessage());
-        }
     }
 
     @Override
@@ -126,7 +117,6 @@ public class ActivityBarControllerSwing implements ActivityBarController
         view.enableStart();
     }
 
-
     @Override
     public void enableStopButton() {
         view.enableStop();
@@ -145,6 +135,22 @@ public class ActivityBarControllerSwing implements ActivityBarController
     @Override
     public void finishActivity() {
         view.showFinishActivityDialog();
+    }
+
+    @Override
+    public void activityFinished(String project, String projectPhase, String description, String comment) {
+        try {
+            if(description.isEmpty())
+            {
+                view.showError("Activity Description cannot be empty");
+                view.showCommentDescriptionDialog();
+            }
+            else
+                model.activityFinished(project, projectPhase, description, comment);
+        } catch (Exception e) {
+            e.printStackTrace();
+            view.showError(e.getLocalizedMessage());
+        }
     }
 
 }

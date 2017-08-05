@@ -12,14 +12,9 @@ public interface SideBarController
     void setModel(SideBarModel model);
 
     void projectsClicked();
-
     void personalStatisticClicked();
-
     void administrationClicked();
-
     void settingsClicked();
-
     void projectStatisticClicked();
-
     void logoutClicked();
 }

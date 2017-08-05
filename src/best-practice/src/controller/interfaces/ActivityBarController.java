@@ -16,22 +16,22 @@ import view.interfaces.ActivityBarView;
  */
 public interface ActivityBarController
 {
+    //basic
     void setModel(ActivityBarModel model);
     void setView(ActivityBarView view);
-
-    void StartClicked();
-    void StopClicked();
-
-    void ActivityFinished(String project, String projectPhase, String description, String comment);
-    void ProjectSelected(String project);
-    void PhaseSelected(String projectPhase);
-
     void refresh();
+
+    //callbacks
+    void startClicked();
+    void stopClicked();
+
+
+    void projectSelected(String project);
+    void phaseSelected(String projectPhase);
 
     void disableComboBoxes();
 
     void showCommentDescriptionDialog();
-
 
     void startTimer();
     void stopTimer();
@@ -47,4 +47,5 @@ public interface ActivityBarController
     void discardActivity();
 
     void finishActivity();
+    void activityFinished(String project, String projectPhase, String description, String comment);
 }

@@ -16,7 +16,7 @@ public class ViewManager
 {
     private static MainView view;
     
-    public static void InitInstance(String frontend)
+    public static void initInstance(String frontend)
     {
         assert(view == null);
         switch(frontend)
@@ -26,7 +26,7 @@ public class ViewManager
         }
     }
     
-    public static MainView GetInstance()
+    public static MainView getInstance()
     {
         assert(view != null);
         return view;

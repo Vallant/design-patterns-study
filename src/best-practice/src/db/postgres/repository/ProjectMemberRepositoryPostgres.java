@@ -139,18 +139,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String role = rs.getString("ROLE");
-                
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-                
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-                
-                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                ProjectMember m = extractMember(rs);
                 l.add(m);
             }
         }
@@ -171,19 +160,10 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
                         new ArrayList(Arrays.asList("Username", "ProjectId")),
                         new ArrayList(Arrays.asList(userLoginName, Integer.toString(projectId)))
                 );
-            
-            int hash = rs.getInt("HASH");
-            String projectIdDb = rs.getString("PROJECT_ID");
-            String userLoginNameDb = rs.getString("USER_LOGIN_NAME");
-            String role = rs.getString("ROLE");
 
-            ProjectRepository p = db.getProjectRepository();
-            Project project = p.getByPrimaryKey(projectId);
+            ProjectMember m = extractMember(rs);
 
-            UserRepository u = db.getUserRepository();
-            User user = u.getByPrimaryKey(userLoginName);
-
-            return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+            return m;
         }
         
     }
@@ -205,17 +185,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String role = rs.getString("ROLE");
-
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                ProjectMember m = extractMember(rs);
                 l.add(m);
             }
         }
@@ -240,18 +210,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String role = rs.getString("ROLE");
-
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                ProjectMember m = extractMember(rs);
                 l.add(m);
             }
         }
@@ -276,22 +235,26 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String role = rs.getString("ROLE");
-
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                ProjectMember m = new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+                ProjectMember m = extractMember(rs);
                 l.add(m);
             }
         }
         return l;
+    }
+
+    ProjectMember extractMember(ResultSet rs) throws Exception {
+        int hash = rs.getInt("HASH");
+        int projectId = rs.getInt("PROJECT_ID");
+        String userLoginName = rs.getString("USER_LOGIN_NAME");
+        String role = rs.getString("ROLE");
+
+        ProjectRepository p = db.getProjectRepository();
+        Project project = p.getByPrimaryKey(projectId);
+
+        UserRepository u = db.getUserRepository();
+        User user = u.getByPrimaryKey(userLoginName);
+
+        return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
     }
 
 }

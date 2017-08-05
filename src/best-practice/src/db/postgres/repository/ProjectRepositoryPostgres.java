@@ -80,7 +80,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
                     + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getName());
@@ -102,7 +102,6 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         
         try(Connection con = db.getConnection())
         {
-            //TODO: Delete cascade
             String sql = "DELETE FROM PROJECT "
                     + "WHERE ID = ? AND HASH = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -134,15 +133,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             ResultSet rs = ps.executeQuery();
             if(rs.next() == false)
                 throw new Exception("No such record");
-            
-            int hash = rs.getInt("HASH");
-            int id = rs.getInt("ID");
-            String name = rs.getString("NAME");
-            String description = rs.getString("DESCRIPTION");
-            ProjectPhaseRepository ppr = db.getProjectPhaseRepository();
-            assert(projectId == id);
 
-            return new Project(hash, projectId, name, description);
+            Project p = extractProject(rs);
+
+            return p;
         }
     }
 
@@ -205,15 +199,24 @@ public class ProjectRepositoryPostgres implements ProjectRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                String name = rs.getString("NAME");
-                String description = rs.getString("DESCRIPTION");
-
-                
-                list.add(new Project(hash, id, name, description));
+                Project p = extractProject(rs);
+                list.add(p);
             }
         }
         return list;
+    }
+
+    private Project extractProject(ResultSet rs) throws Exception {
+        int hash = rs.getInt("HASH");
+        int id = rs.getInt("ID");
+        String name = rs.getString("NAME");
+        String description = rs.getString("DESCRIPTION");
+
+
+        return new Project(hash, id, name, description);
+    }
+    private void setProject(Project item, PreparedStatement ps)
+    {
+
     }
 }

@@ -54,19 +54,19 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public ArrayList<ProjectMember> getOwnedProjects() throws Exception {
 
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         return pmr.getOwnedProject(user.getLoginName());
     }
 
     @Override
     public ArrayList<ProjectMember> getInvolvedProjects() throws Exception {
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         return pmr.getInvolvedProjects(user.getLoginName());
     }
 
     @Override
     public void leaveProject(ProjectMember member) throws Exception {
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         pmr.delete(member);
         controller.refresh();
     }
@@ -74,7 +74,7 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public void deleteProject(Project selectedProject) throws Exception {
 
-        ProjectRepository pr = mainModel.DB().getProjectRepository();
+        ProjectRepository pr = mainModel.db().getProjectRepository();
         pr.delete(selectedProject);
         controller.refresh();
         mainModel.refreshActivityBar();
@@ -83,10 +83,10 @@ public class ProjectModelImpl implements ProjectModel
 
     @Override
     public void requestedDetailForProject(Project project) throws Exception {
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         ArrayList<ProjectMember> members = pmr.getMembersByProjectId(project.getId());
 
-        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
         ArrayList<ProjectPhase> phases = ppr.getByProjectId(project.getId());
 
         controller.showDetail(project, phases, members);
@@ -94,10 +94,10 @@ public class ProjectModelImpl implements ProjectModel
 
     @Override
     public void addProject(String name, String description) throws Exception {
-        ProjectRepository pr = mainModel.DB().getProjectRepository();
+        ProjectRepository pr = mainModel.db().getProjectRepository();
         Project project = new Project(name, description) ;
         pr.add(project);
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
         pmr.add(pm);
         controller.refresh();
@@ -107,7 +107,7 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public void addPhase(Project project, String phaseName) throws Exception {
         ProjectPhase phase = new ProjectPhase(project, phaseName);
-        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
         ppr.add(phase);
         controller.refresh();
         mainModel.refreshActivityBar();
@@ -115,7 +115,7 @@ public class ProjectModelImpl implements ProjectModel
 
     @Override
     public void deletePhase(ProjectPhase projectPhase) throws Exception {
-        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
         ppr.delete(projectPhase);
         controller.refresh();
         mainModel.refreshActivityBar();
@@ -124,7 +124,7 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public void promoteToLeader(ProjectMember projectMember) throws Exception {
         projectMember.setRole(ProjectMember.ROLE.LEADER);
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         pmr.update(projectMember);
         controller.refresh();
     }
@@ -132,27 +132,27 @@ public class ProjectModelImpl implements ProjectModel
     @Override
     public void degradeToMember(ProjectMember projectMember) throws Exception {
         projectMember.setRole(ProjectMember.ROLE.MEMBER);
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         pmr.update(projectMember);
         controller.refresh();
     }
 
     @Override
     public void deleteMember(ProjectMember projectMember) throws Exception {
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         pmr.delete(projectMember);
         controller.refresh();
     }
 
     @Override
     public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception {
-        UserRepository ur = mainModel.DB().getUserRepository();
+        UserRepository ur = mainModel.db().getUserRepository();
         return ur.getAvailableUsersFor(projectId);
     }
 
     @Override
     public void addMembersToProject(ArrayList<User> toAdd, Project currentProject) throws Exception {
-        ProjectMemberRepository pmr = mainModel.DB().getProjectMemberRepository();
+        ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
         for(User u : toAdd)
         {
             ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
@@ -163,7 +163,7 @@ public class ProjectModelImpl implements ProjectModel
 
     @Override
     public void updateProject(Project project) throws Exception {
-        ProjectRepository pr = mainModel.DB().getProjectRepository();
+        ProjectRepository pr = mainModel.db().getProjectRepository();
         pr.update(project);
         controller.refresh();
     }

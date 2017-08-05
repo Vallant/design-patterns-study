@@ -36,11 +36,11 @@ import java.util.List;
  *
  * @author stephan
  */
-public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
+public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
 {
     private final DBManagerPostgres db;
 
-    public ProjectPhaseRepositoryPostres(DBManagerPostgres db)
+    public ProjectPhaseRepositoryPostgres(DBManagerPostgres db)
     {
         this.db = db;
     }
@@ -139,16 +139,10 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             
             if(rs.next() == false)
                 throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id));
-            
-            int hash = rs.getInt("HASH");
-            int idDb = rs.getInt("ID");
-            int projectId = rs.getInt("PROJECT_ID");
-            String name = rs.getString("NAME");
 
-            ProjectRepository p = db.getProjectRepository();
-            Project project = p.getByPrimaryKey(projectId);
+            ProjectPhase phase = extractPhase(rs);
 
-            return new ProjectPhase(hash, project, name, id);
+            return phase;
         }
     }
 
@@ -169,16 +163,7 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
 
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                int projectIdDb = rs.getInt("PROJECT_ID");
-                String name = rs.getString("NAME");
-
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-
-                assert(projectIdDb == projectId);
-                ProjectPhase phase = new ProjectPhase(hash, project, name, id);
+                ProjectPhase phase = extractPhase(rs);
                 l.add(phase);
             }
         }
@@ -229,15 +214,8 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
                 throw new Exception("Element not found");
                 //throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id)); //TODO change to correct output
 
-            int hash = rs.getInt("HASH");
-            int id = rs.getInt("ID");
-            int projectId = rs.getInt("PROJECT_ID");
-            String name = rs.getString("NAME");
-
-            ProjectRepository p = db.getProjectRepository();
-            Project project = p.getByPrimaryKey(projectId);
-
-            return new ProjectPhase(hash, project, name, id);
+            ProjectPhase phase = extractPhase(rs);
+            return phase;
         }
     }
 
@@ -254,19 +232,23 @@ public class ProjectPhaseRepositoryPostres implements ProjectPhaseRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                int projectId = rs.getInt("PROJECT_ID");
-                String name = rs.getString("NAME");
-                
-                ProjectRepository p = db.getProjectRepository();
-                Project project = p.getByPrimaryKey(projectId);
-                
-                ProjectPhase phase = new ProjectPhase(hash, project, name, id);
+                ProjectPhase phase = extractPhase(rs);
                 l.add(phase);                
             }
         }
         return l;
+    }
+
+    private ProjectPhase extractPhase(ResultSet rs) throws Exception {
+        int hash = rs.getInt("HASH");
+        int id = rs.getInt("ID");
+        int projectId = rs.getInt("PROJECT_ID");
+        String name = rs.getString("NAME");
+
+        ProjectRepository p = db.getProjectRepository();
+        Project project = p.getByPrimaryKey(projectId);
+
+        return new ProjectPhase(hash, project, name, id);
     }
 
 }

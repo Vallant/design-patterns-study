@@ -14,19 +14,16 @@ import view.interfaces.LoginView;
  */
 public interface LoginController
 {
+    void setModel(LoginModel model);
+    void setView(LoginView view);
     
-    void SetModel(LoginModel model);
-    void SetView(LoginView view);
-    
-    void ResetPasswordClicked();
-    void LoginClicked();
-    void AddUserClicked();
-    
-    void BackToLoginClicked();
-    void AddClicked();
-    void ResetClicked();
+    void resetPasswordClicked();
+    void loginClicked();
+    void addUserClicked();
+    void backToLoginClicked();
+    void addClicked();
+    void resetClicked();
 
     void showDialog(String message);
-
-    public void loginFailed();
+    void loginFailed();
 }

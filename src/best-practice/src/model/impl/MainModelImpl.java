@@ -145,7 +145,7 @@ public class MainModelImpl implements MainModel
     }
 
     @Override
-    public DBManager DB()
+    public DBManager db()
     {
         return db;
     }

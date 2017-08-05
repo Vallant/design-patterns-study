@@ -140,7 +140,7 @@ public class ActivityBarViewSwing implements ActivityBarView
         {
             String project = (String) pMain.cbProject.getSelectedItem();
             String phase = (String) pMain.cbPhase.getSelectedItem();
-            controller.ActivityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
+            controller.activityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
         }
         else if (JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?","Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
         {
@@ -189,14 +189,14 @@ public class ActivityBarViewSwing implements ActivityBarView
         pMain.btStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.StartClicked();
+                controller.startClicked();
             }
         });
 
         pMain.btStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                controller.StopClicked();
+                controller.stopClicked();
             }
         });
 
@@ -206,7 +206,7 @@ public class ActivityBarViewSwing implements ActivityBarView
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         String selectedPhase = (String) pMain.cbPhase.getSelectedItem();
-                        controller.PhaseSelected(selectedPhase);
+                        controller.phaseSelected(selectedPhase);
                     }
                 }
         );
@@ -216,7 +216,7 @@ public class ActivityBarViewSwing implements ActivityBarView
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         String selectedProject = (String) pMain.cbProject.getSelectedItem();
-                        controller.ProjectSelected(selectedProject);
+                        controller.projectSelected(selectedProject);
                     }
                 }
         );

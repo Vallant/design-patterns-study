@@ -21,45 +21,30 @@ public interface ProjectController
 {
     void setModel(ProjectModel model);
     void setView(ProjectView view);
-
     void refresh();
 
     void leaveProjectClicked();
-
     void addProjectClicked();
-
     void deleteProjectClicked();
+    void doubleClickedOn(int index);
+    void backClicked();
+    void deletePhaseClicked();
+    void addPhaseClicked();
+    void deleteMemberClicked();
+    void promoteToAdminClicked();
+    void degradeToMemberClicked();
+    void addMemberClicked();
+    void updateDescriptionClicked();
 
     void ownedProjectsHasSelection(boolean hasSelection);
-
     void involvedProjectsHasSelection(boolean hasSelection);
+    void projectPhaseHasSelection(boolean hasSelection);
+    void memberTableHasSelection(boolean hasSelection);
 
-    void doubleClickedOn(int index);
 
     void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members);
 
-    void backClicked();
-
-    void addProject(String text, String text1);
-
-    void deletePhaseClicked();
-    void addPhaseClicked();
-
-    void deleteMemberClicked();
-
-    void promoteToAdminClicked();
-
-    void degradeToMemberClicked();
-
-    void addMemberClicked();
-
     void addPhase(String phaseName);
-
     void addMembers(int[] selectedIndices);
-
-    void updateDescriptionClicked();
-
-    void projectPhaseHasSelection(boolean hasSelection);
-
-    void memberTableHasSelection(boolean hasSelection);
+    void addProject(String name, String description);
 }

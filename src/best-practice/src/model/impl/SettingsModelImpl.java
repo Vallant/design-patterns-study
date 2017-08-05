@@ -43,7 +43,7 @@ public class SettingsModelImpl implements SettingsModel {
     @Override
     public void saveUser(User user) throws Exception {
 
-        UserRepository ur = mainModel.DB().getUserRepository();
+        UserRepository ur = mainModel.db().getUserRepository();
         if(user.getNewPassword() != null)
         {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");

@@ -20,6 +20,8 @@ package db.postgres.repository;
 import data.User;
 import db.common.DBManager;
 import db.common.DBManagerPostgres;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
 import java.sql.Connection;
@@ -52,7 +54,7 @@ public class UserRepositoryPostgres implements UserRepository
                     + "VALUES "
                     + "(?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getFirstName());
@@ -81,7 +83,7 @@ public class UserRepositoryPostgres implements UserRepository
             
             PreparedStatement ps = con.prepareStatement(sql);
             
-            
+
             int index = 1;
             ps.setInt(index++, item.getLocalHash());
             ps.setString(index++, item.getFirstName());
@@ -91,7 +93,7 @@ public class UserRepositoryPostgres implements UserRepository
             ps.setBytes(index++, item.getPassword());
             ps.setString(index++, item.getLoginName());
             ps.setString(index++, item.getEmail());
-            
+
             ps.setString(index++, item.getLoginName());
             ps.setInt(index++, item.getRemoteHash());
             
@@ -141,18 +143,9 @@ public class UserRepositoryPostgres implements UserRepository
             ResultSet rs = ps.executeQuery();
             if(rs.next() == false)
                 throw new Exception("No such record");
-            
-            int hash = rs.getInt("HASH");
-            String firstName = rs.getString("FIRST_NAME");
-            String lastName = rs.getString("LAST_NAME");
-            String role = rs.getString("ROLE");
-            byte[] salt = rs.getBytes("SALT");
-            byte[] password = rs.getBytes("PASSWORD");
-            String loginNameDb = rs.getString("LOGIN_NAME");
-            String email = rs.getString("EMAIL");
 
-            return new User(hash, loginName, firstName, lastName, 
-                    User.ROLE.valueOf(role), email, password, salt);
+            User u = extractUser(rs);
+            return u;
         }
     }
 
@@ -175,17 +168,8 @@ public class UserRepositoryPostgres implements UserRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                String firstName = rs.getString("FIRST_NAME");
-                String lastName = rs.getString("LAST_NAME");
-                String role = rs.getString("ROLE");
-                byte[] salt = rs.getBytes("SALT");
-                byte[] password = rs.getBytes("PASSWORD");
-                String loginName = rs.getString("LOGIN_NAME");
-                String email = rs.getString("EMAIL");
-
-                l.add(new User(hash, loginName, firstName, lastName,
-                        User.ROLE.valueOf(role), email, password, salt));
+                User u = extractUser(rs);
+                l.add(u);
             }
         }
         return l;
@@ -206,21 +190,24 @@ public class UserRepositoryPostgres implements UserRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                String firstName = rs.getString("FIRST_NAME");
-                String lastName = rs.getString("LAST_NAME");
-                String role = rs.getString("ROLE");
-                byte[] salt = rs.getBytes("SALT");
-                byte[] password = rs.getBytes("PASSWORD");
-                String loginName = rs.getString("LOGIN_NAME");
-                String email = rs.getString("EMAIL");
-                
-                l.add(new User(hash, loginName, firstName, lastName, 
-                        User.ROLE.valueOf(role), email, password, salt));
+                User u = extractUser(rs);
+                l.add(u);
             }
         }
         return l;
     }
 
+    private User extractUser(ResultSet rs) throws Exception {
+        int hash = rs.getInt("HASH");
+        String firstName = rs.getString("FIRST_NAME");
+        String lastName = rs.getString("LAST_NAME");
+        String role = rs.getString("ROLE");
+        byte[] salt = rs.getBytes("SALT");
+        byte[] password = rs.getBytes("PASSWORD");
+        String loginName = rs.getString("LOGIN_NAME");
+        String email = rs.getString("EMAIL");
 
+        return new User(hash, loginName, firstName, lastName,
+                User.ROLE.valueOf(role), email, password, salt);
+    }
 }

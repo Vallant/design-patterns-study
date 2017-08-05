@@ -150,31 +150,8 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ResultSet rs = ps.executeQuery();
             if(rs.next() == false)
                 throw new Exception("No such record");
-            
-            int hash = rs.getInt("HASH");
-            int id_db = rs.getInt("ID");
-            int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
-            int projectId = rs.getInt("PROJECT_ID");
-            String userLoginName = rs.getString("USER_LOGIN_NAME");
-            String description = rs.getString("DESCRIPTION");
-            Timestamp tsStart = rs.getTimestamp("START_TIME");
-            ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
-            Timestamp tsEnd = rs.getTimestamp("END_TIME");
-            ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
-            String comments = rs.getString("COMMENTS");
 
-
-
-            ProjectPhaseRepository pp = db.getProjectPhaseRepository();
-            ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
-
-            UserRepository u = db.getUserRepository();
-            User user = u.getByPrimaryKey(userLoginName);
-
-            assert(id == id_db);
-            assert(projectId == phase.getProjectId());
-
-            Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+            Activity a = extractActivity(rs);
             return a;
         }
     }
@@ -202,7 +179,6 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             {
                 int id = rs.getInt(1);
 
-
                 double seconds = rs.getDouble(2);
                 Duration duration = Duration.ZERO;
 
@@ -210,7 +186,6 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                 duration = duration.plusMillis((long) ((seconds % 1) * 1000));
 
                 Project p = pr.getByPrimaryKey(id);
-
 
                 projects.add(p);
                 durations.add(duration);
@@ -280,28 +255,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String description = rs.getString("DESCRIPTION");
-                Timestamp tsStart = rs.getTimestamp("START_TIME");
-                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
-                Timestamp tsEnd = rs.getTimestamp("END_TIME");
-                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
-                String comments = rs.getString("COMMENTS");
-
-
-                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
-                ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
-
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                assert(projectId == phase.getProjectId());
-
-                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+                Activity a = extractActivity(rs);
                 l.add(a);
             }
         }
@@ -332,28 +286,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String description = rs.getString("DESCRIPTION");
-                Timestamp tsStart = rs.getTimestamp("START_TIME");
-                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
-                Timestamp tsEnd = rs.getTimestamp("END_TIME");
-                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
-                String comments = rs.getString("COMMENTS");
-
-
-                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
-                ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
-
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                assert(projectId == phase.getProjectId());
-
-                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+                Activity a = extractActivity(rs);
                 l.add(a);
             }
         }
@@ -455,31 +388,35 @@ public class ActivityRepositoryPostgres implements ActivityRepository
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                int hash = rs.getInt("HASH");
-                int id = rs.getInt("ID");
-                int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
-                int projectId = rs.getInt("PROJECT_ID");
-                String userLoginName = rs.getString("USER_LOGIN_NAME");
-                String description = rs.getString("DESCRIPTION");
-                Timestamp tsStart = rs.getTimestamp("START_TIME");
-                ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
-                Timestamp tsEnd = rs.getTimestamp("END_TIME");
-                ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
-                String comments = rs.getString("COMMENTS");
-                
-                
-                ProjectPhaseRepository pp = db.getProjectPhaseRepository();
-                ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
-                
-                UserRepository u = db.getUserRepository();
-                User user = u.getByPrimaryKey(userLoginName);
-
-                assert(projectId == phase.getProjectId());
-                
-                Activity a = new Activity(hash, id, phase, user, description, start, end, comments);
+                Activity a = extractActivity(rs);
                 l.add(a);
             }
         }
         return l;
+    }
+
+    private Activity extractActivity(ResultSet rs) throws Exception {
+        int hash = rs.getInt("HASH");
+        int id = rs.getInt("ID");
+        int projectPhaseId = rs.getInt("PROJECT_PHASE_ID");
+        int projectId = rs.getInt("PROJECT_ID");
+        String userLoginName = rs.getString("USER_LOGIN_NAME");
+        String description = rs.getString("DESCRIPTION");
+        Timestamp tsStart = rs.getTimestamp("START_TIME");
+        ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+        Timestamp tsEnd = rs.getTimestamp("END_TIME");
+        ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
+        String comments = rs.getString("COMMENTS");
+
+
+        ProjectPhaseRepository pp = db.getProjectPhaseRepository();
+        ProjectPhase phase = pp.getByPrimaryKey(projectPhaseId);
+
+        UserRepository u = db.getUserRepository();
+        User user = u.getByPrimaryKey(userLoginName);
+
+        assert(projectId == phase.getProjectId());
+
+        return new Activity(hash, id, phase, user, description, start, end, comments);
     }
 }

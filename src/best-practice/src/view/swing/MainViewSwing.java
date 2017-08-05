@@ -9,8 +9,6 @@ import controller.interfaces.*;
 import data.User;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 import view.interfaces.*;
 import view.swing.activitybar.ActivityBarViewSwing;
@@ -19,9 +17,6 @@ import view.swing.project.ProjectViewSwing;
 import view.swing.personalstatistic.PersonalStatisticViewSwing;
 import view.swing.projectstatistic.ProjectStatisticViewSwing;
 import view.swing.settings.SettingsViewSwing;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *
@@ -71,14 +66,14 @@ public class MainViewSwing implements MainView
     public void showLoginView()
     {
         hideCenterContent();
-        login.SwitchToLogin();
+        login.switchToLogin();
         frame.pack();
     }
 
     @Override
     public void showProjectView()
     {
-        login.RemoveAllComponents();
+        login.removeAllComponents();
         personalStatistic.RemoveAllComponents();
         projectStatistic.hide();
         project.showOverview();
@@ -94,7 +89,7 @@ public class MainViewSwing implements MainView
     @Override
     public void pairLogin(LoginController controller)
     {
-        controller.SetView(login);
+        controller.setView(login);
         login.setController(controller);
     }
 

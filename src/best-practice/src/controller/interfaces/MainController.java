@@ -15,8 +15,15 @@ import model.interfaces.*;
 public interface MainController
 {
     void init(String frontend);
-    
     void setModel(MainModel model);
+
+    void pairLogin(LoginModel model);
+    void pairProject(ProjectModel model);
+    void pairActivityBar(ActivityBarModel model);
+    void pairSideBar(SideBarModel sideBar);
+    void pairPersonalStatistic(PersonalStatisticModel model);
+    void pairProjectStatistic(ProjectStatisticModel projectStatistic);
+    void pairSettings(SettingsModel settings);
     
     void switchToLogin();
     void switchToProjectView();
@@ -27,19 +34,6 @@ public interface MainController
     
     void showActivityBar();
     void showSideBar(User.ROLE role);
-    
-    void pairLogin(LoginModel model);
-    void pairProject(ProjectModel model);
-    void pairActivityBar(ActivityBarModel model);
-    void pairSideBar(SideBarModel sideBar);
-    void pairPersonalStatistic(PersonalStatisticModel model);
-    void pairProjectStatistic(ProjectStatisticModel projectStatistic);
-    void pairSettings(SettingsModel settings);
-    
+
     void showError(Exception ex);
-
-
-    void logout();
-
-
 }

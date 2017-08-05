@@ -7,7 +7,6 @@ package model.impl;
 
 import controller.interfaces.ActivityBarController;
 import data.Activity;
-import data.Project;
 import data.ProjectPhase;
 import data.User;
 import db.interfaces.ActivityRepository;
@@ -77,7 +76,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
 
     @Override
     public ArrayList<String> getProjectPhasesFor(String project) throws Exception{
-        ProjectPhaseRepository r = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhaseRepository r = mainModel.db().getProjectPhaseRepository();
         return r.getNamesByProjectName(project);
 
     }
@@ -89,7 +88,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
 
     @Override
     public ArrayList<String> getProjects() throws Exception {
-        ProjectRepository r = mainModel.DB().getProjectRepository();
+        ProjectRepository r = mainModel.db().getProjectRepository();
         return r.getProjectsByUserName(user.getLoginName());
     }
 
@@ -99,10 +98,10 @@ public class ActivityBarModelImpl implements ActivityBarModel
         controller.enableStartButton();
         controller.stopTimer();
         controller.enableComboBoxes();
-        ProjectPhaseRepository ppr = mainModel.DB().getProjectPhaseRepository();
+        ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
         ProjectPhase projectPhase = ppr.getByProjectAndPhaseName(projectName, projectPhaseName);
         Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
-        ActivityRepository ar = mainModel.DB().getActivityRepository();
+        ActivityRepository ar = mainModel.db().getActivityRepository();
         ar.add(activity);
     }
 

@@ -16,7 +16,7 @@ public interface MainModel
 {
     void loginSuccessfulFor(User user);
     void showError(Exception ex);
-    DBManager DB();
+    DBManager db();
 
     void switchToPersonalStatistics();
     void switchToProjects();

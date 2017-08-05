@@ -47,7 +47,7 @@ public class LoginViewSwing implements LoginView
     }
     
     @Override
-    public void SwitchToResetPassword()
+    public void switchToResetPassword()
     {
         hide();
         frame.add(pResetPassword);
@@ -55,7 +55,7 @@ public class LoginViewSwing implements LoginView
     }
 
     @Override
-    public void SwitchToAddNewUser()
+    public void switchToAddNewUser()
     {
         hide();
         frame.add(pNewUser);
@@ -63,7 +63,7 @@ public class LoginViewSwing implements LoginView
     }
 
     @Override
-    public void ShowLoginFailed()
+    public void showLoginFailed()
     {
         JOptionPane.showMessageDialog(frame, "Password or Username incorrect.", "Login failed!", JOptionPane.ERROR_MESSAGE);
     }
@@ -93,14 +93,14 @@ public class LoginViewSwing implements LoginView
     }
 
     @Override
-    public void RemoveAllComponents()
+    public void removeAllComponents()
     {
         hide();
         update();
     }
 
     @Override
-    public void SwitchToLogin()
+    public void switchToLogin()
     {
         hide();
         frame.add(pLogin);
@@ -116,7 +116,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.LoginClicked();
+                controller.loginClicked();
             }
         });
 
@@ -125,7 +125,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.ResetPasswordClicked();
+                controller.resetPasswordClicked();
             }
         }
         );
@@ -135,7 +135,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.AddUserClicked();
+                controller.addUserClicked();
             }
         });
 
@@ -143,7 +143,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.BackToLoginClicked();
+                controller.backToLoginClicked();
             }
         });
         
@@ -151,7 +151,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.BackToLoginClicked();
+                controller.backToLoginClicked();
             }
         });
         
@@ -160,7 +160,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.AddClicked();
+                controller.addClicked();
             }
         });
         
@@ -169,7 +169,7 @@ public class LoginViewSwing implements LoginView
             @Override
             public void actionPerformed(ActionEvent ae)
             {
-                controller.ResetClicked();
+                controller.resetClicked();
             }
         });
 
