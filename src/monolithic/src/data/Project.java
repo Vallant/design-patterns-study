@@ -21,102 +21,100 @@ import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class Project implements DBEntity
 {
-    
-    private int remoteHash;
-    private int id;
-    private String name;
-    private String description;
+
+  private int    remoteHash;
+  private int    id;
+  private String name;
+  private String description;
 
 
-    public int getLocalHash()
-    {
-        return new HashCodeBuilder()
-                .append(name.hashCode())
-                .append(id)
-                .append(description.hashCode())
-                .hashCode();
-    }
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder()
+      .append(name.hashCode())
+      .append(id)
+      .append(description.hashCode())
+      .hashCode();
+  }
 
-    public int getRemoteHash()
-    {
-        return remoteHash;
-    }
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
 
-    public Project(int hash, int id, String name, String description)
-    {
-        this.remoteHash = hash;
-        this.name = name;
-        this.description = description;
-        this.id = id;
-    }
+  public Project(int hash, int id, String name, String description)
+  {
+    this.remoteHash = hash;
+    this.name = name;
+    this.description = description;
+    this.id = id;
+  }
 
-    public Project(String name, String description)
-    {
-        this.name = name;
-        this.description = description;
-    }
-    
-    
-    public int getHash()
-    {
-        return remoteHash;
-    }
-
-    public void setHash(int hash)
-    {
-        this.remoteHash = hash;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
+  public Project(String name, String description)
+  {
+    this.name = name;
+    this.description = description;
+  }
 
 
+  public int getHash()
+  {
+    return remoteHash;
+  }
 
-    public boolean isChanged()
-    {
-        return getLocalHash() != getRemoteHash();
-    }
+  public void setHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
 
 
-    public void setRemoteHash(int hash)
-    {
-        this.remoteHash = hash; 
-    }
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
 
-    public int getId()
-    {
-        return id;
-    }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    
-    
-    
+  public void setRemoteHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+
+
 }
 
 

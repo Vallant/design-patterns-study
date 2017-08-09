@@ -9,27 +9,28 @@ import java.awt.*;
  */
 public class ActivityBarDialogPanel extends JPanel
 {
-    public final JTextField tfDescription;
-    public final JTextField tfComment;
+  public final JTextField tfDescription;
+  public final JTextField tfComment;
 
-    public ActivityBarDialogPanel() {
-        super();
+  public ActivityBarDialogPanel()
+  {
+    super();
 
-        tfDescription = new JTextField();
-        tfComment = new JTextField();
+    tfDescription = new JTextField();
+    tfComment = new JTextField();
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
-        centerPanel.setBorder(new EmptyBorder(5,5,5,5));
+    JPanel centerPanel = new JPanel();
+    centerPanel.setLayout(new GridLayout(2, 2, 5, 5));
+    centerPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        JLabel lbDescription = new JLabel("Enter Activity Description : ");
-        JLabel lbComment = new JLabel("Enter Activity Comment     : ");
+    JLabel lbDescription = new JLabel("Enter Activity Description : ");
+    JLabel lbComment = new JLabel("Enter Activity Comment     : ");
 
-        centerPanel.add(lbDescription);
-        centerPanel.add(tfDescription);
-        centerPanel.add(lbComment);
-        centerPanel.add(tfComment);
+    centerPanel.add(lbDescription);
+    centerPanel.add(tfDescription);
+    centerPanel.add(lbComment);
+    centerPanel.add(tfComment);
 
-        add(centerPanel);
-    }
+    add(centerPanel);
+  }
 }

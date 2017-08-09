@@ -13,106 +13,125 @@ import java.awt.event.ActionListener;
 /**
  * Created by stephan on 08.07.17.
  */
-public class SideBarViewSwing {
+public class SideBarViewSwing
+{
 
-    private final JFrame frame;
+  private final JFrame frame;
 
-    private final JButton btProjects;
-    private final JButton btPersonalStatistic;
-    private final JButton btProjectStatistic;
-    private final JButton btAdministration;
-    private final JButton btSettings;
-    private final JButton btLogout;
+  private final JButton btProjects;
+  private final JButton btPersonalStatistic;
+  private final JButton btProjectStatistic;
+  private final JButton btAdministration;
+  private final JButton btSettings;
+  private final JButton btLogout;
 
-    private final JPanel pSideBar;
-    private final JPanel pFloatPanel;
-    //private final JButton btHelp;
+  private final JPanel pSideBar;
+  private final JPanel pFloatPanel;
+  //private final JButton btHelp;
 
-    private SideBarControllerSwing controller;
-    public SideBarViewSwing(JFrame frame) {
-        this.frame = frame;
+  private SideBarControllerSwing controller;
 
-        pSideBar = new JPanel(new GridLayout(5,1,5,5));
-        pSideBar.setBorder(new EmptyBorder(5,5,5,5));
-        btProjects = new JButton("Manage Projects");
-        btPersonalStatistic = new JButton("Personal Statistic");
-        btProjectStatistic = new JButton("Project Statistic");
-        btAdministration = new JButton("Administration");
-        btSettings = new JButton("Settings");
-        btLogout = new JButton("Logout");
+  public SideBarViewSwing(JFrame frame)
+  {
+    this.frame = frame;
 
-        pFloatPanel = new JPanel(new FlowLayout(5));
-        pSideBar.add(btProjects);
-        pSideBar.add(btPersonalStatistic);
-        pSideBar.add(btProjectStatistic);
-        pSideBar.add(btSettings);
-        pSideBar.add(btLogout);
+    pSideBar = new JPanel(new GridLayout(5, 1, 5, 5));
+    pSideBar.setBorder(new EmptyBorder(5, 5, 5, 5));
+    btProjects = new JButton("Manage Projects");
+    btPersonalStatistic = new JButton("Personal Statistic");
+    btProjectStatistic = new JButton("Project Statistic");
+    btAdministration = new JButton("Administration");
+    btSettings = new JButton("Settings");
+    btLogout = new JButton("Logout");
 
-        pFloatPanel.add(pSideBar);
-        setListeners();
-        pFloatPanel.setBorder(new EtchedBorder());
-        //pSideBar.add(btAdministration);
+    pFloatPanel = new JPanel(new FlowLayout(5));
+    pSideBar.add(btProjects);
+    pSideBar.add(btPersonalStatistic);
+    pSideBar.add(btProjectStatistic);
+    pSideBar.add(btSettings);
+    pSideBar.add(btLogout);
 
-    }
+    pFloatPanel.add(pSideBar);
+    setListeners();
+    pFloatPanel.setBorder(new EtchedBorder());
+    //pSideBar.add(btAdministration);
 
-    private void setListeners() {
-        btProjects.addActionListener(new ActionListener() {
+  }
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.projectsClicked();
-            }
-        });
-        btPersonalStatistic.addActionListener(new ActionListener() {
+  private void setListeners()
+  {
+    btProjects.addActionListener(new ActionListener()
+    {
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.personalStatisticClicked();
-            }
-        });
-        btAdministration.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.projectsClicked();
+      }
+    });
+    btPersonalStatistic.addActionListener(new ActionListener()
+    {
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.administrationClicked();
-            }
-        });
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.personalStatisticClicked();
+      }
+    });
+    btAdministration.addActionListener(new ActionListener()
+    {
 
-        btSettings.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.administrationClicked();
+      }
+    });
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.settingsClicked();
-            }
-        });
+    btSettings.addActionListener(new ActionListener()
+    {
 
-        btProjectStatistic.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.settingsClicked();
+      }
+    });
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.projectStatisticClicked();
-            }
-        });
-        btLogout.addActionListener(new ActionListener() {
+    btProjectStatistic.addActionListener(new ActionListener()
+    {
 
-            public void actionPerformed(ActionEvent actionEvent) {
-                controller.logoutClicked();
-            }
-        });
-    }
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.projectStatisticClicked();
+      }
+    });
+    btLogout.addActionListener(new ActionListener()
+    {
 
-
-    public void setController(SideBarControllerSwing controller) {
-        this.controller = controller;
-    }
-
-
-    public void show(User.ROLE role) {
-        if(role == User.ROLE.ADMIN)
-            pSideBar.add(btAdministration);
-        else
-            pSideBar.remove(btAdministration);
-
-        frame.getContentPane().add(pFloatPanel, BorderLayout.WEST);
-    }
+      public void actionPerformed(ActionEvent actionEvent)
+      {
+        controller.logoutClicked();
+      }
+    });
+  }
 
 
-    public void hide() {
-        frame.remove(pFloatPanel);
-    }
+  public void setController(SideBarControllerSwing controller)
+  {
+    this.controller = controller;
+  }
+
+
+  public void show(User.ROLE role)
+  {
+    if(role == User.ROLE.ADMIN)
+      pSideBar.add(btAdministration);
+    else
+      pSideBar.remove(btAdministration);
+
+    frame.getContentPane().add(pFloatPanel, BorderLayout.WEST);
+  }
+
+
+  public void hide()
+  {
+    frame.remove(pFloatPanel);
+  }
 }

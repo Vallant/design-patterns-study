@@ -8,26 +8,30 @@ package controller.common;
 import controller.swing.MainControllerSwing;
 
 /**
- *
  * @author stephan
  */
 public class ControllerManager
 {
-    private static MainControllerSwing controller;
-    public static void initInstance(String frontend)
+  private static MainControllerSwing controller;
+
+  public static void initInstance(String frontend)
+  {
+    assert (controller == null);
+    switch(frontend)
     {
-        assert(controller == null);
-        switch(frontend)
-        {
-            case "swing": controller = new MainControllerSwing(); break;
-            default: throw new UnsupportedOperationException();
-        }
-        
-        controller.init(frontend);
+      case "swing":
+        controller = new MainControllerSwing();
+        break;
+      default:
+        throw new UnsupportedOperationException();
     }
-    public static MainControllerSwing getInstance()
-    {
-        assert(controller != null);
-        return controller;
-    }
+
+    controller.init(frontend);
+  }
+
+  public static MainControllerSwing getInstance()
+  {
+    assert (controller != null);
+    return controller;
+  }
 }

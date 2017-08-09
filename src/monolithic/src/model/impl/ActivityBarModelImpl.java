@@ -17,106 +17,114 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public class ActivityBarModelImpl
 {
-    
-    private ActivityBarControllerSwing controller;
-    private MainModelImpl mainModel;
-    private User user;
 
-    ZonedDateTime start;
-    ZonedDateTime stop;
-    boolean ongoingActivity;
-    
-    ActivityBarModelImpl()
-    {
-        ongoingActivity = false;
-    }
+  private ActivityBarControllerSwing controller;
+  private MainModelImpl              mainModel;
+  private User                       user;
 
+  ZonedDateTime start;
+  ZonedDateTime stop;
+  boolean       ongoingActivity;
 
-    public void setMainModel(MainModelImpl mainModel)
-    {
-        this.mainModel = mainModel;
-    }
+  ActivityBarModelImpl()
+  {
+    ongoingActivity = false;
+  }
 
 
-    public void setController(ActivityBarControllerSwing controller)
-    {
-        this.controller = controller;
-    }
+  public void setMainModel(MainModelImpl mainModel)
+  {
+    this.mainModel = mainModel;
+  }
 
 
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
+  public void setController(ActivityBarControllerSwing controller)
+  {
+    this.controller = controller;
+  }
 
 
-    public void startClicked() {
-        ongoingActivity = true;
-        start = ZonedDateTime.now();
-        controller.startTimer();
-        controller.disableStartButton();
-        controller.enableStopButton();
-    }
+  public void setUser(User user)
+  {
+    this.user = user;
+  }
 
 
-    public void stopClicked() {
-        assert(!ongoingActivity);
-        stop = ZonedDateTime.now();
-        controller.disableComboBoxes();
-        controller.showCommentDescriptionDialog();
-        ongoingActivity = false;
-    }
+  public void startClicked()
+  {
+    ongoingActivity = true;
+    start = ZonedDateTime.now();
+    controller.startTimer();
+    controller.disableStartButton();
+    controller.enableStopButton();
+  }
 
 
-    public ArrayList<String> getProjectPhasesFor(String project) throws Exception{
-        ProjectPhaseRepository r = mainModel.db().getProjectPhaseRepository();
-        return r.getNamesByProjectName(project);
-
-    }
-
-
-    public void refresh() {
-        controller.refresh();
-    }
+  public void stopClicked()
+  {
+    assert (!ongoingActivity);
+    stop = ZonedDateTime.now();
+    controller.disableComboBoxes();
+    controller.showCommentDescriptionDialog();
+    ongoingActivity = false;
+  }
 
 
-    public ArrayList<String> getProjects() throws Exception {
-        ProjectRepository r = mainModel.db().getProjectRepository();
-        return r.getProjectsByUserName(user.getLoginName());
-    }
+  public ArrayList<String> getProjectPhasesFor(String project) throws Exception
+  {
+    ProjectPhaseRepository r = mainModel.db().getProjectPhaseRepository();
+    return r.getNamesByProjectName(project);
+
+  }
 
 
-    public void activityFinished(String projectName, String projectPhaseName, String description, String comment) throws Exception {
-        controller.disableStopButton();
-        controller.enableStartButton();
-        controller.stopTimer();
-        controller.enableComboBoxes();
-        ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
-        ProjectPhase projectPhase = ppr.getByProjectAndPhaseName(projectName, projectPhaseName);
-        Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
-        ActivityRepository ar = mainModel.db().getActivityRepository();
-        ar.add(activity);
-    }
+  public void refresh()
+  {
+    controller.refresh();
+  }
 
 
-    public void discardActivity() {
-        controller.disableStopButton();
-        controller.enableStartButton();
-        controller.stopTimer();
-        controller.enableComboBoxes();
-        ongoingActivity = false;
-
-    }
+  public ArrayList<String> getProjects() throws Exception
+  {
+    ProjectRepository r = mainModel.db().getProjectRepository();
+    return r.getProjectsByUserName(user.getLoginName());
+  }
 
 
-    public void finishActivity() {
-        if(ongoingActivity)
-            controller.finishActivity();
-    }
+  public void activityFinished(String projectName, String projectPhaseName, String description, String comment)
+    throws Exception
+  {
+    controller.disableStopButton();
+    controller.enableStartButton();
+    controller.stopTimer();
+    controller.enableComboBoxes();
+    ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
+    ProjectPhase projectPhase = ppr.getByProjectAndPhaseName(projectName, projectPhaseName);
+    Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
+    ActivityRepository ar = mainModel.db().getActivityRepository();
+    ar.add(activity);
+  }
+
+
+  public void discardActivity()
+  {
+    controller.disableStopButton();
+    controller.enableStartButton();
+    controller.stopTimer();
+    controller.enableComboBoxes();
+    ongoingActivity = false;
+
+  }
+
+
+  public void finishActivity()
+  {
+    if(ongoingActivity)
+      controller.finishActivity();
+  }
 
 }

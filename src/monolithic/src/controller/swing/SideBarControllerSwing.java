@@ -8,47 +8,54 @@ import view.swing.SideBarViewSwing;
  */
 public class SideBarControllerSwing
 {
-    SideBarViewSwing view;
-    SideBarModelImpl model;
+  SideBarViewSwing view;
+  SideBarModelImpl model;
 
 
-
-    public void setView(SideBarViewSwing view) {
-        this.view = view;
-    }
-
-
-    public void setModel(SideBarModelImpl model) {
-        this.model = model;
-    }
+  public void setView(SideBarViewSwing view)
+  {
+    this.view = view;
+  }
 
 
-    public void projectsClicked() {
-        model.projectsClicked();
-    }
+  public void setModel(SideBarModelImpl model)
+  {
+    this.model = model;
+  }
 
 
-    public void personalStatisticClicked() {
-        model.personalStatisticClicked();
-    }
+  public void projectsClicked()
+  {
+    model.projectsClicked();
+  }
 
 
-    public void administrationClicked() {
-        model.administrationClicked();
-    }
+  public void personalStatisticClicked()
+  {
+    model.personalStatisticClicked();
+  }
 
 
-    public void settingsClicked() {
-        model.settingsClicked();
-    }
+  public void administrationClicked()
+  {
+    model.administrationClicked();
+  }
 
 
-    public void projectStatisticClicked() {
-        model.projectStatisticClicked();
-    }
+  public void settingsClicked()
+  {
+    model.settingsClicked();
+  }
 
 
-    public void logoutClicked() {
-        model.logoutClicked();
-    }
+  public void projectStatisticClicked()
+  {
+    model.projectStatisticClicked();
+  }
+
+
+  public void logoutClicked()
+  {
+    model.logoutClicked();
+  }
 }

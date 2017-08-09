@@ -6,14 +6,17 @@
 package db.interfaces;
 
 /**
- *
  * @author stephan
  */
 public interface RepositoryFactory
 {
-    public UserRepository getUserRepository();
-    public ProjectRepository getProjectRepository();
-    public ProjectMemberRepository getProjectMemberRepository();
-    public ProjectPhaseRepository getProjectPhaseRepository();
-    public ActivityRepository getActivityRepository();
+  public UserRepository getUserRepository();
+
+  public ProjectRepository getProjectRepository();
+
+  public ProjectMemberRepository getProjectMemberRepository();
+
+  public ProjectPhaseRepository getProjectPhaseRepository();
+
+  public ActivityRepository getActivityRepository();
 }

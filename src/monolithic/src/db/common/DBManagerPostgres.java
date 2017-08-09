@@ -17,74 +17,66 @@
 
 package db.common;
 
-import db.interfaces.ActivityRepository;
-import db.postgres.repository.ActivityRepositoryPostgres;
-import db.postgres.repository.ProjectMemberRepositoryPostgres;
-import db.postgres.repository.ProjectPhaseRepositoryPostgres;
-import db.postgres.repository.ProjectRepositoryPostgres;
-import db.postgres.repository.UserRepositoryPostgres;
-import java.sql.Connection;
-
-import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
-import db.interfaces.UserRepository;
+import db.interfaces.*;
+import db.postgres.repository.*;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.sql.Connection;
+
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class DBManagerPostgres extends DBManager
 {
-    private final BasicDataSource pool;
-    
-    public DBManagerPostgres(String driver, String url, String username, String password)
-    {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(driver);
-        ds.setUrl(url);
-        ds.setUsername(username);
-        ds.setPassword(password);
-        ds.setMaxTotal(50);
-        ds.setMinIdle(5);
-        //TODO optimize parameters
-        pool = ds;
-    }
-    
-    public Connection getConnection() throws Exception
-    {
-        return pool.getConnection();
-    }  
-    
+  private final BasicDataSource pool;
 
-    public UserRepository getUserRepository()
-    {
-        return new UserRepositoryPostgres(this);
-    }
+  public DBManagerPostgres(String driver, String url, String username, String password)
+  {
+    BasicDataSource ds = new BasicDataSource();
+    ds.setDriverClassName(driver);
+    ds.setUrl(url);
+    ds.setUsername(username);
+    ds.setPassword(password);
+    ds.setMaxTotal(50);
+    ds.setMinIdle(5);
+    //TODO optimize parameters
+    pool = ds;
+  }
+
+  public Connection getConnection() throws Exception
+  {
+    return pool.getConnection();
+  }
 
 
-    public ProjectRepository getProjectRepository()
-    {
-        return new ProjectRepositoryPostgres(this);
-    }
+  public UserRepository getUserRepository()
+  {
+    return new UserRepositoryPostgres(this);
+  }
 
 
-    public ProjectMemberRepository getProjectMemberRepository()
-    {
-        return new ProjectMemberRepositoryPostgres(this);
-    }
+  public ProjectRepository getProjectRepository()
+  {
+    return new ProjectRepositoryPostgres(this);
+  }
 
 
-    public ProjectPhaseRepository getProjectPhaseRepository()
-    {
-        return new ProjectPhaseRepositoryPostgres(this);
-    }
+  public ProjectMemberRepository getProjectMemberRepository()
+  {
+    return new ProjectMemberRepositoryPostgres(this);
+  }
 
 
-    public ActivityRepository getActivityRepository()
-    {
-        return new ActivityRepositoryPostgres(this);
-    }
+  public ProjectPhaseRepository getProjectPhaseRepository()
+  {
+    return new ProjectPhaseRepositoryPostgres(this);
+  }
+
+
+  public ActivityRepository getActivityRepository()
+  {
+    return new ActivityRepositoryPostgres(this);
+  }
 
 }

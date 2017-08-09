@@ -5,7 +5,8 @@ package exception;
  */
 public class ElementInsertFailedException extends Exception
 {
-    public ElementInsertFailedException(String s) {
-        super(s);
-    }
+  public ElementInsertFailedException(String s)
+  {
+    super(s);
+  }
 }
