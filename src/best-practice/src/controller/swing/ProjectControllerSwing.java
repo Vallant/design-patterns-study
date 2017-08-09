@@ -20,14 +20,14 @@ import java.util.ArrayList;
  */
 public class ProjectControllerSwing implements ProjectController
 {
-  Project detailProject;
-  private ProjectModel model;
-  private ProjectView  view;
+  private Project                  detailProject;
+  private ProjectModel             model;
+  private ProjectView              view;
   private ArrayList<ProjectMember> ownedProjects;
   private ArrayList<ProjectMember> involvedProjects;
   private ArrayList<ProjectMember> projectMembers;
   private ArrayList<ProjectPhase>  projectPhases;
-  private ArrayList<User> availableMembers;
+  private ArrayList<User>          availableMembers;
 
   @Override
   public void setModel(ProjectModel model)

@@ -6,23 +6,23 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ProjectStatisticActivityPanel extends JPanel
+class ProjectStatisticActivityPanel extends JPanel
 {
-  final JPanel pHeader;
+  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
   final JComboBox<String> cbMembers;
 
-  final ProjectStatisticActivityTableModel tblActivityModel;
-  final JTable                             tblActivity;
-  final JScrollPane                        scrpTable;
-  final JButton                            btBack;
+  final         ProjectStatisticActivityTableModel tblActivityModel;
+  private final JTable                             tblActivity;
+  private final JScrollPane                        scrpTable;
+  final         JButton                            btBack;
 
-  final JPanel  pButtons;
-  final JPanel  pFlowPanel;
-  final JButton btDeleteActivity;
-  final JButton btAddActivity;
-  final JButton btUpdateActivity;
+  private final JPanel  pButtons;
+  private final JPanel  pFlowPanel;
+  private final JButton btDeleteActivity;
+  private final JButton btAddActivity;
+  private final JButton btUpdateActivity;
 
   public ProjectStatisticActivityPanel()
   {

@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class ProjectStatisticControllerSwing implements ProjectStatisticController
 {
 
-  ArrayList<Project> projects;
-  ArrayList<ProjectPhase> phases;
-  ProjectPhase            currentPhase;
-  ArrayList<Activity> activities;
-  ArrayList<ProjectMember> members;
-  private ProjectStatisticModel model;
-  private ProjectStatisticView  view;
+  private ArrayList<Project>       projects;
+  private ArrayList<ProjectPhase>  phases;
+  private ProjectPhase             currentPhase;
+  private ArrayList<Activity>      activities;
+  private ArrayList<ProjectMember> members;
+  private ProjectStatisticModel    model;
+  private ProjectStatisticView     view;
 
   @Override
   public void setModel(ProjectStatisticModel model)
@@ -45,8 +45,11 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUser() == 0,
           members.get(view.getSelectedUser()));
       if(activities != null)
+      {
+        assert currentPhase != null;
         model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(),
           view.getSelectedUser() == 0, members.get(view.getSelectedUser()));
+      }
     }
     catch(Exception e)
     {

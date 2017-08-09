@@ -31,9 +31,9 @@ public interface LoginView
 
   char[] getEnteredPassword();
 
-  public void showDialog(String message);
+  void showDialog(String message);
 
-  public void setController(LoginController controller);
+  void setController(LoginController controller);
 
   void showError(String localizedMessage);
 }

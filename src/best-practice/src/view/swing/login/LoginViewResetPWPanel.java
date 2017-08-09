@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by stephan on 08.07.17.
  */
-public class LoginViewResetPWPanel extends JPanel
+class LoginViewResetPWPanel extends JPanel
 {
 
 

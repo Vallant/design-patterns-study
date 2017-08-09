@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 class ProjectStatisticTableModel extends AbstractTableModel
 {
-  private final String[] columnNames;
-  ArrayList<String>   firstColumn;
-  ArrayList<Duration> durations;
+  private final String[]            columnNames;
+  private       ArrayList<String>   firstColumn;
+  private       ArrayList<Duration> durations;
 
   public ProjectStatisticTableModel(String firstColumnName)
   {

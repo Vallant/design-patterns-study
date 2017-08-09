@@ -24,8 +24,6 @@ public interface PersonalStatisticModel
 
   void setUser(User user);
 
-  ;
-
   void setMainModel(MainModel mainModel);
 
   void setController(PersonalStatisticController statistics);

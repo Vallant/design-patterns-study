@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Created by stephan on 09.07.17.
  */
-public class ProjectAddDialogPanel extends JPanel
+class ProjectAddDialogPanel extends JPanel
 {
   final JTextField tfName;
   final JTextField tfDescription;

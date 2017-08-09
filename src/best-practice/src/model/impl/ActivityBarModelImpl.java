@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class ActivityBarModelImpl implements ActivityBarModel
 {
 
-  ZonedDateTime start;
-  ZonedDateTime stop;
-  boolean       ongoingActivity;
+  private ZonedDateTime         start;
+  private ZonedDateTime         stop;
+  private boolean               ongoingActivity;
   private ActivityBarController controller;
   private MainModel             mainModel;
   private User                  user;

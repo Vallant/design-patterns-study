@@ -120,7 +120,7 @@ public class ProjectMember implements DBEntity
     return project.getName();
   }
 
-  public static enum ROLE
+  public enum ROLE
   {
     MEMBER,
     LEADER

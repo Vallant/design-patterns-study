@@ -9,18 +9,18 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class ProjectStatisticPhasePanel extends JPanel
+class ProjectStatisticPhasePanel extends JPanel
 {
 
-  final JPanel pHeader;
+  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
   final JComboBox<String> cbMembers;
 
-  final ProjectStatisticTableModel tblPhaseModel;
-  final JTable                     tblPhases;
-  final JScrollPane                scrpTable;
-  final JButton                    btBack;
+  final         ProjectStatisticTableModel tblPhaseModel;
+  final         JTable                     tblPhases;
+  private final JScrollPane                scrpTable;
+  final         JButton                    btBack;
 
   public ProjectStatisticPhasePanel()
   {

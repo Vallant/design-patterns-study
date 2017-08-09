@@ -139,11 +139,10 @@ public class UserRepositoryPostgres implements UserRepository
       ps.setString(index++, loginName);
 
       ResultSet rs = ps.executeQuery();
-      if(rs.next() == false)
+      if(!rs.next())
         throw new Exception("No such record");
 
-      User u = extractUser(rs);
-      return u;
+      return extractUser(rs);
     }
   }
 

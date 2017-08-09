@@ -10,13 +10,13 @@ package db.interfaces;
  */
 public interface RepositoryFactory
 {
-  public UserRepository getUserRepository();
+  UserRepository getUserRepository();
 
-  public ProjectRepository getProjectRepository();
+  ProjectRepository getProjectRepository();
 
-  public ProjectMemberRepository getProjectMemberRepository();
+  ProjectMemberRepository getProjectMemberRepository();
 
-  public ProjectPhaseRepository getProjectPhaseRepository();
+  ProjectPhaseRepository getProjectPhaseRepository();
 
-  public ActivityRepository getActivityRepository();
+  ActivityRepository getActivityRepository();
 }

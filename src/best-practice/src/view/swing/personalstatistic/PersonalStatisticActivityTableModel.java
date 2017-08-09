@@ -5,16 +5,16 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class PersonalStatisticActivityTableModel extends AbstractTableModel
+class PersonalStatisticActivityTableModel extends AbstractTableModel
 {
 
   static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-  String[] columnNames = {"Start", "End", "Description", "Comment"};
-  ArrayList<String>        descriptions;
-  ArrayList<String>        comments;
-  ArrayList<ZonedDateTime> startTimes;
-  ArrayList<ZonedDateTime> endTimes;
+  private final String[] columnNames = {"Start", "End", "Description", "Comment"};
+  private ArrayList<String>        descriptions;
+  private ArrayList<String>        comments;
+  private ArrayList<ZonedDateTime> startTimes;
+  private ArrayList<ZonedDateTime> endTimes;
 
   public PersonalStatisticActivityTableModel()
   {

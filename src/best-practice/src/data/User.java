@@ -201,7 +201,7 @@ public class User implements DBEntity
     this.newPassword = newPassword;
   }
 
-  public static enum ROLE
+  public enum ROLE
   {
     ADMIN,
     USER

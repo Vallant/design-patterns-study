@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Created by stephan on 08.07.17.
  */
-public class ActivityBarDialogPanel extends JPanel
+class ActivityBarDialogPanel extends JPanel
 {
   public final JTextField tfDescription;
   public final JTextField tfComment;

@@ -8,17 +8,17 @@ import java.awt.*;
 /**
  * Created by stephan on 17/07/17.
  */
-public class PersonalStatisticPhasePanel extends JPanel
+class PersonalStatisticPhasePanel extends JPanel
 {
 
-  final JPanel pHeader;
+  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
 
-  final PersonalStatisticTableModel tblProjectsModel;
-  final JTable                      tblPhases;
-  final JScrollPane                 scrpTable;
-  final JButton                     btBack;
+  final         PersonalStatisticTableModel tblProjectsModel;
+  final         JTable                      tblPhases;
+  private final JScrollPane                 scrpTable;
+  final         JButton                     btBack;
 
   public PersonalStatisticPhasePanel()
   {

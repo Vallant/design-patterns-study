@@ -7,17 +7,17 @@ import java.awt.*;
 /**
  * Created by stephan on 08.07.17.
  */
-public class ActivityBarPanel extends JPanel
+class ActivityBarPanel extends JPanel
 {
 
-  final JPanel            pMain;
-  final JComboBox<String> cbProject;
-  final JLabel            lbProject;
-  final JComboBox<String> cbPhase;
-  final JLabel            lbPhase;
-  final JButton           btStart;
-  final JButton           btStop;
-  final JLabel            lbDuration;
+  private final JPanel            pMain;
+  final         JComboBox<String> cbProject;
+  private final JLabel            lbProject;
+  final         JComboBox<String> cbPhase;
+  private final JLabel            lbPhase;
+  final         JButton           btStart;
+  final         JButton           btStop;
+  final         JLabel            lbDuration;
 
   public ActivityBarPanel()
   {

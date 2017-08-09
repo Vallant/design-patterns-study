@@ -10,42 +10,42 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 08.07.17.
  */
-public class ProjectDetailViewPanel extends JPanel
+class ProjectDetailViewPanel extends JPanel
 {
-  final JPanel  pHeader;
-  final JButton btBack;
-  final JLabel  lbProjectName;
+  private final JPanel  pHeader;
+  final         JButton btBack;
+  private final JLabel  lbProjectName;
 
-  final JPanel pCenter;
+  private final JPanel pCenter;
 
-  final JPanel                   pFlowPanel1;
-  final JPanel                   pPhases;
-  final JPanel                   pPhasesHeader;
+  private final JPanel                   pFlowPanel1;
+  private final JPanel                   pPhases;
+  private final JPanel                   pPhasesHeader;
   //final JLabel lbPhases;
-  final JPanel                   pPhasesButtons;
-  final JButton                  btAddPhase;
-  final JButton                  btDeletePhase;
-  final DefaultListModel<String> lstPhasesModel;
-  final JList<String>            lstPhases;
+  private final JPanel                   pPhasesButtons;
+  final         JButton                  btAddPhase;
+  final         JButton                  btDeletePhase;
+  private final DefaultListModel<String> lstPhasesModel;
+  final         JList<String>            lstPhases;
 
-  final JPanel  pFlowPanel2;
-  final JPanel  pMembers;
-  final JPanel  pMembersHeader;
+  private final JPanel  pFlowPanel2;
+  private final JPanel  pMembers;
+  private final JPanel  pMembersHeader;
   //final JLabel lbMembers;
-  final JPanel  pMembersButtons;
-  final JButton btAddMember;
-  final JButton btDeleteMember;
-  final JButton btPromoteToAdmin;
-  final JButton btDegradeToMember;
+  private final JPanel  pMembersButtons;
+  final         JButton btAddMember;
+  final         JButton btDeleteMember;
+  final         JButton btPromoteToAdmin;
+  final         JButton btDegradeToMember;
 
-  final DefaultListModel<String> lstMemberModel;
-  final JList                    lstMembers;
+  private final DefaultListModel<String> lstMemberModel;
+  final         JList                    lstMembers;
 
-  final JPanel    pDescription;
-  final JPanel    pFlowPanel3;
-  final JPanel    pDescriptionButtons;
-  final JTextArea taDescription;
-  final JButton   btUpdateDescription;
+  private final JPanel    pDescription;
+  private final JPanel    pFlowPanel3;
+  private final JPanel    pDescriptionButtons;
+  final         JTextArea taDescription;
+  final         JButton   btUpdateDescription;
 
 
   public ProjectDetailViewPanel()

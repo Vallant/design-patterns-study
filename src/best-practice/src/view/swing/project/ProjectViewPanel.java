@@ -9,25 +9,25 @@ import java.awt.*;
 /**
  * Created by stephan on 08.07.17.
  */
-public class ProjectViewPanel extends JPanel
+class ProjectViewPanel extends JPanel
 {
 
-  final JPanel                   pOwned;
-  final JPanel                   pOwnedButtons;
-  final JButton                  btAddProject;
-  final JButton                  btDeleteProject;
-  final JPanel                   pFlowPanel1;
-  final JScrollPane              spOwned;
-  final DefaultListModel<String> lstOwnedModel;
-  final JList<String>            lstOwned;
+  private final JPanel                   pOwned;
+  private final JPanel                   pOwnedButtons;
+  final         JButton                  btAddProject;
+  final         JButton                  btDeleteProject;
+  private final JPanel                   pFlowPanel1;
+  private final JScrollPane              spOwned;
+  final         DefaultListModel<String> lstOwnedModel;
+  final         JList<String>            lstOwned;
 
-  final JPanel                   pInvolved;
-  final JPanel                   pInvolvedButtons;
-  final JPanel                   pFlowPanel2;
-  final JButton                  btLeaveProject;
-  final JScrollPane              spInvolved;
-  final DefaultListModel<String> lstInvolvedModel;
-  final JList<String>            lstInvolved;
+  private final JPanel                   pInvolved;
+  private final JPanel                   pInvolvedButtons;
+  private final JPanel                   pFlowPanel2;
+  final         JButton                  btLeaveProject;
+  private final JScrollPane              spInvolved;
+  final         DefaultListModel<String> lstInvolvedModel;
+  final         JList<String>            lstInvolved;
 
   public ProjectViewPanel()
   {

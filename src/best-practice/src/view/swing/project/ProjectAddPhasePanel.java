@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Created by stephan on 09.07.17.
  */
-public class ProjectAddPhasePanel extends JPanel
+class ProjectAddPhasePanel extends JPanel
 {
 
   final JTextField tfName;

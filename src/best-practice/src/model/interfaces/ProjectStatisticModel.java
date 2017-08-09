@@ -19,8 +19,6 @@ public interface ProjectStatisticModel
 
   void setUser(User user);
 
-  ;
-
   void setMainModel(MainModel mainModel);
 
   void setController(ProjectStatisticController controller);

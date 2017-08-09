@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by stephan on 08.07.17.
  */
-public class LoginViewRegisterPanel extends JPanel
+class LoginViewRegisterPanel extends JPanel
 {
 
   final JTextField     tfLoginName;
