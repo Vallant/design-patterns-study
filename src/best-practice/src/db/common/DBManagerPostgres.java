@@ -17,73 +17,66 @@
 
 package db.common;
 
-import db.interfaces.ActivityRepository;
-import db.postgres.repository.ActivityRepositoryPostgres;
-import db.postgres.repository.ProjectMemberRepositoryPostgres;
-import db.postgres.repository.ProjectPhaseRepositoryPostgres;
-import db.postgres.repository.ProjectRepositoryPostgres;
-import db.postgres.repository.UserRepositoryPostgres;
-import java.sql.Connection;
+import db.interfaces.*;
+import db.postgres.repository.*;
 import org.apache.commons.dbcp2.BasicDataSource;
-import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
-import db.interfaces.UserRepository;
+
+import java.sql.Connection;
 
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class DBManagerPostgres extends DBManager
 {
-    private final BasicDataSource pool;
-    
-    public DBManagerPostgres(String driver, String url, String username, String password)
-    {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(driver);
-        ds.setUrl(url);
-        ds.setUsername(username);
-        ds.setPassword(password);
-        ds.setMaxTotal(50);
-        ds.setMinIdle(5);
-        //TODO optimize parameters
-        pool = ds;
-    }
-    
-    public Connection getConnection() throws Exception
-    {
-        return pool.getConnection();
-    }  
-    
-    @Override
-    public UserRepository getUserRepository()
-    {
-        return new UserRepositoryPostgres(this);
-    }
+  private final BasicDataSource pool;
 
-    @Override
-    public ProjectRepository getProjectRepository()
-    {
-        return new ProjectRepositoryPostgres(this);
-    }
+  public DBManagerPostgres(String driver, String url, String username, String password)
+  {
+    BasicDataSource ds = new BasicDataSource();
+    ds.setDriverClassName(driver);
+    ds.setUrl(url);
+    ds.setUsername(username);
+    ds.setPassword(password);
+    ds.setMaxTotal(50);
+    ds.setMinIdle(5);
+    //TODO optimize parameters
+    pool = ds;
+  }
 
-    @Override
-    public ProjectMemberRepository getProjectMemberRepository()
-    {
-        return new ProjectMemberRepositoryPostgres(this);
-    }
+  public Connection getConnection() throws Exception
+  {
+    return pool.getConnection();
+  }
 
-    @Override
-    public ProjectPhaseRepository getProjectPhaseRepository()
-    {
-        return new ProjectPhaseRepositoryPostgres(this);
-    }
+  @Override
+  public UserRepository getUserRepository()
+  {
+    return new UserRepositoryPostgres(this);
+  }
 
-    @Override
-    public ActivityRepository getActivityRepository()
-    {
-        return new ActivityRepositoryPostgres(this);
-    }
+  @Override
+  public ProjectRepository getProjectRepository()
+  {
+    return new ProjectRepositoryPostgres(this);
+  }
+
+  @Override
+  public ProjectMemberRepository getProjectMemberRepository()
+  {
+    return new ProjectMemberRepositoryPostgres(this);
+  }
+
+  @Override
+  public ProjectPhaseRepository getProjectPhaseRepository()
+  {
+    return new ProjectPhaseRepositoryPostgres(this);
+  }
+
+  @Override
+  public ActivityRepository getActivityRepository()
+  {
+    return new ActivityRepositoryPostgres(this);
+  }
 
 }

@@ -16,18 +16,19 @@
  */
 package db.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author stephan
  */
 public interface Repository<T>
 {
-    void add(T item) throws Exception;
-    void update(T item) throws Exception;
-    void delete(T item) throws Exception;
-    List<T> getAll() throws Exception;
-    
+  void add(T item) throws Exception;
+
+  void update(T item) throws Exception;
+
+  void delete(T item) throws Exception;
+
+  List<T> getAll() throws Exception;
+
 }

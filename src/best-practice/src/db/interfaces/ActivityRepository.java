@@ -19,30 +19,33 @@ package db.interfaces;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
-import data.User;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public interface ActivityRepository extends Repository<Activity>
 {
-    Activity getByPrimaryKey(int id) throws Exception;
+  Activity getByPrimaryKey(int id) throws Exception;
 
-    void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
+  void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects,
+                                                ArrayList<Duration> durations) throws Exception;
 
-    void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception;
+  void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases,
+                                 ArrayList<Duration> durations) throws Exception;
 
-    ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int id, ZonedDateTime since) throws Exception;
-    ArrayList<Activity> getActivitiesByUserForPhaseSince(String s, int phaseId, ZonedDateTime since) throws Exception;
+  ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int id, ZonedDateTime since) throws Exception;
 
-    void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception;
+  ArrayList<Activity> getActivitiesByUserForPhaseSince(String s, int phaseId, ZonedDateTime since) throws Exception;
 
-    void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception;
+  void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects,
+                                        ArrayList<Duration> durations) throws Exception;
+
+  void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since,
+                                        ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception;
 
 
 }

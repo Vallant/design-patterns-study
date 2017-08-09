@@ -2,37 +2,46 @@ package view.interfaces;
 
 import controller.interfaces.ProjectStatisticController;
 
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-public interface ProjectStatisticView {
-    void setController(ProjectStatisticController controller);
-    void hide();
-    void removeAllComponents();
+public interface ProjectStatisticView
+{
+  void setController(ProjectStatisticController controller);
 
-    void showProjectView();
-    void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations);
+  void hide();
 
-    void showPhaseView();
-    void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations, ArrayList<String> memberNames);
+  void removeAllComponents();
 
-    void showActivityView();
-    void setActivityData(ArrayList<String> users,
-                         ArrayList<String> descriptions,
-                         ArrayList<String> comments,
-                         ArrayList<ZonedDateTime> startTimes,
-                         ArrayList<ZonedDateTime> endTimes,
-                         ArrayList<String> memberNames);
+  void showProjectView();
+
+  void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations);
+
+  void showPhaseView();
+
+  void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations, ArrayList<String> memberNames);
+
+  void showActivityView();
+
+  void setActivityData(ArrayList<String> users,
+                       ArrayList<String> descriptions,
+                       ArrayList<String> comments,
+                       ArrayList<ZonedDateTime> startTimes,
+                       ArrayList<ZonedDateTime> endTimes,
+                       ArrayList<String> memberNames);
 
 
-    int getSelectedPhasePeriod();
-    int getSelectedActivityPeriod();
-    int getSelectedProjectPeriod();
-    int getSelectedUser();
+  int getSelectedPhasePeriod();
 
-    boolean confirmDeletion();
-    void showError(String error);
+  int getSelectedActivityPeriod();
+
+  int getSelectedProjectPeriod();
+
+  int getSelectedUser();
+
+  boolean confirmDeletion();
+
+  void showError(String error);
 
 }

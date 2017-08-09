@@ -21,117 +21,110 @@ import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class ProjectMember implements DBEntity
 {
 
 
+  private User    user;
+  private Project project;
+  private int     remoteHash;
+  private ROLE    role;
+  public ProjectMember(User user, Project project, ROLE role)
+  {
+    this.user = user;
+    this.project = project;
+    this.role = role;
+  }
 
-    public static enum ROLE
-    {
-        MEMBER,
-        LEADER
-    }
-    
-    private User user;
-    private Project project;
-    private int remoteHash;
-    private ROLE role;
+  public ProjectMember(User user, Project project, int hash, ROLE role)
+  {
+    this.user = user;
+    this.project = project;
+    this.remoteHash = hash;
+    this.role = role;
+  }
 
-    public User getUser()
-    {
-        return user;
-    }
+  public User getUser()
+  {
+    return user;
+  }
 
-    public Project getProject()
-    {
-        return project;
-    }
+  public void setUser(User user)
+  {
+    this.user = user;
+  }
 
-    public ROLE getRole()
-    {
-        return role;
-    }
+  public Project getProject()
+  {
+    return project;
+  }
 
-    public void setRole(ROLE role)
-    {
-        this.role = role;
-    }
+  public void setProject(Project project)
+  {
+    this.project = project;
+  }
 
-    public ProjectMember(User user, Project project, ROLE role)
-    {
-        this.user = user;
-        this.project = project;
-        this.role = role;
-    }
+  public ROLE getRole()
+  {
+    return role;
+  }
 
-    public ProjectMember(User user, Project project, int hash, ROLE role)
-    {
-        this.user = user;
-        this.project = project;
-        this.remoteHash = hash;
-        this.role = role;
-    }
-    
-    
-    @Override
-    public boolean isChanged()
-    {
-        return getLocalHash() != getRemoteHash();
-    }
+  public void setRole(ROLE role)
+  {
+    this.role = role;
+  }
 
-    @Override
-    public int getLocalHash()
-    {
-        return new HashCodeBuilder().
-                append(user.getLoginName()).
-                append(project.getId()).
-                append(role).
-                hashCode();
-                
-    }
+  @Override
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
 
-    @Override
-    public int getRemoteHash()
-    {
-        return remoteHash;
-    }
+  @Override
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder().
+      append(user.getLoginName()).
+      append(project.getId()).
+      append(role).
+      hashCode();
 
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
+  }
 
-    public void setProject(Project project)
-    {
-        this.project = project;
-    }
+  @Override
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
 
-    public void setRemoteHash(int remoteHash)
-    {
-        this.remoteHash = remoteHash;
-    }
-    
-    
-    public String getUserLoginName()
-    {
-        return user.getLoginName();
-    }
-   
-    public int getProjectId()
-    {
-        return project.getId();
-    }
+  public void setRemoteHash(int remoteHash)
+  {
+    this.remoteHash = remoteHash;
+  }
 
-    public String getProjectName() {
-        return project.getName();
-    }
-    
-    
-    
-    
-    
+  public String getUserLoginName()
+  {
+    return user.getLoginName();
+  }
+
+  public int getProjectId()
+  {
+    return project.getId();
+  }
+
+  public String getProjectName()
+  {
+    return project.getName();
+  }
+
+  public static enum ROLE
+  {
+    MEMBER,
+    LEADER
+  }
+
 
 }

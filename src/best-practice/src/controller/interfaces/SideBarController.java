@@ -8,13 +8,19 @@ import view.interfaces.SideBarView;
  */
 public interface SideBarController
 {
-    void setView(SideBarView view);
-    void setModel(SideBarModel model);
+  void setView(SideBarView view);
 
-    void projectsClicked();
-    void personalStatisticClicked();
-    void administrationClicked();
-    void settingsClicked();
-    void projectStatisticClicked();
-    void logoutClicked();
+  void setModel(SideBarModel model);
+
+  void projectsClicked();
+
+  void personalStatisticClicked();
+
+  void administrationClicked();
+
+  void settingsClicked();
+
+  void projectStatisticClicked();
+
+  void logoutClicked();
 }

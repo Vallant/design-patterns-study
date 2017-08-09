@@ -10,45 +10,49 @@ import controller.interfaces.ProjectController;
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public interface ProjectView
 {
-    void setController(ProjectController controller);
-    void showOverview();
-    void showDetail(String projectName, ArrayList<String> phases, ArrayList<String> members, ArrayList<String> roles, String description);
-    void hide();
+  void setController(ProjectController controller);
 
-    void setParticipatingProjects(ArrayList<String> participatingProjects);
+  void showOverview();
 
-    void setOwnedProjects(ArrayList<String> ownedProjects);
+  void showDetail(String projectName, ArrayList<String> phases, ArrayList<String> members, ArrayList<String> roles,
+                  String description);
 
-    void showError(String localizedMessage);
+  void hide();
 
+  void setParticipatingProjects(ArrayList<String> participatingProjects);
 
-    void showProjectCreationDialog();
+  void setOwnedProjects(ArrayList<String> ownedProjects);
 
-    void setOwnedProjectsButtonsEnabled(boolean enabled);
-
-    void setInvolvedProjectsButtonsEnabled(boolean enabled);
+  void showError(String localizedMessage);
 
 
-    int getSelectedOwnedProjectIndex();
+  void showProjectCreationDialog();
 
-    int getSelectedInvolvedProjectIndex();
+  void setOwnedProjectsButtonsEnabled(boolean enabled);
 
-    int getSelectedPhaseIndex();
-    
+  void setInvolvedProjectsButtonsEnabled(boolean enabled);
 
-    int getSelectedMemberIndex();
 
-    void showAddPhaseDialog();
-    void showAddMemberDialog(ArrayList<String> availableMembers);
+  int getSelectedOwnedProjectIndex();
 
-    String getDescription();
+  int getSelectedInvolvedProjectIndex();
 
-    void setProjectPhaseButtonsEnabled(boolean hasSelection);
+  int getSelectedPhaseIndex();
 
-    void setMemberListButtonsEnabled(boolean hasSelection);
+
+  int getSelectedMemberIndex();
+
+  void showAddPhaseDialog();
+
+  void showAddMemberDialog(ArrayList<String> availableMembers);
+
+  String getDescription();
+
+  void setProjectPhaseButtonsEnabled(boolean hasSelection);
+
+  void setMemberListButtonsEnabled(boolean hasSelection);
 }

@@ -21,98 +21,98 @@ import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class ProjectPhase implements DBEntity
 {
-    private int remoteHash;
-    private Project project;
-    private String name;
-    private int id;
-    
-    public ProjectPhase(int hash, Project project, String name, int id)
-    {
-        this.remoteHash = hash;
-        this.project = project;
-        this.name = name;
-        this.id = id;
-    }
+  private int     remoteHash;
+  private Project project;
+  private String  name;
+  private int     id;
 
-    public ProjectPhase(Project project, String name)
-    {
-        this.project = project;
-        this.name = name;
-    }
-    
-    
-    
-    @Override
-    public boolean isChanged()
-    {
-        return getLocalHash() != getRemoteHash();
-    }
+  public ProjectPhase(int hash, Project project, String name, int id)
+  {
+    this.remoteHash = hash;
+    this.project = project;
+    this.name = name;
+    this.id = id;
+  }
 
-    @Override
-    public int getLocalHash()
-    {
-        return new HashCodeBuilder().
-                append(project.getId()).
-                append(name).
-                append(id).
-                hashCode();
-    }
+  public ProjectPhase(Project project, String name)
+  {
+    this.project = project;
+    this.name = name;
+  }
 
-    public Project getProject()
-    {
-        return project;
-    }
 
-    public void setProject(Project project)
-    {
-        this.project = project;
-    }
+  @Override
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
 
-    public String getName()
-    {
-        return name;
-    }
+  @Override
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder().
+      append(project.getId()).
+      append(name).
+      append(id).
+      hashCode();
+  }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+  public Project getProject()
+  {
+    return project;
+  }
 
-    @Override
-    public int getRemoteHash()
-    {
-        return remoteHash;
-    }
+  public void setProject(Project project)
+  {
+    this.project = project;
+  }
 
-    @Override
-    public void setRemoteHash(int hash)
-    {
-        remoteHash = hash;
-    }
+  public String getName()
+  {
+    return name;
+  }
 
-    public String getProjectName()
-    {
-        return project.getName();
-    }
-    public int getProjectId()
-    {
-        return project.getId();
-    }
+  public void setName(String name)
+  {
+    this.name = name;
+  }
 
-    public int getId()
-    {
-        return id;
-    }
+  @Override
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    
-    
+  @Override
+  public void setRemoteHash(int hash)
+  {
+    remoteHash = hash;
+  }
+
+  public String getProjectName()
+  {
+    return project.getName();
+  }
+
+  public int getProjectId()
+  {
+    return project.getId();
+  }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+
+
 }

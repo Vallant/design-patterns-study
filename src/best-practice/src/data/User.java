@@ -28,172 +28,182 @@ public class User implements DBEntity
 {
 
 
-    public void setOldPassword(char[] oldPassword) {
-        this.oldPassword = oldPassword;
-    }
+  private int    remoteHash;
+  private String loginName;
+  private String firstName;
+  private String lastName;
+  private ROLE   role;
+  private String email;
+  private byte[] password;
+  private byte[] salt;
+  private char[] newPassword;
+  private char[] newPasswordAgain;
+  private char[] oldPassword;
+  public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email,
+              byte[] password, byte[] salt)
+  {
+    this.remoteHash = remoteHash;
+    this.loginName = loginName;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.role = role;
+    this.email = email;
+    this.password = password;
+    this.salt = salt;
+  }
 
-    public static enum ROLE
-    {
-        ADMIN,
-        USER
-    }
-    
-    private int remoteHash;
-    private String loginName;
-    
-    private String firstName;
-    private String lastName;
-    private ROLE role;
-    private String email;
-    private byte[] password;
-    private byte[] salt;
-    
-    private char[] newPassword;
-    private char[] newPasswordAgain;
+  public User(String loginName, String firstName, String lastName, ROLE role, String email, byte[] password,
+              byte[] salt)
+  {
+    this.loginName = loginName;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.role = role;
+    this.email = email;
+    this.password = password;
+    this.salt = salt;
+  }
 
-    public char[] getOldPassword() {
-        return oldPassword;
-    }
+  public User(String loginName, String firstName, String lastName, ROLE role, String email, char[] password,
+              char[] passwordAgain)
+  {
+    this.loginName = loginName;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.role = role;
+    this.email = email;
+    this.newPassword = password;
+    this.newPasswordAgain = passwordAgain;
+  }
 
-    private char[] oldPassword;
+  public char[] getOldPassword()
+  {
+    return oldPassword;
+  }
 
-    public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
-    {
-        this.remoteHash = remoteHash;
-        this.loginName = loginName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-        this.salt = salt;
-    }
+  public void setOldPassword(char[] oldPassword)
+  {
+    this.oldPassword = oldPassword;
+  }
 
-    public User(String loginName, String firstName, String lastName, ROLE role, String email, byte[] password, byte[] salt)
-    {
-        this.loginName = loginName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-        this.salt = salt;
-    }
+  public char[] getNewPasswordAgain()
+  {
+    return newPasswordAgain;
+  }
 
-    public User(String loginName, String firstName, String lastName, ROLE role, String email, char[] password, char[] passwordAgain)
-    {
-        this.loginName = loginName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.email = email;
-        this.newPassword = password;
-        this.newPasswordAgain = passwordAgain;
-    }
+  public byte[] getPassword()
+  {
+    return password;
+  }
 
-    public char[] getNewPasswordAgain()
-    {
-        return newPasswordAgain;
-    }
+  public void setPassword(byte[] password)
+  {
+    this.password = password;
+  }
 
-    public byte[] getPassword()
-    {
-        return password;
-    }
+  public byte[] getSalt()
+  {
+    return salt;
+  }
 
-    public void setPassword(byte[] password)
-    {
-        this.password = password;
-    }
+  public void setSalt(byte[] salt)
+  {
+    this.salt = salt;
+  }
 
-    public byte[] getSalt()
-    {
-        return salt;
-    }
+  public String getLoginName()
+  {
+    return loginName;
+  }
 
-    public void setSalt(byte[] salt)
-    {
-        this.salt = salt;
-    }
+  public void setLoginName(String userName)
+  {
+    this.loginName = userName;
+  }
 
-    
-     
-   
-    public String getLoginName() {
-        return loginName;
-    }
+  public String getFirstName()
+  {
+    return firstName;
+  }
 
-    public void setLoginName(String userName) {
-        this.loginName = userName;
-    }
+  public void setFirstName(String firstName)
+  {
+    this.firstName = firstName;
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public String getLastName()
+  {
+    return lastName;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public void setLastName(String lastName)
+  {
+    this.lastName = lastName;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public ROLE getRole()
+  {
+    return role;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public void setRole(ROLE role)
+  {
+    this.role = role;
+  }
 
-    public ROLE getRole() {
-        return role;
-    }
+  public String getEmail()
+  {
+    return email;
+  }
 
-    public void setRole(ROLE role) {
-        this.role = role;
-    }
+  public void setEmail(String email)
+  {
+    this.email = email;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  @Override
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  @Override
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder().
+      append(firstName).
+      append(lastName).
+      append(role).
+      append(loginName).
+      append(email).
+      hashCode();
+  }
 
-    @Override
-    public boolean isChanged()
-    {
-        return getLocalHash() != getRemoteHash();
-    }
+  @Override
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
 
-    @Override
-    public int getLocalHash()
-    {
-        return new HashCodeBuilder().
-                append(firstName).
-                append(lastName).
-                append(role).
-                append(loginName).
-                append(email).
-                hashCode();
-    }
+  @Override
+  public void setRemoteHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
 
-    @Override
-    public int getRemoteHash()
-    {
-        return remoteHash;
-    }
-    
-    @Override
-    public void setRemoteHash(int hash)
-    {
-        this.remoteHash = hash;
-    }
-    
-    public char[] getNewPassword()
-    {
-        return newPassword;
-    }
-    public void setNewPassword(char[] newPassword) {
-        this.newPassword = newPassword;
-    }
+  public char[] getNewPassword()
+  {
+    return newPassword;
+  }
+
+  public void setNewPassword(char[] newPassword)
+  {
+    this.newPassword = newPassword;
+  }
+
+  public static enum ROLE
+  {
+    ADMIN,
+    USER
+  }
 }

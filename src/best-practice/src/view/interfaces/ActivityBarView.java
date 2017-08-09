@@ -6,39 +6,44 @@
 package view.interfaces;
 
 import controller.interfaces.ActivityBarController;
-import data.ProjectPhase;
 
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public interface ActivityBarView
 {
-    void setActivityBarController(ActivityBarController controller);
-    void show();
+  void setActivityBarController(ActivityBarController controller);
 
-    void enableStart();
-    void disableStart();
-    void enableStop();
-    void disableStop();
+  void show();
 
-    void setProjectPhases(ArrayList<String> phases);
-    void setProjects(ArrayList<String> projects);
-    void startTimer();
-    void stopTimer();
+  void enableStart();
 
-    void showError(String localizedMessage);
+  void disableStart();
+
+  void enableStop();
+
+  void disableStop();
+
+  void setProjectPhases(ArrayList<String> phases);
+
+  void setProjects(ArrayList<String> projects);
+
+  void startTimer();
+
+  void stopTimer();
+
+  void showError(String localizedMessage);
 
 
-    void disableComboBoxes();
+  void disableComboBoxes();
 
-    void showCommentDescriptionDialog();
+  void showCommentDescriptionDialog();
 
-    void enableComboBoxes();
+  void enableComboBoxes();
 
-    void hide();
+  void hide();
 
-    void showFinishActivityDialog();
+  void showFinishActivityDialog();
 }

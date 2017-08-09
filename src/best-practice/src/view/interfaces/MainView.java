@@ -9,42 +9,45 @@ import controller.interfaces.*;
 import data.User;
 
 /**
- *
  * @author stephan
  */
 public interface MainView
 {
-    void setMainController(MainController controller);
-    void showLoginView();
-    void showProjectView();
-    
-    void pairLogin(LoginController controller);
-    void pairProject(ProjectController controller);
-    void pairActivityBar(ActivityBarController controller);
+  void setMainController(MainController controller);
 
-    void showError(String message);
+  void showLoginView();
 
-    void showActivityBar();
+  void showProjectView();
 
-    void pairSideBar(SideBarController sideBar);
+  void pairLogin(LoginController controller);
 
-    void showSideBar(User.ROLE role);
+  void pairProject(ProjectController controller);
 
-    void hideCenterContent();
+  void pairActivityBar(ActivityBarController controller);
 
-    void showAdminView();
+  void showError(String message);
 
-    void showPersonalStatisticView();
+  void showActivityBar();
 
-    void showProjectStatisticView();
+  void pairSideBar(SideBarController sideBar);
 
-    void showSettingsView();
+  void showSideBar(User.ROLE role);
 
-    void pairPersonalStatistic(PersonalStatisticController statistics);
+  void hideCenterContent();
 
-    void pairProjectStatistic(ProjectStatisticController projectStatistic);
+  void showAdminView();
 
-    void hideAll();
+  void showPersonalStatisticView();
 
-    void pairSettings(SettingsController settings);
+  void showProjectStatisticView();
+
+  void showSettingsView();
+
+  void pairPersonalStatistic(PersonalStatisticController statistics);
+
+  void pairProjectStatistic(ProjectStatisticController projectStatistic);
+
+  void hideAll();
+
+  void pairSettings(SettingsController settings);
 }

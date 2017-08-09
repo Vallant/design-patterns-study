@@ -20,106 +20,101 @@ package data;
 import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 /**
- * @created $date
  * @author stephan
+ * @created $date
  */
 public class Project implements DBEntity
 {
-    
-    private int remoteHash;
-    private int id;
-    private String name;
-    private String description;
 
-    @Override
-    public int getLocalHash()
-    {
-        return new HashCodeBuilder()
-                .append(name.hashCode())
-                .append(id)
-                .append(description.hashCode())
-                .hashCode();
-    }
-    @Override
-    public int getRemoteHash()
-    {
-        return remoteHash;
-    }
+  private int    remoteHash;
+  private int    id;
+  private String name;
+  private String description;
 
-    public Project(int hash, int id, String name, String description)
-    {
-        this.remoteHash = hash;
-        this.name = name;
-        this.description = description;
-        this.id = id;
-    }
+  public Project(int hash, int id, String name, String description)
+  {
+    this.remoteHash = hash;
+    this.name = name;
+    this.description = description;
+    this.id = id;
+  }
 
-    public Project(String name, String description)
-    {
-        this.name = name;
-        this.description = description;
-    }
-    
-    
-    public int getHash()
-    {
-        return remoteHash;
-    }
+  public Project(String name, String description)
+  {
+    this.name = name;
+    this.description = description;
+  }
 
-    public void setHash(int hash)
-    {
-        this.remoteHash = hash;
-    }
+  @Override
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder()
+      .append(name.hashCode())
+      .append(id)
+      .append(description.hashCode())
+      .hashCode();
+  }
 
-    public String getName()
-    {
-        return name;
-    }
+  @Override
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+  @Override
+  public void setRemoteHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
 
-    public String getDescription()
-    {
-        return description;
-    }
+  public int getHash()
+  {
+    return remoteHash;
+  }
 
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
+  public void setHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
+
+  @Override
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
 
 
-    @Override
-    public boolean isChanged()
-    {
-        return getLocalHash() != getRemoteHash();
-    }
-
-    @Override
-    public void setRemoteHash(int hash)
-    {
-        this.remoteHash = hash; 
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    
-    
-    
 }
 
 

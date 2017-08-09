@@ -9,31 +9,43 @@ import data.User;
 import model.interfaces.*;
 
 /**
- *
  * @author stephan
  */
 public interface MainController
 {
-    void init(String frontend);
-    void setModel(MainModel model);
+  void init(String frontend);
 
-    void pairLogin(LoginModel model);
-    void pairProject(ProjectModel model);
-    void pairActivityBar(ActivityBarModel model);
-    void pairSideBar(SideBarModel sideBar);
-    void pairPersonalStatistic(PersonalStatisticModel model);
-    void pairProjectStatistic(ProjectStatisticModel projectStatistic);
-    void pairSettings(SettingsModel settings);
-    
-    void switchToLogin();
-    void switchToProjectView();
-    void switchToAdminView();
-    void switchToPersonalStatisticView();
-    void switchToSettingsView();
-    void switchToProjectStatisticView();
-    
-    void showActivityBar();
-    void showSideBar(User.ROLE role);
+  void setModel(MainModel model);
 
-    void showError(Exception ex);
+  void pairLogin(LoginModel model);
+
+  void pairProject(ProjectModel model);
+
+  void pairActivityBar(ActivityBarModel model);
+
+  void pairSideBar(SideBarModel sideBar);
+
+  void pairPersonalStatistic(PersonalStatisticModel model);
+
+  void pairProjectStatistic(ProjectStatisticModel projectStatistic);
+
+  void pairSettings(SettingsModel settings);
+
+  void switchToLogin();
+
+  void switchToProjectView();
+
+  void switchToAdminView();
+
+  void switchToPersonalStatisticView();
+
+  void switchToSettingsView();
+
+  void switchToProjectStatisticView();
+
+  void showActivityBar();
+
+  void showSideBar(User.ROLE role);
+
+  void showError(Exception ex);
 }

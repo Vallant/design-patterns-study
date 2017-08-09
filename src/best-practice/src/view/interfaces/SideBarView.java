@@ -6,11 +6,12 @@ import data.User;
 /**
  * Created by stephan on 08.07.17.
  */
-public interface SideBarView {
+public interface SideBarView
+{
 
-    void setController(SideBarController controller);
+  void setController(SideBarController controller);
 
-    void show(User.ROLE role);
+  void show(User.ROLE role);
 
-    void hide();
+  void hide();
 }

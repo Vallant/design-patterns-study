@@ -11,27 +11,29 @@ import data.User;
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public interface ActivityBarModel
 {
-    void setMainModel(MainModel mainModel);
-    void setController(ActivityBarController controller);
-    void setUser(User user);
+  void setMainModel(MainModel mainModel);
 
-    void startClicked();
-    void stopClicked();
+  void setController(ActivityBarController controller);
 
-    ArrayList<String> getProjectPhasesFor(String project) throws Exception;
+  void setUser(User user);
 
-    void refresh();
+  void startClicked();
 
-    ArrayList<String> getProjects() throws Exception;
+  void stopClicked();
 
-    void activityFinished(String project, String projectPhase, String description, String comment) throws Exception;
+  ArrayList<String> getProjectPhasesFor(String project) throws Exception;
 
-    void discardActivity();
+  void refresh();
 
-    void finishActivity();
+  ArrayList<String> getProjects() throws Exception;
+
+  void activityFinished(String project, String projectPhase, String description, String comment) throws Exception;
+
+  void discardActivity();
+
+  void finishActivity();
 }

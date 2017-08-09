@@ -3,13 +3,17 @@ package model.interfaces;
 import controller.interfaces.SettingsController;
 import data.User;
 
-public interface SettingsModel {
+public interface SettingsModel
+{
 
-    void setUser(User user);
-    void setMainModel(MainModel mainModel);
-    void setController(SettingsController controller);
-    void refresh();
+  void setUser(User user);
 
-    void saveUser(User user) throws Exception;
+  void setMainModel(MainModel mainModel);
+
+  void setController(SettingsController controller);
+
+  void refresh();
+
+  void saveUser(User user) throws Exception;
 
 }

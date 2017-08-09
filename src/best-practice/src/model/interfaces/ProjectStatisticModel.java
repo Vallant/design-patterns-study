@@ -9,24 +9,34 @@ import data.User;
 public interface ProjectStatisticModel
 {
 
-    void projectPeriodChanged(int selectedPeriodIndex) throws Exception;
+  void projectPeriodChanged(int selectedPeriodIndex) throws Exception;
 
-    void activityDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser) throws Exception;
-    void phaseDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser) throws Exception;
+  void activityDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser)
+    throws Exception;
 
-    enum PERIOD
-    {
-        ALLTIME,
-        YEAR,
-        MONTH,
-        WEEK,
-        DAY
-    };
+  void phaseDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser)
+    throws Exception;
 
-    void setUser(User user);
-    void setMainModel(MainModel mainModel);
-    void setController(ProjectStatisticController controller);
-    void refresh();
-    void requestedDetailFor(Project project) throws Exception;
-    void requestedDetailFor(ProjectPhase projectPhase) throws Exception;
+  void setUser(User user);
+
+  ;
+
+  void setMainModel(MainModel mainModel);
+
+  void setController(ProjectStatisticController controller);
+
+  void refresh();
+
+  void requestedDetailFor(Project project) throws Exception;
+
+  void requestedDetailFor(ProjectPhase projectPhase) throws Exception;
+
+  enum PERIOD
+  {
+    ALLTIME,
+    YEAR,
+    MONTH,
+    WEEK,
+    DAY
+  }
 }

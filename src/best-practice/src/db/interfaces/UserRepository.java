@@ -21,12 +21,11 @@ import data.User;
 import java.util.ArrayList;
 
 /**
- *
  * @author stephan
  */
 public interface UserRepository extends Repository<User>
 {
-    User getByPrimaryKey(String loginName) throws Exception;
+  User getByPrimaryKey(String loginName) throws Exception;
 
-    ArrayList<User> getAvailableUsersFor(int projectId) throws Exception;
+  ArrayList<User> getAvailableUsersFor(int projectId) throws Exception;
 }

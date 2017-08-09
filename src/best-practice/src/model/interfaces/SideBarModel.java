@@ -8,20 +8,21 @@ import controller.interfaces.SideBarController;
 public interface SideBarModel
 {
 
-    void setMainModel(MainModel model);
-    void setController(SideBarController controller);
+  void setMainModel(MainModel model);
 
-    void refresh();
+  void setController(SideBarController controller);
 
-    void projectsClicked();
+  void refresh();
 
-    void personalStatisticClicked();
+  void projectsClicked();
 
-    void administrationClicked();
+  void personalStatisticClicked();
 
-    void settingsClicked();
+  void administrationClicked();
 
-    void projectStatisticClicked();
+  void settingsClicked();
 
-    void logoutClicked();
+  void projectStatisticClicked();
+
+  void logoutClicked();
 }

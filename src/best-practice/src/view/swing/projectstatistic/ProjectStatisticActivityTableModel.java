@@ -5,61 +5,73 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class ProjectStatisticActivityTableModel extends AbstractTableModel {
+public class ProjectStatisticActivityTableModel extends AbstractTableModel
+{
 
-    static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
+  static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-    String[] columnNames = {"Member", "Start", "End", "Description", "Comment"};
-    ArrayList<String> descriptions;
-    ArrayList<String> comments;
-    ArrayList<ZonedDateTime> startTimes;
-    ArrayList<ZonedDateTime> endTimes;
-    ArrayList<String> users;
+  String[] columnNames = {"Member", "Start", "End", "Description", "Comment"};
+  ArrayList<String>        descriptions;
+  ArrayList<String>        comments;
+  ArrayList<ZonedDateTime> startTimes;
+  ArrayList<ZonedDateTime> endTimes;
+  ArrayList<String>        users;
 
-    public ProjectStatisticActivityTableModel() {
-        descriptions = new ArrayList<>();
-        comments = new ArrayList<>();
-        startTimes = new ArrayList<>();
-        endTimes = new ArrayList<>();
-    }
+  public ProjectStatisticActivityTableModel()
+  {
+    descriptions = new ArrayList<>();
+    comments = new ArrayList<>();
+    startTimes = new ArrayList<>();
+    endTimes = new ArrayList<>();
+  }
 
-    @Override
-    public int getRowCount() {
-        return descriptions.size();
-    }
+  @Override
+  public int getRowCount()
+  {
+    return descriptions.size();
+  }
 
-    @Override
-    public int getColumnCount() {
-        return columnNames.length;
-    }
+  @Override
+  public int getColumnCount()
+  {
+    return columnNames.length;
+  }
 
-    @Override
-    public Object getValueAt(int row, int column) {
-        switch (column)
-        {
-            case 0: return users.get(row);
-            case 1: return startTimes.get(row).format(formatter);
-            case 2: return endTimes.get(row).format(formatter);
-            case 3: return descriptions.get(row);
-            case 4: return comments.get(row);
-            default: return "ERROR";
-        }
-    }
-
-    public void setValues(ArrayList<String> users, ArrayList<String> descriptions,
-                   ArrayList<String> comments,
-                   ArrayList<ZonedDateTime> startTimes,
-                   ArrayList<ZonedDateTime> endTimes)
+  @Override
+  public Object getValueAt(int row, int column)
+  {
+    switch(column)
     {
-        this.descriptions = descriptions;
-        this.comments = comments;
-        this.startTimes = startTimes;
-        this.endTimes = endTimes;
-        this.users = users;
+      case 0:
+        return users.get(row);
+      case 1:
+        return startTimes.get(row).format(formatter);
+      case 2:
+        return endTimes.get(row).format(formatter);
+      case 3:
+        return descriptions.get(row);
+      case 4:
+        return comments.get(row);
+      default:
+        return "ERROR";
     }
+  }
 
-    @Override
-    public String getColumnName(int i) {
-        return columnNames[i];
-    }
+  public void setValues(ArrayList<String> users, ArrayList<String> descriptions,
+                        ArrayList<String> comments,
+                        ArrayList<ZonedDateTime> startTimes,
+                        ArrayList<ZonedDateTime> endTimes)
+  {
+    this.descriptions = descriptions;
+    this.comments = comments;
+    this.startTimes = startTimes;
+    this.endTimes = endTimes;
+    this.users = users;
+  }
+
+  @Override
+  public String getColumnName(int i)
+  {
+    return columnNames[i];
+  }
 }

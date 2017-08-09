@@ -9,25 +9,31 @@ import controller.interfaces.LoginController;
 import data.User;
 
 /**
- *
  * @author stephan
  */
 public interface LoginView
 {
-    void switchToResetPassword();
-    void switchToAddNewUser();
-    void switchToLogin();
-    void showLoginFailed();
-    void removeAllComponents();
-            
-    User getEnteredUser();
-    String getEnteredEmail();
-    String getEnteredUsername();
-    char[] getEnteredPassword();
+  void switchToResetPassword();
 
-    public void showDialog(String message);
+  void switchToAddNewUser();
 
-    public void setController(LoginController controller);
+  void switchToLogin();
 
-    void showError(String localizedMessage);
+  void showLoginFailed();
+
+  void removeAllComponents();
+
+  User getEnteredUser();
+
+  String getEnteredEmail();
+
+  String getEnteredUsername();
+
+  char[] getEnteredPassword();
+
+  public void showDialog(String message);
+
+  public void setController(LoginController controller);
+
+  void showError(String localizedMessage);
 }

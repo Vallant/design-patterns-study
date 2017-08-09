@@ -10,41 +10,44 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 08.07.17.
  */
-public interface PersonalStatisticView {
-    void showProjectView();
+public interface PersonalStatisticView
+{
+  void showProjectView();
 
-    void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations);
+  void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations);
 
-    void showPhaseView();
-    void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations);
+  void showPhaseView();
 
-    void showActivityView();
-    void setActivityData(ArrayList<String> descriptions,
-                         ArrayList<String> comments,
-                         ArrayList<ZonedDateTime> startTimes,
-                         ArrayList<ZonedDateTime> endTimes);
+  void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations);
 
-    void setController(PersonalStatisticController controller);
+  void showActivityView();
 
-    void RemoveAllComponents();
+  void setActivityData(ArrayList<String> descriptions,
+                       ArrayList<String> comments,
+                       ArrayList<ZonedDateTime> startTimes,
+                       ArrayList<ZonedDateTime> endTimes);
 
-    void showError(String localizedMessage);
+  void setController(PersonalStatisticController controller);
 
-    int getSelectedProjectPeriod();
+  void RemoveAllComponents();
 
-    int getSelectedActivity();
+  void showError(String localizedMessage);
 
-    void hide();
+  int getSelectedProjectPeriod();
 
-    void showAddActivityDialog();
+  int getSelectedActivity();
 
-    boolean confirmDeletion();
+  void hide();
 
-    void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end);
+  void showAddActivityDialog();
 
-    int getSelectedPhasePeriod();
+  boolean confirmDeletion();
 
-    int getSelectedActivityPeriod();
+  void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end);
 
-    void updateUI();
+  int getSelectedPhasePeriod();
+
+  int getSelectedActivityPeriod();
+
+  void updateUI();
 }

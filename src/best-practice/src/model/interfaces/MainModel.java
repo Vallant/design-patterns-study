@@ -9,25 +9,29 @@ import data.User;
 import db.common.DBManager;
 
 /**
- *
  * @author stephan
  */
 public interface MainModel
 {
-    void loginSuccessfulFor(User user);
-    void showError(Exception ex);
-    DBManager db();
+  void loginSuccessfulFor(User user);
 
-    void switchToPersonalStatistics();
-    void switchToProjects();
-    void switchToAdministration();
-    void switchToSettings();
+  void showError(Exception ex);
 
-    void refreshActivityBar();
+  DBManager db();
 
-    void switchToProjectStatistic();
+  void switchToPersonalStatistics();
 
-    void logout();
+  void switchToProjects();
 
-    //void switchedToHelp();
+  void switchToAdministration();
+
+  void switchToSettings();
+
+  void refreshActivityBar();
+
+  void switchToProjectStatistic();
+
+  void logout();
+
+  //void switchedToHelp();
 }

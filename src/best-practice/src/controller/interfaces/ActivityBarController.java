@@ -5,47 +5,52 @@
  */
 package controller.interfaces;
 
-import data.Project;
-import data.ProjectPhase;
 import model.interfaces.ActivityBarModel;
 import view.interfaces.ActivityBarView;
 
 /**
- *
  * @author stephan
  */
 public interface ActivityBarController
 {
-    //basic
-    void setModel(ActivityBarModel model);
-    void setView(ActivityBarView view);
-    void refresh();
+  //basic
+  void setModel(ActivityBarModel model);
 
-    //callbacks
-    void startClicked();
-    void stopClicked();
+  void setView(ActivityBarView view);
+
+  void refresh();
+
+  //callbacks
+  void startClicked();
+
+  void stopClicked();
 
 
-    void projectSelected(String project);
-    void phaseSelected(String projectPhase);
+  void projectSelected(String project);
 
-    void disableComboBoxes();
+  void phaseSelected(String projectPhase);
 
-    void showCommentDescriptionDialog();
+  void disableComboBoxes();
 
-    void startTimer();
-    void stopTimer();
+  void showCommentDescriptionDialog();
 
-    void disableStartButton();
-    void disableStopButton();
+  void startTimer();
 
-    void enableStartButton();
-    void enableStopButton();
+  void stopTimer();
 
-    void enableComboBoxes();
+  void disableStartButton();
 
-    void discardActivity();
+  void disableStopButton();
 
-    void finishActivity();
-    void activityFinished(String project, String projectPhase, String description, String comment);
+  void enableStartButton();
+
+  void enableStopButton();
+
+  void enableComboBoxes();
+
+  void discardActivity();
+
+  void finishActivity();
+
+  void activityFinished(String project, String projectPhase, String description, String comment);
 }

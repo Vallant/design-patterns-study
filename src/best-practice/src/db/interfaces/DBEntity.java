@@ -6,14 +6,16 @@
 package db.interfaces;
 
 /**
- *
  * @author stephan
  */
 public interface DBEntity
 {
-    public boolean isChanged();
-    public int getLocalHash();
-    public int getRemoteHash();
-    public void setRemoteHash(int hash);
-    
+  public boolean isChanged();
+
+  public int getLocalHash();
+
+  public int getRemoteHash();
+
+  public void setRemoteHash(int hash);
+
 }

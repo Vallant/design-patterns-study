@@ -9,21 +9,27 @@ import model.interfaces.LoginModel;
 import view.interfaces.LoginView;
 
 /**
- *
  * @author stephan
  */
 public interface LoginController
 {
-    void setModel(LoginModel model);
-    void setView(LoginView view);
-    
-    void resetPasswordClicked();
-    void loginClicked();
-    void addUserClicked();
-    void backToLoginClicked();
-    void addClicked();
-    void resetClicked();
+  void setModel(LoginModel model);
 
-    void showDialog(String message);
-    void loginFailed();
+  void setView(LoginView view);
+
+  void resetPasswordClicked();
+
+  void loginClicked();
+
+  void addUserClicked();
+
+  void backToLoginClicked();
+
+  void addClicked();
+
+  void resetClicked();
+
+  void showDialog(String message);
+
+  void loginFailed();
 }

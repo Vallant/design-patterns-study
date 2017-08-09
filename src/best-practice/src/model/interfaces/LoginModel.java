@@ -9,15 +9,17 @@ import controller.interfaces.LoginController;
 import data.User;
 
 /**
- *
  * @author stephan
  */
 public interface LoginModel
 {
-    void resetPassword(String email);
-    void login(String username, char[] password) throws Exception;
-    void saveNewUser(User user) throws Exception;
+  void resetPassword(String email);
 
-    void setMainModel(MainModel mainModel);
-    void setController(LoginController controller);
+  void login(String username, char[] password) throws Exception;
+
+  void saveNewUser(User user) throws Exception;
+
+  void setMainModel(MainModel mainModel);
+
+  void setController(LoginController controller);
 }
