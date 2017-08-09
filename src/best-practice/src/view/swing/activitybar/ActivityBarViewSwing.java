@@ -200,46 +200,24 @@ public class ActivityBarViewSwing implements ActivityBarView
 
   private void setListeners()
   {
-    pMain.btStart.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.startClicked();
-      }
-    });
+    pMain.btStart.addActionListener(actionEvent -> controller.startClicked());
 
-    pMain.btStop.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.stopClicked();
-      }
-    });
+    pMain.btStop.addActionListener(actionEvent -> controller.stopClicked());
 
 
     pMain.cbPhase.addActionListener(
-      new ActionListener()
+      actionEvent ->
       {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent)
-        {
-          String selectedPhase = (String) pMain.cbPhase.getSelectedItem();
-          controller.phaseSelected(selectedPhase);
-        }
+        String selectedPhase = (String) pMain.cbPhase.getSelectedItem();
+        controller.phaseSelected(selectedPhase);
       }
     );
 
     pMain.cbProject.addActionListener(
-      new ActionListener()
+      actionEvent ->
       {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent)
-        {
-          String selectedProject = (String) pMain.cbProject.getSelectedItem();
-          controller.projectSelected(selectedProject);
-        }
+        String selectedProject = (String) pMain.cbProject.getSelectedItem();
+        controller.projectSelected(selectedProject);
       }
     );
   }

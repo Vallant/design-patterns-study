@@ -61,56 +61,14 @@ public class SideBarViewSwing implements SideBarView
 
   private void setListeners()
   {
-    btProjects.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectsClicked();
-      }
-    });
-    btPersonalStatistic.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.personalStatisticClicked();
-      }
-    });
-    btAdministration.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.administrationClicked();
-      }
-    });
+    btProjects.addActionListener(actionEvent -> controller.projectsClicked());
+    btPersonalStatistic.addActionListener(actionEvent -> controller.personalStatisticClicked());
+    btAdministration.addActionListener(actionEvent -> controller.administrationClicked());
 
-    btSettings.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.settingsClicked();
-      }
-    });
+    btSettings.addActionListener(actionEvent -> controller.settingsClicked());
 
-    btProjectStatistic.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectStatisticClicked();
-      }
-    });
-    btLogout.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.logoutClicked();
-      }
-    });
+    btProjectStatistic.addActionListener(actionEvent -> controller.projectStatisticClicked());
+    btLogout.addActionListener(actionEvent -> controller.logoutClicked());
   }
 
   @Override

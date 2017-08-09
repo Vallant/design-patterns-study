@@ -35,53 +35,19 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView
 
   private void setListener()
   {
-    pProject.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex());
-      }
-    });
-    pPhase.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
-          pPhase.cbMembers.getSelectedIndex());
-      }
-    });
-    pPhase.cbMembers.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
-          pPhase.cbMembers.getSelectedIndex());
-      }
-    });
+    pProject.cbPeriod.addActionListener(
+      actionEvent -> controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex()));
+    pPhase.cbPeriod.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
+      pPhase.cbMembers.getSelectedIndex()));
+    pPhase.cbMembers.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
+      pPhase.cbMembers.getSelectedIndex()));
 
-    pActivity.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.activityDropDownChanged(
-          pActivity.cbPeriod.getSelectedIndex(),
-          pActivity.cbMembers.getSelectedIndex());
-      }
-    });
-    pActivity.cbMembers.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.activityDropDownChanged(
-          pActivity.cbPeriod.getSelectedIndex(),
-          pActivity.cbMembers.getSelectedIndex());
-      }
-    });
+    pActivity.cbPeriod.addActionListener(actionEvent -> controller.activityDropDownChanged(
+      pActivity.cbPeriod.getSelectedIndex(),
+      pActivity.cbMembers.getSelectedIndex()));
+    pActivity.cbMembers.addActionListener(actionEvent -> controller.activityDropDownChanged(
+      pActivity.cbPeriod.getSelectedIndex(),
+      pActivity.cbMembers.getSelectedIndex()));
 
     pProject.tblProjects.addMouseListener(new MouseAdapter()
     {
@@ -97,14 +63,7 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView
       }
     });
 
-    pPhase.btBack.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.backToProjectClicked();
-      }
-    });
+    pPhase.btBack.addActionListener(actionEvent -> controller.backToProjectClicked());
     pPhase.tblPhases.addMouseListener(new MouseAdapter()
     {
       @Override
@@ -119,14 +78,7 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView
       }
     });
 
-    pActivity.btBack.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.backToPhaseClicked();
-      }
-    });
+    pActivity.btBack.addActionListener(actionEvent -> controller.backToPhaseClicked());
   }
 
   @Override

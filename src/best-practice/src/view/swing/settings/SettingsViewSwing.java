@@ -26,29 +26,15 @@ public class SettingsViewSwing implements SettingsView
 
   private void setListener()
   {
-    pMain.btReset.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.resetClicked();
-      }
-    });
-    pMain.btApply.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.applyClicked(
-          pMain.tfFirst.getText(),
-          pMain.tfLast.getText(),
-          pMain.tfEmail.getText(),
-          pMain.tfOldPw.getPassword(),
-          pMain.tfNewPw.getPassword(),
-          pMain.tfNewPwAgain.getPassword()
-        );
-      }
-    });
+    pMain.btReset.addActionListener(actionEvent -> controller.resetClicked());
+    pMain.btApply.addActionListener(actionEvent -> controller.applyClicked(
+      pMain.tfFirst.getText(),
+      pMain.tfLast.getText(),
+      pMain.tfEmail.getText(),
+      pMain.tfOldPw.getPassword(),
+      pMain.tfNewPw.getPassword(),
+      pMain.tfNewPwAgain.getPassword()
+    ));
   }
 
   @Override

@@ -38,31 +38,12 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
 
   private void setListeners()
   {
-    pProject.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex());
-      }
-    });
-    pPhase.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.phasePeriodChanged(pPhase.cbPeriod.getSelectedIndex());
-      }
-    });
+    pProject.cbPeriod.addActionListener(
+      actionEvent -> controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex()));
+    pPhase.cbPeriod.addActionListener(actionEvent -> controller.phasePeriodChanged(pPhase.cbPeriod.getSelectedIndex()));
 
-    pActivity.cbPeriod.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.activityPeriodChanged(pActivity.cbPeriod.getSelectedIndex());
-      }
-    });
+    pActivity.cbPeriod.addActionListener(
+      actionEvent -> controller.activityPeriodChanged(pActivity.cbPeriod.getSelectedIndex()));
 
     pProject.tblProjects.addMouseListener(new MouseAdapter()
     {
@@ -78,14 +59,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
       }
     });
 
-    pPhase.btBack.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.backToOverviewClicked();
-      }
-    });
+    pPhase.btBack.addActionListener(actionEvent -> controller.backToOverviewClicked());
     pPhase.tblPhases.addMouseListener(new MouseAdapter()
     {
       @Override
@@ -100,40 +74,12 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
       }
     });
 
-    pActivity.btAddActivity.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.addActivityClicked();
-      }
-    });
-    pActivity.btDeleteActivity.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.deleteActivityClicked();
-      }
-    });
+    pActivity.btAddActivity.addActionListener(actionEvent -> controller.addActivityClicked());
+    pActivity.btDeleteActivity.addActionListener(actionEvent -> controller.deleteActivityClicked());
 
-    pActivity.btUpdateActivity.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.updateActivityClicked();
-      }
-    });
+    pActivity.btUpdateActivity.addActionListener(actionEvent -> controller.updateActivityClicked());
 
-    pActivity.btBack.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.backToPhaseViewClicked();
-      }
-    });
+    pActivity.btBack.addActionListener(actionEvent -> controller.backToPhaseViewClicked());
   }
 
   @Override

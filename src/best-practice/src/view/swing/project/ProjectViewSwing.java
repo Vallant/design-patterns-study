@@ -39,49 +39,20 @@ public class ProjectViewSwing implements ProjectView
 
   private void setListener()
   {
-    pMain.btLeaveProject.addActionListener(new ActionListener()
+    pMain.btLeaveProject.addActionListener(actionEvent -> controller.leaveProjectClicked());
+    pMain.btAddProject.addActionListener(actionEvent -> controller.addProjectClicked());
+    pMain.btDeleteProject.addActionListener(actionEvent -> controller.deleteProjectClicked());
+
+    pMain.lstOwned.addListSelectionListener(listSelectionEvent ->
     {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.leaveProjectClicked();
-      }
-    });
-    pMain.btAddProject.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.addProjectClicked();
-      }
-    });
-    pMain.btDeleteProject.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.deleteProjectClicked();
-      }
+      int index = listSelectionEvent.getFirstIndex();
+      controller.ownedProjectsHasSelection(index != -1);
     });
 
-    pMain.lstOwned.addListSelectionListener(new ListSelectionListener()
+    pMain.lstInvolved.addListSelectionListener(listSelectionEvent ->
     {
-      @Override
-      public void valueChanged(ListSelectionEvent listSelectionEvent)
-      {
-        int index = listSelectionEvent.getFirstIndex();
-        controller.ownedProjectsHasSelection(index != -1);
-      }
-    });
-
-    pMain.lstInvolved.addListSelectionListener(new ListSelectionListener()
-    {
-      @Override
-      public void valueChanged(ListSelectionEvent listSelectionEvent)
-      {
-        int index = listSelectionEvent.getFirstIndex();
-        controller.involvedProjectsHasSelection(index != -1);
-      }
+      int index = listSelectionEvent.getFirstIndex();
+      controller.involvedProjectsHasSelection(index != -1);
     });
 
     pMain.lstOwned.addMouseListener(new MouseAdapter()
@@ -98,95 +69,27 @@ public class ProjectViewSwing implements ProjectView
       }
     });
 
-    pDetail.btBack.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.backClicked();
-      }
-    });
+    pDetail.btBack.addActionListener(actionEvent -> controller.backClicked());
 
-    pDetail.btAddPhase.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.addPhaseClicked();
-      }
-    });
-    pDetail.btDeletePhase.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.deletePhaseClicked();
-      }
-    });
+    pDetail.btAddPhase.addActionListener(actionEvent -> controller.addPhaseClicked());
+    pDetail.btDeletePhase.addActionListener(actionEvent -> controller.deletePhaseClicked());
 
-    pDetail.btAddMember.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.addMemberClicked();
-      }
-    });
+    pDetail.btAddMember.addActionListener(actionEvent -> controller.addMemberClicked());
 
-    pDetail.btDeleteMember.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.deleteMemberClicked();
-      }
-    });
+    pDetail.btDeleteMember.addActionListener(actionEvent -> controller.deleteMemberClicked());
 
 
-    pDetail.btPromoteToAdmin.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.promoteToAdminClicked();
-      }
-    });
+    pDetail.btPromoteToAdmin.addActionListener(actionEvent -> controller.promoteToAdminClicked());
 
-    pDetail.btDegradeToMember.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.degradeToMemberClicked();
-      }
-    });
+    pDetail.btDegradeToMember.addActionListener(actionEvent -> controller.degradeToMemberClicked());
 
-    pDetail.btUpdateDescription.addActionListener(new ActionListener()
-    {
-      @Override
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.updateDescriptionClicked();
-      }
-    });
+    pDetail.btUpdateDescription.addActionListener(actionEvent -> controller.updateDescriptionClicked());
 
-    pDetail.lstPhases.addListSelectionListener(new ListSelectionListener()
-    {
-      @Override
-      public void valueChanged(ListSelectionEvent listSelectionEvent)
-      {
-        controller.projectPhaseHasSelection(listSelectionEvent.getFirstIndex() != -1);
-      }
-    });
+    pDetail.lstPhases.addListSelectionListener(
+      listSelectionEvent -> controller.projectPhaseHasSelection(listSelectionEvent.getFirstIndex() != -1));
 
-    pDetail.lstMembers.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-    {
-      @Override
-      public void valueChanged(ListSelectionEvent listSelectionEvent)
-      {
-        controller.memberTableHasSelection(listSelectionEvent.getFirstIndex() != -1);
-      }
-    });
+    pDetail.lstMembers.getSelectionModel().addListSelectionListener(
+      listSelectionEvent -> controller.memberTableHasSelection(listSelectionEvent.getFirstIndex() != -1));
   }
 
   @Override
