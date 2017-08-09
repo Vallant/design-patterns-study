@@ -145,11 +145,10 @@ public class ActivityRepositoryPostgres implements ActivityRepository
       PreparedStatement ps = con.prepareStatement(sql);
 
       ResultSet rs = ps.executeQuery();
-      if(rs.next() == false)
+      if(!rs.next())
         throw new Exception("No such record");
 
-      Activity a = extractActivity(rs);
-      return a;
+      return extractActivity(rs);
     }
   }
 

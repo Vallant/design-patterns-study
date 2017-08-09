@@ -132,12 +132,10 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
       ps.setInt(index++, id);
       ResultSet rs = ps.executeQuery();
 
-      if(rs.next() == false)
+      if(!rs.next())
         throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id));
 
-      ProjectPhase phase = extractPhase(rs);
-
-      return phase;
+      return extractPhase(rs);
     }
   }
 
@@ -210,12 +208,11 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
       ps.setString(index++, projectPhaseName);
       ResultSet rs = ps.executeQuery();
 
-      if(rs.next() == false)
+      if(!rs.next())
         throw new Exception("Element not found");
       //throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id)); //TODO change to correct output
 
-      ProjectPhase phase = extractPhase(rs);
-      return phase;
+      return extractPhase(rs);
     }
   }
 

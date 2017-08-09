@@ -32,7 +32,7 @@ public class MainModelImpl
   private final DBManager db;
 
 
-  MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
+  private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
   {
 
     db = DBManager.get(driver, url, username, password);

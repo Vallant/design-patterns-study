@@ -137,7 +137,7 @@ public class PersonalStatisticControllerSwing
   }
 
 
-  public void showProjectView()
+  private void showProjectView()
   {
     view.showProjectView();
   }

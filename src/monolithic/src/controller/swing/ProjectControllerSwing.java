@@ -30,7 +30,7 @@ public class ProjectControllerSwing
 
   private ArrayList<User> availableMembers;
 
-  Project detailProject;
+  private Project detailProject;
 
 
   public void setModel(ProjectModelImpl model)

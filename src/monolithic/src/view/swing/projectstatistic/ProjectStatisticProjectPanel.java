@@ -8,15 +8,15 @@ import java.awt.*;
 /**
  * Created by stephan on 17/07/17.
  */
-public class ProjectStatisticProjectPanel extends JPanel
+class ProjectStatisticProjectPanel extends JPanel
 {
-  final JPanel pHeader;
+  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
 
-  final ProjectStatisticTableModel tblProjectsModel;
-  final JTable                     tblProjects;
-  final JScrollPane                scrpTable;
+  final         ProjectStatisticTableModel tblProjectsModel;
+  final         JTable                     tblProjects;
+  private final JScrollPane                scrpTable;
 
   public ProjectStatisticProjectPanel()
   {

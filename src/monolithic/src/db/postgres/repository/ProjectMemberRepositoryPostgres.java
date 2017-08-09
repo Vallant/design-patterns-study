@@ -152,15 +152,13 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
       PreparedStatement ps = con.prepareStatement(sql);
 
       ResultSet rs = ps.executeQuery();
-      if(rs.next() == false)
+      if(!rs.next())
         throw new ElementNotFoundException("ProjectMember",
           new ArrayList(Arrays.asList("Username", "ProjectId")),
           new ArrayList(Arrays.asList(userLoginName, Integer.toString(projectId)))
         );
 
-      ProjectMember m = extractMember(rs);
-
-      return m;
+      return extractMember(rs);
     }
 
   }
@@ -248,7 +246,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     return l;
   }
 
-  ProjectMember extractMember(ResultSet rs) throws Exception
+  private ProjectMember extractMember(ResultSet rs) throws Exception
   {
     int hash = rs.getInt("HASH");
     int projectId = rs.getInt("PROJECT_ID");

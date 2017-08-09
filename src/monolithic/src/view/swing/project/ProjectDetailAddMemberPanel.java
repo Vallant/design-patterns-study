@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 11/07/17.
  */
-public class ProjectDetailAddMemberPanel extends JPanel
+class ProjectDetailAddMemberPanel extends JPanel
 {
   private ArrayList<String> available;
 

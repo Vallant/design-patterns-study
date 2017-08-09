@@ -60,56 +60,14 @@ public class SideBarViewSwing
 
   private void setListeners()
   {
-    btProjects.addActionListener(new ActionListener()
-    {
+    btProjects.addActionListener(actionEvent -> controller.projectsClicked());
+    btPersonalStatistic.addActionListener(actionEvent -> controller.personalStatisticClicked());
+    btAdministration.addActionListener(actionEvent -> controller.administrationClicked());
 
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectsClicked();
-      }
-    });
-    btPersonalStatistic.addActionListener(new ActionListener()
-    {
+    btSettings.addActionListener(actionEvent -> controller.settingsClicked());
 
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.personalStatisticClicked();
-      }
-    });
-    btAdministration.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.administrationClicked();
-      }
-    });
-
-    btSettings.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.settingsClicked();
-      }
-    });
-
-    btProjectStatistic.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.projectStatisticClicked();
-      }
-    });
-    btLogout.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent actionEvent)
-      {
-        controller.logoutClicked();
-      }
-    });
+    btProjectStatistic.addActionListener(actionEvent -> controller.projectStatisticClicked());
+    btLogout.addActionListener(actionEvent -> controller.logoutClicked());
   }
 
 

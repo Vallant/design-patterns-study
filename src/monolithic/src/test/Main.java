@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 /**
  * @author stephan
  */
-public class Main
+class Main
 {
   public static void main(String[] args)
   {

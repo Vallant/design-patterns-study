@@ -17,14 +17,14 @@ public class ProjectStatisticControllerSwing
   private ProjectStatisticModelImpl model;
   private ProjectStatisticViewSwing view;
 
-  ArrayList<Project> projects;
+  private ArrayList<Project> projects;
 
-  ArrayList<ProjectPhase> phases;
-  ProjectPhase            currentPhase;
+  private ArrayList<ProjectPhase> phases;
+  private ProjectPhase            currentPhase;
 
-  ArrayList<Activity> activities;
+  private ArrayList<Activity> activities;
 
-  ArrayList<ProjectMember> members;
+  private ArrayList<ProjectMember> members;
 
 
   public void setModel(ProjectStatisticModelImpl model)
@@ -48,8 +48,11 @@ public class ProjectStatisticControllerSwing
         model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUser() == 0,
           members.get(view.getSelectedUser()));
       if(activities != null)
+      {
+        assert currentPhase != null;
         model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(),
           view.getSelectedUser() == 0, members.get(view.getSelectedUser()));
+      }
     }
     catch(Exception e)
     {
@@ -103,7 +106,7 @@ public class ProjectStatisticControllerSwing
   }
 
 
-  public void showProjectView()
+  private void showProjectView()
   {
     view.showProjectView();
     refresh();

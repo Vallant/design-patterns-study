@@ -8,8 +8,8 @@ import view.swing.SideBarViewSwing;
  */
 public class SideBarControllerSwing
 {
-  SideBarViewSwing view;
-  SideBarModelImpl model;
+  private SideBarViewSwing view;
+  private SideBarModelImpl model;
 
 
   public void setView(SideBarViewSwing view)

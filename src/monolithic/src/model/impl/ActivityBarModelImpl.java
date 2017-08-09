@@ -26,9 +26,9 @@ public class ActivityBarModelImpl
   private MainModelImpl              mainModel;
   private User                       user;
 
-  ZonedDateTime start;
-  ZonedDateTime stop;
-  boolean       ongoingActivity;
+  private ZonedDateTime start;
+  private ZonedDateTime stop;
+  private boolean       ongoingActivity;
 
   ActivityBarModelImpl()
   {

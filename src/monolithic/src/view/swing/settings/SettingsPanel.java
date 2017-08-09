@@ -4,25 +4,25 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
-public class SettingsPanel extends JPanel
+class SettingsPanel extends JPanel
 {
-  final JPanel         pMain;
-  final JLabel         lbFirst;
-  final JTextField     tfFirst;
-  final JLabel         lbLast;
-  final JTextField     tfLast;
-  final JLabel         lbEmail;
-  final JTextField     tfEmail;
-  final JLabel         lbOldPw;
-  final JPasswordField tfOldPw;
-  final JLabel         lbNewPw;
-  final JPasswordField tfNewPw;
-  final JLabel         lbNewPwAgain;
-  final JPasswordField tfNewPwAgain;
+  private final JPanel         pMain;
+  private final JLabel         lbFirst;
+  final         JTextField     tfFirst;
+  private final JLabel         lbLast;
+  final         JTextField     tfLast;
+  private final JLabel         lbEmail;
+  final         JTextField     tfEmail;
+  private final JLabel         lbOldPw;
+  final         JPasswordField tfOldPw;
+  private final JLabel         lbNewPw;
+  final         JPasswordField tfNewPw;
+  private final JLabel         lbNewPwAgain;
+  final         JPasswordField tfNewPwAgain;
 
-  final JPanel  pBottom;
-  final JButton btApply;
-  final JButton btReset;
+  private final JPanel  pBottom;
+  final         JButton btApply;
+  final         JButton btReset;
 
   public SettingsPanel()
   {

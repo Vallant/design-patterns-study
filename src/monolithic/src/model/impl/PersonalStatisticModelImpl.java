@@ -28,8 +28,6 @@ public class PersonalStatisticModelImpl
     DAY
   }
 
-  ;
-
   private MainModelImpl                    mainModel;
   private PersonalStatisticControllerSwing controller;
   private User                             user;

@@ -6,21 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class PersonalStatisticUpdateActivityDialogPanel extends JPanel
+class PersonalStatisticUpdateActivityDialogPanel extends JPanel
 {
-  final JLabel     lbDescription;
-  final JLabel     lbComment;
-  final JTextField tfDescription;
-  final JTextField tfComment;
+  private final JLabel     lbDescription;
+  private final JLabel     lbComment;
+  final         JTextField tfDescription;
+  final         JTextField tfComment;
 
-  final JLabel         lbStartTime;
-  final DateTimePicker dpStartTime;
-  final JLabel         lbEndTime;
-  final DateTimePicker dpEndTime;
+  private final JLabel         lbStartTime;
+  final         DateTimePicker dpStartTime;
+  private final JLabel         lbEndTime;
+  final         DateTimePicker dpEndTime;
 
-  final JPanel  pBottom;
-  final JButton btCancel;
-  final JButton btOk;
+  private final JPanel  pBottom;
+  private final JButton btCancel;
+  private final JButton btOk;
 
 
   public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)

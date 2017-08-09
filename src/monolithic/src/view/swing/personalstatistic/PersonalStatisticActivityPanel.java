@@ -5,22 +5,22 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class PersonalStatisticActivityPanel extends JPanel
+class PersonalStatisticActivityPanel extends JPanel
 {
-  final JPanel pHeader;
+  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
 
-  final PersonalStatisticActivityTableModel tblActivityModel;
-  final JTable                              tblActivity;
-  final JScrollPane                         scrpTable;
-  final JButton                             btBack;
+  final         PersonalStatisticActivityTableModel tblActivityModel;
+  final         JTable                              tblActivity;
+  private final JScrollPane                         scrpTable;
+  final         JButton                             btBack;
 
-  final JPanel  pButtons;
-  final JPanel  pFlowPanel;
-  final JButton btDeleteActivity;
-  final JButton btAddActivity;
-  final JButton btUpdateActivity;
+  private final JPanel  pButtons;
+  private final JPanel  pFlowPanel;
+  final         JButton btDeleteActivity;
+  final         JButton btAddActivity;
+  final         JButton btUpdateActivity;
 
   public PersonalStatisticActivityPanel()
   {

@@ -128,12 +128,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
       ps.setInt(index++, projectId);
 
       ResultSet rs = ps.executeQuery();
-      if(rs.next() == false)
+      if(!rs.next())
         throw new Exception("No such record");
 
-      Project p = extractProject(rs);
-
-      return p;
+      return extractProject(rs);
     }
   }
 
@@ -175,11 +173,10 @@ public class ProjectRepositoryPostgres implements ProjectRepository
       ps.setString(index++, projectName);
 
       ResultSet rs = ps.executeQuery();
-      if(rs.next() == false)
+      if(!rs.next())
         throw new Exception("No such record");
 
-      String description = rs.getString("DESCRIPTION");
-      return description;
+      return rs.getString("DESCRIPTION");
 
     }
   }

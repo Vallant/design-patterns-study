@@ -10,12 +10,12 @@ package db.interfaces;
  */
 public interface DBEntity
 {
-  public boolean isChanged();
+  boolean isChanged();
 
-  public int getLocalHash();
+  int getLocalHash();
 
-  public int getRemoteHash();
+  int getRemoteHash();
 
-  public void setRemoteHash(int hash);
+  void setRemoteHash(int hash);
 
 }

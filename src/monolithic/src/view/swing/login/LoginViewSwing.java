@@ -109,69 +109,20 @@ public class LoginViewSwing
 
   private void setListeners()
   {
-    pLogin.btLogin.addActionListener(new ActionListener()
-    {
+    pLogin.btLogin.addActionListener(ae -> controller.loginClicked());
 
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.loginClicked();
-      }
-    });
-
-    pLogin.btResetPassword.addActionListener(new ActionListener()
-                                             {
-
-                                               public void actionPerformed(ActionEvent ae)
-                                               {
-                                                 controller.resetPasswordClicked();
-                                               }
-                                             }
+    pLogin.btResetPassword.addActionListener(ae -> controller.resetPasswordClicked()
     );
 
-    pLogin.btAddNewUser.addActionListener(new ActionListener()
-    {
+    pLogin.btAddNewUser.addActionListener(ae -> controller.addUserClicked());
 
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.addUserClicked();
-      }
-    });
+    pNewUser.btBackNew.addActionListener(ae -> controller.backToLoginClicked());
 
-    pNewUser.btBackNew.addActionListener(new ActionListener()
-    {
+    pResetPassword.btBackReset.addActionListener(ae -> controller.backToLoginClicked());
 
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.backToLoginClicked();
-      }
-    });
+    pNewUser.btAdd.addActionListener(ae -> controller.addClicked());
 
-    pResetPassword.btBackReset.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.backToLoginClicked();
-      }
-    });
-
-    pNewUser.btAdd.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.addClicked();
-      }
-    });
-
-    pResetPassword.btReset.addActionListener(new ActionListener()
-    {
-
-      public void actionPerformed(ActionEvent ae)
-      {
-        controller.resetClicked();
-      }
-    });
+    pResetPassword.btReset.addActionListener(ae -> controller.resetClicked());
 
   }
 

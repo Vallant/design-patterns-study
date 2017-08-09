@@ -23,8 +23,6 @@ public class ProjectStatisticModelImpl
     DAY
   }
 
-  ;
-
   private User                            user;
   private MainModelImpl                   mainModel;
   private ProjectStatisticControllerSwing controller;
