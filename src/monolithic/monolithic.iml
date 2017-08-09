@@ -7,5 +7,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../libraries/commons-dbcp2-2.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-lang3-3.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-logging-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-pool2-2.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/LGoodDatePicker-10.3.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/postgresql-42.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/../libraries/commons-dbcp2-2.1.1-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-lang3-3.5-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-logging-1.2-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/commons-pool2-2.4.2-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../libraries/LGoodDatePicker-10.3.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

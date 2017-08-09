@@ -5,7 +5,6 @@
  */
 package controller.common;
 
-import controller.interfaces.MainController;
 import controller.swing.MainControllerSwing;
 
 /**
@@ -14,7 +13,7 @@ import controller.swing.MainControllerSwing;
  */
 public class ControllerManager
 {
-    private static MainController controller;
+    private static MainControllerSwing controller;
     public static void initInstance(String frontend)
     {
         assert(controller == null);
@@ -26,7 +25,7 @@ public class ControllerManager
         
         controller.init(frontend);
     }
-    public static MainController getInstance()
+    public static MainControllerSwing getInstance()
     {
         assert(controller != null);
         return controller;

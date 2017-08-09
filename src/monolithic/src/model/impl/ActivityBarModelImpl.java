@@ -5,15 +5,13 @@
  */
 package model.impl;
 
-import controller.interfaces.ActivityBarController;
+import controller.swing.ActivityBarControllerSwing;
 import data.Activity;
 import data.ProjectPhase;
 import data.User;
 import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
-import model.interfaces.ActivityBarModel;
-import model.interfaces.MainModel;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -22,11 +20,11 @@ import java.util.ArrayList;
  *
  * @author stephan
  */
-public class ActivityBarModelImpl implements ActivityBarModel
+public class ActivityBarModelImpl
 {
     
-    private ActivityBarController controller;
-    private MainModel mainModel;
+    private ActivityBarControllerSwing controller;
+    private MainModelImpl mainModel;
     private User user;
 
     ZonedDateTime start;
@@ -38,25 +36,25 @@ public class ActivityBarModelImpl implements ActivityBarModel
         ongoingActivity = false;
     }
 
-    @Override
-    public void setMainModel(MainModel mainModel)
+
+    public void setMainModel(MainModelImpl mainModel)
     {
         this.mainModel = mainModel;
     }
 
-    @Override
-    public void setController(ActivityBarController controller)
+
+    public void setController(ActivityBarControllerSwing controller)
     {
         this.controller = controller;
     }
 
-    @Override
+
     public void setUser(User user)
     {
         this.user = user;
     }
 
-    @Override
+
     public void startClicked() {
         ongoingActivity = true;
         start = ZonedDateTime.now();
@@ -65,7 +63,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
         controller.enableStopButton();
     }
 
-    @Override
+
     public void stopClicked() {
         assert(!ongoingActivity);
         stop = ZonedDateTime.now();
@@ -74,25 +72,25 @@ public class ActivityBarModelImpl implements ActivityBarModel
         ongoingActivity = false;
     }
 
-    @Override
+
     public ArrayList<String> getProjectPhasesFor(String project) throws Exception{
         ProjectPhaseRepository r = mainModel.db().getProjectPhaseRepository();
         return r.getNamesByProjectName(project);
 
     }
 
-    @Override
+
     public void refresh() {
         controller.refresh();
     }
 
-    @Override
+
     public ArrayList<String> getProjects() throws Exception {
         ProjectRepository r = mainModel.db().getProjectRepository();
         return r.getProjectsByUserName(user.getLoginName());
     }
 
-    @Override
+
     public void activityFinished(String projectName, String projectPhaseName, String description, String comment) throws Exception {
         controller.disableStopButton();
         controller.enableStartButton();
@@ -105,7 +103,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
         ar.add(activity);
     }
 
-    @Override
+
     public void discardActivity() {
         controller.disableStopButton();
         controller.enableStartButton();
@@ -115,7 +113,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
 
     }
 
-    @Override
+
     public void finishActivity() {
         if(ongoingActivity)
             controller.finishActivity();

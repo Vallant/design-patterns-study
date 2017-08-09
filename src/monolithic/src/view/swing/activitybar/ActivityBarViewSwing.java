@@ -5,11 +5,10 @@
  */
 package view.swing.activitybar;
 
-import controller.interfaces.ActivityBarController;
+
+import controller.swing.ActivityBarControllerSwing;
 
 import javax.swing.*;
-
-import view.interfaces.ActivityBarView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,10 +21,10 @@ import java.util.Timer;
  *
  * @author stephan
  */
-public class ActivityBarViewSwing implements ActivityBarView
+public class ActivityBarViewSwing
 {
     private final JFrame frame;
-    private ActivityBarController controller;
+    private ActivityBarControllerSwing controller;
 
     private final ActivityBarPanel pMain;
 
@@ -51,39 +50,39 @@ public class ActivityBarViewSwing implements ActivityBarView
 
     }
 
-    @Override
-    public void setActivityBarController(ActivityBarController controller)
+
+    public void setActivityBarController(ActivityBarControllerSwing controller)
     {
         this.controller = controller;
     }
 
-    @Override
+
     public void show() {
         frame.getContentPane().add(pMain, BorderLayout.NORTH);
         update();
     }
 
-    @Override
+
     public void enableStart() {
         pMain.btStart.setEnabled(true);
     }
 
-    @Override
+
     public void disableStart() {
         pMain.btStart.setEnabled(false);
     }
 
-    @Override
+
     public void enableStop() {
         pMain.btStop.setEnabled(true);
     }
 
-    @Override
+
     public void disableStop() {
         pMain.btStop.setEnabled(false);
     }
 
-    @Override
+
     public void setProjectPhases(ArrayList<String> phases)
     {
         pMain.cbPhase.removeAllItems();
@@ -91,19 +90,19 @@ public class ActivityBarViewSwing implements ActivityBarView
             pMain.cbPhase.addItem(phase);
     }
 
-    @Override
+
     public void setProjects(ArrayList<String> projects) {
         pMain.cbProject.removeAllItems();
         for(String project : projects)
             pMain.cbProject.addItem(project);
     }
 
-    @Override
+
     public void startTimer() {
         timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
-    @Override
+
     public void stopTimer() {
 
         resetTimer();
@@ -116,18 +115,18 @@ public class ActivityBarViewSwing implements ActivityBarView
     }
 
 
-    @Override
+
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    @Override
+
     public void disableComboBoxes() {
         pMain.cbProject.setEnabled(false);
         pMain.cbPhase.setEnabled(false);
     }
 
-    @Override
+
     public void showCommentDescriptionDialog() {
         ActivityBarDialogPanel dialogPanel = new ActivityBarDialogPanel();
 
@@ -152,18 +151,18 @@ public class ActivityBarViewSwing implements ActivityBarView
         dialogPanel.tfDescription.setText("");
     }
 
-    @Override
+
     public void enableComboBoxes() {
         pMain.cbPhase.setEnabled(true);
         pMain.cbProject.setEnabled(true);
     }
 
-    @Override
+
     public void hide() {
         frame.remove(pMain);
     }
 
-    @Override
+
     public void showFinishActivityDialog() {
         if (JOptionPane.showConfirmDialog(null, "Do you want to discard the ongoing Activity?","Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
         {
@@ -187,14 +186,14 @@ public class ActivityBarViewSwing implements ActivityBarView
     private void setListeners()
     {
         pMain.btStart.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.startClicked();
             }
         });
 
         pMain.btStop.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.stopClicked();
             }
@@ -203,7 +202,7 @@ public class ActivityBarViewSwing implements ActivityBarView
 
         pMain.cbPhase.addActionListener(
                 new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent actionEvent) {
                         String selectedPhase = (String) pMain.cbPhase.getSelectedItem();
                         controller.phaseSelected(selectedPhase);
@@ -213,7 +212,7 @@ public class ActivityBarViewSwing implements ActivityBarView
 
         pMain.cbProject.addActionListener(
                 new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent actionEvent) {
                         String selectedProject = (String) pMain.cbProject.getSelectedItem();
                         controller.projectSelected(selectedProject);
@@ -235,7 +234,7 @@ public class ActivityBarViewSwing implements ActivityBarView
         timer = new Timer();
 
         task = new TimerTask() {
-            @Override
+
             public void run() {
                 duration = duration.plusSeconds(1);
                 long seconds = duration.getSeconds();

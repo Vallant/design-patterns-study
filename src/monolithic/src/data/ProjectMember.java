@@ -26,9 +26,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class ProjectMember implements DBEntity
 {
-
-
-
     public static enum ROLE
     {
         MEMBER,
@@ -74,13 +71,15 @@ public class ProjectMember implements DBEntity
         this.remoteHash = hash;
         this.role = role;
     }
-    
-    
+
+
+
     @Override
     public boolean isChanged()
     {
         return getLocalHash() != getRemoteHash();
     }
+
 
     @Override
     public int getLocalHash()
@@ -93,7 +92,7 @@ public class ProjectMember implements DBEntity
                 
     }
 
-    @Override
+
     public int getRemoteHash()
     {
         return remoteHash;

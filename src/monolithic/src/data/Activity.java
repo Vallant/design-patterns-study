@@ -18,9 +18,10 @@
 package data;
 
 import db.interfaces.DBEntity;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * @created $date
@@ -64,7 +65,7 @@ public class Activity implements DBEntity
     
     
     
-    @Override
+
     public int getLocalHash()
     {
         return new HashCodeBuilder()
@@ -78,7 +79,7 @@ public class Activity implements DBEntity
                 .hashCode();
     }
     
-    @Override
+
     public int getRemoteHash()
     {
         return remoteHash;
@@ -160,7 +161,7 @@ public class Activity implements DBEntity
         this.comments = comments;
     }
 
-    @Override
+
     public boolean isChanged()
     {
         return getLocalHash() != getRemoteHash();
@@ -184,7 +185,7 @@ public class Activity implements DBEntity
         return phase.getProject().getId();
     }
 
-    @Override
+
     public void setRemoteHash(int hash)
     {
         this.remoteHash = hash;

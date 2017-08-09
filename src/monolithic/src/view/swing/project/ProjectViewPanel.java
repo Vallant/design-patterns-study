@@ -1,7 +1,6 @@
 package view.swing.project;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -47,7 +46,7 @@ public class ProjectViewPanel extends JPanel {
         lstOwned = new JList<>(lstOwnedModel);
         lstOwned.setCellRenderer(new DefaultListCellRenderer()
                                  {
-                                     @Override
+
                                      public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                                          JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,cellHasFocus);
                                          if (index % 2 == 1) setBackground(Color.decode("#EEF1FD"));
@@ -79,7 +78,7 @@ public class ProjectViewPanel extends JPanel {
         lstInvolved = new JList<>(lstInvolvedModel);
         lstInvolved.setCellRenderer(new DefaultListCellRenderer()
                                     {
-                                        @Override
+
                                         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                                             JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,cellHasFocus);
                                             if (index % 2 == 1) setBackground(Color.decode("#EEF1FD"));

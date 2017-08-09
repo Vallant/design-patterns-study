@@ -22,17 +22,17 @@ public class PersonalStatisticActivityTableModel extends AbstractTableModel {
         endTimes = new ArrayList<>();
     }
 
-    @Override
+
     public int getRowCount() {
         return descriptions.size();
     }
 
-    @Override
+
     public int getColumnCount() {
         return columnNames.length;
     }
 
-    @Override
+
     public Object getValueAt(int row, int column) {
         switch (column)
         {
@@ -55,7 +55,7 @@ public class PersonalStatisticActivityTableModel extends AbstractTableModel {
         this.endTimes = endTimes;
     }
 
-    @Override
+
     public String getColumnName(int i) {
         return columnNames[i];
     }

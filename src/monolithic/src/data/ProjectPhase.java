@@ -47,13 +47,13 @@ public class ProjectPhase implements DBEntity
     
     
     
-    @Override
+
     public boolean isChanged()
     {
         return getLocalHash() != getRemoteHash();
     }
 
-    @Override
+
     public int getLocalHash()
     {
         return new HashCodeBuilder().
@@ -83,13 +83,13 @@ public class ProjectPhase implements DBEntity
         this.name = name;
     }
 
-    @Override
+
     public int getRemoteHash()
     {
         return remoteHash;
     }
 
-    @Override
+
     public void setRemoteHash(int hash)
     {
         remoteHash = hash;

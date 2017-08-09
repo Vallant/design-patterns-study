@@ -24,11 +24,12 @@ import db.postgres.repository.ProjectPhaseRepositoryPostgres;
 import db.postgres.repository.ProjectRepositoryPostgres;
 import db.postgres.repository.UserRepositoryPostgres;
 import java.sql.Connection;
-import org.apache.commons.dbcp2.BasicDataSource;
+
 import db.interfaces.ProjectMemberRepository;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import db.interfaces.UserRepository;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  * @created $date
@@ -56,31 +57,31 @@ public class DBManagerPostgres extends DBManager
         return pool.getConnection();
     }  
     
-    @Override
+
     public UserRepository getUserRepository()
     {
         return new UserRepositoryPostgres(this);
     }
 
-    @Override
+
     public ProjectRepository getProjectRepository()
     {
         return new ProjectRepositoryPostgres(this);
     }
 
-    @Override
+
     public ProjectMemberRepository getProjectMemberRepository()
     {
         return new ProjectMemberRepositoryPostgres(this);
     }
 
-    @Override
+
     public ProjectPhaseRepository getProjectPhaseRepository()
     {
         return new ProjectPhaseRepositoryPostgres(this);
     }
 
-    @Override
+
     public ActivityRepository getActivityRepository()
     {
         return new ActivityRepositoryPostgres(this);

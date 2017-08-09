@@ -5,7 +5,6 @@
  */
 package view.common;
 
-import view.interfaces.MainView;
 import view.swing.MainViewSwing;
 
 /**
@@ -14,7 +13,7 @@ import view.swing.MainViewSwing;
  */
 public class ViewManager
 {
-    private static MainView view;
+    private static MainViewSwing view;
     
     public static void initInstance(String frontend)
     {
@@ -26,7 +25,7 @@ public class ViewManager
         }
     }
     
-    public static MainView getInstance()
+    public static MainViewSwing getInstance()
     {
         assert(view != null);
         return view;

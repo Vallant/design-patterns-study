@@ -1,13 +1,11 @@
 package model.impl;
 
-import controller.interfaces.PersonalStatisticController;
+import controller.swing.PersonalStatisticControllerSwing;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import data.User;
 import db.interfaces.ActivityRepository;
-import model.interfaces.MainModel;
-import model.interfaces.PersonalStatisticModel;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -18,21 +16,30 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class PersonalStatisticModelImpl implements PersonalStatisticModel
+public class PersonalStatisticModelImpl
 {
 
-    private MainModel mainModel;
-    private PersonalStatisticController controller;
+    public enum PERIOD
+    {
+        ALLTIME,
+        YEAR,
+        MONTH,
+        WEEK,
+        DAY
+    };
+
+    private MainModelImpl mainModel;
+    private PersonalStatisticControllerSwing controller;
     private User user;
 
-    @Override
+
     public void deleteActivity(Activity toDelete) throws Exception {
      ActivityRepository ar = mainModel.db().getActivityRepository();
      ar.delete(toDelete);
      controller.refresh();
     }
 
-    @Override
+
     public void addActivity(ProjectPhase detailPhase, String description, String comment, ZonedDateTime zdtStart, ZonedDateTime zdtEnd) throws Exception {
         if(zdtEnd.isBefore(zdtStart))
             throw new Exception("Start date has to be before End date");
@@ -43,47 +50,47 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
         controller.refresh();
     }
 
-    @Override
+
     public void updateActivity(Activity a) throws Exception {
         ActivityRepository ar  =mainModel.db().getActivityRepository();
         ar.update(a);
         controller.refresh();
     }
 
-    @Override
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    @Override
-    public void setMainModel(MainModel mainModel) {
+
+    public void setMainModel(MainModelImpl mainModel) {
         this.mainModel = mainModel;
     }
 
-    @Override
-    public void setController(PersonalStatisticController controller) {
+
+    public void setController(PersonalStatisticControllerSwing controller) {
         this.controller = controller;
     }
 
-    @Override
+
     public void refresh() {
         controller.refresh();
     }
 
-    @Override
+
     public void requestedDetailFor(Project project) throws Exception {
 
         phasePeriodChanged(project.getId(), PERIOD.ALLTIME.ordinal());
         controller.showPhaseView();
     }
 
-    @Override
+
     public void requestedDetailFor(ProjectPhase detailPhase) throws Exception {
         activityPeriodChanged(detailPhase.getId(), PERIOD.ALLTIME.ordinal());
         controller.showActivityView();
     }
 
-    @Override
+
     public void phasePeriodChanged(int projectId, int selectedIndex) throws Exception {
         PERIOD period = PERIOD.values()[selectedIndex];
         ArrayList<ProjectPhase> phases = new ArrayList<>();
@@ -97,7 +104,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
         controller.setPhaseData(phases, durations);
     }
 
-    @Override
+
     public void projectPeriodChanged(int selectedIndex) throws Exception {
         PERIOD period = PERIOD.values()[selectedIndex];
         ArrayList<Project> projects = new ArrayList<>();
@@ -112,7 +119,7 @@ public class PersonalStatisticModelImpl implements PersonalStatisticModel
         controller.setProjectData(projects, durations);
     }
 
-    @Override
+
     public void activityPeriodChanged(int phaseId, int selectedIndex) throws Exception {
         PERIOD period = PERIOD.values()[selectedIndex];
         ZonedDateTime since = subtract(period);

@@ -5,13 +5,12 @@
  */
 package controller.swing;
 
-import controller.interfaces.ProjectController;
 import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
 import data.User;
-import model.interfaces.ProjectModel;
-import view.interfaces.ProjectView;
+import model.impl.ProjectModelImpl;
+import view.swing.project.ProjectViewSwing;
 
 import java.util.ArrayList;
 
@@ -19,10 +18,10 @@ import java.util.ArrayList;
  *
  * @author stephan
  */
-public class ProjectControllerSwing implements ProjectController
+public class ProjectControllerSwing
 {
-    private ProjectModel model;
-    private ProjectView view;
+    private ProjectModelImpl model;
+    private ProjectViewSwing view;
 
     private ArrayList<ProjectMember> ownedProjects;
     private ArrayList<ProjectMember> involvedProjects;
@@ -36,19 +35,19 @@ public class ProjectControllerSwing implements ProjectController
 
 
 
-    @Override
-    public void setModel(ProjectModel model)
+    
+    public void setModel(ProjectModelImpl model)
     {
         this.model = model;
     }
 
-    @Override
-    public void setView(ProjectView view)
+    
+    public void setView(ProjectViewSwing view)
     {
         this.view = view;
     }
 
-    @Override
+    
     public void refresh()
     {
         ArrayList<String> owned = new ArrayList<>();
@@ -74,7 +73,7 @@ public class ProjectControllerSwing implements ProjectController
 
     }
 
-    @Override
+    
     public void leaveProjectClicked()
     {
         int index = view.getSelectedInvolvedProjectIndex();
@@ -86,13 +85,13 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void addProjectClicked()
     {
         view.showProjectCreationDialog();
     }
 
-    @Override
+    
     public void deleteProjectClicked() {
         int index = view.getSelectedOwnedProjectIndex();
         try {
@@ -103,17 +102,17 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void ownedProjectsHasSelection(boolean hasSelection) {
         view.setOwnedProjectsButtonsEnabled(hasSelection);
     }
 
-    @Override
+    
     public void involvedProjectsHasSelection(boolean hasSelection) {
         view.setInvolvedProjectsButtonsEnabled(hasSelection);
     }
 
-    @Override
+    
     public void doubleClickedOn(int index)
     {
         try {
@@ -124,7 +123,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members) {
 
         detailProject = project;
@@ -149,13 +148,13 @@ public class ProjectControllerSwing implements ProjectController
         view.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
     }
 
-    @Override
+    
     public void backClicked() {
         detailProject = null;
         view.showOverview();
     }
 
-    @Override
+    
     public void addProject(String name, String description) {
         try {
             model.addProject(name, description);
@@ -165,7 +164,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void deletePhaseClicked() {
         int index = view.getSelectedPhaseIndex();
         try {
@@ -176,12 +175,12 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void addPhaseClicked() {
         view.showAddPhaseDialog();
     }
 
-    @Override
+    
     public void deleteMemberClicked()
     {
         int index = view.getSelectedMemberIndex();
@@ -193,7 +192,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void promoteToAdminClicked()
     {
         int index = view.getSelectedMemberIndex();
@@ -205,7 +204,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void degradeToMemberClicked() {
 
         try {
@@ -217,7 +216,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void addMemberClicked() {
         try {
             availableMembers = model.getAvailableUsersFor(detailProject.getId());
@@ -235,7 +234,7 @@ public class ProjectControllerSwing implements ProjectController
 
     }
 
-    @Override
+    
     public void addPhase(String phaseName) {
         try {
             assert(detailProject != null);
@@ -246,7 +245,7 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void addMembers(int[] selectedIndices)
     {
         try {
@@ -264,7 +263,7 @@ public class ProjectControllerSwing implements ProjectController
 
     }
 
-    @Override
+    
     public void updateDescriptionClicked() {
         String newDescription = view.getDescription();
         detailProject.setDescription(newDescription);
@@ -276,12 +275,12 @@ public class ProjectControllerSwing implements ProjectController
         }
     }
 
-    @Override
+    
     public void projectPhaseHasSelection(boolean hasSelection) {
         view.setProjectPhaseButtonsEnabled(hasSelection);
     }
 
-    @Override
+    
     public void memberTableHasSelection(boolean hasSelection) {
         view.setMemberListButtonsEnabled(hasSelection);
     }

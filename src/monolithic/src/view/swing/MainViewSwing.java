@@ -5,12 +5,11 @@
  */
 package view.swing;
 
-import controller.interfaces.*;
+import controller.swing.*;
 import data.User;
 
 import javax.swing.*;
 
-import view.interfaces.*;
 import view.swing.activitybar.ActivityBarViewSwing;
 import view.swing.login.LoginViewSwing;
 import view.swing.project.ProjectViewSwing;
@@ -22,24 +21,24 @@ import view.swing.settings.SettingsViewSwing;
  *
  * @author stephan
  */
-public class MainViewSwing implements MainView
+public class MainViewSwing
 {
     
     private final JFrame frame;
     private JPanel loginPanel;
     
-    private final LoginView login;
-    private final ProjectView project;
-    private final SettingsView settings;
-    private final PersonalStatisticView personalStatistic;
+    private final LoginViewSwing login;
+    private final ProjectViewSwing project;
+    private final SettingsViewSwing settings;
+    private final PersonalStatisticViewSwing personalStatistic;
     //private final AdministrationView administration;
-    private final ActivityBarView activityBar;
-    private final SideBarView sideBar;
-    private final ProjectStatisticView projectStatistic;
+    private final ActivityBarViewSwing activityBar;
+    private final SideBarViewSwing sideBar;
+    private final ProjectStatisticViewSwing projectStatistic;
     private JMenuBar menuBar;
     private JMenu file;
     private JMenuItem logout;
-    private MainController controller;
+    private MainControllerSwing controller;
     
     
     
@@ -62,7 +61,7 @@ public class MainViewSwing implements MainView
     }
 
 
-    @Override
+
     public void showLoginView()
     {
         hideCenterContent();
@@ -70,7 +69,7 @@ public class MainViewSwing implements MainView
         frame.pack();
     }
 
-    @Override
+
     public void showProjectView()
     {
         login.removeAllComponents();
@@ -80,55 +79,55 @@ public class MainViewSwing implements MainView
         frame.pack();
     }
 
-    @Override
-    public void setMainController(MainController controller)
+
+    public void setMainController(MainControllerSwing controller)
     {
         this.controller = controller;
     }
 
-    @Override
-    public void pairLogin(LoginController controller)
+
+    public void pairLogin(LoginControllerSwing controller)
     {
         controller.setView(login);
         login.setController(controller);
     }
 
-    @Override
-    public void pairProject(ProjectController controller)
+
+    public void pairProject(ProjectControllerSwing controller)
     {
         controller.setView(project);
         project.setController(controller);
     }
 
-    @Override
-    public void pairActivityBar(ActivityBarController controller)
+
+    public void pairActivityBar(ActivityBarControllerSwing controller)
     {
         activityBar.setActivityBarController(controller);
         controller.setView(activityBar);
     }
 
-    @Override
+
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    @Override
+
     public void showActivityBar() {
         activityBar.show();
     }
 
-    @Override
-    public void pairSideBar(SideBarController controller) {
+
+    public void pairSideBar(SideBarControllerSwing controller) {
         sideBar.setController(controller);
         controller.setView(sideBar);
     }
 
-    @Override
+
     public void showSideBar(User.ROLE role) {
         sideBar.show(role);
     }
 
-    @Override
+
     public void hideCenterContent() {
         project.hide();
         settings.hide();
@@ -137,49 +136,49 @@ public class MainViewSwing implements MainView
         //administration.hide();
     }
 
-    @Override
+
     public void showAdminView() {
 
     }
 
-    @Override
+
     public void showPersonalStatisticView() {
         personalStatistic.showProjectView();
 
     }
 
-    @Override
+
     public void showProjectStatisticView() {
         projectStatistic.showProjectView();
     }
 
-    @Override
+
     public void showSettingsView() {
         hideCenterContent();
         settings.show();
     }
 
-    @Override
-    public void pairPersonalStatistic(PersonalStatisticController controller) {
+
+    public void pairPersonalStatistic(PersonalStatisticControllerSwing controller) {
         controller.setView(personalStatistic);
         personalStatistic.setController(controller);
     }
 
-    @Override
-    public void pairProjectStatistic(ProjectStatisticController controller) {
+
+    public void pairProjectStatistic(ProjectStatisticControllerSwing controller) {
         controller.setView(projectStatistic);
         projectStatistic.setController(controller);
     }
 
-    @Override
+
     public void hideAll() {
         hideCenterContent();
         sideBar.hide();
         activityBar.hide();
     }
 
-    @Override
-    public void pairSettings(SettingsController controller) {
+
+    public void pairSettings(SettingsControllerSwing controller) {
      controller.setView(settings);
      settings.setController(controller);
     }

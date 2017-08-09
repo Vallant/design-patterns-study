@@ -1,8 +1,7 @@
 package view.swing;
 
-import controller.interfaces.SideBarController;
+import controller.swing.SideBarControllerSwing;
 import data.User;
-import view.interfaces.SideBarView;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +13,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by stephan on 08.07.17.
  */
-public class SideBarViewSwing implements SideBarView {
+public class SideBarViewSwing {
 
     private final JFrame frame;
 
@@ -29,7 +28,7 @@ public class SideBarViewSwing implements SideBarView {
     private final JPanel pFloatPanel;
     //private final JButton btHelp;
 
-    private SideBarController controller;
+    private SideBarControllerSwing controller;
     public SideBarViewSwing(JFrame frame) {
         this.frame = frame;
 
@@ -58,51 +57,51 @@ public class SideBarViewSwing implements SideBarView {
 
     private void setListeners() {
         btProjects.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.projectsClicked();
             }
         });
         btPersonalStatistic.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.personalStatisticClicked();
             }
         });
         btAdministration.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.administrationClicked();
             }
         });
 
         btSettings.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.settingsClicked();
             }
         });
 
         btProjectStatistic.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.projectStatisticClicked();
             }
         });
         btLogout.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.logoutClicked();
             }
         });
     }
 
-    @Override
-    public void setController(SideBarController controller) {
+
+    public void setController(SideBarControllerSwing controller) {
         this.controller = controller;
     }
 
-    @Override
+
     public void show(User.ROLE role) {
         if(role == User.ROLE.ADMIN)
             pSideBar.add(btAdministration);
@@ -112,7 +111,7 @@ public class SideBarViewSwing implements SideBarView {
         frame.getContentPane().add(pFloatPanel, BorderLayout.WEST);
     }
 
-    @Override
+
     public void hide() {
         frame.remove(pFloatPanel);
     }

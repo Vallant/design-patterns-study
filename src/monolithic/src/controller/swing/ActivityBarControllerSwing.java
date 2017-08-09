@@ -5,40 +5,33 @@
  */
 package controller.swing;
 
-import controller.interfaces.ActivityBarController;
-import model.interfaces.ActivityBarModel;
-import view.interfaces.ActivityBarView;
+import model.impl.ActivityBarModelImpl;
+import view.swing.activitybar.ActivityBarViewSwing;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
  *
  * @author stephan
  */
-public class ActivityBarControllerSwing implements ActivityBarController
+public class ActivityBarControllerSwing
 {
-    private ActivityBarModel model;
-    private ActivityBarView view;
+    private ActivityBarModelImpl model;
+    private ActivityBarViewSwing view;
 
 
     public ActivityBarControllerSwing() {
     }
-
-
-    @Override
-    public void setModel(ActivityBarModel model)
+    
+    public void setModel(ActivityBarModelImpl model)
     {
         this.model = model;
     }
-
-    @Override
-    public void setView(ActivityBarView view)
+    public void setView(ActivityBarViewSwing view)
     {
         this.view = view;
     }
-
-    @Override
+    
     public void refresh() {
         try {
             view.setProjects(model.getProjects());
@@ -47,20 +40,15 @@ public class ActivityBarControllerSwing implements ActivityBarController
             view.showError(e.getLocalizedMessage());
         }
     }
-
-    @Override
+    
     public void startClicked() {
         model.startClicked();
     }
-
-    @Override
+    
     public void stopClicked() {
         model.stopClicked();
     }
-
-
-
-    @Override
+    
     public void projectSelected(String project) {
         ArrayList<String> phases = null;
         try {
@@ -72,8 +60,7 @@ public class ActivityBarControllerSwing implements ActivityBarController
             view.showError(ex.getLocalizedMessage());
         }
     }
-
-    @Override
+    
     public void phaseSelected(String projectPhase)
     {
         if(projectPhase == null || projectPhase.isEmpty())
@@ -81,63 +68,60 @@ public class ActivityBarControllerSwing implements ActivityBarController
         else
             view.enableStart();
     }
-
-    @Override
+    
     public void disableComboBoxes() {
         view.disableComboBoxes();
     }
-
-    @Override
+    
     public void showCommentDescriptionDialog() {
         view.showCommentDescriptionDialog();
     }
-
-    @Override
+    
     public void startTimer() {
         view.startTimer();
     }
 
-    @Override
+    
     public void stopTimer() {
         view.stopTimer();
     }
 
-    @Override
+    
     public void disableStartButton() {
         view.disableStart();
     }
 
-    @Override
+    
     public void disableStopButton() {
         view.disableStop();
     }
 
-    @Override
+    
     public void enableStartButton() {
         view.enableStart();
     }
 
-    @Override
+    
     public void enableStopButton() {
         view.enableStop();
     }
 
-    @Override
+    
     public void enableComboBoxes() {
         view.enableComboBoxes();
     }
 
-    @Override
+    
     public void discardActivity() {
         model.discardActivity();
     }
 
-    @Override
+    
     public void finishActivity() {
         view.showFinishActivityDialog();
     }
 
-    @Override
+    
     public void activityFinished(String project, String projectPhase, String description, String comment) {
         try {
             if(description.isEmpty())

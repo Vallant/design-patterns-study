@@ -6,7 +6,6 @@
 package db.interfaces;
 
 import data.Project;
-import data.ProjectMember;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,10 @@
 package model.impl;
 
-import controller.interfaces.ProjectStatisticController;
+import controller.swing.ProjectStatisticControllerSwing;
 import data.*;
 import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectMemberRepository;
-import model.interfaces.MainModel;
-import model.interfaces.ProjectStatisticModel;
+
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,12 +12,22 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-public class ProjectStatisticModelImpl implements ProjectStatisticModel {
-    private User user;
-    private MainModel mainModel;
-    private ProjectStatisticController controller;
+public class ProjectStatisticModelImpl{
 
-    @Override
+    public enum PERIOD
+    {
+        ALLTIME,
+        YEAR,
+        MONTH,
+        WEEK,
+        DAY
+    };
+
+    private User user;
+    private MainModelImpl mainModel;
+    private ProjectStatisticControllerSwing controller;
+
+
     public void projectPeriodChanged(int selectedPeriodIndex) throws Exception {
         PERIOD period = PERIOD.values()[selectedPeriodIndex];
         ArrayList<Project> projects = new ArrayList<>();
@@ -31,7 +40,7 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel {
         controller.setProjectData(projects, durations);
     }
 
-    @Override
+
     public void activityDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser) throws Exception {
         PERIOD period = PERIOD.values()[selectedPeriodIndex];
         ZonedDateTime since = subtract(period);
@@ -47,7 +56,7 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel {
         controller.setActivityData(activities);
     }
 
-    @Override
+
     public void phaseDropDownChanged(int projectId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser) throws Exception {
         PERIOD period = PERIOD.values()[selectedPeriodIndex];
         ArrayList<ProjectPhase> phases = new ArrayList<>();
@@ -69,33 +78,33 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel {
 
     }
 
-    @Override
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    @Override
-    public void setMainModel(MainModel mainModel) {
+
+    public void setMainModel(MainModelImpl mainModel) {
         this.mainModel = mainModel;
     }
 
-    @Override
-    public void setController(ProjectStatisticController controller) {
+
+    public void setController(ProjectStatisticControllerSwing controller) {
         this.controller = controller;
     }
 
-    @Override
+
     public void refresh() {
         controller.refresh();
     }
 
-    @Override
+
     public void requestedDetailFor(Project project) throws Exception {
         phaseDropDownChanged(project.getId(), PERIOD.ALLTIME.ordinal(), true, null);
         controller.showPhaseView();
     }
 
-    @Override
+
     public void requestedDetailFor(ProjectPhase projectPhase) throws Exception {
         activityDropDownChanged(projectPhase.getId(), PERIOD.ALLTIME.ordinal(), true, null);
         controller.showActivityView();

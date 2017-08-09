@@ -25,18 +25,18 @@ class ProjectStatisticTableModel extends AbstractTableModel
 
 
 
-    @Override
+
     public int getRowCount() {
         assert(firstColumn.size() == durations.size());
         return firstColumn.size();
     }
 
-    @Override
+
     public int getColumnCount() {
         return columnNames.length;
     }
 
-    @Override
+
     public Object getValueAt(int row, int column) {
         Duration current = durations.get(row);
         switch(column)
@@ -57,7 +57,7 @@ class ProjectStatisticTableModel extends AbstractTableModel
         return total;
     }
 
-    @Override
+
     public String getColumnName(int i) {
         return columnNames[i];
     }

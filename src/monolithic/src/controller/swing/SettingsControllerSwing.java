@@ -1,45 +1,43 @@
 package controller.swing;
 
-import controller.interfaces.SettingsController;
 import data.User;
-import model.interfaces.SettingsModel;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import view.interfaces.SettingsView;
+import model.impl.SettingsModelImpl;
+import view.swing.settings.SettingsViewSwing;
 
 import java.util.Arrays;
 
 
-public class SettingsControllerSwing implements SettingsController {
-    private SettingsModel model;
-    private SettingsView view;
+public class SettingsControllerSwing{
+    private SettingsModelImpl model;
+    private SettingsViewSwing view;
     private User user;
-    @Override
-    public void setModel(SettingsModel model) {
+
+    public void setModel(SettingsModelImpl model) {
         this.model = model;
     }
 
-    @Override
-    public void setView(SettingsView view) {
+
+    public void setView(SettingsViewSwing view) {
         this.view = view;
     }
 
-    @Override
+
     public void refresh() {
         view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
-    @Override
+
     public void show(User user) {
         this.user = user;
         view.show();
     }
 
-    @Override
+
     public void resetClicked() {
         view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
     }
 
-    @Override
+
     public void applyClicked(String first, String last, String email, char[] old, char[] newPw, char[] newPwAgain) {
 
         if(first.isEmpty() || last.isEmpty() || email.isEmpty())
@@ -68,7 +66,7 @@ public class SettingsControllerSwing implements SettingsController {
         }
     }
 
-    @Override
+
     public void updateSuccessful() {
         view.updateSuccessful();
     }

@@ -17,8 +17,6 @@
 package db.interfaces;
 
 import data.ProjectMember;
-import data.User;
-import exception.ElementNotFoundException;
 
 import java.util.ArrayList;
 

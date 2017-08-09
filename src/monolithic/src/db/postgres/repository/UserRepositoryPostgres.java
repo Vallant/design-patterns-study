@@ -18,10 +18,8 @@
 package db.postgres.repository;
 
 import data.User;
-import db.common.DBManager;
 import db.common.DBManagerPostgres;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import db.interfaces.UserRepository;
 import java.sql.Connection;
@@ -43,7 +41,7 @@ public class UserRepositoryPostgres implements UserRepository
     }
     
     
-    @Override
+
     public void add(User item) throws Exception
     {
         assert(item != null);
@@ -70,7 +68,7 @@ public class UserRepositoryPostgres implements UserRepository
         }
     }
 
-    @Override
+
     public void update(User item) throws Exception
     {
         assert(item != null);
@@ -103,7 +101,7 @@ public class UserRepositoryPostgres implements UserRepository
         }
     }
 
-    @Override
+
     public void delete(User item) throws Exception
     {
         assert(item != null);
@@ -126,7 +124,7 @@ public class UserRepositoryPostgres implements UserRepository
     }
 
   
-    @Override
+
     public User getByPrimaryKey(String loginName) throws Exception
     { 
         try(Connection con = db.getConnection())
@@ -149,7 +147,7 @@ public class UserRepositoryPostgres implements UserRepository
         }
     }
 
-    @Override
+
     public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception {
         ArrayList<User> l = new ArrayList<>();
 
@@ -175,7 +173,7 @@ public class UserRepositoryPostgres implements UserRepository
         return l;
     }
 
-    @Override
+
     public List<User> getAll() throws Exception
     {
          ArrayList<User> l = new ArrayList<>();

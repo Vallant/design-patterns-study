@@ -19,7 +19,6 @@ package db.interfaces;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
-import data.User;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;

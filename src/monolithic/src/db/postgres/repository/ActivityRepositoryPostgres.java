@@ -17,12 +17,10 @@
 
 package db.postgres.repository;
 
-import com.sun.org.glassfish.external.statistics.TimeStatistic;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import data.User;
-import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.ActivityRepository;
 import db.interfaces.ProjectPhaseRepository;
@@ -51,7 +49,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         this.db = db;
     }
     
-    @Override
+
     public void add(Activity item) throws Exception
     {
         try(Connection con = db.getConnection())
@@ -85,7 +83,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public void update(Activity item) throws Exception
     {
         
@@ -117,7 +115,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public void delete(Activity item) throws Exception
     {
         
@@ -138,7 +136,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public Activity getByPrimaryKey(int id) throws Exception
     {   
         try(Connection con = db.getConnection())
@@ -156,7 +154,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -193,7 +191,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -232,7 +230,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int phaseId, ZonedDateTime since) throws Exception {
         ArrayList<Activity> l = new ArrayList<>();
 
@@ -262,7 +260,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         return l;
     }
 
-    @Override
+
     public ArrayList<Activity> getActivitiesByUserForPhaseSince(String loginName, int phaseId, ZonedDateTime since) throws Exception {
         ArrayList<Activity> l = new ArrayList<>();
 
@@ -293,7 +291,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         return l;
     }
 
-    @Override
+
     public void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project> projects, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -334,7 +332,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -374,7 +372,7 @@ public class ActivityRepositoryPostgres implements ActivityRepository
         }
     }
 
-    @Override
+
     public List<Activity> getAll() throws Exception
     {
         ArrayList<Activity> l = new ArrayList<>();

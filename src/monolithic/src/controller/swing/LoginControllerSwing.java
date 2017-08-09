@@ -5,34 +5,34 @@
  */
 package controller.swing;
 
-import controller.interfaces.LoginController;
 import data.User;
-import java.util.Arrays;
-import model.interfaces.LoginModel;
+import model.impl.LoginModelImpl;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import view.interfaces.LoginView;
+import view.swing.login.LoginViewSwing;
+
+import java.util.Arrays;
 
 /**
  *
  * @author stephan
  */
-public class LoginControllerSwing implements LoginController
+public class LoginControllerSwing
 {
-    private LoginView view;
-    private LoginModel model;
+    private LoginViewSwing view;
+    private LoginModelImpl model;
 
     public LoginControllerSwing()
     {
         
     }
     
-    @Override
+    
     public void resetPasswordClicked()
     {
         view.switchToResetPassword();
     }
 
-    @Override
+    
     public void loginClicked()
     {
         String username = view.getEnteredUsername();
@@ -50,19 +50,19 @@ public class LoginControllerSwing implements LoginController
             }
     }
 
-    @Override
+    
     public void addUserClicked()
     {
         view.switchToAddNewUser();
     }
 
-    @Override
+    
     public void backToLoginClicked()
     {
         view.switchToLogin();
     }
 
-    @Override
+    
     public void addClicked()
     {
         User u = view.getEnteredUser();
@@ -85,24 +85,24 @@ public class LoginControllerSwing implements LoginController
 
     }
 
-    @Override
+    
     public void resetClicked()
     {
         throw new NotImplementedException();
     }
 
-    @Override
-    public void setView(LoginView view)
+    
+    public void setView(LoginViewSwing view)
     {
         this.view = view;
     }
 
-    @Override
+    
     public void showDialog(String message) {
         view.showDialog(message);
     }
 
-    @Override
+    
     public void loginFailed()
     {
         view.showLoginFailed();
@@ -117,8 +117,8 @@ public class LoginControllerSwing implements LoginController
                  u.getNewPassword().length == 0);
     }
 
-    @Override
-    public void setModel(LoginModel model)
+    
+    public void setModel(LoginModelImpl model)
     {
         this.model = model;
     }

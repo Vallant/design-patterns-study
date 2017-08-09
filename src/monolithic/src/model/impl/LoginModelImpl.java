@@ -5,7 +5,7 @@
  */
 package model.impl;
 
-import controller.interfaces.LoginController;
+import controller.swing.LoginControllerSwing;
 import data.User;
 import db.interfaces.UserRepository;
 
@@ -16,17 +16,15 @@ import java.util.Random;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import model.interfaces.LoginModel;
-import model.interfaces.MainModel;
 
 /**
  *
  * @author stephan
  */
-public class LoginModelImpl implements LoginModel
+public class LoginModelImpl
 {
-    private LoginController controller;
-    private MainModel mainModel;
+    private LoginControllerSwing controller;
+    private MainModelImpl mainModel;
 
     public LoginModelImpl()
     {
@@ -35,13 +33,13 @@ public class LoginModelImpl implements LoginModel
 
 
 
-    @Override
+
     public void resetPassword(String email)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+
     public void login(String username, char[] password) throws Exception
     {
         UserRepository repo = mainModel.db().getUserRepository();
@@ -58,7 +56,7 @@ public class LoginModelImpl implements LoginModel
             mainModel.loginSuccessfulFor(u);
     }
 
-    @Override
+
     public void saveNewUser(User user) throws Exception
     {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
@@ -77,14 +75,14 @@ public class LoginModelImpl implements LoginModel
         controller.backToLoginClicked();
     }
 
-    @Override
-    public void setController(LoginController controller)
+
+    public void setController(LoginControllerSwing controller)
     {
         this.controller = controller;
     }
 
-    @Override
-    public void setMainModel(MainModel mainModel)
+
+    public void setMainModel(MainModelImpl mainModel)
     {
         this.mainModel = mainModel;
     }

@@ -1,54 +1,53 @@
 package controller.swing;
 
-import controller.interfaces.SideBarController;
-import model.interfaces.SideBarModel;
-import view.interfaces.SideBarView;
+import model.impl.SideBarModelImpl;
+import view.swing.SideBarViewSwing;
 
 /**
  * Created by stephan on 08.07.17.
  */
-public class SideBarControllerSwing implements SideBarController
+public class SideBarControllerSwing
 {
-    SideBarView view;
-    SideBarModel model;
+    SideBarViewSwing view;
+    SideBarModelImpl model;
 
 
-    @Override
-    public void setView(SideBarView view) {
+
+    public void setView(SideBarViewSwing view) {
         this.view = view;
     }
 
-    @Override
-    public void setModel(SideBarModel model) {
+
+    public void setModel(SideBarModelImpl model) {
         this.model = model;
     }
 
-    @Override
+
     public void projectsClicked() {
         model.projectsClicked();
     }
 
-    @Override
+
     public void personalStatisticClicked() {
         model.personalStatisticClicked();
     }
 
-    @Override
+
     public void administrationClicked() {
         model.administrationClicked();
     }
 
-    @Override
+
     public void settingsClicked() {
         model.settingsClicked();
     }
 
-    @Override
+
     public void projectStatisticClicked() {
         model.projectStatisticClicked();
     }
 
-    @Override
+
     public void logoutClicked() {
         model.logoutClicked();
     }

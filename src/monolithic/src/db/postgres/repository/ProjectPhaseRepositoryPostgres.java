@@ -18,7 +18,6 @@ package db.postgres.repository;
 
 import data.Project;
 import data.ProjectPhase;
-import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
@@ -46,7 +45,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
     }
     
     
-    @Override
+
     public void add(ProjectPhase item) throws Exception
     {
         try(Connection con = db.getConnection())
@@ -75,7 +74,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         }
     }
 
-    @Override
+
     public void update(ProjectPhase item) throws Exception
     {
         try(Connection con = db.getConnection())
@@ -101,7 +100,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         }
     }
 
-    @Override
+
     public void delete(ProjectPhase item) throws Exception
     {
         try(Connection con = db.getConnection())
@@ -124,7 +123,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
 
 
    
-    @Override
+
     public ProjectPhase getByPrimaryKey(int id) throws Exception
     {
         try(Connection con = db.getConnection())
@@ -146,7 +145,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         }
     }
 
-    @Override
+
     public ArrayList<ProjectPhase> getByProjectId(int projectId) throws Exception {
         ArrayList<ProjectPhase> l = new ArrayList<>();
 
@@ -170,7 +169,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         return l;
     }
 
-    @Override
+
     public ArrayList<String> getNamesByProjectName(String projectName) throws Exception {
         ArrayList<String> l = new ArrayList<>();
 
@@ -196,7 +195,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         return l;
     }
 
-    @Override
+
     public ProjectPhase getByProjectAndPhaseName(String projectName, String projectPhaseName) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -219,7 +218,7 @@ public class ProjectPhaseRepositoryPostgres implements ProjectPhaseRepository
         }
     }
 
-    @Override
+
     public List<ProjectPhase> getAll() throws Exception
     {
         ArrayList<ProjectPhase> l = new ArrayList<>();

@@ -1,7 +1,6 @@
 package view.swing.project;
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -31,7 +30,7 @@ public class ProjectDetailAddMemberPanel extends JPanel {
         add(spList, BorderLayout.CENTER);
         setPreferredSize(new Dimension(350, 200));
         lstAvailableUsers.setCellRenderer(new DefaultListCellRenderer() {
-                                              @Override
+
                                               public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                                                   JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                                                   if (index % 2 == 1) setBackground(Color.decode("#EEF1FD"));

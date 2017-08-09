@@ -6,29 +6,27 @@
 package model.impl;
 
 import controller.common.ControllerManager;
-import controller.interfaces.MainController;
+import controller.swing.MainControllerSwing;
 import data.User;
 import db.common.DBManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.interfaces.*;
-
 /**
  *
  * @author stephan
  */
-public class MainModelImpl implements MainModel
+public class MainModelImpl
 {
-    private final MainController controller;
+    private final MainControllerSwing controller;
     
-    private final LoginModel login;
-    private final ProjectModel project;
-    private final ActivityBarModel activityBar;
-    private final SideBarModel sideBar;
-    private final PersonalStatisticModel personalStatistic;
-    private final ProjectStatisticModel projectStatistic;
-    private final SettingsModel settings;
+    private final LoginModelImpl login;
+    private final ProjectModelImpl project;
+    private final ActivityBarModelImpl activityBar;
+    private final SideBarModelImpl sideBar;
+    private final PersonalStatisticModelImpl personalStatistic;
+    private final ProjectStatisticModelImpl projectStatistic;
+    private final SettingsModelImpl settings;
 
     private User user;
     private final DBManager db;
@@ -78,7 +76,7 @@ public class MainModelImpl implements MainModel
         }
     }    
 
-    @Override
+
     public void loginSuccessfulFor(User user)
     {
         this.user = user;
@@ -98,7 +96,7 @@ public class MainModelImpl implements MainModel
         sideBar.refresh();
     }
 
-    @Override
+
     public void showError(Exception ex)
     {
         controller.showError(ex);
@@ -144,45 +142,45 @@ public class MainModelImpl implements MainModel
         controller.pairSettings(settings);
     }
 
-    @Override
+
     public DBManager db()
     {
         return db;
     }
 
-    @Override
+
     public void switchToPersonalStatistics() {
         controller.switchToPersonalStatisticView();
     }
 
-    @Override
+
     public void switchToProjects() {
         controller.switchToProjectView();
     }
 
-    @Override
+
     public void switchToAdministration() {
         controller.switchToAdminView();
     }
 
-    @Override
+
     public void switchToSettings() {
         controller.switchToSettingsView();
         settings.setUser(user);
         settings.refresh();
     }
 
-    @Override
+
     public void refreshActivityBar() {
         activityBar.refresh();
     }
 
-    @Override
+
     public void switchToProjectStatistic() {
         controller.switchToProjectStatisticView();
     }
 
-    @Override
+
     public void logout() {
         activityBar.finishActivity();
         controller.switchToLogin();

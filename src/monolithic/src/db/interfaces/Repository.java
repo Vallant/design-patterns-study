@@ -16,7 +16,6 @@
  */
 package db.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

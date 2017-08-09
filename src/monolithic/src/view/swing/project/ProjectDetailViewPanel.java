@@ -72,7 +72,7 @@ public class ProjectDetailViewPanel extends JPanel
         lstPhases = new JList<>(lstPhasesModel);
         lstPhases.setCellRenderer(new DefaultListCellRenderer()
                                    {
-                                       @Override
+
                                        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                                            JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,cellHasFocus);
                                            if (index % 2 == 0) setBackground(Color.decode("#EEF1FD"));
@@ -111,7 +111,7 @@ public class ProjectDetailViewPanel extends JPanel
         lstMembers = new JList(lstMemberModel);
         lstMembers.setCellRenderer(new DefaultListCellRenderer()
                                           {
-                                              @Override
+
                                               public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                                                   JLabel listCellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,cellHasFocus);
                                                   if (index % 2 == 0) setBackground(Color.decode("#EEF1FD"));

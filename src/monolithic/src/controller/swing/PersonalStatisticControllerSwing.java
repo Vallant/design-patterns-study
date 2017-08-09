@@ -1,11 +1,10 @@
 package controller.swing;
 
-import controller.interfaces.PersonalStatisticController;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
-import model.interfaces.PersonalStatisticModel;
-import view.interfaces.PersonalStatisticView;
+import model.impl.PersonalStatisticModelImpl;
+import view.swing.personalstatistic.PersonalStatisticViewSwing;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class PersonalStatisticControllerSwing implements PersonalStatisticController {
-    private PersonalStatisticModel model;
-    private PersonalStatisticView view;
+public class PersonalStatisticControllerSwing {
+    private PersonalStatisticModelImpl model;
+    private PersonalStatisticViewSwing view;
 
     private ArrayList<Project> currentProjects;
     private ArrayList<ProjectPhase> currentPhases;
@@ -27,17 +26,17 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
 
     }
 
-    @Override
-    public void setModel(PersonalStatisticModel model) {
+    
+    public void setModel(PersonalStatisticModelImpl model) {
         this.model = model;
     }
 
-    @Override
-    public void setView(PersonalStatisticView view) {
+    
+    public void setView(PersonalStatisticViewSwing view) {
         this.view = view;
     }
 
-    @Override
+    
     public void refresh() {
         try {
             if(detailProject != null)
@@ -55,7 +54,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void phasePeriodChanged(int selectedIndex) {
         try {
             assert(detailProject != null);
@@ -66,7 +65,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void projectPeriodChanged(int selectedIndex) {
         try {
             model.projectPeriodChanged(selectedIndex);
@@ -76,7 +75,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void doubleClickOnProject(int index) {
         detailProject = currentProjects.get(index);
         try {
@@ -87,7 +86,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations) {
         currentProjects = projects;
         detailProject = null;
@@ -98,7 +97,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         view.setProjectData(projectNames, durations);
     }
 
-    @Override
+    
     public void setPhaseData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) {
         currentPhases = phases;
         ArrayList<String> phaseNames = new ArrayList<>();
@@ -108,23 +107,23 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         view.setPhaseData(phaseNames, durations);
     }
 
-    @Override
+    
     public void showProjectView() {
         view.showProjectView();
     }
 
-    @Override
+    
     public void showPhaseView() {
         view.showPhaseView();
     }
 
-    @Override
+    
     public void backToOverviewClicked() {
         currentPhases = null;
         showProjectView();
     }
 
-    @Override
+    
     public void doubleClickOnPhase(int index) {
         detailPhase = currentPhases.get(index);
         try {
@@ -135,7 +134,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void activityPeriodChanged(int selectedIndex) {
         try {
             assert(detailPhase != null);
@@ -146,7 +145,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void setActivityData(ArrayList<Activity> activities)
     {
         currentActivities = activities;
@@ -166,17 +165,17 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
 
     }
 
-    @Override
+    
     public void showActivityView() {
         view.showActivityView();
     }
 
-    @Override
+    
     public void addActivityClicked() {
         view.showAddActivityDialog();
     }
 
-    @Override
+    
     public void deleteActivityClicked()
     {
         if(view.confirmDeletion())
@@ -191,14 +190,14 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void updateActivityClicked()
     {
         Activity a = currentActivities.get(view.getSelectedActivity());
         view.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDate(), a.getStop().toLocalDate());
     }
 
-    @Override
+    
     public void addActivity(String description, String comment, LocalDate start, LocalDate end)
     {
         if(description.isEmpty())
@@ -218,7 +217,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
         }
     }
 
-    @Override
+    
     public void updateActivity(String description, String comment, LocalDate start, LocalDate end) {
         Activity a = currentActivities.get(view.getSelectedActivity());
 
@@ -237,7 +236,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
 
     }
 
-    @Override
+    
     public void backToPhaseViewClicked() {
         currentActivities = null;
         showPhaseView();

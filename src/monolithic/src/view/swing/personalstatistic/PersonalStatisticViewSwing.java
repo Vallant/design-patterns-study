@@ -1,7 +1,6 @@
 package view.swing.personalstatistic;
 
-import controller.interfaces.PersonalStatisticController;
-import view.interfaces.PersonalStatisticView;
+import controller.swing.PersonalStatisticControllerSwing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,10 +16,10 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class PersonalStatisticViewSwing implements PersonalStatisticView {
+public class PersonalStatisticViewSwing {
 
     private final JFrame frame;
-    private PersonalStatisticController controller;
+    private PersonalStatisticControllerSwing controller;
     private final PersonalStatisticProjectPanel pProject;
     private final PersonalStatisticPhasePanel pPhase;
     private final PersonalStatisticActivityPanel pActivity;
@@ -36,27 +35,27 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     private void setListeners() {
         pProject.cbPeriod.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex());
             }
         });
         pPhase.cbPeriod.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.phasePeriodChanged(pPhase.cbPeriod.getSelectedIndex());
             }
         });
 
         pActivity.cbPeriod.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.activityPeriodChanged(pActivity.cbPeriod.getSelectedIndex());
             }
         });
 
         pProject.tblProjects.addMouseListener(new MouseAdapter() {
-            @Override
+
             public void mouseClicked(MouseEvent mouseEvent) {
                 JTable tbl = (JTable) mouseEvent.getSource();
                 if(mouseEvent.getClickCount() == 2)
@@ -68,13 +67,13 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         });
 
         pPhase.btBack.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.backToOverviewClicked();
             }
         });
         pPhase.tblPhases.addMouseListener(new MouseAdapter() {
-            @Override
+
             public void mouseClicked(MouseEvent mouseEvent) {
                 JTable tbl = (JTable) mouseEvent.getSource();
                 if(mouseEvent.getClickCount() == 2)
@@ -86,34 +85,34 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         });
 
         pActivity.btAddActivity.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.addActivityClicked();
             }
         });
         pActivity.btDeleteActivity.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.deleteActivityClicked();
             }
         });
 
         pActivity.btUpdateActivity.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.updateActivityClicked();
             }
         });
 
         pActivity.btBack.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent actionEvent) {
                 controller.backToPhaseViewClicked();
             }
         });
     }
 
-    @Override
+
     public void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations) {
 
         pProject.tblProjectsModel.setFirstColumnContent(projectNames);
@@ -121,14 +120,14 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         pProject.tblProjects.updateUI();
     }
 
-    @Override
+
     public void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations) {
         pPhase.tblProjectsModel.setFirstColumnContent(phaseNames);
         pPhase.tblProjectsModel.setWorkloadContent(durations);
         pPhase.tblPhases.updateUI();
     }
 
-    @Override
+
     public void showActivityView() {
         frame.remove(pPhase);
         frame.remove(pProject);
@@ -138,17 +137,17 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
 
     }
 
-    @Override
+
     public void setActivityData(ArrayList<String> descriptions, ArrayList<String> comments, ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes) {
         pActivity.tblActivityModel.setValues(descriptions, comments, startTimes, endTimes);
     }
 
-    @Override
-    public void setController(PersonalStatisticController controller) {
+
+    public void setController(PersonalStatisticControllerSwing controller) {
         this.controller = controller;
     }
 
-    @Override
+
     public void RemoveAllComponents() {
         frame.remove(pPhase);
         frame.remove(pProject);
@@ -157,13 +156,13 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         frame.repaint();
     }
 
-    @Override
+
     public void showError(String localizedMessage) {
         JOptionPane.showMessageDialog(frame, localizedMessage, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
 
-    @Override
+
     public void showProjectView() {
 
         frame.remove(pPhase);
@@ -173,7 +172,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         frame.repaint();
     }
 
-    @Override
+
     public void showPhaseView() {
         frame.remove(pProject);
         frame.remove(pActivity);
@@ -182,24 +181,24 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         frame.repaint();
     }
 
-    @Override
+
     public int getSelectedProjectPeriod() {
         return pProject.cbPeriod.getSelectedIndex();
     }
 
-    @Override
+
     public int getSelectedActivity() {
         return pActivity.tblActivity.getSelectedRow();
     }
 
-    @Override
+
     public void hide() {
         frame.remove(pPhase);
         frame.remove(pProject);
         frame.remove(pActivity);
     }
 
-    @Override
+
     public void showAddActivityDialog()
     {
         PersonalStatisticUpdateActivityDialogPanel dialogPanel = new PersonalStatisticUpdateActivityDialogPanel();
@@ -217,14 +216,14 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         }
     }
 
-    @Override
+
     public boolean confirmDeletion() {
 
         return JOptionPane.showConfirmDialog(null, "Are you sure to delete this activity?","Confirmation",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION;
     }
 
-    @Override
+
     public void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end)
     {
         PersonalStatisticUpdateActivityDialogPanel dialogPanel = new PersonalStatisticUpdateActivityDialogPanel(description, comment, start, end);
@@ -242,17 +241,17 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView {
         }
     }
 
-    @Override
+
     public int getSelectedPhasePeriod() {
         return pPhase.cbPeriod.getSelectedIndex();
     }
 
-    @Override
+
     public int getSelectedActivityPeriod() {
         return pActivity.cbPeriod.getSelectedIndex();
     }
 
-    @Override
+
     public void updateUI() {
         pProject.tblProjects.updateUI();
         pPhase.tblPhases.updateUI();

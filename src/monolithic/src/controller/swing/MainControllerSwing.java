@@ -5,28 +5,27 @@
  */
 package controller.swing;
 
-import controller.interfaces.*;
 import data.User;
-import model.interfaces.*;
+import model.impl.*;
 import view.common.ViewManager;
-import view.interfaces.MainView;
+import view.swing.MainViewSwing;
 
 /**
  *
  * @author stephan
  */
-public class MainControllerSwing implements MainController
+public class MainControllerSwing
 {
-    private MainView mainView;
-    private MainModel mainModel;
+    private MainViewSwing mainView;
+    private MainModelImpl mainModel;
     
-    private final LoginController login;
-    private final ActivityBarController activityBar;
-    private final ProjectController project;
-    private final SideBarController sideBar;
-    private final PersonalStatisticController personalStatistic;
-    private final ProjectStatisticController projectStatistic;
-    private final SettingsController settings;
+    private final LoginControllerSwing login;
+    private final ActivityBarControllerSwing activityBar;
+    private final ProjectControllerSwing project;
+    private final SideBarControllerSwing sideBar;
+    private final PersonalStatisticControllerSwing personalStatistic;
+    private final ProjectStatisticControllerSwing projectStatistic;
+    private final SettingsControllerSwing settings;
 
     public MainControllerSwing()
     {
@@ -39,20 +38,20 @@ public class MainControllerSwing implements MainController
         settings = new SettingsControllerSwing();
     }
     
-    @Override
+    
     public void init(String frontend)
     {
         ViewManager.initInstance(frontend);
         mainView = ViewManager.getInstance();
     }
 
-    @Override
-    public void setModel(MainModel model)
+    
+    public void setModel(MainModelImpl model)
     {
         mainModel = model;
     }
 
-    @Override
+    
     public void switchToLogin()
     {
         assert(mainView != null);
@@ -61,21 +60,21 @@ public class MainControllerSwing implements MainController
         mainView.showLoginView();
     }
 
-    @Override
+    
     public void switchToProjectView()
     {
         mainView.hideCenterContent();
         mainView.showProjectView();
     }
 
-    @Override
+    
     public void switchToAdminView()
     {
         mainView.hideCenterContent();
         mainView.showAdminView();
     }
 
-    @Override
+    
     public void switchToPersonalStatisticView()
     {
         mainView.hideCenterContent();
@@ -83,81 +82,81 @@ public class MainControllerSwing implements MainController
         personalStatistic.refresh();
     }
 
-    @Override
+    
     public void showActivityBar()
     {
         mainView.showActivityBar();
     }
 
-    @Override
-    public void pairLogin(LoginModel model)
+    
+    public void pairLogin(LoginModelImpl model)
     {
         login.setModel(model);
         model.setController(login);
         mainView.pairLogin(login);
     }
 
-    @Override
-    public void pairProject(ProjectModel model)
+    
+    public void pairProject(ProjectModelImpl model)
     {
         project.setModel(model);
         model.setController(project);
         mainView.pairProject(project);
     }
 
-    @Override
-    public void pairActivityBar(ActivityBarModel model)
+    
+    public void pairActivityBar(ActivityBarModelImpl model)
     {
         activityBar.setModel(model);
         model.setController(activityBar);
         mainView.pairActivityBar(activityBar);
     }
 
-    @Override
+    
     public void showError(Exception ex) {
         mainView.showError(ex.getLocalizedMessage());
     }
 
-    @Override
+    
     public void showSideBar(User.ROLE role) {
         mainView.showSideBar(role);
     }
 
-    @Override
-    public void pairSideBar(SideBarModel model) {
+    
+    public void pairSideBar(SideBarModelImpl model) {
         sideBar.setModel(model);
         model.setController(sideBar);
         mainView.pairSideBar(sideBar);
     }
 
-    @Override
-    public void pairPersonalStatistic(PersonalStatisticModel model) {
+    
+    public void pairPersonalStatistic(PersonalStatisticModelImpl model) {
         personalStatistic.setModel(model);
         model.setController(personalStatistic);
         mainView.pairPersonalStatistic(personalStatistic);
     }
 
-    @Override
-    public void pairProjectStatistic(ProjectStatisticModel model) {
+    
+    public void pairProjectStatistic(ProjectStatisticModelImpl model) {
         projectStatistic.setModel(model);
         model.setController(projectStatistic);
         mainView.pairProjectStatistic(projectStatistic);
     }
 
-    @Override
-    public void pairSettings(SettingsModel model) {
+    
+    public void pairSettings(SettingsModelImpl model) {
         settings.setModel(model);
         model.setController(settings);
         mainView.pairSettings(settings);
     }
 
-    @Override
+    
     public void switchToSettingsView() {
         mainView.hideCenterContent();
         mainView.showSettingsView();
     }
 
-    @Override
+    
     public void switchToProjectStatisticView() {
         mainView.hideCenterContent();
         mainView.showProjectStatisticView();

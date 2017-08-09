@@ -5,7 +5,7 @@ package exception;
  */
 public class ElementChangedException extends Exception
 {
-    @Override
+
     public String getLocalizedMessage() {
         return "The object was changed in the database or does not exist anymore\nPlease refresh.";
     }

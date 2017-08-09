@@ -5,7 +5,7 @@
  */
 package view.swing.login;
 
-import controller.interfaces.LoginController;
+import controller.swing.LoginControllerSwing;
 import data.User;
 
 import java.awt.event.ActionEvent;
@@ -13,15 +13,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import view.interfaces.LoginView;
-
 /**
  *
  * @author stephan
  */
-public class LoginViewSwing implements LoginView
+public class LoginViewSwing
 {
-    private LoginController controller;
+    private LoginControllerSwing controller;
     
     private final JFrame frame;
 
@@ -46,7 +44,7 @@ public class LoginViewSwing implements LoginView
         setListeners();
     }
     
-    @Override
+
     public void switchToResetPassword()
     {
         hide();
@@ -54,7 +52,7 @@ public class LoginViewSwing implements LoginView
         update();
     }
 
-    @Override
+
     public void switchToAddNewUser()
     {
         hide();
@@ -62,44 +60,44 @@ public class LoginViewSwing implements LoginView
         update();
     }
 
-    @Override
+
     public void showLoginFailed()
     {
         JOptionPane.showMessageDialog(frame, "Password or Username incorrect.", "Login failed!", JOptionPane.ERROR_MESSAGE);
     }
 
-    @Override
+
     public User getEnteredUser()
     {
         return new User(pNewUser.tfLoginName.getText(), pNewUser.tfFirstName.getText(), pNewUser.tfLastName.getText(), User.ROLE.USER, pNewUser.tfEmailNew.getText(), pNewUser.tfPasswordNew.getPassword(), pNewUser.tfPasswordNewAgain.getPassword());
     }
 
-    @Override
+
     public String getEnteredEmail()
     {
         return pResetPassword.tfEmail.getText();
     }
 
-    @Override
+
     public String getEnteredUsername()
     {
         return pLogin.tfUsername.getText();
     }
 
-    @Override
+
     public char[] getEnteredPassword()
     {
         return pLogin.tfPassword.getPassword();
     }
 
-    @Override
+
     public void removeAllComponents()
     {
         hide();
         update();
     }
 
-    @Override
+
     public void switchToLogin()
     {
         hide();
@@ -113,7 +111,7 @@ public class LoginViewSwing implements LoginView
     {
         pLogin.btLogin.addActionListener(new ActionListener()
         {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.loginClicked();
@@ -122,7 +120,7 @@ public class LoginViewSwing implements LoginView
 
         pLogin.btResetPassword.addActionListener(new ActionListener()
         {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.resetPasswordClicked();
@@ -132,7 +130,7 @@ public class LoginViewSwing implements LoginView
 
         pLogin.btAddNewUser.addActionListener(new ActionListener()
         {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.addUserClicked();
@@ -140,7 +138,7 @@ public class LoginViewSwing implements LoginView
         });
 
         pNewUser.btBackNew.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.backToLoginClicked();
@@ -148,7 +146,7 @@ public class LoginViewSwing implements LoginView
         });
         
         pResetPassword.btBackReset.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.backToLoginClicked();
@@ -157,7 +155,7 @@ public class LoginViewSwing implements LoginView
         
         pNewUser.btAdd.addActionListener(new ActionListener()
         {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.addClicked();
@@ -166,7 +164,7 @@ public class LoginViewSwing implements LoginView
         
         pResetPassword.btReset.addActionListener(new ActionListener()
         {
-            @Override
+
             public void actionPerformed(ActionEvent ae)
             {
                 controller.resetClicked();
@@ -175,18 +173,18 @@ public class LoginViewSwing implements LoginView
 
     }
 
-    @Override
+
     public void showDialog(String message) {
         JOptionPane.showMessageDialog(frame, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    @Override
-    public void setController(LoginController controller)
+
+    public void setController(LoginControllerSwing controller)
     {
         this.controller = controller;
     }
 
-    @Override
+
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }

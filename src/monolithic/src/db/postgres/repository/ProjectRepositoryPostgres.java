@@ -17,14 +17,11 @@
 package db.postgres.repository;
 
 import data.Project;
-import data.ProjectPhase;
-import db.common.DBManager;
 import db.common.DBManagerPostgres;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import db.interfaces.ProjectPhaseRepository;
 import db.interfaces.ProjectRepository;
 import java.util.List;
 
@@ -42,7 +39,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
     }
     
     
-    @Override
+
     public void add(Project item) throws Exception
     {
         assert(item != null);
@@ -70,7 +67,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         }
     }
 
-    @Override
+
     public void update(Project item) throws Exception
     {
         
@@ -96,7 +93,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         }
     }
 
-    @Override
+
     public void delete(Project item) throws Exception
     {
         
@@ -118,7 +115,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         }
     }
 
-    @Override
+
     public Project getByPrimaryKey(int projectId) throws Exception
     {
        try(Connection con = db.getConnection())
@@ -140,7 +137,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         }
     }
 
-    @Override
+
     public ArrayList<String> getProjectsByUserName(String loginName) throws Exception{
         ArrayList<String> list = new ArrayList<>();
 
@@ -164,7 +161,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         return list;
     }
 
-    @Override
+
     public String getDescriptionByProjectName(String projectName) throws Exception {
         try(Connection con = db.getConnection())
         {
@@ -185,7 +182,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
         }
     }
 
-    @Override
+
     public List<Project> getAll() throws Exception
     {
          ArrayList<Project> list = new ArrayList<>();

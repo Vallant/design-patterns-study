@@ -1,18 +1,17 @@
 package controller.swing;
 
-import controller.interfaces.ProjectStatisticController;
 import data.*;
-import model.interfaces.ProjectStatisticModel;
-import view.interfaces.ProjectStatisticView;
+import model.impl.ProjectStatisticModelImpl;
+import view.swing.projectstatistic.ProjectStatisticViewSwing;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-public class ProjectStatisticControllerSwing implements ProjectStatisticController {
+public class ProjectStatisticControllerSwing {
 
-    private ProjectStatisticModel model;
-    private ProjectStatisticView view;
+    private ProjectStatisticModelImpl model;
+    private ProjectStatisticViewSwing view;
 
     ArrayList<Project> projects;
 
@@ -23,17 +22,17 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
 
     ArrayList<ProjectMember> members;
 
-    @Override
-    public void setModel(ProjectStatisticModel model) {
+    
+    public void setModel(ProjectStatisticModelImpl model) {
         this.model = model;
     }
 
-    @Override
-    public void setView(ProjectStatisticView view) {
+    
+    public void setView(ProjectStatisticViewSwing view) {
         this.view = view;
     }
 
-    @Override
+    
     public void refresh() {
         try {
             model.projectPeriodChanged(view.getSelectedProjectPeriod());
@@ -46,7 +45,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex) {
         try {
             if(members != null && currentPhase != null)
@@ -57,7 +56,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void projectPeriodChanged(int selectedPeriodIndex) {
         try {
             model.projectPeriodChanged(selectedPeriodIndex);
@@ -67,7 +66,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void activityDropDownChanged(int selectedPeriodIndex, int selectedUserIndex) {
         try {
             model.activityDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0, members.get(selectedPeriodIndex));
@@ -77,13 +76,13 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void showProjectView() {
         view.showProjectView();
         refresh();
     }
 
-    @Override
+    
     public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations) {
         this.projects = projects;
 
@@ -93,12 +92,12 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         view.setProjectData(projectNames, durations);
     }
 
-    @Override
+    
     public void showPhaseView() {
         view.showPhaseView();
     }
 
-    @Override
+    
     public void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases, ArrayList<Duration> durations) {
         this.phases = phases;
         this.members = members;
@@ -114,12 +113,12 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         view.setPhaseData(phaseNames, durations, memberNames);
     }
 
-    @Override
+    
     public void showActivityView() {
         view.showActivityView();
     }
 
-    @Override
+    
     public void setActivityData(ArrayList<Activity> activities) {
         this.activities = activities;
         ArrayList<String> descriptions = new ArrayList<>();
@@ -143,7 +142,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
     }
 
-    @Override
+    
     public void doubleClickOnProject(int index) {
         try {
             model.requestedDetailFor(projects.get(index));
@@ -153,12 +152,12 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void backToProjectClicked() {
         showProjectView();
     }
 
-    @Override
+    
     public void doubleClickOnPhase(int index) {
         try {
             currentPhase = phases.get(index);
@@ -169,7 +168,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
         }
     }
 
-    @Override
+    
     public void backToPhaseClicked() {
         showPhaseView();
     }

@@ -30,7 +30,7 @@ public class ElementNotFoundException extends Exception
         this.values = values;
     }
 
-    @Override
+
     public String getLocalizedMessage() {
         String message = "Element from table " + table + " not found that satifies conditions:";
         for(int i = 0; i < columns.size(); ++i)

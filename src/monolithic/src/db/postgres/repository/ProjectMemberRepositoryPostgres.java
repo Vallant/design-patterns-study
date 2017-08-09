@@ -20,7 +20,6 @@ package db.postgres.repository;
 import data.Project;
 import data.ProjectMember;
 import data.User;
-import db.common.DBManager;
 import db.common.DBManagerPostgres;
 import java.util.ArrayList;
 import db.interfaces.ProjectMemberRepository;
@@ -52,7 +51,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     }
     
     
-    @Override
+
     public void add(ProjectMember item) throws Exception
     {
         
@@ -77,7 +76,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         }
     }
 
-    @Override
+
     public void update(ProjectMember item) throws Exception
     {
         
@@ -104,7 +103,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         }
     }
 
-    @Override
+
     public void delete(ProjectMember item) throws Exception
     {
         
@@ -126,7 +125,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
     }
 
     
-    @Override
+
     public List<ProjectMember> getAll() throws Exception
     {
          ArrayList<ProjectMember> l = new ArrayList<>();
@@ -146,7 +145,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         return l;
     }
 
-    @Override
+
     public ProjectMember getByPrimaryKey(String userLoginName, int projectId) throws Exception
     {   
         try(Connection con = db.getConnection())
@@ -168,7 +167,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         
     }
 
-    @Override
+
     public ArrayList<ProjectMember> getMembersByProjectId(int projectId) throws Exception {
         ArrayList<ProjectMember> l = new ArrayList<>();
 
@@ -192,7 +191,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         return l;
     }
 
-    @Override
+
     public ArrayList<ProjectMember> getInvolvedProjects(String loginName) throws Exception {
         ArrayList<ProjectMember> l = new ArrayList<>();
 
@@ -217,7 +216,7 @@ public class ProjectMemberRepositoryPostgres implements ProjectMemberRepository
         return l;
     }
 
-    @Override
+
     public ArrayList<ProjectMember> getOwnedProject(String loginName) throws Exception {
         ArrayList<ProjectMember> l = new ArrayList<>();
 

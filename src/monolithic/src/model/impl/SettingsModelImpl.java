@@ -1,10 +1,8 @@
 package model.impl;
 
-import controller.interfaces.SettingsController;
+import controller.swing.SettingsControllerSwing;
 import data.User;
 import db.interfaces.UserRepository;
-import model.interfaces.MainModel;
-import model.interfaces.SettingsModel;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -15,32 +13,32 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-public class SettingsModelImpl implements SettingsModel {
+public class SettingsModelImpl {
     private User user;
-    private MainModel mainModel;
-    private SettingsController controller;
-    @Override
+    private MainModelImpl mainModel;
+    private SettingsControllerSwing controller;
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    @Override
-    public void setMainModel(MainModel mainModel) {
+
+    public void setMainModel(MainModelImpl mainModel) {
         this.mainModel = mainModel;
     }
 
-    @Override
-    public void setController(SettingsController controller) {
+
+    public void setController(SettingsControllerSwing controller) {
         this.controller = controller;
     }
 
-    @Override
+
     public void refresh() {
         controller.show(user);
         controller.refresh();
     }
 
-    @Override
+
     public void saveUser(User user) throws Exception {
 
         UserRepository ur = mainModel.db().getUserRepository();
