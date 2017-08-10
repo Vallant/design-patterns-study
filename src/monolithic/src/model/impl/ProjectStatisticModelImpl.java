@@ -2,8 +2,6 @@ package model.impl;
 
 import controller.swing.ProjectStatisticControllerSwing;
 import data.*;
-import db.interfaces.ActivityRepository;
-import db.interfaces.ProjectMemberRepository;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -36,8 +34,7 @@ public class ProjectStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
+    Activity.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
     controller.setProjectData(projects, durations);
   }
 
@@ -48,14 +45,13 @@ public class ProjectStatisticModelImpl
     PERIOD period = PERIOD.values()[selectedPeriodIndex];
     ZonedDateTime since = subtract(period);
 
-
-    ActivityRepository ar = mainModel.db().getActivityRepository();
     ArrayList<Activity> activities;
 
     if(selectedUser == null)
-      activities = ar.getActivitiesByUserForPhaseSince("", phaseId, since);
+      activities = Activity.getActivitiesByUserForPhaseSince("", phaseId, since, mainModel.db());
     else
-      activities = ar.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since);
+      activities = Activity.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since,
+        mainModel.db());
     controller.setActivityData(activities);
   }
 
@@ -71,14 +67,13 @@ public class ProjectStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
     if(selectedUser == null)
-      ar.getPhasesAndWorkloadForUserSince("", projectId, since, phases, durations);
+      Activity.getPhasesAndWorkloadForUserSince("", projectId, since, phases, durations, mainModel.db());
     else
-      ar.getPhasesAndWorkloadForUserSince(selectedUser.getUserLoginName(), projectId, since, phases, durations);
+      Activity.getPhasesAndWorkloadForUserSince(selectedUser.getUserLoginName(), projectId, since, phases, durations,
+        mainModel.db());
 
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    members = pmr.getMembersByProjectId(projectId);
+    members = ProjectMember.getMembersByProjectId(projectId, mainModel.db());
     controller.setPhaseData(members, phases, durations);
 
   }

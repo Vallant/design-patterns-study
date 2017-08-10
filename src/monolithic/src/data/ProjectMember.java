@@ -17,8 +17,19 @@
 
 package data;
 
+import db.common.DBManagerPostgres;
 import db.interfaces.DBEntity;
+import exception.ElementChangedException;
+import exception.ElementNotFoundException;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author stephan
@@ -128,5 +139,210 @@ public class ProjectMember implements DBEntity
     return project.getName();
   }
 
+  public void insertIntoDb(DBManagerPostgres db) throws Exception
+  {
 
+    try(Connection con = db.getConnection())
+    {
+      String sql = "INSERT INTO PROJECT_MEMBERS(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
+                   + "VALUES "
+                   + "(?, ?, ?, ?) ";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getRole().name());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Update failed!");
+      setRemoteHash(getLocalHash());
+
+    }
+    
+    
+  }
+
+  public void updateInDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "UPDATE PROJECT_MEMBERS SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
+                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ? AND HASH = ?";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getRole().name());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setInt(index++, getRemoteHash());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+      setRemoteHash(getLocalHash());
+
+    }
+  }
+
+  public void deleteInDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "DELETE FROM PROJECT_MEMBERS "
+                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+    }
+  }
+
+  public static List<ProjectMember> getAll(DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectMember> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE FROM PROJECT_MEMBERS ";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        ProjectMember m = extractMember(rs, db);
+        l.add(m);
+      }
+    }
+    return l;
+  }
+
+  public static ProjectMember getByPrimaryKey(String userLoginName, int projectId, DBManagerPostgres db) throws
+    Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE FROM PROJECT_MEMBERS ";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ResultSet rs = ps.executeQuery();
+      if(!rs.next())
+        throw new ElementNotFoundException("ProjectMember",
+          new ArrayList(Arrays.asList("Username", "ProjectId")),
+          new ArrayList(Arrays.asList(userLoginName, Integer.toString(projectId)))
+        );
+
+      return extractMember(rs, db);
+    }
+
+  }
+
+  public static ArrayList<ProjectMember> getMembersByProjectId(int projectId, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectMember> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql =
+        "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS" +
+        ".ROLE FROM PROJECT_MEMBERS " +
+        "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+        "WHERE PROJECT.Id = ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setInt(index++, projectId);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        ProjectMember m = extractMember(rs, db);
+        l.add(m);
+      }
+    }
+    return l;
+  }
+
+  public static ArrayList<ProjectMember> getInvolvedProjects(String loginName, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectMember> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql =
+        "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS" +
+        ".ROLE FROM PROJECT_MEMBERS " +
+        "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+        "WHERE PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+        "AND PROJECT_MEMBERS.ROLE = 'MEMBER'";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setString(index++, loginName);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        ProjectMember m = extractMember(rs, db);
+        l.add(m);
+      }
+    }
+    return l;
+  }
+
+  public static ArrayList<ProjectMember> getOwnedProject(String loginName, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectMember> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql =
+        "SELECT PROJECT_MEMBERS.HASH, PROJECT_MEMBERS.USER_LOGIN_NAME, PROJECT_MEMBERS.PROJECT_ID, PROJECT_MEMBERS" +
+        ".ROLE FROM PROJECT_MEMBERS " +
+        "JOIN PROJECT ON PROJECT_MEMBERS.PROJECT_ID = PROJECT.ID " +
+        "WHERE PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
+        "AND PROJECT_MEMBERS.ROLE = 'LEADER'";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setString(index++, loginName);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        ProjectMember m = extractMember(rs, db);
+        l.add(m);
+      }
+    }
+    return l;
+  }
+
+
+  private static ProjectMember extractMember(ResultSet rs, DBManagerPostgres db) throws Exception
+  {
+    int hash = rs.getInt("HASH");
+    int projectId = rs.getInt("PROJECT_ID");
+    String userLoginName = rs.getString("USER_LOGIN_NAME");
+    String role = rs.getString("ROLE");
+
+    Project project = Project.getByPrimaryKey(projectId, db);
+
+    User user = User.getByPrimaryKey(userLoginName, db);
+
+    return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
+  }
+  
 }

@@ -18,7 +18,6 @@
 package db.common;
 
 import db.interfaces.*;
-import db.postgres.repository.*;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
@@ -27,7 +26,7 @@ import java.sql.Connection;
  * @author stephan
  * @created $date
  */
-public class DBManagerPostgres extends DBManager
+public class DBManagerPostgres
 {
   private final BasicDataSource pool;
 
@@ -47,36 +46,6 @@ public class DBManagerPostgres extends DBManager
   public Connection getConnection() throws Exception
   {
     return pool.getConnection();
-  }
-
-
-  public UserRepository getUserRepository()
-  {
-    return new UserRepositoryPostgres(this);
-  }
-
-
-  public ProjectRepository getProjectRepository()
-  {
-    return new ProjectRepositoryPostgres(this);
-  }
-
-
-  public ProjectMemberRepository getProjectMemberRepository()
-  {
-    return new ProjectMemberRepositoryPostgres(this);
-  }
-
-
-  public ProjectPhaseRepository getProjectPhaseRepository()
-  {
-    return new ProjectPhaseRepositoryPostgres(this);
-  }
-
-
-  public ActivityRepository getActivityRepository()
-  {
-    return new ActivityRepositoryPostgres(this);
   }
 
 }

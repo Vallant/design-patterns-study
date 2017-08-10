@@ -6,8 +6,6 @@
 package test;
 
 import data.Project;
-import db.common.DBManager;
-import db.interfaces.ProjectRepository;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,14 +19,7 @@ class Main
   {
     try
     {
-      DBManager db =
-        DBManager.get("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
-
-      ProjectRepository r = db.getProjectRepository();
-
-      Project p2 = r.getByPrimaryKey(20);
-
-      System.out.println(p2.getName());
+      
     }
     catch(Exception ex)
     {

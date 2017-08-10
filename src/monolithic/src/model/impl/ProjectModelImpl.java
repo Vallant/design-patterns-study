@@ -10,10 +10,6 @@ import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
 import data.User;
-import db.interfaces.ProjectMemberRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
-import db.interfaces.UserRepository;
 
 import java.util.ArrayList;
 
@@ -58,32 +54,26 @@ public class ProjectModelImpl
 
   public ArrayList<ProjectMember> getOwnedProjects() throws Exception
   {
-
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    return pmr.getOwnedProject(user.getLoginName());
+    return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.db());
   }
 
 
   public ArrayList<ProjectMember> getInvolvedProjects() throws Exception
   {
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    return pmr.getInvolvedProjects(user.getLoginName());
+    return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.db());
   }
 
 
   public void leaveProject(ProjectMember member) throws Exception
   {
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    pmr.delete(member);
+    member.deleteInDb(mainModel.db());
     controller.refresh();
   }
 
 
   public void deleteProject(Project selectedProject) throws Exception
   {
-
-    ProjectRepository pr = mainModel.db().getProjectRepository();
-    pr.delete(selectedProject);
+    selectedProject.delete(mainModel.db());
     controller.refresh();
     mainModel.refreshActivityBar();
 
@@ -92,11 +82,9 @@ public class ProjectModelImpl
 
   public void requestedDetailForProject(Project project) throws Exception
   {
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    ArrayList<ProjectMember> members = pmr.getMembersByProjectId(project.getId());
+    ArrayList<ProjectMember> members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.db());
 
-    ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
-    ArrayList<ProjectPhase> phases = ppr.getByProjectId(project.getId());
+    ArrayList<ProjectPhase> phases = ProjectPhase.getByProjectId(project.getId(), mainModel.db());
 
     controller.showDetail(project, phases, members);
   }
@@ -104,12 +92,10 @@ public class ProjectModelImpl
 
   public void addProject(String name, String description) throws Exception
   {
-    ProjectRepository pr = mainModel.db().getProjectRepository();
     Project project = new Project(name, description);
-    pr.add(project);
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
+    project.insertIntoDb(mainModel.db());
     ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
-    pmr.add(pm);
+    pm.insertIntoDb(mainModel.db());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -118,8 +104,7 @@ public class ProjectModelImpl
   public void addPhase(Project project, String phaseName) throws Exception
   {
     ProjectPhase phase = new ProjectPhase(project, phaseName);
-    ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
-    ppr.add(phase);
+    phase.insertIntoDb(mainModel.db());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -127,8 +112,7 @@ public class ProjectModelImpl
 
   public void deletePhase(ProjectPhase projectPhase) throws Exception
   {
-    ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
-    ppr.delete(projectPhase);
+    projectPhase.deleteFromDb(mainModel.db());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -137,8 +121,7 @@ public class ProjectModelImpl
   public void promoteToLeader(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.LEADER);
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    pmr.update(projectMember);
+    projectMember.updateInDb(mainModel.db());
     controller.refresh();
   }
 
@@ -146,34 +129,30 @@ public class ProjectModelImpl
   public void degradeToMember(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.MEMBER);
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    pmr.update(projectMember);
+    projectMember.updateInDb(mainModel.db());
     controller.refresh();
   }
 
 
   public void deleteMember(ProjectMember projectMember) throws Exception
   {
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    pmr.delete(projectMember);
+    projectMember.deleteInDb(mainModel.db());
     controller.refresh();
   }
 
 
   public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception
   {
-    UserRepository ur = mainModel.db().getUserRepository();
-    return ur.getAvailableUsersFor(projectId);
+    return User.getAvailableUsersFor(projectId, mainModel.db());
   }
 
 
   public void addMembersToProject(ArrayList<User> toAdd, Project currentProject) throws Exception
   {
-    ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
     for(User u : toAdd)
     {
       ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
-      pmr.add(member);
+      member.insertIntoDb(mainModel.db());
     }
     controller.refresh();
   }
@@ -181,8 +160,7 @@ public class ProjectModelImpl
 
   public void updateProject(Project project) throws Exception
   {
-    ProjectRepository pr = mainModel.db().getProjectRepository();
-    pr.update(project);
+    project.updateInDb(mainModel.db());
     controller.refresh();
   }
 

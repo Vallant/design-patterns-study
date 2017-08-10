@@ -5,7 +5,6 @@ import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import data.User;
-import db.interfaces.ActivityRepository;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -35,8 +34,7 @@ public class PersonalStatisticModelImpl
 
   public void deleteActivity(Activity toDelete) throws Exception
   {
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.delete(toDelete);
+    toDelete.deleteInDb(mainModel.db());
     controller.refresh();
   }
 
@@ -48,16 +46,14 @@ public class PersonalStatisticModelImpl
       throw new Exception("Start date has to be before End date");
     Activity a = new Activity(detailPhase, user, description, zdtStart, zdtEnd, comment);
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.add(a);
+    a.insertIntoDb(mainModel.db());
     controller.refresh();
   }
 
 
   public void updateActivity(Activity a) throws Exception
   {
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.update(a);
+    a.updateInDb(mainModel.db());
     controller.refresh();
   }
 
@@ -110,8 +106,7 @@ public class PersonalStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations);
+    Activity.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations, mainModel.db());
     controller.setPhaseData(phases, durations);
   }
 
@@ -126,8 +121,8 @@ public class PersonalStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations);
+
+    Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
     controller.setProjectData(projects, durations);
   }
 
@@ -138,8 +133,7 @@ public class PersonalStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
 
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ArrayList<Activity> activities = ar.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since);
+    ArrayList<Activity> activities = Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
     controller.showActivityView();
     controller.setActivityData(activities);
   }

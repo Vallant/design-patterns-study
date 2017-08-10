@@ -8,7 +8,7 @@ package model.impl;
 import controller.common.ControllerManager;
 import controller.swing.MainControllerSwing;
 import data.User;
-import db.common.DBManager;
+import db.common.DBManagerPostgres;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,14 +28,14 @@ public class MainModelImpl
   private final ProjectStatisticModelImpl  projectStatistic;
   private final SettingsModelImpl          settings;
 
-  private       User      user;
-  private final DBManager db;
+  private       User              user;
+  private final DBManagerPostgres db;
 
 
   private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
   {
 
-    db = DBManager.get(driver, url, username, password);
+    db = new DBManagerPostgres(driver, url, username, password);
     ControllerManager.initInstance(frontend);
 
     controller = ControllerManager.getInstance();
@@ -143,7 +143,7 @@ public class MainModelImpl
   }
 
 
-  public DBManager db()
+  public DBManagerPostgres db()
   {
     return db;
   }

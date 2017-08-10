@@ -7,11 +7,9 @@ package model.impl;
 
 import controller.swing.ActivityBarControllerSwing;
 import data.Activity;
+import data.Project;
 import data.ProjectPhase;
 import data.User;
-import db.interfaces.ActivityRepository;
-import db.interfaces.ProjectPhaseRepository;
-import db.interfaces.ProjectRepository;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
  */
 public class ActivityBarModelImpl
 {
-
   private ActivityBarControllerSwing controller;
   private MainModelImpl              mainModel;
   private User                       user;
@@ -76,8 +73,7 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjectPhasesFor(String project) throws Exception
   {
-    ProjectPhaseRepository r = mainModel.db().getProjectPhaseRepository();
-    return r.getNamesByProjectName(project);
+    return ProjectPhase.getNamesByProjectName(project, mainModel.db());
 
   }
 
@@ -90,8 +86,7 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjects() throws Exception
   {
-    ProjectRepository r = mainModel.db().getProjectRepository();
-    return r.getProjectsByUserName(user.getLoginName());
+    return Project.getProjectsByUserName(user.getLoginName(), mainModel.db());
   }
 
 
@@ -102,11 +97,10 @@ public class ActivityBarModelImpl
     controller.enableStartButton();
     controller.stopTimer();
     controller.enableComboBoxes();
-    ProjectPhaseRepository ppr = mainModel.db().getProjectPhaseRepository();
-    ProjectPhase projectPhase = ppr.getByProjectAndPhaseName(projectName, projectPhaseName);
+
+    ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.db());
     Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
-    ActivityRepository ar = mainModel.db().getActivityRepository();
-    ar.add(activity);
+    activity.insertIntoDb(mainModel.db());
   }
 
 

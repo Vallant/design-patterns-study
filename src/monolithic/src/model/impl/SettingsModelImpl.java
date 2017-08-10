@@ -2,7 +2,6 @@ package model.impl;
 
 import controller.swing.SettingsControllerSwing;
 import data.User;
-import db.interfaces.UserRepository;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -47,7 +46,6 @@ public class SettingsModelImpl
   public void saveUser(User user) throws Exception
   {
 
-    UserRepository ur = mainModel.db().getUserRepository();
     if(user.getNewPassword() != null)
     {
       SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
@@ -70,7 +68,7 @@ public class SettingsModelImpl
     user.setNewPassword(null);
 
 
-    ur.update(user);
+    user.updateInDb(mainModel.db());
     controller.updateSuccessful();
 
     controller.refresh();

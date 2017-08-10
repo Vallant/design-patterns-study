@@ -7,7 +7,6 @@ package model.impl;
 
 import controller.swing.LoginControllerSwing;
 import data.User;
-import db.interfaces.UserRepository;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -40,9 +39,7 @@ public class LoginModelImpl
 
   public void login(String username, char[] password) throws Exception
   {
-    UserRepository repo = mainModel.db().getUserRepository();
-
-    User u = repo.getByPrimaryKey(username);
+    User u = User.getByPrimaryKey(username, mainModel.db());
     SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
     Random r = new SecureRandom();
     KeySpec ks = new PBEKeySpec(password, u.getSalt(), 1000, 512);
@@ -66,8 +63,7 @@ public class LoginModelImpl
     user.setPassword(generateSecret.getEncoded());
     user.setSalt(salt);
 
-    UserRepository repo = mainModel.db().getUserRepository();
-    repo.add(user);
+    user.insertIntoDb(mainModel.db());
 
     controller.showDialog("User creation successful");
     controller.backToLoginClicked();

@@ -141,8 +141,11 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     try(Connection con = db.getConnection())
     {
       String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
-                   + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY ";
+                   + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY "
+                   + "WHERE ID = ?";
       PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setInt(index, id);
 
       ResultSet rs = ps.executeQuery();
       if(!rs.next())

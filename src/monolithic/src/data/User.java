@@ -17,8 +17,15 @@
 
 package data;
 
+import db.common.DBManagerPostgres;
 import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author stephan
@@ -210,5 +217,168 @@ public class User implements DBEntity
   public void setNewPassword(char[] newPassword)
   {
     this.newPassword = newPassword;
+  }
+
+
+  public void insertIntoDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "INSERT INTO USERS(HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL) "
+                   + "VALUES "
+                   + "(?, ?, ?, ?, ?, ?, ?, ?)";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getFirstName());
+      ps.setString(index++, getLastName());
+      ps.setString(index++, getRole().name());
+      ps.setBytes(index++, getSalt());
+      ps.setBytes(index++, getPassword());
+      ps.setString(index++, getLoginName());
+      ps.setString(index++, getEmail());
+
+      ps.executeUpdate();
+      setRemoteHash(getLocalHash());
+    }
+  }
+
+
+  public void updateInDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "UPDATE USERS SET HASH = ?, FIRST_NAME = ?, LAST_NAME = ?, ROLE = ?, "
+                   + "SALT = ?, PASSWORD = ?, LOGIN_NAME = ?, EMAIL = ? "
+                   + "WHERE LOGIN_NAME = ? AND HASH = ?";
+
+      PreparedStatement ps = con.prepareStatement(sql);
+
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getFirstName());
+      ps.setString(index++, getLastName());
+      ps.setString(index++, getRole().name());
+      ps.setBytes(index++, getSalt());
+      ps.setBytes(index++, getPassword());
+      ps.setString(index++, getLoginName());
+      ps.setString(index++, getEmail());
+
+      ps.setString(index++, getLoginName());
+      ps.setInt(index++, getRemoteHash());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Record has changed or was not found!");
+    }
+  }
+
+
+  public void delete(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "DELETE FROM USERS "
+                   + "WHERE LOGIN_NAME = ? AND HASH = ?";
+
+      PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setString(index++, getLoginName());
+      ps.setInt(index++, getRemoteHash());
+
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Record has changed or was not found!");
+    }
+  }
+
+
+  public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                   + "FROM USERS "
+                   + "WHERE LOGIN_NAME = ?";
+
+      int index = 1;
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setString(index++, loginName);
+
+      ResultSet rs = ps.executeQuery();
+      if(!rs.next())
+        throw new Exception("No such record");
+
+      return extractUser(rs, db);
+    }
+  }
+
+
+  public static ArrayList<User> getAvailableUsersFor(int projectId, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<User> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT USERS.HASH, USERS.FIRST_NAME, USERS.LAST_NAME, USERS.ROLE, " +
+                   "USERS.SALT, USERS.PASSWORD, USERS.LOGIN_NAME, USERS.EMAIL " +
+                   "FROM USERS " +
+                   "RIGHT JOIN PROJECT_MEMBERS " +
+                   "ON PROJECT_MEMBERS.USER_LOGIN_NAME = USERS.LOGIN_NAME " +
+                   "WHERE PROJECT_MEMBERS.PROJECT_ID IS NULL OR PROJECT_MEMBERS.PROJECT_ID != ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setInt(index++, projectId);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        User u = extractUser(rs, db);
+        l.add(u);
+      }
+    }
+    return l;
+  }
+
+
+  public static List<User> getAll(DBManagerPostgres db) throws Exception
+  {
+    ArrayList<User> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                   + "FROM USERS ";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        User u = extractUser(rs, db);
+        l.add(u);
+      }
+    }
+    return l;
+  }
+
+  private static User extractUser(ResultSet rs, DBManagerPostgres db) throws Exception
+  {
+    int hash = rs.getInt("HASH");
+    String firstName = rs.getString("FIRST_NAME");
+    String lastName = rs.getString("LAST_NAME");
+    String role = rs.getString("ROLE");
+    byte[] salt = rs.getBytes("SALT");
+    byte[] password = rs.getBytes("PASSWORD");
+    String loginName = rs.getString("LOGIN_NAME");
+    String email = rs.getString("EMAIL");
+
+    return new User(hash, loginName, firstName, lastName,
+      User.ROLE.valueOf(role), email, password, salt);
   }
 }
