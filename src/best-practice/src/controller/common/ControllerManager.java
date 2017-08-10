@@ -6,6 +6,7 @@
 package controller.common;
 
 import controller.interfaces.MainController;
+import controller.javafx.MainControllerFX;
 import controller.swing.MainControllerSwing;
 
 /**
@@ -22,6 +23,9 @@ public class ControllerManager
     {
       case "swing":
         controller = new MainControllerSwing();
+        break;
+      case "javafx":
+        controller = new MainControllerFX();
         break;
       default:
         throw new UnsupportedOperationException();
