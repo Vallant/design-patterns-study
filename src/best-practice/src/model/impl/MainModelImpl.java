@@ -70,6 +70,7 @@ public class MainModelImpl implements MainModel
     }
     catch(Exception ex)
     {
+      ex.printStackTrace();
       Logger.getLogger(MainModelImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
   }

@@ -3,9 +3,11 @@ package view.javafx;
 import controller.interfaces.*;
 import data.User;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import view.interfaces.MainView;
 
@@ -13,27 +15,38 @@ import java.io.IOException;
 
 public class MainViewFX extends Application implements MainView
 {
+  private static MainViewFX theInstance;
   private Stage stage;
 
+
+  public static MainViewFX getInstance()
+  {
+    if(theInstance == null)
+      theInstance = new MainViewFX();
+    return theInstance;
+  }
 
   public MainViewFX()
   {
 
   }
-  public static void launchThis()
+
+  public Stage getStage()
+  {
+    return stage;
+  }
+
+  public void launchThis()
   {
     launch();
+
   }
 
   @Override
   public void start(Stage stage) throws Exception
   {
     this.stage = stage;
-    Parent root = null;
-    root = FXMLLoader.load(getClass().getResource("login.fxml"));
-    stage.setTitle("Hello World");
-    stage.setScene(new Scene(root, 300, 275));
-    stage.show();
+    theInstance = this;
   }
 
   @Override
@@ -45,19 +58,18 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void showLoginView()
   {
-    this.stage = stage;
-    Parent root = null;
-    try
+    Platform.runLater(new Runnable()
     {
-      root = FXMLLoader.load(getClass().getResource("login.fxml"));
-    }
-    catch(IOException e)
-    {
-      e.printStackTrace();
-    }
-    stage.setTitle("Hello World 2");
-    stage.setScene(new Scene(root, 300, 275));
-    stage.show();
+      @Override
+      public void run()
+      {
+        Parent root = new Pane();
+        theInstance.stage.setTitle("Hello World 2");
+        theInstance.stage.setScene(new Scene(root, 300, 275));
+        theInstance.stage.show();
+      }
+    });
+
   }
 
   @Override

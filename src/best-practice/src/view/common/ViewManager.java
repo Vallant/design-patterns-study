@@ -5,6 +5,9 @@
  */
 package view.common;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import view.interfaces.MainView;
 import view.javafx.MainViewFX;
 import view.swing.MainViewSwing;
@@ -25,12 +28,27 @@ public class ViewManager
         view = new MainViewSwing();
         break;
       case "javafx":
-        view = new MainViewFX();
-        MainViewFX.launchThis();
+        MainViewFX fx = MainViewFX.getInstance();
+        launchFx(fx);
         break;
       default:
         throw new UnsupportedOperationException();
     }
+  }
+
+  private static void launchFx(MainViewFX fx)
+  {
+    new Thread(() -> fx.launchThis()).start();
+    view = fx;
+    while(MainViewFX.getInstance().getStage() == null)
+      try
+      {
+        Thread.sleep(100);
+      }
+      catch(InterruptedException e)
+      {
+        e.printStackTrace();
+      }
   }
 
   public static MainView getInstance()
