@@ -1,0 +1,93 @@
+package view.javafx.settings;
+
+import controller.interfaces.SettingsController;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import view.interfaces.SettingsView;
+import view.javafx.FXDialogs;
+
+public class SettingsViewFX implements SettingsView
+{
+  private BorderPane mainPane;
+  private Stage mainStage;
+  private       SettingsController controller;
+  private final SettingsViewPane pMain;
+
+  public SettingsViewFX()
+  {
+    pMain = new SettingsViewPane();
+
+    setListener();
+
+  }
+
+  private void setListener()
+  {
+    pMain.btReset.setOnAction(actionEvent -> controller.resetClicked());
+    pMain.btApply.setOnAction(actionEvent -> controller.applyClicked(
+      pMain.tfFirst.getText(),
+      pMain.tfLast.getText(),
+      pMain.tfEmail.getText(),
+      pMain.tfOldPw.getText().toCharArray(),
+      pMain.tfNewPw.getText().toCharArray(),
+      pMain.tfNewPwAgain.getText().toCharArray()
+    ));
+  }
+
+  @Override
+  public void setController(SettingsController controller)
+  {
+    this.controller = controller;
+  }
+
+  @Override
+  public void hide()
+  {
+    mainPane.setCenter(null);
+    mainStage.show();
+  }
+
+  @Override
+  public void show()
+  {
+    mainPane.setCenter(pMain);
+    mainStage.show();
+  }
+
+  @Override
+  public void showError(String error)
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR, error);
+    alert.showAndWait();
+  }
+
+  @Override
+  public void setData(String firstName, String lastName, String email)
+  {
+    pMain.tfFirst.setText(firstName);
+    pMain.tfLast.setText(lastName);
+    pMain.tfEmail.setText(email);
+    pMain.tfNewPwAgain.setText("");
+    pMain.tfNewPw.setText("");
+    pMain.tfOldPw.setText("");
+  }
+
+  @Override
+  public void updateSuccessful()
+  {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Update Successful");
+    alert.showAndWait();
+  }
+
+  public void setMainPane(BorderPane mainPane)
+  {
+    this.mainPane = mainPane;
+  }
+
+  public void setMainStage(Stage mainStage)
+  {
+    this.mainStage = mainStage;
+  }
+}

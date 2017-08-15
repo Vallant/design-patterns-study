@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface ActivityBarView
 {
-  void setActivityBarController(ActivityBarController controller);
+  void setController(ActivityBarController controller);
 
   void show();
 

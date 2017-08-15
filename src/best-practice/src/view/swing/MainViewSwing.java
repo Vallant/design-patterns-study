@@ -99,7 +99,7 @@ public class MainViewSwing implements MainView
   @Override
   public void pairActivityBar(ActivityBarController controller)
   {
-    activityBar.setActivityBarController(controller);
+    activityBar.setController(controller);
     controller.setView(activityBar);
   }
 

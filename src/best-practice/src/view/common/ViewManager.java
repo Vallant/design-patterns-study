@@ -5,9 +5,6 @@
  */
 package view.common;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.stage.Stage;
 import view.interfaces.MainView;
 import view.javafx.MainViewFX;
 import view.swing.MainViewSwing;
@@ -40,7 +37,7 @@ public class ViewManager
   {
     new Thread(() -> fx.launchThis()).start();
     view = fx;
-    while(MainViewFX.getInstance().getStage() == null)
+    while(MainViewFX.getInstance().getMainStage() == null)
       try
       {
         Thread.sleep(100);
