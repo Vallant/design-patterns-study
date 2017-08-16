@@ -47,12 +47,19 @@ public class LoginViewFX implements LoginView
   {
     mainPane.setCenter(register);
     mainStage.show();
+    mainPane.autosize();
+    mainStage.sizeToScene();
   }
 
   @Override
   public void switchToLogin()
   {
+    login.tfPassword.clear();
+    login.tfUsername.clear();
+
     mainPane.setCenter(login);
+    mainPane.autosize();
+    mainStage.sizeToScene();
   }
 
   @Override
@@ -64,8 +71,11 @@ public class LoginViewFX implements LoginView
   @Override
   public void removeAllComponents()
   {
-    mainPane.setCenter(null);
+    mainPane.getChildren().remove(login);
+    mainPane.getChildren().remove(register);
     mainStage.show();
+    mainPane.autosize();
+    mainStage.sizeToScene();
   }
 
   @Override

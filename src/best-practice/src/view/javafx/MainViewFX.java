@@ -94,7 +94,7 @@ public class MainViewFX extends Application implements MainView
     theInstance.project.setMainStage(mainStage);
 
 
-    theInstance.mainStage.setScene(new Scene(mainPane, 300, 500));
+    theInstance.mainStage.setScene(new Scene(mainPane));
   }
 
   @Override
@@ -111,8 +111,11 @@ public class MainViewFX extends Application implements MainView
       @Override
       public void run()
       {
+        theInstance.sideBar.hide();
+        theInstance.activityBar.hide();
         theInstance.login.switchToLogin();
         theInstance.mainStage.show();
+
       }
     });
 
@@ -124,6 +127,7 @@ public class MainViewFX extends Application implements MainView
     theInstance.login.removeAllComponents();
     theInstance.personalStatistic.RemoveAllComponents();
     theInstance.projectStatistic.hide();
+    theInstance.settings.hide();
     theInstance.project.showOverview();
 
   }

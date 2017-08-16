@@ -51,6 +51,8 @@ public class ProjectViewFX implements ProjectView
       if(clickEvent.getClickCount() == 2)
       {
         int index = pMain.lstOwned.getSelectionModel().getSelectedIndex();
+        if(index == -1)
+          return;
         controller.doubleClickedOn(index);
       }
     });
@@ -99,7 +101,9 @@ public class ProjectViewFX implements ProjectView
       pMain.btLeaveProject.setDisable(true);
     if(pMain.lstOwned.getSelectionModel().getSelectedIndex() == -1)
       pMain.btDeleteProject.setDisable(true);
+
     mainStage.show();
+    mainStage.sizeToScene();
   }
 
   @Override
@@ -126,21 +130,17 @@ public class ProjectViewFX implements ProjectView
   @Override
   public void setParticipatingProjects(ArrayList<String> participatingProjects)
   {
-    pMain.lstInvolvedModel.clear();
-    for(String s : participatingProjects)
-    {
-      pMain.lstInvolvedModel.addElement(s);
-    }
+    pMain.lstInvolved.getItems().clear();
+    pMain.lstInvolved.getItems().addAll(participatingProjects);
+    pMain.lstInvolved.refresh();
   }
 
   @Override
   public void setOwnedProjects(ArrayList<String> ownedProjects)
   {
-    pMain.lstOwnedModel.clear();
-    for(String s : ownedProjects)
-    {
-      pMain.lstOwnedModel.addElement(s);
-    }
+    pMain.lstOwned.getItems().clear();
+    pMain.lstOwned.getItems().addAll(ownedProjects);
+    pMain.lstOwned.refresh();
   }
 
   @Override

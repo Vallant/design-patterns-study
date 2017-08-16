@@ -27,39 +27,46 @@ public class ActivityBarPane extends FlowPane
     setPadding(new Insets(5,5,5,5));
 
     pMain = new GridPane();
+    pMain.setHgap(5);
+    pMain.setVgap(5);
     pMain.setPadding(new Insets(5,5,5,5));
 
-    FlowPane pFlow1 = new FlowPane();
+    //FlowPane pFlow1 = new FlowPane();
     cbProject = new ComboBox<>();
+    cbProject.setPrefWidth(100);
 
     lbProject = new Label("Project:");
 
-    FlowPane pFlow2 = new FlowPane();
+    //FlowPane pFlow2 = new FlowPane();
     cbPhase = new ComboBox<>();
+    cbPhase.setPrefWidth(100);
     lbPhase = new Label("Phase:");
 
     btStart = new Button("Start Activity");
     btStop = new Button("Stop Activity");
     lbDuration = new Label();
-    lbDuration.setPrefWidth(50);
+    lbDuration.setPrefWidth(100);
     btStart.setDisable(true);
     btStop.setDisable(true);
 
 
-    pFlow1.getChildren().add(lbProject);
-    pFlow1.getChildren().add(cbProject);
-    pMain.add(pFlow1, 0,0);
-    pFlow2.getChildren().add(lbPhase);
-    pFlow2.getChildren().add(cbPhase);
+    //pFlow1.getChildren().add(lbProject);
+    //pFlow1.getChildren().add(cbProject);
+    pMain.add(lbProject, 0,0);
+    pMain.add(cbProject, 1,0);
+    pMain.add(lbPhase, 2,0);
+    pMain.add(cbPhase, 3,0);
+    //pFlow2.getChildren().add(lbPhase);
+    //pFlow2.getChildren().add(cbPhase);
 
-    FlowPane pFlow3 = new FlowPane();
-    pFlow3.getChildren().add(btStart);
-    FlowPane pFlow4 = new FlowPane();
-    pFlow4.getChildren().add(btStop);
-    pMain.add(pFlow2, 1, 0);
-    pMain.add(pFlow3, 2, 0);
-    pMain.add(pFlow4, 3, 0);
-    pMain.add(lbDuration, 4, 0);
+    //FlowPane pFlow3 = new FlowPane();
+    //pFlow3.getChildren().add(btStart);
+    //FlowPane pFlow4 = new FlowPane();
+    //pFlow4.getChildren().add(btStop);
+    pMain.add(btStart, 4, 0);
+    pMain.add(btStop, 5, 0);
+//    pMain.add(pFlow4, 3, 0);
+    pMain.add(lbDuration, 6, 0);
     getChildren().add(pMain);
 
 

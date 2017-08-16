@@ -2,10 +2,12 @@ package view.javafx;
 
 import controller.interfaces.SideBarController;
 import data.User;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import view.interfaces.SideBarView;
 
@@ -26,17 +28,27 @@ public class SideBarViewFX implements SideBarView
   //private final JButton btHelp;
 
   private SideBarController controller;
+  private static int BUTTON_WIDTH = 150;
 
   public SideBarViewFX()
   {
-
     pSideBar = new GridPane();
+    pSideBar.setVgap(5);
+    pSideBar.setHgap(5);
+    pSideBar.setPadding(new Insets(5,5,5,5));
+
     btProjects = new Button("Manage Projects");
+    btProjects.setPrefWidth(BUTTON_WIDTH);
     btPersonalStatistic = new Button("Personal Statistic");
+    btPersonalStatistic.setPrefWidth(BUTTON_WIDTH);
     btProjectStatistic = new Button("Project Statistic");
+    btProjectStatistic.setPrefWidth(BUTTON_WIDTH);
     btAdministration = new Button("Administration");
+    btAdministration.setPrefWidth(BUTTON_WIDTH);
     btSettings = new Button("Settings");
+    btSettings.setPrefWidth(BUTTON_WIDTH);
     btLogout = new Button("Logout");
+    btLogout.setPrefWidth(BUTTON_WIDTH);
 
     pFloatPanel = new FlowPane();
     pSideBar.add(btProjects, 0, 0);
@@ -50,6 +62,7 @@ public class SideBarViewFX implements SideBarView
     //pFloatPanel.setBorder(new EtchedBorder());
     //pSideBar.add(btAdministration);
 
+    GridPane.setHgrow(pSideBar, Priority.NEVER);
   }
 
   private void setListeners()
@@ -78,7 +91,7 @@ public class SideBarViewFX implements SideBarView
     else
       pSideBar.getChildren().remove(btAdministration);
 
-    mainPane.setLeft(pFloatPanel);
+    mainPane.setLeft(pSideBar);
     mainStage.show();
   }
 

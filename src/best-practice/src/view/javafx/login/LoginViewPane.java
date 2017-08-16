@@ -22,7 +22,7 @@ public class LoginViewPane extends BorderPane
   public LoginViewPane()
   {
 
-    setPrefSize(355, 165);
+    setPrefSize(355, 70);
     setPadding(new Insets(5, 5, 5, 5));
 
     GridPane buttons = new GridPane();
