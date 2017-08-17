@@ -209,6 +209,7 @@ public class ProjectViewFX implements ProjectView
   public void showAddMemberDialog(ArrayList<String> names)
   {
     ProjectAddMemberDialog dlg = new ProjectAddMemberDialog();
+    dlg.setAvailableNames(names);
     dlg.showAndWait().ifPresent(response ->
     {
 

@@ -29,22 +29,12 @@ public class ProjectAddMemberDialog extends Dialog<ButtonType>
     getDialogPane().setContent(spList);
     getDialogPane().setPrefSize(350, 200);
 
-    lstAvailableUsers.setCellFactory(list -> {
-      // usual list cell:
-      ListCell<String> cell = new ListCell<String>() {
-        @Override
-        protected void updateItem(String item, boolean empty) {
-          super.updateItem(item, empty);
-          setText(empty ? null : item);
-        }
-      };
-      if(cell.getIndex() % 2 == 1)
-      {
-        cell.setStyle("-fx-background-color: #EEF1FD;");
-      }
+    spList.setFitToHeight(true);
+    spList.setFitToWidth(true);
+    spList.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+    spList.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-      return cell;
-    });
+    setResizable(true);
   }
 
   void setAvailableNames(ArrayList<String> names)
