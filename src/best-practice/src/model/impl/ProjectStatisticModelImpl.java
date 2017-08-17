@@ -40,7 +40,6 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel
     PERIOD period = PERIOD.values()[selectedPeriodIndex];
     ZonedDateTime since = subtract(period);
 
-
     ActivityRepository ar = mainModel.db().getActivityRepository();
     ArrayList<Activity> activities;
 
@@ -58,8 +57,6 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel
     PERIOD period = PERIOD.values()[selectedPeriodIndex];
     ArrayList<ProjectPhase> phases = new ArrayList<>();
     ArrayList<Duration> durations = new ArrayList<>();
-    ArrayList<ProjectMember> members = new ArrayList<>();
-
 
     ZonedDateTime since = subtract(period);
 
@@ -70,7 +67,7 @@ public class ProjectStatisticModelImpl implements ProjectStatisticModel
       ar.getPhasesAndWorkloadForUserSince(selectedUser.getUserLoginName(), projectId, since, phases, durations);
 
     ProjectMemberRepository pmr = mainModel.db().getProjectMemberRepository();
-    members = pmr.getMembersByProjectId(projectId);
+    ArrayList<ProjectMember> members = pmr.getMembersByProjectId(projectId);
     controller.setPhaseData(members, phases, durations);
 
   }

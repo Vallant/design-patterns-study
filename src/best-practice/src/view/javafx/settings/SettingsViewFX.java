@@ -45,7 +45,7 @@ public class SettingsViewFX implements SettingsView
   @Override
   public void hide()
   {
-    mainPane.setCenter(null);
+    mainPane.getChildren().remove(pMain);
     mainStage.show();
   }
 

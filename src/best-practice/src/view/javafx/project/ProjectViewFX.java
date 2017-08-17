@@ -123,7 +123,8 @@ public class ProjectViewFX implements ProjectView
   @Override
   public void hide()
   {
-    mainPane.setCenter(null);
+    mainPane.getChildren().remove(pMain);
+    mainPane.getChildren().remove(pDetail);
     mainStage.show();
   }
 

@@ -41,7 +41,6 @@ class ProjectStatisticProjectPanel extends JPanel
     pHeader.add(cbPeriod);
     add(pHeader, BorderLayout.NORTH);
     add(scrpTable, BorderLayout.CENTER);
-
   }
 
 

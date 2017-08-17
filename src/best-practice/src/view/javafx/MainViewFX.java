@@ -200,13 +200,19 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void showProjectStatisticView()
   {
-
+    theInstance.login.removeAllComponents();
+    theInstance.personalStatistic.RemoveAllComponents();
+    theInstance.projectStatistic.showProjectView();
+    theInstance.settings.hide();
+    theInstance.project.hide();
+    theInstance.mainStage.show();
   }
 
   @Override
   public void showSettingsView()
   {
-
+    theInstance.settings.show();
+    theInstance.mainStage.show();
   }
 
   @Override

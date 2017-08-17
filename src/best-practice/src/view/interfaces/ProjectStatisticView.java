@@ -38,10 +38,11 @@ public interface ProjectStatisticView
 
   int getSelectedProjectPeriod();
 
-  int getSelectedUser();
+  int getSelectedUserPhase();
 
   boolean confirmDeletion();
 
   void showError(String error);
 
+  int getSelectedUserActivity();
 }

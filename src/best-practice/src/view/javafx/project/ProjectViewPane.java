@@ -11,9 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-import javax.swing.*;
-import java.util.List;
-
 public class ProjectViewPane extends GridPane
 {
 

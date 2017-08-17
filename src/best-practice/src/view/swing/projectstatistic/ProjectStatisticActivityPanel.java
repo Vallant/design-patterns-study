@@ -14,7 +14,7 @@ class ProjectStatisticActivityPanel extends JPanel
   final JComboBox<String> cbMembers;
 
   final         ProjectStatisticActivityTableModel tblActivityModel;
-  private final JTable                             tblActivity;
+  final JTable                             tblActivity;
   private final JScrollPane                        scrpTable;
   final         JButton                            btBack;
 
@@ -71,11 +71,14 @@ class ProjectStatisticActivityPanel extends JPanel
 
   public void setMembers(ArrayList<String> members)
   {
+    int index = cbMembers.getSelectedIndex();
     cbMembers.removeAllItems();
     cbMembers.addItem("All Members");
     for(String m : members)
     {
       cbMembers.addItem(m);
     }
+    if(index < cbMembers.getItemCount())
+      cbMembers.setSelectedIndex(index);
   }
 }
