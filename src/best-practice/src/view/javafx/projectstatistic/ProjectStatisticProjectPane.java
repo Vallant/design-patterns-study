@@ -10,9 +10,6 @@ import javafx.scene.layout.BorderPane;
 
 public class ProjectStatisticProjectPane extends BorderPane
 {
-
-
-
   final ComboBox<String> cbPeriod;
 
   final         TableView  tblProjects;
@@ -40,11 +37,11 @@ public class ProjectStatisticProjectPane extends BorderPane
 
     setPadding(new Insets(5,5,5,5));
 
-    TableColumn<ProjectTableData, String> nameColumn = new TableColumn<>("Project Name");
+    TableColumn<ProjectStatisticTableData, String> nameColumn = new TableColumn<>("Project Name");
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-    TableColumn<ProjectTableData, String> durationColumn = new TableColumn<>("Duration");
+    TableColumn<ProjectStatisticTableData, String> durationColumn = new TableColumn<>("Duration");
     durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
-    TableColumn<ProjectTableData, String> shareColumn = new TableColumn<>("Share");
+    TableColumn<ProjectStatisticTableData, String> shareColumn = new TableColumn<>("Share");
     shareColumn.setCellValueFactory(new PropertyValueFactory<>("share"));
 
     tblProjects.getColumns().add(nameColumn);

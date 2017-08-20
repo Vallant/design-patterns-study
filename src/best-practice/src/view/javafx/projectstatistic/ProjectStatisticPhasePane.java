@@ -50,11 +50,11 @@ public class ProjectStatisticPhasePane extends BorderPane
     setTop(pHeader);
     setCenter(scrpTable);
 
-    TableColumn<ProjectTableData, String> nameColumn = new TableColumn<>("Phase Name");
+    TableColumn<ProjectStatisticTableData, String> nameColumn = new TableColumn<>("Phase Name");
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-    TableColumn<ProjectTableData, String> durationColumn = new TableColumn<>("Duration");
+    TableColumn<ProjectStatisticTableData, String> durationColumn = new TableColumn<>("Duration");
     durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
-    TableColumn<ProjectTableData, String> shareColumn = new TableColumn<>("Share");
+    TableColumn<ProjectStatisticTableData, String> shareColumn = new TableColumn<>("Share");
     shareColumn.setCellValueFactory(new PropertyValueFactory<>("share"));
 
     tblPhases.getColumns().add(nameColumn);

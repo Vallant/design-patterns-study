@@ -5,6 +5,7 @@ import com.github.lgooddatepicker.components.DateTimePicker;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 class PersonalStatisticUpdateActivityDialogPanel extends JPanel
 {
@@ -23,13 +24,15 @@ class PersonalStatisticUpdateActivityDialogPanel extends JPanel
   private final JButton btOk;
 
 
-  public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)
+  public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     this();
     tfDescription.setText(description);
     tfComment.setText(comment);
-    dpStartTime.getDatePicker().setDate(start);
-    dpEndTime.getDatePicker().setDate(end);
+    dpStartTime.getDatePicker().setDate(start.toLocalDate());
+    dpStartTime.getTimePicker().setTime(start.toLocalTime());
+    dpEndTime.getDatePicker().setDate(end.toLocalDate());
+    dpEndTime.getTimePicker().setTime(end.toLocalTime());
   }
 
   public PersonalStatisticUpdateActivityDialogPanel()
@@ -47,7 +50,6 @@ class PersonalStatisticUpdateActivityDialogPanel extends JPanel
     pBottom = new JPanel(new FlowLayout(5));
     btCancel = new JButton("Cancel");
     btOk = new JButton("OK");
-
 
     JPanel centerPanel = new JPanel();
     centerPanel.setLayout(new GridLayout(4, 2, 5, 5));

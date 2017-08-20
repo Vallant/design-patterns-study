@@ -9,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
 /**
@@ -193,9 +191,13 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
 
     if(selection == JOptionPane.OK_OPTION)
     {
-      controller.addActivity(dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText(),
-        dialogPanel.dpStartTime.getDatePicker().getDate(),
-        dialogPanel.dpEndTime.getDatePicker().getDate());
+
+      LocalDateTime start = dialogPanel.dpStartTime.getDateTimeStrict();
+      LocalDateTime end = dialogPanel.dpEndTime.getDateTimeStrict();
+      String description = dialogPanel.tfDescription.getText();
+      String comment = dialogPanel.tfComment.getText();
+      controller.addActivity(description, comment,
+        start, end);
     }
   }
 
@@ -208,7 +210,7 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
   }
 
   @Override
-  public void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end)
+  public void showUpdateActivityDialog(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     PersonalStatisticUpdateActivityDialogPanel dialogPanel =
       new PersonalStatisticUpdateActivityDialogPanel(description, comment, start, end);
@@ -220,9 +222,12 @@ public class PersonalStatisticViewSwing implements PersonalStatisticView
 
     if(selection == JOptionPane.OK_OPTION)
     {
-      controller.updateActivity(dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText(),
-        dialogPanel.dpStartTime.getDatePicker().getDate(),
-        dialogPanel.dpEndTime.getDatePicker().getDate());
+      LocalDateTime newStart = dialogPanel.dpStartTime.getDateTimeStrict();
+      LocalDateTime newEnd = dialogPanel.dpEndTime.getDateTimeStrict();
+      String newDescription = dialogPanel.tfDescription.getText();
+      String newComment = dialogPanel.tfComment.getText();
+      controller.updateActivity(description, comment,
+        start, end);
     }
   }
 

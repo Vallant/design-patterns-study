@@ -3,12 +3,12 @@ package view.javafx.projectstatistic;
 import controller.interfaces.ProjectStatisticController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.interfaces.ProjectStatisticView;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -19,63 +19,63 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
   private Stage mainStage;
   private ProjectStatisticController controller;
 
-  private final ProjectStatisticProjectPane project;
-  private final ProjectStatisticPhasePane phase;
-  private final ProjectStatisticActivityPane activity;
+  private final ProjectStatisticProjectPane  pProject;
+  private final ProjectStatisticPhasePane    pPhase;
+  private final ProjectStatisticActivityPane pActivity;
 
   public ProjectStatisticViewFX()
   {
-    project = new ProjectStatisticProjectPane();
-    phase = new ProjectStatisticPhasePane();
-    activity = new ProjectStatisticActivityPane();
+    pProject = new ProjectStatisticProjectPane();
+    pPhase = new ProjectStatisticPhasePane();
+    pActivity = new ProjectStatisticActivityPane();
 
     setListener();
   }
 
   private void setListener()
   {
-    project.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+    pProject.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
       controller.projectPeriodChanged(newValue.intValue());
     });
 
-    phase.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.phaseDropDownChanged(newValue.intValue(), phase.cbMembers.getSelectionModel().getSelectedIndex());
+    pPhase.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+      controller.phaseDropDownChanged(newValue.intValue(), pPhase.cbMembers.getSelectionModel().getSelectedIndex());
     });
-    phase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+    pPhase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
       System.out.println(newValue);
-      controller.phaseDropDownChanged(phase.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
+      controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
     });
 
-    activity.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.activityDropDownChanged(newValue.intValue(), activity.cbMembers.getSelectionModel().getSelectedIndex());
+    pActivity.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+      controller.activityDropDownChanged(newValue.intValue(), pActivity.cbMembers.getSelectionModel().getSelectedIndex());
     });
-    activity.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.activityDropDownChanged(activity.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
+    pActivity.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+      controller.activityDropDownChanged(pActivity.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
     });
 
-    project.tblProjects.setOnMouseClicked(mouseEvent -> {
+    pProject.tblProjects.setOnMouseClicked(mouseEvent -> {
       if(mouseEvent.getClickCount() == 2)
       {
-        int index = project.tblProjects.getSelectionModel().getSelectedIndex();
+        int index = pProject.tblProjects.getSelectionModel().getSelectedIndex();
         if(index == -1)
           return;
         controller.doubleClickOnProject(index);
       }
     });
 
-    phase.btBack.setOnAction(actionEvent -> controller.backToProjectClicked());
+    pPhase.btBack.setOnAction(actionEvent -> controller.backToProjectClicked());
 
-    phase.tblPhases.setOnMouseClicked(mouseEvent -> {
+    pPhase.tblPhases.setOnMouseClicked(mouseEvent -> {
         if(mouseEvent.getClickCount() == 2)
         {
-          int index = phase.tblPhases.getSelectionModel().getSelectedIndex();
+          int index = pPhase.tblPhases.getSelectionModel().getSelectedIndex();
           if(index == -1)
             return;
           controller.doubleClickOnPhase(index);
         }
     });
 
-    activity.btBack.setOnAction(actionEvent -> controller.backToPhaseClicked());
+    pActivity.btBack.setOnAction(actionEvent -> controller.backToPhaseClicked());
   }
 
   @Override
@@ -87,9 +87,9 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
   @Override
   public void hide()
   {
-    mainPane.getChildren().remove(project);
-    mainPane.getChildren().remove(phase);
-    mainPane.getChildren().remove(activity);
+    mainPane.getChildren().remove(pProject);
+    mainPane.getChildren().remove(pPhase);
+    mainPane.getChildren().remove(pActivity);
     mainPane.autosize();
     mainStage.sizeToScene();
     mainStage.show();
@@ -105,11 +105,11 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
   public void showProjectView()
   {
     hide();
-    mainPane.setCenter(project);
+    mainPane.setCenter(pProject);
     mainPane.autosize();
     mainStage.sizeToScene();
     mainStage.show();
-    project.cbPeriod.getSelectionModel().selectFirst();
+    pProject.cbPeriod.getSelectionModel().selectFirst();
   }
 
   @Override
@@ -120,26 +120,26 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
     for(Duration duration : durations)
       total = total.plus(duration);
 
-    ObservableList<ProjectTableData> data = FXCollections.observableArrayList();
+    ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < projectNames.size(); ++i)
     {
-      data.add(new ProjectTableData(projectNames.get(i), durations.get(i), total));
+      data.add(new ProjectStatisticTableData(projectNames.get(i), durations.get(i), total));
     }
 
-    project.tblProjects.getItems().clear();
-    project.tblProjects.getItems().addAll(data);
+    pProject.tblProjects.getItems().clear();
+    pProject.tblProjects.getItems().addAll(data);
   }
 
   @Override
   public void showPhaseView()
   {
     hide();
-    mainPane.setCenter(phase);
+    mainPane.setCenter(pPhase);
     mainPane.autosize();
     mainStage.sizeToScene();
     mainStage.show();
-    phase.cbPeriod.getSelectionModel().selectFirst();
-    phase.cbMembers.getSelectionModel().selectFirst();
+    pPhase.cbPeriod.getSelectionModel().selectFirst();
+    pPhase.cbMembers.getSelectionModel().selectFirst();
   }
 
   @Override
@@ -150,15 +150,15 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
     for(Duration duration : durations)
       total = total.plus(duration);
 
-    ObservableList<ProjectTableData> data = FXCollections.observableArrayList();
+    ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < phaseNames.size(); ++i)
     {
-      data.add(new ProjectTableData(phaseNames.get(i), durations.get(i), total));
+      data.add(new ProjectStatisticTableData(phaseNames.get(i), durations.get(i), total));
     }
 
-    phase.tblPhases.getItems().clear();
-    phase.tblPhases.getItems().addAll(data);
-    phase.setMemberNames(memberNames);
+    pPhase.tblPhases.getItems().clear();
+    pPhase.tblPhases.getItems().addAll(data);
+    pPhase.setMemberNames(memberNames);
   }
 
   @Override
@@ -166,7 +166,7 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
   {
     hide();
 
-    mainPane.setCenter(activity);
+    mainPane.setCenter(pActivity);
     mainPane.autosize();
     mainStage.sizeToScene();
     mainStage.show();
@@ -178,57 +178,60 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
                               ArrayList<String> memberNames)
   {
 
-    ObservableList<ActivityTableData> data = FXCollections.observableArrayList();
+    ObservableList<ProjectStatisticActivityTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < users.size(); ++i)
     {
-      data.add(new ActivityTableData(startTimes.get(i), endTimes.get(i), users.get(i), descriptions.get(i),
+      data.add(new ProjectStatisticActivityTableData(startTimes.get(i), endTimes.get(i), users.get(i), descriptions.get(i),
         comments.get(i)));
     }
-    activity.tblActivity.getItems().clear();
-    activity.tblActivity.getItems().addAll(data);
-    activity.setMembers(memberNames);
+    pActivity.tblActivity.getItems().clear();
+    pActivity.tblActivity.getItems().addAll(data);
+    pActivity.setMembers(memberNames);
   }
 
   @Override
   public int getSelectedPhasePeriod()
   {
-    return phase.cbPeriod.getSelectionModel().getSelectedIndex();
+    return pPhase.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
   @Override
   public int getSelectedActivityPeriod()
   {
-    return activity.cbPeriod.getSelectionModel().getSelectedIndex();
+    return pActivity.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
   @Override
   public int getSelectedProjectPeriod()
   {
-    return project.cbPeriod.getSelectionModel().getSelectedIndex();
+    return pProject.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
   @Override
   public int getSelectedUserPhase()
   {
-    return activity.cbMembers.getSelectionModel().getSelectedIndex();
+    return pActivity.cbMembers.getSelectionModel().getSelectedIndex();
   }
 
   @Override
   public boolean confirmDeletion()
   {
-    return false;
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this project?", ButtonType.YES,
+      ButtonType.NO);
+    return alert.getResult() == ButtonType.YES;
   }
 
   @Override
   public void showError(String error)
   {
-
+    Alert alert = new Alert(Alert.AlertType.ERROR, error);
+    alert.showAndWait();
   }
 
   @Override
   public int getSelectedUserActivity()
   {
-    return activity.cbMembers.getSelectionModel().getSelectedIndex();
+    return pActivity.cbMembers.getSelectionModel().getSelectedIndex();
   }
 
   public void setMainPane(BorderPane mainPane)

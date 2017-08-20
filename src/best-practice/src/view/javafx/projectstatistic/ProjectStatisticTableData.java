@@ -2,14 +2,14 @@ package view.javafx.projectstatistic;
 
 import java.time.Duration;
 
-public class ProjectTableData
+public class ProjectStatisticTableData
 {
   String projectName;
   String duration;
   String share;
 
 
-  public ProjectTableData(String projectName, Duration duration, Duration total)
+  public ProjectStatisticTableData(String projectName, Duration duration, Duration total)
   {
     this.projectName = projectName;
     this.duration = String.format("%02d:%02d", duration.getSeconds() / 60, duration.getSeconds() % 60);

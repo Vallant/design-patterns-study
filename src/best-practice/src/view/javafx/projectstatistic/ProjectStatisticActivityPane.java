@@ -20,11 +20,6 @@ public class ProjectStatisticActivityPane extends BorderPane
   private final ScrollPane scrpTable;
   final         Button     btBack;
 
-  private final GridPane pButtons;
-  private final Button   btDeleteActivity;
-  private final Button   btAddActivity;
-  private final Button   btUpdateActivity;
-
   public ProjectStatisticActivityPane()
   {
     pHeader = new BorderPane();
@@ -49,14 +44,6 @@ public class ProjectStatisticActivityPane extends BorderPane
     tblActivity = new TableView();
     scrpTable = new ScrollPane(tblActivity);
 
-    pButtons = new GridPane();
-    btAddActivity = new Button("Add Activity");
-    btDeleteActivity = new Button("Delete Activity");
-    btUpdateActivity = new Button("Update Activity");
-
-    pButtons.add(btAddActivity, 0, 0);
-    pButtons.add(btDeleteActivity, 0, 1);
-    pButtons.add(btUpdateActivity, 0, 2);
 
     pHeaderGrid.add(btBack, 0, 0);
     pHeaderGrid.add(cbPeriod, 1, 0);
@@ -64,21 +51,20 @@ public class ProjectStatisticActivityPane extends BorderPane
     pHeader.setLeft(pHeaderGrid);
     setTop(pHeader);
     setCenter(scrpTable);
-    setRight(pButtons);
 
-    TableColumn<ActivityTableData, String> startColumn = new TableColumn<>("Start");
+    TableColumn<ProjectStatisticActivityTableData, String> startColumn = new TableColumn<>("Start");
     startColumn.setCellValueFactory(new PropertyValueFactory<>("start"));
 
-    TableColumn<ActivityTableData, String> userColumn = new TableColumn<>("User");
+    TableColumn<ProjectStatisticActivityTableData, String> userColumn = new TableColumn<>("User");
     userColumn.setCellValueFactory(new PropertyValueFactory<>("member"));
 
-    TableColumn<ActivityTableData, String> endColumn = new TableColumn<>("End");
+    TableColumn<ProjectStatisticActivityTableData, String> endColumn = new TableColumn<>("End");
     endColumn.setCellValueFactory(new PropertyValueFactory<>("end"));
 
-    TableColumn<ActivityTableData, String> commentColumn = new TableColumn<>("Comment");
+    TableColumn<ProjectStatisticActivityTableData, String> commentColumn = new TableColumn<>("Comment");
     commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
 
-    TableColumn<ActivityTableData, String> descriptionColumn = new TableColumn<>("Description");
+    TableColumn<ProjectStatisticActivityTableData, String> descriptionColumn = new TableColumn<>("Description");
     descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
     tblActivity.getColumns().addAll(userColumn, startColumn, endColumn, descriptionColumn, commentColumn);

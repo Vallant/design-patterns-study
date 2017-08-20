@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.interfaces.MainView;
@@ -156,7 +157,8 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void showError(String message)
   {
-
+    Alert alert = new Alert(Alert.AlertType.ERROR, message);
+    alert.showAndWait();
   }
 
   @Override
@@ -194,7 +196,12 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void showPersonalStatisticView()
   {
-
+    theInstance.login.removeAllComponents();
+    theInstance.personalStatistic.showProjectView();
+    theInstance.projectStatistic.hide();
+    theInstance.settings.hide();
+    theInstance.project.hide();
+    theInstance.mainStage.show();
   }
 
   @Override
@@ -218,8 +225,8 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void pairPersonalStatistic(PersonalStatisticController statistics)
   {
-    personalStatistic.setController(statistics);
-    statistics.setView(personalStatistic);
+    theInstance.personalStatistic.setController(statistics);
+    statistics.setView(theInstance.personalStatistic);
   }
 
   @Override

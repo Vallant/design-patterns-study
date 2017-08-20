@@ -3,7 +3,7 @@ package view.javafx.projectstatistic;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ActivityTableData
+public class ProjectStatisticActivityTableData
 {
 
   static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
@@ -15,8 +15,8 @@ public class ActivityTableData
 
 
 
-  public ActivityTableData(ZonedDateTime start, ZonedDateTime end, String user, String description,
-                           String comment)
+  public ProjectStatisticActivityTableData(ZonedDateTime start, ZonedDateTime end, String user, String description,
+                                           String comment)
   {
 
     this.start = start;

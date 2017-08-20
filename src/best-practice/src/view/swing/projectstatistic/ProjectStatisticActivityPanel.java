@@ -18,12 +18,6 @@ class ProjectStatisticActivityPanel extends JPanel
   private final JScrollPane                        scrpTable;
   final         JButton                            btBack;
 
-  private final JPanel  pButtons;
-  private final JPanel  pFlowPanel;
-  private final JButton btDeleteActivity;
-  private final JButton btAddActivity;
-  private final JButton btUpdateActivity;
-
   public ProjectStatisticActivityPanel()
   {
     super(new BorderLayout(5, 5));
@@ -49,23 +43,11 @@ class ProjectStatisticActivityPanel extends JPanel
 
     tblActivity.setBorder(new LineBorder(Color.black, 1));
 
-    pFlowPanel = new JPanel(new FlowLayout(5));
-    pButtons = new JPanel(new GridLayout(3, 1, 5, 5));
-    btAddActivity = new JButton("Add Activity");
-    btDeleteActivity = new JButton("Delete Activity");
-    btUpdateActivity = new JButton("Update Activity");
-
-    pButtons.add(btAddActivity);
-    pButtons.add(btDeleteActivity);
-    pButtons.add(btUpdateActivity);
-
     pHeader.add(btBack);
     pHeader.add(cbPeriod);
     pHeader.add(cbMembers);
     add(pHeader, BorderLayout.NORTH);
     add(scrpTable, BorderLayout.CENTER);
-    pFlowPanel.add(pButtons);
-    add(pFlowPanel, BorderLayout.EAST);
   }
 
 
