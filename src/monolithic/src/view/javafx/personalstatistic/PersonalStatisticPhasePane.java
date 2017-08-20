@@ -7,24 +7,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import view.javafx.projectstatistic.ProjectStatisticTableData;
 
-public class PersonalStatisticPhasePane extends BorderPane
+class PersonalStatisticPhasePane extends BorderPane
 {
-
-  private final BorderPane pHeader;
-  private final GridPane   pHeaderGrid;
 
   final ComboBox<String> cbPeriod;
 
-  final         TableView  tblPhases;
-  private final ScrollPane scrpTable;
-  final         Button     btBack;
+  final TableView tblPhases;
+  final Button    btBack;
 
   public PersonalStatisticPhasePane()
   {
-    pHeader = new BorderPane();
-    pHeaderGrid = new GridPane();
+    BorderPane pHeader = new BorderPane();
+    GridPane pHeaderGrid = new GridPane();
     pHeaderGrid.setHgap(5);
-    pHeader.setPadding(new Insets(5,0,5,0));
+    pHeader.setPadding(new Insets(5, 0, 5, 0));
 
 
     cbPeriod = new ComboBox<>();
@@ -36,11 +32,10 @@ public class PersonalStatisticPhasePane extends BorderPane
     cbPeriod.getSelectionModel().clearAndSelect(0);
 
 
-
     btBack = new Button("Back");
 
     tblPhases = new TableView();
-    scrpTable = new ScrollPane(tblPhases);
+    ScrollPane scrpTable = new ScrollPane(tblPhases);
 
     pHeaderGrid.add(btBack, 0, 0);
     pHeaderGrid.add(cbPeriod, 1, 0);

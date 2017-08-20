@@ -9,21 +9,17 @@ import controller.swing.LoginControllerSwing;
 import data.User;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author stephan
  */
 public class LoginViewSwing
 {
-  private LoginControllerSwing controller;
-
   private final JFrame frame;
-
   private final LoginViewPanel         pLogin;
   private final LoginViewRegisterPanel pNewUser;
   private final LoginViewResetPWPanel  pResetPassword;
+  private LoginControllerSwing controller;
 
 
   public LoginViewSwing(JFrame frame)

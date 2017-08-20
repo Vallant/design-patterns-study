@@ -6,41 +6,33 @@ import java.awt.*;
 
 class SettingsPanel extends JPanel
 {
-  private final JPanel         pMain;
-  private final JLabel         lbFirst;
-  final         JTextField     tfFirst;
-  private final JLabel         lbLast;
-  final         JTextField     tfLast;
-  private final JLabel         lbEmail;
-  final         JTextField     tfEmail;
-  private final JLabel         lbOldPw;
-  final         JPasswordField tfOldPw;
-  private final JLabel         lbNewPw;
-  final         JPasswordField tfNewPw;
-  private final JLabel         lbNewPwAgain;
-  final         JPasswordField tfNewPwAgain;
+  final JTextField     tfFirst;
+  final JTextField     tfLast;
+  final JTextField     tfEmail;
+  final JPasswordField tfOldPw;
+  final JPasswordField tfNewPw;
+  final JPasswordField tfNewPwAgain;
 
-  private final JPanel  pBottom;
-  final         JButton btApply;
-  final         JButton btReset;
+  final JButton btApply;
+  final JButton btReset;
 
   public SettingsPanel()
   {
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
 
-    pMain = new JPanel(new GridLayout(6, 2, 5, 5));
-    lbFirst = new JLabel("First Name");
-    lbLast = new JLabel("Last Name");
+    JPanel pMain = new JPanel(new GridLayout(6, 2, 5, 5));
+    JLabel lbFirst = new JLabel("First Name");
+    JLabel lbLast = new JLabel("Last Name");
     tfFirst = new JTextField("");
     tfLast = new JTextField("");
-    lbEmail = new JLabel("Email");
+    JLabel lbEmail = new JLabel("Email");
     tfEmail = new JTextField("");
-    lbOldPw = new JLabel("Old Password");
+    JLabel lbOldPw = new JLabel("Old Password");
     tfOldPw = new JPasswordField();
-    lbNewPw = new JLabel("New Password");
+    JLabel lbNewPw = new JLabel("New Password");
     tfNewPw = new JPasswordField();
-    lbNewPwAgain = new JLabel("Repeat new Password");
+    JLabel lbNewPwAgain = new JLabel("Repeat new Password");
     tfNewPwAgain = new JPasswordField();
 
     pMain.add(lbFirst);
@@ -59,7 +51,7 @@ class SettingsPanel extends JPanel
     pFlow.add(pMain);
     add(pFlow, BorderLayout.CENTER);
 
-    pBottom = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JPanel pBottom = new JPanel(new FlowLayout(FlowLayout.LEFT));
     btApply = new JButton("Apply Changes");
     btReset = new JButton("Discard Changes");
     pBottom.add(btApply);

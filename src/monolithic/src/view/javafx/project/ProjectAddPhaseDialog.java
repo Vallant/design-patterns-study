@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class ProjectAddPhaseDialog extends Dialog<ButtonType>
+class ProjectAddPhaseDialog extends Dialog<ButtonType>
 {
-  private TextField name;
+  private final TextField name;
 
   public ProjectAddPhaseDialog()
   {

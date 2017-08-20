@@ -14,7 +14,6 @@ public class ProjectStatisticActivityTableData
   private final String        comment;
 
 
-
   public ProjectStatisticActivityTableData(ZonedDateTime start, ZonedDateTime end, String user, String description,
                                            String comment)
   {

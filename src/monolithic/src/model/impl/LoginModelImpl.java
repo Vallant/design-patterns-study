@@ -23,7 +23,7 @@ import java.util.Random;
 public class LoginModelImpl
 {
   private LoginControllerSwing controllerSwing;
-  private LoginControllerFX controllerFX;
+  private LoginControllerFX    controllerFX;
   private MainModelImpl        mainModel;
 
   public LoginModelImpl()

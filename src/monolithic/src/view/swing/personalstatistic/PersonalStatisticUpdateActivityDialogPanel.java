@@ -8,19 +8,11 @@ import java.time.LocalDate;
 
 class PersonalStatisticUpdateActivityDialogPanel extends JPanel
 {
-  private final JLabel     lbDescription;
-  private final JLabel     lbComment;
-  final         JTextField tfDescription;
-  final         JTextField tfComment;
+  final JTextField tfDescription;
+  final JTextField tfComment;
 
-  private final JLabel         lbStartTime;
-  final         DateTimePicker dpStartTime;
-  private final JLabel         lbEndTime;
-  final         DateTimePicker dpEndTime;
-
-  private final JPanel  pBottom;
-  private final JButton btCancel;
-  private final JButton btOk;
+  final DateTimePicker dpStartTime;
+  final DateTimePicker dpEndTime;
 
 
   public PersonalStatisticUpdateActivityDialogPanel(String description, String comment, LocalDate start, LocalDate end)
@@ -34,19 +26,19 @@ class PersonalStatisticUpdateActivityDialogPanel extends JPanel
 
   public PersonalStatisticUpdateActivityDialogPanel()
   {
-    lbDescription = new JLabel("Description");
+    JLabel lbDescription = new JLabel("Description");
     tfDescription = new JTextField();
-    lbComment = new JLabel("Comment");
+    JLabel lbComment = new JLabel("Comment");
     tfComment = new JTextField();
-    lbStartTime = new JLabel("Start time");
+    JLabel lbStartTime = new JLabel("Start time");
 
     dpStartTime = new DateTimePicker();
-    lbEndTime = new JLabel("End time");
+    JLabel lbEndTime = new JLabel("End time");
     dpEndTime = new DateTimePicker();
 
-    pBottom = new JPanel(new FlowLayout(5));
-    btCancel = new JButton("Cancel");
-    btOk = new JButton("OK");
+    JPanel pBottom = new JPanel(new FlowLayout(5));
+    JButton btCancel = new JButton("Cancel");
+    JButton btOk = new JButton("OK");
 
 
     JPanel centerPanel = new JPanel();

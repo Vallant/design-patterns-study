@@ -20,19 +20,19 @@ public class ProjectControllerFX
   private ArrayList<ProjectPhase>  projectPhases;
   private ArrayList<User>          availableMembers;
 
-  
+
   public void setModel(ProjectModelImpl model)
   {
     this.model = model;
   }
 
-  
+
   public void setView(ProjectViewFX view)
   {
     this.view = view;
   }
 
-  
+
   public void refresh()
   {
     ArrayList<String> owned = new ArrayList<>();
@@ -65,7 +65,7 @@ public class ProjectControllerFX
 
   }
 
-  
+
   public void leaveProjectClicked()
   {
     int index = view.getSelectedInvolvedProjectIndex();
@@ -80,13 +80,13 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void addProjectClicked()
   {
     view.showProjectCreationDialog();
   }
 
-  
+
   public void deleteProjectClicked()
   {
     int index = view.getSelectedOwnedProjectIndex();
@@ -101,19 +101,19 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void ownedProjectsHasSelection(boolean hasSelection)
   {
     view.setOwnedProjectsButtonsEnabled(hasSelection);
   }
 
-  
+
   public void involvedProjectsHasSelection(boolean hasSelection)
   {
     view.setInvolvedProjectsButtonsEnabled(hasSelection);
   }
 
-  
+
   public void doubleClickedOn(int index)
   {
     try
@@ -127,7 +127,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void showDetail(Project project, ArrayList<ProjectPhase> phases, ArrayList<ProjectMember> members)
   {
 
@@ -153,14 +153,14 @@ public class ProjectControllerFX
     view.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
   }
 
-  
+
   public void backClicked()
   {
     detailProject = null;
     view.showOverview();
   }
 
-  
+
   public void addProject(String name, String description)
   {
     try
@@ -174,7 +174,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void deletePhaseClicked()
   {
     int index = view.getSelectedPhaseIndex();
@@ -189,13 +189,13 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void addPhaseClicked()
   {
     view.showAddPhaseDialog();
   }
 
-  
+
   public void deleteMemberClicked()
   {
     int index = view.getSelectedMemberIndex();
@@ -210,7 +210,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void promoteToAdminClicked()
   {
     int index = view.getSelectedMemberIndex();
@@ -225,7 +225,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void degradeToMemberClicked()
   {
 
@@ -241,7 +241,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void addMemberClicked()
   {
     try
@@ -265,7 +265,7 @@ public class ProjectControllerFX
 
   }
 
-  
+
   public void addPhase(String phaseName)
   {
     try
@@ -280,7 +280,7 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void addMembers(int[] selectedIndices)
   {
     try
@@ -303,7 +303,7 @@ public class ProjectControllerFX
 
   }
 
-  
+
   public void updateDescriptionClicked()
   {
     String newDescription = view.getDescription();
@@ -319,13 +319,13 @@ public class ProjectControllerFX
     }
   }
 
-  
+
   public void projectPhaseHasSelection(boolean hasSelection)
   {
     view.setProjectPhaseButtonsEnabled(hasSelection);
   }
 
-  
+
   public void memberTableHasSelection(boolean hasSelection)
   {
     view.setMemberListButtonsEnabled(hasSelection);

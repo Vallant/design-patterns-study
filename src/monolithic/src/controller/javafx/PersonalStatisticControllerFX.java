@@ -8,7 +8,6 @@ import view.javafx.personalstatistic.PersonalStatisticViewFX;
 
 import java.time.*;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 public class PersonalStatisticControllerFX
 {
@@ -26,19 +25,19 @@ public class PersonalStatisticControllerFX
 
   }
 
-  
+
   public void setModel(PersonalStatisticModelImpl model)
   {
     this.model = model;
   }
 
-  
+
   public void setView(PersonalStatisticViewFX view)
   {
     this.view = view;
   }
 
-  
+
   public void refresh()
   {
     try
@@ -60,7 +59,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void phasePeriodChanged(int selectedIndex)
   {
     try
@@ -75,7 +74,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void projectPeriodChanged(int selectedIndex)
   {
     try
@@ -89,7 +88,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void doubleClickOnProject(int index)
   {
     detailProject = currentProjects.get(index);
@@ -104,7 +103,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations)
   {
     currentProjects = projects;
@@ -118,7 +117,7 @@ public class PersonalStatisticControllerFX
     view.setProjectData(projectNames, durations);
   }
 
-  
+
   public void setPhaseData(ArrayList<ProjectPhase> phases, ArrayList<Duration> durations)
   {
     currentPhases = phases;
@@ -131,26 +130,26 @@ public class PersonalStatisticControllerFX
     view.setPhaseData(phaseNames, durations);
   }
 
-  
-  public void showProjectView()
+
+  private void showProjectView()
   {
     view.showProjectView();
   }
 
-  
+
   public void showPhaseView()
   {
     view.showPhaseView();
   }
 
-  
+
   public void backToOverviewClicked()
   {
     currentPhases = null;
     showProjectView();
   }
 
-  
+
   public void doubleClickOnPhase(int index)
   {
     detailPhase = currentPhases.get(index);
@@ -165,7 +164,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void activityPeriodChanged(int selectedIndex)
   {
     try
@@ -180,7 +179,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void setActivityData(ArrayList<Activity> activities)
   {
     currentActivities = activities;
@@ -200,19 +199,19 @@ public class PersonalStatisticControllerFX
 
   }
 
-  
+
   public void showActivityView()
   {
     view.showActivityView();
   }
 
-  
+
   public void addActivityClicked()
   {
     view.showAddActivityDialog();
   }
 
-  
+
   public void deleteActivityClicked()
   {
     if(view.confirmDeletion())
@@ -230,7 +229,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void updateActivityClicked()
   {
     Activity a = currentActivities.get(view.getSelectedActivity());
@@ -238,7 +237,7 @@ public class PersonalStatisticControllerFX
       a.getStop().toLocalDateTime());
   }
 
-  
+
   public void addActivity(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     if(description.isEmpty())
@@ -261,7 +260,7 @@ public class PersonalStatisticControllerFX
     }
   }
 
-  
+
   public void updateActivity(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     Activity a = currentActivities.get(view.getSelectedActivity());
@@ -284,7 +283,7 @@ public class PersonalStatisticControllerFX
 
   }
 
-  
+
   public void backToPhaseViewClicked()
   {
     currentActivities = null;

@@ -7,28 +7,24 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import view.javafx.projectstatistic.ProjectStatisticActivityTableData;
 
-public class PersonalStatisticActivityPane extends BorderPane
+class PersonalStatisticActivityPane extends BorderPane
 {
-  private final BorderPane pHeader;
-  private final GridPane   pHeaderGrid;
 
   final ComboBox<String> cbPeriod;
 
-  final         TableView  tblActivity;
-  private final ScrollPane scrpTable;
-  final         Button     btBack;
+  final TableView tblActivity;
+  final Button    btBack;
 
-  private final GridPane pButtons;
-  final Button   btDeleteActivity;
-  final Button   btAddActivity;
-  final Button   btUpdateActivity;
+  final Button btDeleteActivity;
+  final Button btAddActivity;
+  final Button btUpdateActivity;
 
   public PersonalStatisticActivityPane()
   {
-    pHeader = new BorderPane();
-    pHeaderGrid = new GridPane();
+    BorderPane pHeader = new BorderPane();
+    GridPane pHeaderGrid = new GridPane();
     pHeaderGrid.setHgap(5);
-    pHeader.setPadding(new Insets(5,0,5,0));
+    pHeader.setPadding(new Insets(5, 0, 5, 0));
 
 
     cbPeriod = new ComboBox<>();
@@ -42,11 +38,11 @@ public class PersonalStatisticActivityPane extends BorderPane
     btBack = new Button("Back");
 
     tblActivity = new TableView();
-    scrpTable = new ScrollPane(tblActivity);
+    ScrollPane scrpTable = new ScrollPane(tblActivity);
 
-    pButtons = new GridPane();
+    GridPane pButtons = new GridPane();
     pButtons.setVgap(5);
-    pButtons.setPadding(new Insets(0,0,0,5));
+    pButtons.setPadding(new Insets(0, 0, 0, 5));
     btAddActivity = new Button("Add Activity");
     btDeleteActivity = new Button("Delete Activity");
     btUpdateActivity = new Button("Update Activity");

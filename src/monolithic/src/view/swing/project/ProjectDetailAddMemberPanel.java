@@ -11,10 +11,9 @@ import java.util.ArrayList;
  */
 class ProjectDetailAddMemberPanel extends JPanel
 {
-  private ArrayList<String> available;
-
-  private final DefaultListModel<String> lstAvailableUsersModel;
   final         JList<String>            lstAvailableUsers;
+  private final DefaultListModel<String> lstAvailableUsersModel;
+  private ArrayList<String> available;
 
 
   public ProjectDetailAddMemberPanel()

@@ -45,8 +45,8 @@ public class Activity implements DBEntity
   private String        comments;
 
 
-  public Activity(int hash, int id, ProjectPhase phase, User user, String description, ZonedDateTime start,
-                  ZonedDateTime stop, String comments)
+  private Activity(int hash, int id, ProjectPhase phase, User user, String description, ZonedDateTime start,
+                   ZonedDateTime stop, String comments)
   {
     this.remoteHash = hash;
     this.id = id;
@@ -70,216 +70,6 @@ public class Activity implements DBEntity
     this.comments = comments;
   }
 
-
-  public int getLocalHash()
-  {
-    return new HashCodeBuilder()
-      .append(id)
-      .append(phase.getRemoteHash())
-      .append(user.getRemoteHash())
-      .append(description)
-      .append(start)
-      .append(stop)
-      .append(comments)
-      .hashCode();
-  }
-
-
-  public int getRemoteHash()
-  {
-    return remoteHash;
-  }
-
-  public void setHash(Integer hash)
-  {
-    this.remoteHash = hash;
-  }
-
-  public Integer getId()
-  {
-    return id;
-  }
-
-  public void setId(Integer id)
-  {
-    this.id = id;
-  }
-
-  public ProjectPhase getPhase()
-  {
-    return phase;
-  }
-
-  public void setPhase(ProjectPhase phase)
-  {
-    this.phase = phase;
-  }
-
-  public User getUser()
-  {
-    return user;
-  }
-
-  public void setUser(User user)
-  {
-    this.user = user;
-  }
-
-
-  public String getDescription()
-  {
-    return description;
-  }
-
-  public void setDescription(String description)
-  {
-    this.description = description;
-  }
-
-  public ZonedDateTime getStart()
-  {
-    return start;
-  }
-
-  public void setStart(ZonedDateTime start)
-  {
-    this.start = start;
-  }
-
-  public ZonedDateTime getStop()
-  {
-    return stop;
-  }
-
-  public void setStop(ZonedDateTime stop)
-  {
-    this.stop = stop;
-  }
-
-  public String getComments()
-  {
-    return comments;
-  }
-
-  public void setComments(String comments)
-  {
-    this.comments = comments;
-  }
-
-
-  public boolean isChanged()
-  {
-    return getLocalHash() != getRemoteHash();
-  }
-
-  public String getProjectPhaseName()
-  {
-    return phase.getName();
-  }
-
-  public int getProjectPhaseId()
-  {
-    return phase.getId();
-  }
-
-  public String getUserLoginName()
-  {
-    return user.getLoginName();
-  }
-
-  public int getProjectId()
-  {
-    return phase.getProject().getId();
-  }
-
-
-  public void setRemoteHash(int hash)
-  {
-    this.remoteHash = hash;
-  }
-  
-  public void updateInDb(DBManagerPostgres db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_PHASE_ID = ?, PROJECT_ID = ?, USER_LOGIN_NAME = ?, "
-                   + "DESCRIPTION = ?, START_TIME = ?, END_TIME = ?, COMMENTS = ? "
-                   + "WHERE HASH = ? AND ID = ?";
-      PreparedStatement ps = con.prepareStatement(sql);
-      int index = 1;
-
-      ps.setInt(index++, hashCode());
-      ps.setInt(index++, getProjectPhaseId());
-      ps.setInt(index++, getProjectId());
-      ps.setString(index++, getUserLoginName());
-      ps.setString(index++, getDescription());
-      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(getStart().toInstant(), ZoneId.of("UTC"));
-      ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
-      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(getStop().toInstant(), ZoneId.of("UTC"));
-      ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
-      ps.setString(index++, getComments());
-
-      ps.setInt(index++, getRemoteHash());
-      ps.setInt(index++, getId());
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new ElementChangedException();
-    }
-  }
-  
-  public void insertIntoDb(DBManagerPostgres db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, "
-                   + "DESCRIPTION, START_TIME, END_TIME, COMMENTS) "
-                   + "VALUES "
-                   + "(?, ?, ?, ?, ?, ?, ?, ?)";
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-      int index = 1;
-      ps.setInt(index++, getRemoteHash());
-      ps.setInt(index++, getProjectPhaseId());
-      ps.setInt(index++, getProjectId());
-      ps.setString(index++, getUserLoginName());
-      ps.setString(index++, getDescription());
-      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(getStart().toInstant(), ZoneId.of("UTC"));
-
-      ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
-      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(getStop().toInstant(), ZoneId.of("UTC"));
-      ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
-      ps.setString(index++, getComments());
-
-      ps.executeUpdate();
-      ResultSet rs = ps.getGeneratedKeys();
-      if(rs.next())
-      {
-        int id = rs.getInt("ID");
-        setId(id);
-      }
-    }
-  }
-
-  public void deleteInDb(DBManagerPostgres db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "DELETE FROM ACTIVITY "
-                   + "WHERE HASH = ? AND ID = ?";
-      PreparedStatement ps = con.prepareStatement(sql);
-
-      int index = 1;
-      ps.setInt(index++, getRemoteHash());
-      ps.setInt(index++, getId());
-
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new ElementChangedException();
-    }
-  }
-
   public static Activity getByPrimaryKey(int id, DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
@@ -300,7 +90,8 @@ public class Activity implements DBEntity
   }
 
   public static void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since,
-                                                       ArrayList<Project> projects, ArrayList<Duration> durations,
+                                                              ArrayList<Project> projects,
+                                                              ArrayList<Duration> durations,
                                                               DBManagerPostgres db)
     throws Exception
   {
@@ -338,7 +129,7 @@ public class Activity implements DBEntity
   }
 
   public static void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since,
-                                        ArrayList<ProjectPhase> phases, ArrayList<Duration> durations,
+                                               ArrayList<ProjectPhase> phases, ArrayList<Duration> durations,
                                                DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
@@ -443,7 +234,8 @@ public class Activity implements DBEntity
 
   public static void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project>
     projects,
-                                               ArrayList<Duration> durations, DBManagerPostgres db) throws Exception
+                                                      ArrayList<Duration> durations, DBManagerPostgres db)
+    throws Exception
   {
     try(Connection con = db.getConnection())
     {
@@ -484,7 +276,7 @@ public class Activity implements DBEntity
   }
 
   public static void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since,
-                                               ArrayList<ProjectPhase> phases, ArrayList<Duration> durations,
+                                                      ArrayList<ProjectPhase> phases, ArrayList<Duration> durations,
                                                       DBManagerPostgres db)
     throws Exception
   {
@@ -560,7 +352,6 @@ public class Activity implements DBEntity
     String comments = rs.getString("COMMENTS");
 
 
-
     ProjectPhase phase = ProjectPhase.getByPrimaryKey(projectPhaseId, db);
 
     User user = User.getByPrimaryKey(userLoginName, db);
@@ -568,6 +359,211 @@ public class Activity implements DBEntity
     assert (projectId == phase.getProjectId());
 
     return new Activity(hash, id, phase, user, description, start, end, comments);
+  }
+
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder()
+      .append(id)
+      .append(phase.getRemoteHash())
+      .append(user.getRemoteHash())
+      .append(description)
+      .append(start)
+      .append(stop)
+      .append(comments)
+      .hashCode();
+  }
+
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
+
+  public void setRemoteHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public void setHash(Integer hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  private Integer getId()
+  {
+    return id;
+  }
+
+  private void setId(Integer id)
+  {
+    this.id = id;
+  }
+
+  public ProjectPhase getPhase()
+  {
+    return phase;
+  }
+
+  public void setPhase(ProjectPhase phase)
+  {
+    this.phase = phase;
+  }
+
+  public User getUser()
+  {
+    return user;
+  }
+
+  public void setUser(User user)
+  {
+    this.user = user;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
+
+  public ZonedDateTime getStart()
+  {
+    return start;
+  }
+
+  public void setStart(ZonedDateTime start)
+  {
+    this.start = start;
+  }
+
+  public ZonedDateTime getStop()
+  {
+    return stop;
+  }
+
+  public void setStop(ZonedDateTime stop)
+  {
+    this.stop = stop;
+  }
+
+  public String getComments()
+  {
+    return comments;
+  }
+
+  public void setComments(String comments)
+  {
+    this.comments = comments;
+  }
+
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
+
+  public String getProjectPhaseName()
+  {
+    return phase.getName();
+  }
+
+  private int getProjectPhaseId()
+  {
+    return phase.getId();
+  }
+
+  private String getUserLoginName()
+  {
+    return user.getLoginName();
+  }
+
+  private int getProjectId()
+  {
+    return phase.getProject().getId();
+  }
+
+  public void updateInDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "UPDATE ACTIVITY SET HASH = ?, PROJECT_PHASE_ID = ?, PROJECT_ID = ?, USER_LOGIN_NAME = ?, "
+                   + "DESCRIPTION = ?, START_TIME = ?, END_TIME = ?, COMMENTS = ? "
+                   + "WHERE HASH = ? AND ID = ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+
+      ps.setInt(index++, hashCode());
+      ps.setInt(index++, getProjectPhaseId());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getUserLoginName());
+      ps.setString(index++, getDescription());
+      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(getStart().toInstant(), ZoneId.of("UTC"));
+      ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
+      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(getStop().toInstant(), ZoneId.of("UTC"));
+      ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
+      ps.setString(index++, getComments());
+
+      ps.setInt(index++, getRemoteHash());
+      ps.setInt(index++, getId());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+    }
+  }
+
+  public void insertIntoDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "INSERT INTO ACTIVITY(HASH, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, "
+                   + "DESCRIPTION, START_TIME, END_TIME, COMMENTS) "
+                   + "VALUES "
+                   + "(?, ?, ?, ?, ?, ?, ?, ?)";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getRemoteHash());
+      ps.setInt(index++, getProjectPhaseId());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getUserLoginName());
+      ps.setString(index++, getDescription());
+      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(getStart().toInstant(), ZoneId.of("UTC"));
+
+      ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
+      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(getStop().toInstant(), ZoneId.of("UTC"));
+      ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
+      ps.setString(index++, getComments());
+
+      ps.executeUpdate();
+      ResultSet rs = ps.getGeneratedKeys();
+      if(rs.next())
+      {
+        int id = rs.getInt("ID");
+        setId(id);
+      }
+    }
+  }
+
+  public void deleteInDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "DELETE FROM ACTIVITY "
+                   + "WHERE HASH = ? AND ID = ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setInt(index++, getRemoteHash());
+      ps.setInt(index++, getId());
+
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+    }
   }
 
 

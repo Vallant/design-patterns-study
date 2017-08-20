@@ -35,13 +35,13 @@ public class LoginViewFX
     register.btAdd.setOnAction(ae -> controller.addClicked());
   }
 
-  
+
   public void switchToResetPassword()
   {
-    
+
   }
 
-  
+
   public void switchToAddNewUser()
   {
     mainPane.setCenter(register);
@@ -50,7 +50,7 @@ public class LoginViewFX
     mainStage.sizeToScene();
   }
 
-  
+
   public void switchToLogin()
   {
     login.tfPassword.clear();
@@ -61,13 +61,13 @@ public class LoginViewFX
     mainStage.sizeToScene();
   }
 
-  
+
   public void showLoginFailed()
   {
     FXDialogs.showError("Login failed", "Username or password incorrect");
   }
 
-  
+
   public void removeAllComponents()
   {
     mainPane.getChildren().remove(login);
@@ -77,7 +77,7 @@ public class LoginViewFX
     mainStage.sizeToScene();
   }
 
-  
+
   public User getEnteredUser()
   {
     return new User(register.tfLoginName.getText(), register.tfFirstName.getText(), register.tfLastName.getText(),
@@ -85,37 +85,37 @@ public class LoginViewFX
       register.tfPasswordNewAgain.getText().toCharArray());
   }
 
-  
+
   public String getEnteredEmail()
   {
     return null;
   }
 
-  
+
   public String getEnteredUsername()
   {
     return login.tfUsername.getText();
   }
 
-  
+
   public char[] getEnteredPassword()
   {
     return login.tfPassword.getText().toCharArray();
   }
 
-  
+
   public void showDialog(String message)
   {
     FXDialogs.showInformation("Information", message);
   }
 
-  
+
   public void setController(LoginControllerFX controller)
   {
     this.controller = controller;
   }
 
-  
+
   public void showError(String localizedMessage)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, localizedMessage);
@@ -126,6 +126,7 @@ public class LoginViewFX
   {
     this.mainPane = mainPane;
   }
+
   public void setMainStage(Stage mainStage)
   {
     this.mainStage = mainStage;

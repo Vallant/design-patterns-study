@@ -11,6 +11,7 @@ import controller.swing.MainControllerSwing;
 import data.User;
 import db.common.DBManagerPostgres;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public class MainModelImpl
 {
   private final MainControllerSwing controllerSwing;
-  private final MainControllerFX controllerFX;
+  private final MainControllerFX    controllerFX;
 
   private final LoginModelImpl             login;
   private final ProjectModelImpl           project;
@@ -29,9 +30,8 @@ public class MainModelImpl
   private final PersonalStatisticModelImpl personalStatistic;
   private final ProjectStatisticModelImpl  projectStatistic;
   private final SettingsModelImpl          settings;
-
-  private       User              user;
   private final DBManagerPostgres db;
+  private       User              user;
 
 
   private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
@@ -41,7 +41,7 @@ public class MainModelImpl
 
     ControllerManager.initInstance(frontend);
 
-    if(frontend == "swing")
+    if(Objects.equals(frontend, "swing"))
     {
       controllerSwing = ControllerManager.getInstanceSwing();
       controllerSwing.setModel(this);
@@ -111,7 +111,6 @@ public class MainModelImpl
       controllerFX.showActivityBar();
       controllerFX.showSideBar(user.getRole());
     }
-
 
 
     project.refresh();

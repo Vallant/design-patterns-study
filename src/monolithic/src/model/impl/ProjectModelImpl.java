@@ -22,7 +22,7 @@ public class ProjectModelImpl
   private MainModelImpl          mainModel;
   private User                   user;
   private ProjectControllerSwing controllerSwing;
-  private ProjectControllerFX controllerFX;
+  private ProjectControllerFX    controllerFX;
 
 
   public ProjectModelImpl()

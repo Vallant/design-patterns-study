@@ -1,25 +1,25 @@
 package view.javafx.personalstatistic;
 
-import javafx.scene.control.*;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import jfxtras.scene.control.LocalDateTimePicker;
 
 import java.time.LocalDateTime;
 
-public class PersonalStatisticActivityUpdateDialog extends Dialog<ButtonType>
+class PersonalStatisticActivityUpdateDialog extends Dialog<ButtonType>
 {
-  private final Label     lbDescription;
-  private final Label     lbComment;
-  final         TextField tfDescription;
-  final         TextField tfComment;
+  final TextField tfDescription;
+  final TextField tfComment;
 
-  private final Label               lbStartTime;
-  final         LocalDateTimePicker dpStartTime;
-  private final Label               lbEndTime;
-  final         LocalDateTimePicker          dpEndTime;
+  final LocalDateTimePicker dpStartTime;
+  final LocalDateTimePicker dpEndTime;
 
 
-  public PersonalStatisticActivityUpdateDialog(String description, String comment, LocalDateTime start, LocalDateTime end)
+  public PersonalStatisticActivityUpdateDialog(String description, String comment, LocalDateTime start,
+                                               LocalDateTime end)
   {
     this();
 
@@ -31,15 +31,15 @@ public class PersonalStatisticActivityUpdateDialog extends Dialog<ButtonType>
 
   public PersonalStatisticActivityUpdateDialog()
   {
-    lbDescription = new Label("Description");
+    Label lbDescription = new Label("Description");
     tfDescription = new TextField();
-    lbComment = new Label("Comment");
+    Label lbComment = new Label("Comment");
     tfComment = new TextField();
-    lbStartTime = new Label("Start time");
+    Label lbStartTime = new Label("Start time");
 
     dpStartTime = new LocalDateTimePicker();
 
-    lbEndTime = new Label("End time");
+    Label lbEndTime = new Label("End time");
     dpEndTime = new LocalDateTimePicker();
 
     GridPane centerPanel = new GridPane();

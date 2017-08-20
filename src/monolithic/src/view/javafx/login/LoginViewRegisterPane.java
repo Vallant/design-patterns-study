@@ -1,7 +1,5 @@
 package view.javafx.login;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,20 +7,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class LoginViewRegisterPane extends BorderPane
+class LoginViewRegisterPane extends BorderPane
 {
-  final         TextField     tfLoginName;
-  final         TextField     tfFirstName;
-  final         TextField     tfLastName;
-  final         TextField     tfEmailNew;
-  final         PasswordField tfPasswordNew;
-  final         PasswordField tfPasswordNewAgain;
-  final         Button        btBackNew;
-  final         Button        btAdd;
+  final TextField     tfLoginName;
+  final TextField     tfFirstName;
+  final TextField     tfLastName;
+  final TextField     tfEmailNew;
+  final PasswordField tfPasswordNew;
+  final PasswordField tfPasswordNewAgain;
+  final Button        btBackNew;
+  final Button        btAdd;
 
   public LoginViewRegisterPane()
   {
-    GridPane main3 = new GridPane ();
+    GridPane main3 = new GridPane();
 
     Label lb4 = new Label("Username");
     tfLoginName = new TextField();
@@ -56,7 +54,7 @@ public class LoginViewRegisterPane extends BorderPane
     btAdd = new Button("Create Account");
     btBackNew = new Button("Back to Login");
     buttons3.add(btBackNew, 0, 0);
-    buttons3.add(btAdd, 1,0);
+    buttons3.add(btAdd, 1, 0);
     setBottom(buttons3);
   }
 }

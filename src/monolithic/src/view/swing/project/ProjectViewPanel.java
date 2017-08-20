@@ -12,22 +12,14 @@ import java.awt.*;
 class ProjectViewPanel extends JPanel
 {
 
-  private final JPanel                   pOwned;
-  private final JPanel                   pOwnedButtons;
-  final         JButton                  btAddProject;
-  final         JButton                  btDeleteProject;
-  private final JPanel                   pFlowPanel1;
-  private final JScrollPane              spOwned;
-  final         DefaultListModel<String> lstOwnedModel;
-  final         JList<String>            lstOwned;
+  final JButton                  btAddProject;
+  final JButton                  btDeleteProject;
+  final DefaultListModel<String> lstOwnedModel;
+  final JList<String>            lstOwned;
 
-  private final JPanel                   pInvolved;
-  private final JPanel                   pInvolvedButtons;
-  private final JPanel                   pFlowPanel2;
-  final         JButton                  btLeaveProject;
-  private final JScrollPane              spInvolved;
-  final         DefaultListModel<String> lstInvolvedModel;
-  final         JList<String>            lstInvolved;
+  final JButton                  btLeaveProject;
+  final DefaultListModel<String> lstInvolvedModel;
+  final JList<String>            lstInvolved;
 
   public ProjectViewPanel()
   {
@@ -36,10 +28,10 @@ class ProjectViewPanel extends JPanel
     setBorder(new EtchedBorder());
     setPreferredSize(new Dimension(700, 400));
     //setBorder(new EmptyBorder(5,5,5,5));
-    pOwned = new JPanel(new BorderLayout(5, 5));
+    JPanel pOwned = new JPanel(new BorderLayout(5, 5));
     pOwned.setPreferredSize(new Dimension(150, 250));
-    pFlowPanel1 = new JPanel(new FlowLayout(0));
-    pOwnedButtons = new JPanel(new GridLayout(2, 1, 5, 5));
+    JPanel pFlowPanel1 = new JPanel(new FlowLayout(0));
+    JPanel pOwnedButtons = new JPanel(new GridLayout(2, 1, 5, 5));
     btAddProject = new JButton("Add Project");
     btAddProject.setPreferredSize(new Dimension(130, 25));
     btDeleteProject = new JButton("Delete Project");
@@ -62,7 +54,7 @@ class ProjectViewPanel extends JPanel
                              }
     );
     lstOwned.setPreferredSize(new Dimension(150, 100));
-    spOwned = new JScrollPane(lstOwned);
+    JScrollPane spOwned = new JScrollPane(lstOwned);
 
 
     spOwned.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Own Projects"));
@@ -75,10 +67,10 @@ class ProjectViewPanel extends JPanel
     pOwned.add(spOwned, BorderLayout.CENTER);
 
 
-    pInvolved = new JPanel(new BorderLayout(5, 5));
+    JPanel pInvolved = new JPanel(new BorderLayout(5, 5));
     pInvolved.setPreferredSize(new Dimension(130, 250));
-    pFlowPanel2 = new JPanel(new FlowLayout(0));
-    pInvolvedButtons = new JPanel(new GridLayout(1, 1, 5, 5));
+    JPanel pFlowPanel2 = new JPanel(new FlowLayout(0));
+    JPanel pInvolvedButtons = new JPanel(new GridLayout(1, 1, 5, 5));
     btLeaveProject = new JButton("Leave Project");
     btLeaveProject.setPreferredSize(new Dimension(130, 25));
     lstInvolvedModel = new DefaultListModel<>();
@@ -98,7 +90,7 @@ class ProjectViewPanel extends JPanel
                                   }
                                 }
     );
-    spInvolved = new JScrollPane(lstInvolved);
+    JScrollPane spInvolved = new JScrollPane(lstInvolved);
     spInvolved.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Participating Projects"));
 
     add(pInvolved);

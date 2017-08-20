@@ -1,4 +1,5 @@
 package controller.javafx;
+
 import data.User;
 import model.impl.*;
 import view.common.ViewManager;
@@ -14,7 +15,6 @@ public class MainControllerFX
   private final ProjectStatisticControllerFX  projectStatistic;
   private final SettingsControllerFX          settings;
   private       MainViewFX                    mainView;
-  private       MainModelImpl                 mainModel;
 
   public MainControllerFX()
   {
@@ -27,20 +27,20 @@ public class MainControllerFX
     settings = new SettingsControllerFX();
   }
 
-  
+
   public void init(String frontend)
   {
     ViewManager.initInstance(frontend);
     mainView = ViewManager.getInstanceFX();
   }
 
-  
+
   public void setModel(MainModelImpl model)
   {
-    mainModel = model;
+    MainModelImpl mainModel = model;
   }
 
-  
+
   public void switchToLogin()
   {
     assert (mainView != null);
@@ -49,21 +49,21 @@ public class MainControllerFX
     mainView.showLoginView();
   }
 
-  
+
   public void switchToProjectView()
   {
     mainView.hideCenterContent();
     mainView.showProjectView();
   }
 
-  
+
   public void switchToAdminView()
   {
     mainView.hideCenterContent();
     mainView.showAdminView();
   }
 
-  
+
   public void switchToPersonalStatisticView()
   {
     mainView.hideCenterContent();
@@ -71,13 +71,13 @@ public class MainControllerFX
     personalStatistic.refresh();
   }
 
-  
+
   public void showActivityBar()
   {
     mainView.showActivityBar();
   }
 
-  
+
   public void pairLogin(LoginModelImpl model)
   {
     login.setModel(model);
@@ -85,7 +85,7 @@ public class MainControllerFX
     mainView.pairLogin(login);
   }
 
-  
+
   public void pairProject(ProjectModelImpl model)
   {
     project.setModel(model);
@@ -93,7 +93,7 @@ public class MainControllerFX
     mainView.pairProject(project);
   }
 
-  
+
   public void pairActivityBar(ActivityBarModelImpl model)
   {
     activityBar.setModel(model);
@@ -101,19 +101,19 @@ public class MainControllerFX
     mainView.pairActivityBar(activityBar);
   }
 
-  
+
   public void showError(Exception ex)
   {
     mainView.showError(ex.getLocalizedMessage());
   }
 
-  
+
   public void showSideBar(User.ROLE role)
   {
     mainView.showSideBar(role);
   }
 
-  
+
   public void pairSideBar(SideBarModelImpl model)
   {
     sideBar.setModel(model);
@@ -121,7 +121,7 @@ public class MainControllerFX
     mainView.pairSideBar(sideBar);
   }
 
-  
+
   public void pairPersonalStatistic(PersonalStatisticModelImpl model)
   {
     personalStatistic.setModel(model);
@@ -129,7 +129,7 @@ public class MainControllerFX
     mainView.pairPersonalStatistic(personalStatistic);
   }
 
-  
+
   public void pairProjectStatistic(ProjectStatisticModelImpl model)
   {
     projectStatistic.setModel(model);
@@ -137,7 +137,7 @@ public class MainControllerFX
     mainView.pairProjectStatistic(projectStatistic);
   }
 
-  
+
   public void pairSettings(SettingsModelImpl model)
   {
     settings.setModel(model);
@@ -145,14 +145,14 @@ public class MainControllerFX
     mainView.pairSettings(settings);
   }
 
-  
+
   public void switchToSettingsView()
   {
     mainView.hideCenterContent();
     mainView.showSettingsView();
   }
 
-  
+
   public void switchToProjectStatisticView()
   {
     mainView.hideCenterContent();

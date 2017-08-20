@@ -8,13 +8,12 @@ import view.swing.SideBarViewSwing;
  */
 public class SideBarControllerSwing
 {
-  private SideBarViewSwing view;
   private SideBarModelImpl model;
 
 
   public void setView(SideBarViewSwing view)
   {
-    this.view = view;
+    SideBarViewSwing view1 = view;
   }
 
 

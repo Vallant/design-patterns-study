@@ -3,82 +3,58 @@ package view.javafx.project;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-import static com.sun.javafx.fxml.expression.Expression.add;
-
-public class ProjectDetailPane extends BorderPane
+class ProjectDetailPane extends BorderPane
 {
-  private static int BUTTON_WIDTH = 150;
-  private final GridPane   pHeader;
   final         Button btBack;
-  private final Label  lbProjectName;
-
-  private final GridPane pCenter;
-
-  private final BorderPane                   pPhases;
-  private final BorderPane                   pPhasesHeader;
-  final Label lbPhases;
-  private final GridPane                   pPhasesButtons;
-  final         Button                  btAddPhase;
-  final         Button                  btDeletePhase;
-  final ListView<String>            lstPhases;
-
-  private final BorderPane  pMembers;
-  private final BorderPane  pMembersHeader;
-  final Label lbMembers;
-  private final GridPane  pMembersButtons;
+  final         Button           btAddPhase;
+  final         Button           btDeletePhase;
+  final         ListView<String> lstPhases;
   final         Button btAddMember;
   final         Button btDeleteMember;
   final         Button btPromoteToAdmin;
   final         Button btDegradeToMember;
-
-  final         ListView<String>                    lstMembers;
-
-  private final BorderPane    pDescription;
-  private final GridPane    pDescriptionButtons;
-  final Label lbDescription;
-  final BorderPane pDescriptionHeader;
-  final         TextArea taDescription;
-  final         Button   btUpdateDescription;
+  final ListView<String> lstMembers;
+  final         TextArea   taDescription;
+  final         Button     btUpdateDescription;
+  private final Label  lbProjectName;
+  private final Label            lbPhases;
+  private final Label  lbMembers;
+  private final Label      lbDescription;
+  private final BorderPane pDescriptionHeader;
 
 
   public ProjectDetailPane()
   {
-    setPadding(new Insets(5,5,5,5));
+    setPadding(new Insets(5, 5, 5, 5));
 
-    pCenter = new GridPane();
-    pHeader = new GridPane();
+    GridPane pCenter = new GridPane();
+    GridPane pHeader = new GridPane();
     pHeader.setAlignment(Pos.CENTER_LEFT);
     pHeader.setHgap(5);
-    pHeader.setPadding(new Insets(0,0,5,0));
+    pHeader.setPadding(new Insets(0, 0, 5, 0));
     btBack = new Button("Back");
     lbProjectName = new Label("Detail for Project: ");
     pHeader.add(btBack, 0, 0);
     pHeader.add(lbProjectName, 1, 0);
 
-    pPhases = new BorderPane();
-    pPhases.setPadding(new Insets(0,5,5,0));
-    pPhasesHeader = new BorderPane();
+    BorderPane pPhases = new BorderPane();
+    pPhases.setPadding(new Insets(0, 5, 5, 0));
+    BorderPane pPhasesHeader = new BorderPane();
     btAddPhase = new Button("Add Phase");
+    int BUTTON_WIDTH = 150;
     btAddPhase.setPrefWidth(BUTTON_WIDTH);
     btDeletePhase = new Button("Delete Phase");
     btDeletePhase.setPrefWidth(BUTTON_WIDTH);
     lstPhases = new ListView<>();
     //lstPhases.setBorder(new LineBorder(Color.black, 1));
-    pPhasesButtons = new GridPane();
-    pPhasesButtons.setPadding(new Insets(0,0,5,5));
+    GridPane pPhasesButtons = new GridPane();
+    pPhasesButtons.setPadding(new Insets(0, 0, 5, 5));
     pPhasesButtons.setVgap(5);
 
     pPhases.setTop(pPhasesHeader);
@@ -91,9 +67,9 @@ public class ProjectDetailPane extends BorderPane
     pPhases.setCenter(spPhases);
 
 
-    pMembers = new BorderPane();
-    pMembers.setPadding(new Insets(0,5,5,0));
-    pMembersHeader = new BorderPane();
+    BorderPane pMembers = new BorderPane();
+    pMembers.setPadding(new Insets(0, 5, 5, 0));
+    BorderPane pMembersHeader = new BorderPane();
     lbMembers = new Label("Project Members");
     btAddMember = new Button("Add Members");
     btAddMember.setPrefWidth(BUTTON_WIDTH);
@@ -104,9 +80,9 @@ public class ProjectDetailPane extends BorderPane
     btPromoteToAdmin.setPrefWidth(BUTTON_WIDTH);
     btDegradeToMember = new Button("Make Member");
     btDegradeToMember.setPrefWidth(BUTTON_WIDTH);
-    lstMembers = new ListView<String>();
-    pMembersButtons = new GridPane();
-    pMembersButtons.setPadding(new Insets(0,0,5,5));
+    lstMembers = new ListView<>();
+    GridPane pMembersButtons = new GridPane();
+    pMembersButtons.setPadding(new Insets(0, 0, 5, 5));
     pMembersButtons.setVgap(5);
     pMembersHeader.setLeft(lbMembers);
     pMembers.setTop(pMembersHeader);
@@ -118,16 +94,16 @@ public class ProjectDetailPane extends BorderPane
     ScrollPane spMembers = new ScrollPane(lstMembers);
     pMembers.setCenter(spMembers);
 
-    pDescription = new BorderPane();
-    pDescription.setPadding(new Insets(0,5,0,0));
-    pDescriptionButtons = new GridPane();
+    BorderPane pDescription = new BorderPane();
+    pDescription.setPadding(new Insets(0, 5, 0, 0));
+    GridPane pDescriptionButtons = new GridPane();
     taDescription = new TextArea();
     btUpdateDescription = new Button("Update Description");
     btUpdateDescription.setPrefWidth(BUTTON_WIDTH);
     ScrollPane spDescription = new ScrollPane(taDescription);
     pDescription.setCenter(spDescription);
     pDescriptionButtons.getChildren().add(btUpdateDescription);
-    pDescriptionButtons.setPadding(new Insets(0,0,5,5));
+    pDescriptionButtons.setPadding(new Insets(0, 0, 5, 5));
     pDescription.setRight(pDescriptionButtons);
 
     pDescriptionHeader = new BorderPane();
@@ -142,12 +118,12 @@ public class ProjectDetailPane extends BorderPane
     setCenter(pCenter);
     setTop(pHeader);
 
-    pCenter.setHgrow(lstPhases, Priority.ALWAYS);
-    pCenter.setVgrow(lstPhases, Priority.ALWAYS);
-    pCenter.setHgrow(spPhases, Priority.ALWAYS);
-    pCenter.setVgrow(spPhases, Priority.ALWAYS);
-    pCenter.setHgrow(pPhases, Priority.ALWAYS);
-    pCenter.setVgrow(pPhases, Priority.ALWAYS);
+    GridPane.setHgrow(lstPhases, Priority.ALWAYS);
+    GridPane.setVgrow(lstPhases, Priority.ALWAYS);
+    GridPane.setHgrow(spPhases, Priority.ALWAYS);
+    GridPane.setVgrow(spPhases, Priority.ALWAYS);
+    GridPane.setHgrow(pPhases, Priority.ALWAYS);
+    GridPane.setVgrow(pPhases, Priority.ALWAYS);
 
     spPhases.setFitToHeight(true);
     spPhases.setFitToWidth(true);

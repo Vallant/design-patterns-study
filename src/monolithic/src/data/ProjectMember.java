@@ -37,37 +37,10 @@ import java.util.List;
  */
 public class ProjectMember implements DBEntity
 {
-  public enum ROLE
-  {
-    MEMBER,
-    LEADER
-  }
-
   private User    user;
   private Project project;
   private int     remoteHash;
   private ROLE    role;
-
-  public User getUser()
-  {
-    return user;
-  }
-
-  public Project getProject()
-  {
-    return project;
-  }
-
-  public ROLE getRole()
-  {
-    return role;
-  }
-
-  public void setRole(ROLE role)
-  {
-    this.role = role;
-  }
-
   public ProjectMember(User user, Project project, ROLE role)
   {
     this.user = user;
@@ -75,140 +48,12 @@ public class ProjectMember implements DBEntity
     this.role = role;
   }
 
-  public ProjectMember(User user, Project project, int hash, ROLE role)
+  private ProjectMember(User user, Project project, int hash, ROLE role)
   {
     this.user = user;
     this.project = project;
     this.remoteHash = hash;
     this.role = role;
-  }
-
-
-  @Override
-  public boolean isChanged()
-  {
-    return getLocalHash() != getRemoteHash();
-  }
-
-
-  @Override
-  public int getLocalHash()
-  {
-    return new HashCodeBuilder().
-      append(user.getLoginName()).
-      append(project.getId()).
-      append(role).
-      hashCode();
-
-  }
-
-
-  public int getRemoteHash()
-  {
-    return remoteHash;
-  }
-
-  public void setUser(User user)
-  {
-    this.user = user;
-  }
-
-  public void setProject(Project project)
-  {
-    this.project = project;
-  }
-
-  public void setRemoteHash(int remoteHash)
-  {
-    this.remoteHash = remoteHash;
-  }
-
-
-  public String getUserLoginName()
-  {
-    return user.getLoginName();
-  }
-
-  public int getProjectId()
-  {
-    return project.getId();
-  }
-
-  public String getProjectName()
-  {
-    return project.getName();
-  }
-
-  public void insertIntoDb(DBManagerPostgres db) throws Exception
-  {
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "INSERT INTO PROJECT_MEMBERS(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
-                   + "VALUES "
-                   + "(?, ?, ?, ?) ";
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-      int index = 1;
-      ps.setInt(index++, getLocalHash());
-      ps.setString(index++, getUserLoginName());
-      ps.setInt(index++, getProjectId());
-      ps.setString(index++, getRole().name());
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new Exception("Update failed!");
-      setRemoteHash(getLocalHash());
-
-    }
-    
-    
-  }
-
-  public void updateInDb(DBManagerPostgres db) throws Exception
-  {
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "UPDATE PROJECT_MEMBERS SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
-                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ? AND HASH = ?";
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-      int index = 1;
-      ps.setInt(index++, getLocalHash());
-      ps.setString(index++, getUserLoginName());
-      ps.setInt(index++, getProjectId());
-      ps.setString(index++, getRole().name());
-      ps.setString(index++, getUserLoginName());
-      ps.setInt(index++, getProjectId());
-      ps.setInt(index++, getRemoteHash());
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new ElementChangedException();
-      setRemoteHash(getLocalHash());
-
-    }
-  }
-
-  public void deleteInDb(DBManagerPostgres db) throws Exception
-  {
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "DELETE FROM PROJECT_MEMBERS "
-                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-      int index = 1;
-      ps.setString(index++, getUserLoginName());
-      ps.setInt(index++, getProjectId());
-
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new ElementChangedException();
-    }
   }
 
   public static List<ProjectMember> getAll(DBManagerPostgres db) throws Exception
@@ -330,7 +175,6 @@ public class ProjectMember implements DBEntity
     return l;
   }
 
-
   private static ProjectMember extractMember(ResultSet rs, DBManagerPostgres db) throws Exception
   {
     int hash = rs.getInt("HASH");
@@ -344,5 +188,156 @@ public class ProjectMember implements DBEntity
 
     return new ProjectMember(user, project, hash, ProjectMember.ROLE.valueOf(role));
   }
-  
+
+  public User getUser()
+  {
+    return user;
+  }
+
+  public void setUser(User user)
+  {
+    this.user = user;
+  }
+
+  public Project getProject()
+  {
+    return project;
+  }
+
+  public void setProject(Project project)
+  {
+    this.project = project;
+  }
+
+  public ROLE getRole()
+  {
+    return role;
+  }
+
+  public void setRole(ROLE role)
+  {
+    this.role = role;
+  }
+
+  @Override
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
+
+  @Override
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder().
+      append(user.getLoginName()).
+      append(project.getId()).
+      append(role).
+      hashCode();
+
+  }
+
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
+
+  public void setRemoteHash(int remoteHash)
+  {
+    this.remoteHash = remoteHash;
+  }
+
+  public String getUserLoginName()
+  {
+    return user.getLoginName();
+  }
+
+  private int getProjectId()
+  {
+    return project.getId();
+  }
+
+  public String getProjectName()
+  {
+    return project.getName();
+  }
+
+  public void insertIntoDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "INSERT INTO PROJECT_MEMBERS(HASH, USER_LOGIN_NAME, PROJECT_ID, ROLE) "
+                   + "VALUES "
+                   + "(?, ?, ?, ?) ";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getRole().name());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Update failed!");
+      setRemoteHash(getLocalHash());
+
+    }
+
+
+  }
+
+  public void updateInDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "UPDATE PROJECT_MEMBERS SET HASH = ?, USER_LOGIN_NAME = ?, PROJECT_ID = ?, ROLE = ? "
+                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ? AND HASH = ?";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setString(index++, getRole().name());
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+      ps.setInt(index++, getRemoteHash());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+      setRemoteHash(getLocalHash());
+
+    }
+  }
+
+  public void deleteInDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "DELETE FROM PROJECT_MEMBERS "
+                   + "WHERE USER_LOGIN_NAME = ? AND PROJECT_ID = ?";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setString(index++, getUserLoginName());
+      ps.setInt(index++, getProjectId());
+
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new ElementChangedException();
+    }
+  }
+
+
+  public enum ROLE
+  {
+    MEMBER,
+    LEADER
+  }
+
 }

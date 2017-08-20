@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 public class SettingsViewFX
 {
+  private final SettingsViewPane     pMain;
   private       BorderPane           mainPane;
   private       Stage                mainStage;
   private       SettingsControllerFX controller;
-  private final SettingsViewPane     pMain;
 
   public SettingsViewFX()
   {
@@ -33,34 +33,34 @@ public class SettingsViewFX
     ));
   }
 
-  
+
   public void setController(SettingsControllerFX controller)
   {
     this.controller = controller;
   }
 
-  
+
   public void hide()
   {
     mainPane.getChildren().remove(pMain);
     mainStage.show();
   }
 
-  
+
   public void show()
   {
     mainPane.setCenter(pMain);
     mainStage.show();
   }
 
-  
+
   public void showError(String error)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, error);
     alert.showAndWait();
   }
 
-  
+
   public void setData(String firstName, String lastName, String email)
   {
     pMain.tfFirst.setText(firstName);
@@ -71,7 +71,7 @@ public class SettingsViewFX
     pMain.tfOldPw.setText("");
   }
 
-  
+
   public void updateSuccessful()
   {
     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Update Successful");

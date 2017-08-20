@@ -5,8 +5,6 @@
  */
 package test;
 
-import data.Project;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -10,28 +10,25 @@ import java.awt.*;
 class ActivityBarPanel extends JPanel
 {
 
-  private final JPanel            pMain;
-  final         JComboBox<String> cbProject;
-  private final JLabel            lbProject;
-  final         JComboBox<String> cbPhase;
-  private final JLabel            lbPhase;
-  final         JButton           btStart;
-  final         JButton           btStop;
-  final         JLabel            lbDuration;
+  final JComboBox<String> cbProject;
+  final JComboBox<String> cbPhase;
+  final JButton           btStart;
+  final JButton           btStop;
+  final JLabel            lbDuration;
 
   public ActivityBarPanel()
   {
     super(new FlowLayout(5));
-    pMain = new JPanel(new GridLayout(1, 5, 5, 0));
+    JPanel pMain = new JPanel(new GridLayout(1, 5, 5, 0));
 
     JPanel pFlow1 = new JPanel(new FlowLayout());
     this.cbProject = new JComboBox<>();
 
-    lbProject = new JLabel("Project:");
+    JLabel lbProject = new JLabel("Project:");
 
     JPanel pFlow2 = new JPanel(new FlowLayout());
     this.cbPhase = new JComboBox<>();
-    lbPhase = new JLabel("Phase:");
+    JLabel lbPhase = new JLabel("Phase:");
 
     this.btStart = new JButton("Start Activity");
     this.btStop = new JButton("Stop Activity");

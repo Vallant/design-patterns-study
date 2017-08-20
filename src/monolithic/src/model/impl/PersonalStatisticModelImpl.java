@@ -19,20 +19,10 @@ import java.util.ArrayList;
 public class PersonalStatisticModelImpl
 {
 
-  public enum PERIOD
-  {
-    ALLTIME,
-    YEAR,
-    MONTH,
-    WEEK,
-    DAY
-  }
-
   private MainModelImpl                    mainModel;
   private PersonalStatisticControllerSwing controllerSwing;
   private PersonalStatisticControllerFX    controllerFX;
   private User                             user;
-
 
   public void deleteActivity(Activity toDelete) throws Exception
   {
@@ -42,7 +32,6 @@ public class PersonalStatisticModelImpl
     else
       controllerFX.refresh();
   }
-
 
   public void addActivity(ProjectPhase detailPhase, String description, String comment, ZonedDateTime zdtStart,
                           ZonedDateTime zdtEnd) throws Exception
@@ -58,7 +47,6 @@ public class PersonalStatisticModelImpl
       controllerFX.refresh();
   }
 
-
   public void updateActivity(Activity a) throws Exception
   {
     a.updateInDb(mainModel.db());
@@ -68,28 +56,25 @@ public class PersonalStatisticModelImpl
       controllerFX.refresh();
   }
 
-
   public void setUser(User user)
   {
     this.user = user;
   }
-
 
   public void setMainModel(MainModelImpl mainModel)
   {
     this.mainModel = mainModel;
   }
 
-
   public void setController(PersonalStatisticControllerSwing controller)
   {
     this.controllerSwing = controller;
   }
+
   public void setController(PersonalStatisticControllerFX controller)
   {
     controllerFX = controller;
   }
-
 
   public void refresh()
   {
@@ -98,7 +83,6 @@ public class PersonalStatisticModelImpl
     else
       controllerFX.refresh();
   }
-
 
   public void requestedDetailFor(Project project) throws Exception
   {
@@ -110,7 +94,6 @@ public class PersonalStatisticModelImpl
       controllerFX.showPhaseView();
   }
 
-
   public void requestedDetailFor(ProjectPhase detailPhase) throws Exception
   {
     activityPeriodChanged(detailPhase.getId(), PERIOD.ALLTIME.ordinal());
@@ -119,7 +102,6 @@ public class PersonalStatisticModelImpl
     else
       controllerFX.showActivityView();
   }
-
 
   public void phasePeriodChanged(int projectId, int selectedIndex) throws Exception
   {
@@ -137,7 +119,6 @@ public class PersonalStatisticModelImpl
       controllerFX.setPhaseData(phases, durations);
   }
 
-
   public void projectPeriodChanged(int selectedIndex) throws Exception
   {
     PERIOD period = PERIOD.values()[selectedIndex];
@@ -148,7 +129,6 @@ public class PersonalStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
 
-
     Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
     if(controllerSwing != null)
       controllerSwing.setProjectData(projects, durations);
@@ -156,14 +136,14 @@ public class PersonalStatisticModelImpl
       controllerFX.setProjectData(projects, durations);
   }
 
-
   public void activityPeriodChanged(int phaseId, int selectedIndex) throws Exception
   {
     PERIOD period = PERIOD.values()[selectedIndex];
     ZonedDateTime since = subtract(period);
 
 
-    ArrayList<Activity> activities = Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
+    ArrayList<Activity> activities =
+      Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
     if(controllerSwing != null)
     {
       controllerSwing.showActivityView();
@@ -194,5 +174,14 @@ public class PersonalStatisticModelImpl
       default:
         return ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
     }
+  }
+
+  public enum PERIOD
+  {
+    ALLTIME,
+    YEAR,
+    MONTH,
+    WEEK,
+    DAY
   }
 }

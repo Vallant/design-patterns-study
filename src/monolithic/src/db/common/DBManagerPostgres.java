@@ -17,7 +17,6 @@
 
 package db.common;
 
-import db.interfaces.*;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;

@@ -1,4 +1,5 @@
 package view.javafx;
+
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -15,9 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FXDialogs {
+public class FXDialogs
+{
 
-  public static void showInformation(String title, String message) {
+  public static final  String YES    = "Yes";
+  public static final  String NO     = "No";
+  private static final String OK     = "OK";
+  private static final String CANCEL = "Cancel";
+
+  public static void showInformation(String title, String message)
+  {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.initStyle(StageStyle.UTILITY);
     alert.setTitle("Information");
@@ -27,7 +35,8 @@ public class FXDialogs {
     alert.showAndWait();
   }
 
-  public static void showWarning(String title, String message) {
+  public static void showWarning(String title, String message)
+  {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.initStyle(StageStyle.UTILITY);
     alert.setTitle("Warning");
@@ -37,7 +46,8 @@ public class FXDialogs {
     alert.showAndWait();
   }
 
-  public static void showError(String title, String message) {
+  public static void showError(String title, String message)
+  {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.initStyle(StageStyle.UTILITY);
     alert.setTitle("Error");
@@ -47,7 +57,8 @@ public class FXDialogs {
     alert.showAndWait();
   }
 
-  public static void showException(String title, String message, Exception exception) {
+  public static void showException(String title, String message, Exception exception)
+  {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.initStyle(StageStyle.UTILITY);
     alert.setTitle("Exception");
@@ -80,12 +91,8 @@ public class FXDialogs {
     alert.showAndWait();
   }
 
-  public static final String YES = "Yes";
-  public static final String NO = "No";
-  public static final String OK = "OK";
-  public static final String CANCEL = "Cancel";
-
-  public static String showConfirm(String title, String message, String... options) {
+  public static String showConfirm(String title, String message, String... options)
+  {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.initStyle(StageStyle.UTILITY);
     alert.setTitle("Choose an option");
@@ -93,39 +100,50 @@ public class FXDialogs {
     alert.setContentText(message);
 
     //To make enter key press the actual focused button, not the first one. Just like pressing "space".
-    alert.getDialogPane().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-      if (event.getCode().equals(KeyCode.ENTER)) {
+    alert.getDialogPane().addEventFilter(KeyEvent.KEY_PRESSED, event ->
+    {
+      if(event.getCode().equals(KeyCode.ENTER))
+      {
         event.consume();
-        try {
+        try
+        {
           Robot r = new Robot();
           r.keyPress(java.awt.event.KeyEvent.VK_SPACE);
           r.keyRelease(java.awt.event.KeyEvent.VK_SPACE);
-        } catch (Exception e) {
+        }
+        catch(Exception e)
+        {
           e.printStackTrace();
         }
       }
     });
 
-    if (options == null || options.length == 0) {
+    if(options == null || options.length == 0)
+    {
       options = new String[]{OK, CANCEL};
     }
 
     List<ButtonType> buttons = new ArrayList<>();
-    for (String option : options) {
+    for(String option : options)
+    {
       buttons.add(new ButtonType(option));
     }
 
     alert.getButtonTypes().setAll(buttons);
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (!result.isPresent()) {
+    if(!result.isPresent())
+    {
       return CANCEL;
-    } else {
+    }
+    else
+    {
       return result.get().getText();
     }
   }
 
-  public static String showTextInput(String title, String message, String defaultValue) {
+  public static String showTextInput(String title, String message, String defaultValue)
+  {
     TextInputDialog dialog = new TextInputDialog(defaultValue);
     dialog.initStyle(StageStyle.UTILITY);
     dialog.setTitle("Input");
@@ -133,9 +151,12 @@ public class FXDialogs {
     dialog.setContentText(message);
 
     Optional<String> result = dialog.showAndWait();
-    if (result.isPresent()) {
+    if(result.isPresent())
+    {
       return result.get();
-    } else {
+    }
+    else
+    {
       return null;
     }
 

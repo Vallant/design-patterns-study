@@ -23,8 +23,6 @@ public class MainViewSwing
 {
 
   private final JFrame frame;
-  private       JPanel loginPanel;
-
   private final LoginViewSwing             login;
   private final ProjectViewSwing           project;
   private final SettingsViewSwing          settings;
@@ -33,10 +31,10 @@ public class MainViewSwing
   private final ActivityBarViewSwing       activityBar;
   private final SideBarViewSwing           sideBar;
   private final ProjectStatisticViewSwing  projectStatistic;
+  private       JPanel loginPanel;
   private       JMenuBar                   menuBar;
   private       JMenu                      file;
   private       JMenuItem                  logout;
-  private       MainControllerSwing        controller;
 
 
   public MainViewSwing()
@@ -78,7 +76,7 @@ public class MainViewSwing
 
   public void setMainController(MainControllerSwing controller)
   {
-    this.controller = controller;
+    MainControllerSwing controller1 = controller;
   }
 
 

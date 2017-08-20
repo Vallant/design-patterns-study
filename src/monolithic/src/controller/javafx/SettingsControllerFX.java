@@ -12,38 +12,38 @@ public class SettingsControllerFX
   private SettingsViewFX    view;
   private User              user;
 
-  
+
   public void setModel(SettingsModelImpl model)
   {
     this.model = model;
   }
 
-  
+
   public void setView(SettingsViewFX view)
   {
     this.view = view;
   }
 
-  
+
   public void refresh()
   {
     view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
   }
 
-  
+
   public void show(User user)
   {
     this.user = user;
     view.show();
   }
 
-  
+
   public void resetClicked()
   {
     view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
   }
 
-  
+
   public void applyClicked(String first, String last, String email, char[] old, char[] newPw, char[] newPwAgain)
   {
 
@@ -76,7 +76,7 @@ public class SettingsControllerFX
     }
   }
 
-  
+
   public void updateSuccessful()
   {
     view.updateSuccessful();

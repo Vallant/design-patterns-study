@@ -11,12 +11,10 @@ import java.util.ArrayList;
 
 public class ProjectViewFX
 {
-  private BorderPane mainPane;
-  private Stage mainStage;
-
-
   private final ProjectViewPane     pMain;
   private final ProjectDetailPane   pDetail;
+  private BorderPane mainPane;
+  private Stage      mainStage;
   private       ProjectControllerFX controller;
 
 
@@ -73,10 +71,10 @@ public class ProjectViewFX
     pDetail.btUpdateDescription.setOnAction(actionEvent -> controller.updateDescriptionClicked());
 
     pDetail.lstPhases.setOnMouseClicked(listSelectionEvent ->
-      {
-        int index = pDetail.lstPhases.getSelectionModel().getSelectedIndex();
-        controller.projectPhaseHasSelection(index != -1);
-      });
+    {
+      int index = pDetail.lstPhases.getSelectionModel().getSelectedIndex();
+      controller.projectPhaseHasSelection(index != -1);
+    });
 
 
     pDetail.lstMembers.setOnMouseClicked(listSelectionEvent ->
@@ -86,13 +84,13 @@ public class ProjectViewFX
     });
   }
 
-  
+
   public void setController(ProjectControllerFX controller)
   {
     this.controller = controller;
   }
 
-  
+
   public void showOverview()
   {
     mainPane.setCenter(pMain);
@@ -105,7 +103,7 @@ public class ProjectViewFX
     mainStage.sizeToScene();
   }
 
-  
+
   public void showDetail(String projectName, ArrayList<String> phases, ArrayList<String> members,
                          ArrayList<String> roles, String description)
   {
@@ -119,7 +117,7 @@ public class ProjectViewFX
     setProjectPhaseButtonsEnabled(pDetail.lstPhases.getSelectionModel().getSelectedIndex() != -1);
   }
 
-  
+
   public void hide()
   {
     mainPane.getChildren().remove(pMain);
@@ -127,7 +125,7 @@ public class ProjectViewFX
     mainStage.show();
   }
 
-  
+
   public void setParticipatingProjects(ArrayList<String> participatingProjects)
   {
     pMain.lstInvolved.getItems().clear();
@@ -135,7 +133,7 @@ public class ProjectViewFX
     pMain.lstInvolved.refresh();
   }
 
-  
+
   public void setOwnedProjects(ArrayList<String> ownedProjects)
   {
     pMain.lstOwned.getItems().clear();
@@ -143,20 +141,21 @@ public class ProjectViewFX
     pMain.lstOwned.refresh();
   }
 
-  
+
   public void showError(String localizedMessage)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, localizedMessage);
     alert.showAndWait();
   }
 
-  
+
   public void showProjectCreationDialog()
   {
     ProjectAddDialog dlg = new ProjectAddDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String description = dlg.getDescription();
         String name = dlg.getName();
@@ -168,44 +167,43 @@ public class ProjectViewFX
           ButtonType.NO);
         alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.NO)
+        if(alert.getResult() == ButtonType.NO)
           showProjectCreationDialog();
       }
     });
   }
 
-  
+
   public void setOwnedProjectsButtonsEnabled(boolean enabled)
   {
     pMain.btDeleteProject.setDisable(!enabled);
   }
 
-  
+
   public void setInvolvedProjectsButtonsEnabled(boolean enabled)
   {
     pMain.btLeaveProject.setDisable(!enabled);
   }
 
 
-  
   public int getSelectedOwnedProjectIndex()
   {
     return pMain.lstOwned.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public int getSelectedInvolvedProjectIndex()
   {
     return pMain.lstInvolved.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public int getSelectedPhaseIndex()
   {
     return pDetail.lstPhases.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public void showAddMemberDialog(ArrayList<String> names)
   {
     ProjectAddMemberDialog dlg = new ProjectAddMemberDialog();
@@ -218,26 +216,27 @@ public class ProjectViewFX
         ObservableList<Integer> list = dlg.lstAvailableUsers.getSelectionModel().getSelectedIndices();
         int[] array = new int[list.size()];
         for(int i = 0; i < list.size(); i++)
+        {
           array[i] = list.get(i);
+        }
         controller.addMembers(array);
       }
-      ;
     });
   }
 
-  
+
   public String getDescription()
   {
     return pDetail.taDescription.getText();
   }
 
-  
+
   public void setProjectPhaseButtonsEnabled(boolean hasSelection)
   {
     pDetail.btDeletePhase.setDisable(!hasSelection);
   }
 
-  
+
   public void setMemberListButtonsEnabled(boolean hasSelection)
   {
     pDetail.btDegradeToMember.setDisable(!hasSelection);
@@ -245,20 +244,21 @@ public class ProjectViewFX
     pDetail.btDeleteMember.setDisable(!hasSelection);
   }
 
-  
+
   public int getSelectedMemberIndex()
   {
     return pDetail.lstMembers.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public void showAddPhaseDialog()
   {
 
     ProjectAddPhaseDialog dlg = new ProjectAddPhaseDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String name = dlg.getName();
         controller.addPhase(name);

@@ -28,26 +28,27 @@ public class ProjectStatisticControllerFX
     inUpdate = false;
   }
 
-  
+
   public void setModel(ProjectStatisticModelImpl model)
   {
     this.model = model;
   }
 
-  
+
   public void setView(ProjectStatisticViewFX view)
   {
     this.view = view;
   }
 
-  
+
   public void refresh()
   {
     try
     {
       model.projectPeriodChanged(view.getSelectedProjectPeriod());
       if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUserPhase() == 0,
+        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
+          view.getSelectedUserPhase() == 0,
           members.get(view.getSelectedUserPhase()));
       if(activities != null)
       {
@@ -62,7 +63,7 @@ public class ProjectStatisticControllerFX
     }
   }
 
-  
+
   public void phaseDropDownChanged(int selectedPeriodIndex, int selectedUserIndex)
   {
     if(inUpdate)
@@ -79,7 +80,7 @@ public class ProjectStatisticControllerFX
       }
 
 
-      if(members != null )
+      if(members != null)
         model.phaseDropDownChanged(currentProject.getId(), selectedPeriodIndex, selectedUserIndex == 0,
           members.get(selectedUserIndex));
     }
@@ -91,7 +92,7 @@ public class ProjectStatisticControllerFX
     inUpdate = false;
   }
 
-  
+
   public void projectPeriodChanged(int selectedPeriodIndex)
   {
     try
@@ -105,7 +106,7 @@ public class ProjectStatisticControllerFX
     }
   }
 
-  
+
   public void activityDropDownChanged(int selectedPeriodIndex, int selectedUserIndex)
   {
     if(inUpdate)
@@ -131,14 +132,14 @@ public class ProjectStatisticControllerFX
     inUpdate = false;
   }
 
-  
-  public void showProjectView()
+
+  private void showProjectView()
   {
     view.showProjectView();
     refresh();
   }
 
-  
+
   public void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations)
   {
     this.projects = projects;
@@ -151,13 +152,13 @@ public class ProjectStatisticControllerFX
     view.setProjectData(projectNames, durations);
   }
 
-  
+
   public void showPhaseView()
   {
     view.showPhaseView();
   }
 
-  
+
   public void setPhaseData(ArrayList<ProjectMember> members, ArrayList<ProjectPhase> phases,
                            ArrayList<Duration> durations)
   {
@@ -181,13 +182,13 @@ public class ProjectStatisticControllerFX
     view.setPhaseData(phaseNames, durations, memberNames);
   }
 
-  
+
   public void showActivityView()
   {
     view.showActivityView();
   }
 
-  
+
   public void setActivityData(ArrayList<Activity> activities)
   {
     this.activities = activities;
@@ -215,7 +216,7 @@ public class ProjectStatisticControllerFX
     view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
   }
 
-  
+
   public void doubleClickOnProject(int index)
   {
     try
@@ -230,7 +231,7 @@ public class ProjectStatisticControllerFX
     }
   }
 
-  
+
   public void backToProjectClicked()
   {
     currentPhase = null;
@@ -240,7 +241,7 @@ public class ProjectStatisticControllerFX
     showProjectView();
   }
 
-  
+
   public void doubleClickOnPhase(int index)
   {
     try
@@ -255,7 +256,7 @@ public class ProjectStatisticControllerFX
     }
   }
 
-  
+
   public void backToPhaseClicked()
   {
     showPhaseView();

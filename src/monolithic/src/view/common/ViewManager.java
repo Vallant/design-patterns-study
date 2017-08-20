@@ -14,7 +14,7 @@ import view.swing.MainViewSwing;
 public class ViewManager
 {
   private static MainViewSwing viewSwing;
-  private static MainViewFX viewFX;
+  private static MainViewFX    viewFX;
 
   public static void initInstance(String frontend)
   {
@@ -41,14 +41,15 @@ public class ViewManager
 
   public static MainViewFX getInstanceFX()
   {
-    assert(viewFX != null);
+    assert (viewFX != null);
     return viewFX;
   }
 
   private static void launchFx(MainViewFX fx)
   {
-    new Thread(() -> fx.launchThis()).start();
+    new Thread(fx::launchThis).start();
     while(MainViewFX.getInstance().getMainStage() == null)
+    {
       try
       {
         Thread.sleep(100);
@@ -57,5 +58,6 @@ public class ViewManager
       {
         e.printStackTrace();
       }
+    }
   }
 }

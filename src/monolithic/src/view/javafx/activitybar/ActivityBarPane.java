@@ -4,43 +4,38 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 
-public class ActivityBarPane extends FlowPane
+class ActivityBarPane extends FlowPane
 {
-  private final GridPane         pMain;
-  final         ComboBox<String> cbProject;
-  private final Label            lbProject;
-  final         ComboBox<String> cbPhase;
-  private final Label            lbPhase;
-  final         Button           btStart;
-  final         Button          btStop;
-  final Label           lbDuration;
+  final ComboBox<String> cbProject;
+  final ComboBox<String> cbPhase;
+  final Button           btStart;
+  final Button           btStop;
+  final Label            lbDuration;
 
   public ActivityBarPane()
   {
     setHgap(5);
-    setPadding(new Insets(5,5,5,5));
+    setPadding(new Insets(5, 5, 5, 5));
 
-    pMain = new GridPane();
+    GridPane pMain = new GridPane();
     pMain.setHgap(5);
     pMain.setVgap(5);
-    pMain.setPadding(new Insets(5,5,5,5));
+    pMain.setPadding(new Insets(5, 5, 5, 5));
 
     //FlowPane pFlow1 = new FlowPane();
     cbProject = new ComboBox<>();
     cbProject.setPrefWidth(100);
 
-    lbProject = new Label("Project:");
+    Label lbProject = new Label("Project:");
 
     //FlowPane pFlow2 = new FlowPane();
     cbPhase = new ComboBox<>();
     cbPhase.setPrefWidth(100);
-    lbPhase = new Label("Phase:");
+    Label lbPhase = new Label("Phase:");
 
     btStart = new Button("Start Activity");
     btStop = new Button("Stop Activity");
@@ -52,10 +47,10 @@ public class ActivityBarPane extends FlowPane
 
     //pFlow1.getChildren().add(lbProject);
     //pFlow1.getChildren().add(cbProject);
-    pMain.add(lbProject, 0,0);
-    pMain.add(cbProject, 1,0);
-    pMain.add(lbPhase, 2,0);
-    pMain.add(cbPhase, 3,0);
+    pMain.add(lbProject, 0, 0);
+    pMain.add(cbProject, 1, 0);
+    pMain.add(lbPhase, 2, 0);
+    pMain.add(cbPhase, 3, 0);
     //pFlow2.getChildren().add(lbPhase);
     //pFlow2.getChildren().add(cbPhase);
 
@@ -65,7 +60,7 @@ public class ActivityBarPane extends FlowPane
     //pFlow4.getChildren().add(btStop);
     pMain.add(btStart, 4, 0);
     pMain.add(btStop, 5, 0);
-//    pMain.add(pFlow4, 3, 0);
+    //    pMain.add(pFlow4, 3, 0);
     pMain.add(lbDuration, 6, 0);
     getChildren().add(pMain);
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ActivityBarModelImpl
 {
   private ActivityBarControllerSwing controllerSwing;
-  private ActivityBarControllerFX controllerFX;
+  private ActivityBarControllerFX    controllerFX;
   private MainModelImpl              mainModel;
   private User                       user;
 

@@ -8,10 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 
-public class ProjectAddDialog extends Dialog<ButtonType>
+class ProjectAddDialog extends Dialog<ButtonType>
 {
-  private TextField name;
-  private TextField description;
+  private final TextField name;
+  private final TextField description;
 
   public ProjectAddDialog()
   {

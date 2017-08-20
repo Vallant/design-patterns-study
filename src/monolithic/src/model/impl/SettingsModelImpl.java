@@ -18,7 +18,7 @@ public class SettingsModelImpl
   private User                    user;
   private MainModelImpl           mainModel;
   private SettingsControllerSwing controllerSwing;
-  private SettingsControllerFX controllerFX;
+  private SettingsControllerFX    controllerFX;
 
   public void setUser(User user)
   {
@@ -36,6 +36,7 @@ public class SettingsModelImpl
   {
     this.controllerSwing = controller;
   }
+
   public void setController(SettingsControllerFX controller)
   {
     controllerFX = controller;

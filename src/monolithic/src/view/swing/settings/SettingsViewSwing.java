@@ -4,15 +4,13 @@ import controller.swing.SettingsControllerSwing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsViewSwing
 {
 
-  private       SettingsControllerSwing controller;
   private final JFrame                  frame;
   private final SettingsPanel           pMain;
+  private       SettingsControllerSwing controller;
 
   public SettingsViewSwing(JFrame frame)
   {

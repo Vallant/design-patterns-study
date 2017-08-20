@@ -19,29 +19,17 @@ import view.javafx.settings.SettingsViewFX;
 public class MainViewFX extends Application
 {
   private static MainViewFX       theInstance;
-  private        Stage            mainStage;
-  private        BorderPane       mainPane;
-  private        MainControllerFX controller;
-
   private final LoginViewFX             login;
   private final PersonalStatisticViewFX personalStatistic;
   private final ProjectStatisticViewFX  projectStatistic;
   private final SettingsViewFX          settings;
   private final ProjectViewFX           project;
   private final ActivityBarViewFX       activityBar;
-  private final SideBarViewFX sideBar;
+  private final SideBarViewFX           sideBar;
+  private        Stage            mainStage;
+  private        BorderPane       mainPane;
+  private        MainControllerFX controller;
 
-
-  public static MainViewFX getInstance()
-  {
-    if(theInstance == null)
-    {
-      new JFXPanel();
-      theInstance = new MainViewFX();
-    }
-
-    return theInstance;
-  }
 
   public MainViewFX()
   {
@@ -52,6 +40,17 @@ public class MainViewFX extends Application
     activityBar = new ActivityBarViewFX();
     project = new ProjectViewFX();
     sideBar = new SideBarViewFX();
+  }
+
+  public static MainViewFX getInstance()
+  {
+    if(theInstance == null)
+    {
+      new JFXPanel();
+      theInstance = new MainViewFX();
+    }
+
+    return theInstance;
   }
 
   public Stage getMainStage()
@@ -65,7 +64,7 @@ public class MainViewFX extends Application
 
   }
 
-  
+
   public void start(Stage mainStage) throws Exception
   {
     this.mainStage = mainStage;
@@ -99,31 +98,27 @@ public class MainViewFX extends Application
     theInstance.mainStage.setScene(new Scene(mainPane));
   }
 
-  
+
   public void setMainController(MainControllerFX controller)
   {
     theInstance.controller = controller;
   }
 
-  
+
   public void showLoginView()
   {
-    Platform.runLater(new Runnable()
+    Platform.runLater(() ->
     {
-      
-      public void run()
-      {
-        theInstance.sideBar.hide();
-        theInstance.activityBar.hide();
-        theInstance.login.switchToLogin();
-        theInstance.mainStage.show();
+      theInstance.sideBar.hide();
+      theInstance.activityBar.hide();
+      theInstance.login.switchToLogin();
+      theInstance.mainStage.show();
 
-      }
     });
 
   }
 
-  
+
   public void showProjectView()
   {
     theInstance.login.removeAllComponents();
@@ -134,67 +129,67 @@ public class MainViewFX extends Application
 
   }
 
-  
+
   public void pairLogin(LoginControllerFX controller)
   {
     controller.setView(theInstance.login);
     theInstance.login.setController(controller);
   }
 
-  
+
   public void pairProject(ProjectControllerFX controller)
   {
     controller.setView(theInstance.project);
     theInstance.project.setController(controller);
   }
 
-  
+
   public void pairActivityBar(ActivityBarControllerFX controller)
   {
     controller.setView(theInstance.activityBar);
     theInstance.activityBar.setController(controller);
   }
 
-  
+
   public void showError(String message)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, message);
     alert.showAndWait();
   }
 
-  
+
   public void showActivityBar()
   {
     theInstance.activityBar.show();
   }
 
-  
+
   public void pairSideBar(SideBarControllerFX controller)
   {
     controller.setView(theInstance.sideBar);
     theInstance.sideBar.setController(controller);
   }
 
-  
+
   public void showSideBar(User.ROLE role)
   {
     theInstance.sideBar.show(role);
   }
 
-  
+
   public void hideCenterContent()
   {
     theInstance.mainPane.setCenter(null);
     theInstance.mainStage.show();
   }
 
-  
+
   public void showAdminView()
   {
 
   }
 
-  
+
   public void showPersonalStatisticView()
   {
     theInstance.login.removeAllComponents();
@@ -205,7 +200,7 @@ public class MainViewFX extends Application
     theInstance.mainStage.show();
   }
 
-  
+
   public void showProjectStatisticView()
   {
     theInstance.login.removeAllComponents();
@@ -216,34 +211,34 @@ public class MainViewFX extends Application
     theInstance.mainStage.show();
   }
 
-  
+
   public void showSettingsView()
   {
     theInstance.settings.show();
     theInstance.mainStage.show();
   }
 
-  
+
   public void pairPersonalStatistic(PersonalStatisticControllerFX statistics)
   {
     theInstance.personalStatistic.setController(statistics);
     statistics.setView(theInstance.personalStatistic);
   }
 
-  
+
   public void pairProjectStatistic(ProjectStatisticControllerFX projectStatistic)
   {
     theInstance.projectStatistic.setController(projectStatistic);
     projectStatistic.setView(theInstance.projectStatistic);
   }
 
-  
+
   public void hideAll()
   {
 
   }
 
-  
+
   public void pairSettings(SettingsControllerFX controller)
   {
     theInstance.settings.setController(controller);

@@ -3,7 +3,6 @@ package view.javafx.activitybar;
 import controller.javafx.ActivityBarControllerFX;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,11 +14,10 @@ import java.util.TimerTask;
 
 public class ActivityBarViewFX
 {
+  private final ActivityBarPane         pMain;
   private       BorderPane              mainPane;
   private       Stage                   mainStage;
   private       ActivityBarControllerFX controller;
-  private final ActivityBarPane         pMain;
-
   private Duration  duration;
   private TimerTask task;
   private Timer     timer;
@@ -55,46 +53,46 @@ public class ActivityBarViewFX
     );
   }
 
-  
+
   public void setController(ActivityBarControllerFX controller)
   {
     this.controller = controller;
 
   }
 
-  
+
   public void show()
   {
     mainPane.setTop(pMain);
     mainStage.show();
   }
 
-  
+
   public void enableStart()
   {
     pMain.btStart.setDisable(false);
   }
 
-  
+
   public void disableStart()
   {
     pMain.btStart.setDisable(true);
 
   }
 
-  
+
   public void enableStop()
   {
     pMain.btStop.setDisable(false);
   }
 
-  
+
   public void disableStop()
   {
     pMain.btStop.setDisable(true);
   }
 
-  
+
   public void setProjectPhases(ArrayList<String> phases)
   {
     pMain.cbPhase.getItems().clear();
@@ -102,7 +100,7 @@ public class ActivityBarViewFX
     pMain.cbPhase.getSelectionModel().clearAndSelect(0);
   }
 
-  
+
   public void setProjects(ArrayList<String> projects)
   {
     pMain.cbProject.getItems().clear();
@@ -115,7 +113,7 @@ public class ActivityBarViewFX
     timer.scheduleAtFixedRate(task, 0, 1000);
   }
 
-  
+
   public void stopTimer()
   {
 
@@ -139,45 +137,40 @@ public class ActivityBarViewFX
 
     task = new TimerTask()
     {
-      
+
       public void run()
       {
         duration = duration.plusSeconds(1);
         long seconds = duration.getSeconds();
-        Platform.runLater(new Runnable()
-        {
-          
-          public void run()
-          {
-            pMain.lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
-          }
-        });
+        Platform.runLater(() -> pMain.lbDuration.setText(
+          String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60))));
 
       }
     };
   }
 
-  
+
   public void showError(String localizedMessage)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, localizedMessage);
     alert.showAndWait();
   }
 
-  
+
   public void disableComboBoxes()
   {
     pMain.cbProject.setDisable(true);
     pMain.cbPhase.setDisable(true);
   }
 
-  
+
   public void showCommentDescriptionDialog()
   {
     ActivityBarDialog dlg = new ActivityBarDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String description = dlg.getDescription();
         String comment = dlg.getComment();
@@ -193,26 +186,27 @@ public class ActivityBarViewFX
     });
   }
 
-  
+
   public void enableComboBoxes()
   {
     pMain.cbProject.setDisable(false);
     pMain.cbPhase.setDisable(false);
   }
 
-  
+
   public void hide()
   {
     mainPane.setTop(null);
   }
 
-  
+
   public void showFinishActivityDialog()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to discard the activity", ButtonType.YES, ButtonType.NO);
+    Alert alert =
+      new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to discard the activity", ButtonType.YES, ButtonType.NO);
     alert.showAndWait();
 
-    if (alert.getResult() == ButtonType.YES)
+    if(alert.getResult() == ButtonType.YES)
       controller.discardActivity();
     else
       showFinishActivityDialog();

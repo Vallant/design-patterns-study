@@ -7,17 +7,30 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import view.javafx.projectstatistic.ProjectStatisticActivityTableData;
 import view.javafx.projectstatistic.ProjectStatisticTableData;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 public class PersonalStatisticViewFX
 {
+
+  private final PersonalStatisticProjectPane  pProject;
+  private final PersonalStatisticPhasePane    pPhase;
+  private final PersonalStatisticActivityPane pActivity;
+  private BorderPane mainPane;
+  private Stage      mainStage;
+  private       PersonalStatisticControllerFX controller;
+  public PersonalStatisticViewFX()
+  {
+    pProject = new PersonalStatisticProjectPane();
+    pPhase = new PersonalStatisticPhasePane();
+    pActivity = new PersonalStatisticActivityPane();
+
+    setListeners();
+  }
 
   public void setMainPane(BorderPane mainPane)
   {
@@ -27,24 +40,6 @@ public class PersonalStatisticViewFX
   public void setMainStage(Stage mainStage)
   {
     this.mainStage = mainStage;
-  }
-
-  private BorderPane mainPane;
-  private Stage      mainStage;
-
-
-  private final PersonalStatisticProjectPane  pProject;
-  private final PersonalStatisticPhasePane    pPhase;
-  private final PersonalStatisticActivityPane pActivity;
-  private       PersonalStatisticControllerFX controller;
-
-  public PersonalStatisticViewFX()
-  {
-    pProject = new PersonalStatisticProjectPane();
-    pPhase = new PersonalStatisticPhasePane();
-    pActivity = new PersonalStatisticActivityPane();
-
-    setListeners();
   }
 
   private void setListeners()
@@ -57,7 +52,8 @@ public class PersonalStatisticViewFX
     pActivity.cbPeriod.setOnAction(
       actionEvent -> controller.activityPeriodChanged(pActivity.cbPeriod.getSelectionModel().getSelectedIndex()));
 
-    pProject.tblProjects.setOnMouseClicked(mouseEvent -> {
+    pProject.tblProjects.setOnMouseClicked(mouseEvent ->
+    {
       if(mouseEvent.getClickCount() == 2)
       {
         int index = pProject.tblProjects.getSelectionModel().getSelectedIndex();
@@ -67,7 +63,8 @@ public class PersonalStatisticViewFX
       }
     });
 
-    pPhase.tblPhases.setOnMouseClicked(mouseEvent -> {
+    pPhase.tblPhases.setOnMouseClicked(mouseEvent ->
+    {
       if(mouseEvent.getClickCount() == 2)
       {
         int index = pPhase.tblPhases.getSelectionModel().getSelectedIndex();
@@ -84,13 +81,15 @@ public class PersonalStatisticViewFX
     pPhase.btBack.setOnAction(actionEvent -> controller.backToOverviewClicked());
   }
 
-  
+
   public void setProjectData(ArrayList<String> projectNames, ArrayList<Duration> durations)
   {
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < projectNames.size(); ++i)
@@ -102,13 +101,15 @@ public class PersonalStatisticViewFX
     pProject.tblProjects.getItems().addAll(data);
   }
 
-  
+
   public void setPhaseData(ArrayList<String> phaseNames, ArrayList<Duration> durations)
   {
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < phaseNames.size(); ++i)
@@ -120,7 +121,7 @@ public class PersonalStatisticViewFX
     pPhase.tblPhases.getItems().addAll(data);
   }
 
-  
+
   public void showActivityView()
   {
     hide();
@@ -131,7 +132,7 @@ public class PersonalStatisticViewFX
     mainStage.show();
   }
 
-  
+
   public void setActivityData(ArrayList<String> descriptions, ArrayList<String> comments,
                               ArrayList<ZonedDateTime> startTimes, ArrayList<ZonedDateTime> endTimes)
   {
@@ -145,19 +146,19 @@ public class PersonalStatisticViewFX
     pActivity.tblActivity.getItems().addAll(data);
   }
 
-  
+
   public void setController(PersonalStatisticControllerFX controller)
   {
     this.controller = controller;
   }
 
-  
+
   public void RemoveAllComponents()
   {
     hide();
   }
 
-  
+
   public void showError(String localizedMessage)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, localizedMessage);
@@ -165,7 +166,6 @@ public class PersonalStatisticViewFX
   }
 
 
-  
   public void showProjectView()
   {
     hide();
@@ -176,7 +176,7 @@ public class PersonalStatisticViewFX
     mainStage.show();
   }
 
-  
+
   public void showPhaseView()
   {
     hide();
@@ -187,20 +187,20 @@ public class PersonalStatisticViewFX
     mainStage.show();
   }
 
-  
+
   public int getSelectedProjectPeriod()
   {
     return pProject.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public int getSelectedActivity()
   {
     return pActivity.tblActivity.getSelectionModel().getSelectedIndex();
   }
 
-  
-  public void hide()
+
+  private void hide()
   {
     mainPane.getChildren().remove(pPhase);
     mainPane.getChildren().remove(pProject);
@@ -210,11 +210,12 @@ public class PersonalStatisticViewFX
     mainStage.show();
   }
 
-  
+
   public void showAddActivityDialog()
   {
     PersonalStatisticActivityUpdateDialog dlg = new PersonalStatisticActivityUpdateDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
       if(response == ButtonType.OK)
       {
         String description = dlg.tfDescription.getText();
@@ -226,7 +227,7 @@ public class PersonalStatisticViewFX
     });
   }
 
-  
+
   public boolean confirmDeletion()
   {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this activity?", ButtonType.YES,
@@ -234,12 +235,13 @@ public class PersonalStatisticViewFX
     return alert.getResult() == ButtonType.YES;
   }
 
-  
+
   public void showUpdateActivityDialog(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     PersonalStatisticActivityUpdateDialog dlg = new PersonalStatisticActivityUpdateDialog(description, comment,
       start, end);
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
       if(response == ButtonType.OK)
       {
         String newDescription = dlg.tfDescription.getText();
@@ -251,19 +253,19 @@ public class PersonalStatisticViewFX
     });
   }
 
-  
+
   public int getSelectedPhasePeriod()
   {
     return pPhase.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public int getSelectedActivityPeriod()
   {
     return pActivity.cbPeriod.getSelectionModel().getSelectedIndex();
   }
 
-  
+
   public void updateUI()
   {
     pProject.tblProjects.refresh();

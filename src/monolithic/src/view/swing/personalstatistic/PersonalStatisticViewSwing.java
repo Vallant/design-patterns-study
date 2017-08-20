@@ -4,8 +4,6 @@ import controller.swing.PersonalStatisticControllerSwing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
@@ -20,10 +18,10 @@ public class PersonalStatisticViewSwing
 {
 
   private final JFrame                           frame;
-  private       PersonalStatisticControllerSwing controller;
   private final PersonalStatisticProjectPanel    pProject;
   private final PersonalStatisticPhasePanel      pPhase;
   private final PersonalStatisticActivityPanel   pActivity;
+  private       PersonalStatisticControllerSwing controller;
 
   public PersonalStatisticViewSwing(JFrame frame)
   {

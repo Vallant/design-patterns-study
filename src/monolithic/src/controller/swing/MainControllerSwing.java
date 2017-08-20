@@ -15,9 +15,6 @@ import view.swing.MainViewSwing;
  */
 public class MainControllerSwing
 {
-  private MainViewSwing mainView;
-  private MainModelImpl mainModel;
-
   private final LoginControllerSwing             login;
   private final ActivityBarControllerSwing       activityBar;
   private final ProjectControllerSwing           project;
@@ -25,6 +22,7 @@ public class MainControllerSwing
   private final PersonalStatisticControllerSwing personalStatistic;
   private final ProjectStatisticControllerSwing  projectStatistic;
   private final SettingsControllerSwing          settings;
+  private MainViewSwing mainView;
 
   public MainControllerSwing()
   {
@@ -47,7 +45,7 @@ public class MainControllerSwing
 
   public void setModel(MainModelImpl model)
   {
-    mainModel = model;
+    MainModelImpl mainModel = model;
   }
 
 

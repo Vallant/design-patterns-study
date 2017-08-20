@@ -9,9 +9,7 @@ import controller.swing.SideBarControllerSwing;
  */
 public class SideBarModelImpl
 {
-  private MainModelImpl          mainModel;
-  private SideBarControllerSwing controllerSwing;
-  private SideBarControllerFX controllerFX;
+  private MainModelImpl mainModel;
 
   public void setMainModel(MainModelImpl model)
   {
@@ -21,12 +19,12 @@ public class SideBarModelImpl
 
   public void setController(SideBarControllerSwing controller)
   {
-    this.controllerSwing = controller;
+    SideBarControllerSwing controllerSwing = controller;
   }
 
   public void setController(SideBarControllerFX controller)
   {
-    controllerFX = controller;
+    SideBarControllerFX controllerFX = controller;
   }
 
 

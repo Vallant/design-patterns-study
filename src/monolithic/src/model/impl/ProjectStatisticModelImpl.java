@@ -13,20 +13,10 @@ import java.util.ArrayList;
 public class ProjectStatisticModelImpl
 {
 
-  public enum PERIOD
-  {
-    ALLTIME,
-    YEAR,
-    MONTH,
-    WEEK,
-    DAY
-  }
-
   private User                            user;
   private MainModelImpl                   mainModel;
   private ProjectStatisticControllerSwing controllerSwing;
-  private ProjectStatisticControllerFX controllerFX;
-
+  private ProjectStatisticControllerFX    controllerFX;
 
   public void projectPeriodChanged(int selectedPeriodIndex) throws Exception
   {
@@ -42,7 +32,6 @@ public class ProjectStatisticModelImpl
     else
       controllerFX.setProjectData(projects, durations);
   }
-
 
   public void activityDropDownChanged(int phaseId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser)
     throws Exception
@@ -63,7 +52,6 @@ public class ProjectStatisticModelImpl
     else
       controllerFX.setActivityData(activities);
   }
-
 
   public void phaseDropDownChanged(int projectId, int selectedPeriodIndex, boolean showAll, ProjectMember selectedUser)
     throws Exception
@@ -91,28 +79,25 @@ public class ProjectStatisticModelImpl
 
   }
 
-
   public void setUser(User user)
   {
     this.user = user;
   }
-
 
   public void setMainModel(MainModelImpl mainModel)
   {
     this.mainModel = mainModel;
   }
 
-
   public void setController(ProjectStatisticControllerSwing controller)
   {
     this.controllerSwing = controller;
   }
+
   public void setController(ProjectStatisticControllerFX controller)
   {
     controllerFX = controller;
   }
-
 
   public void refresh()
   {
@@ -121,7 +106,6 @@ public class ProjectStatisticModelImpl
     else
       controllerFX.refresh();
   }
-
 
   public void requestedDetailFor(Project project) throws Exception
   {
@@ -132,7 +116,6 @@ public class ProjectStatisticModelImpl
     else
       controllerFX.showPhaseView();
   }
-
 
   public void requestedDetailFor(ProjectPhase projectPhase) throws Exception
   {
@@ -161,5 +144,14 @@ public class ProjectStatisticModelImpl
       default:
         return ZonedDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
     }
+  }
+
+  public enum PERIOD
+  {
+    ALLTIME,
+    YEAR,
+    MONTH,
+    WEEK,
+    DAY
   }
 }

@@ -3,7 +3,7 @@ package view.javafx.personalstatistic;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class PersonalStatisticActivityTableData
+class PersonalStatisticActivityTableData
 {
 
   static private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
@@ -11,7 +11,6 @@ public class PersonalStatisticActivityTableData
   private final ZonedDateTime end;
   private final String        description;
   private final String        comment;
-
 
 
   public PersonalStatisticActivityTableData(ZonedDateTime start, ZonedDateTime end, String description,

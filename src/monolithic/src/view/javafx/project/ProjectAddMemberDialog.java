@@ -6,11 +6,11 @@ import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
-public class ProjectAddMemberDialog extends Dialog<ButtonType>
+class ProjectAddMemberDialog extends Dialog<ButtonType>
 {
 
-  final         ListView<String>            lstAvailableUsers;
-  private       ArrayList<String>        available;
+  final   ListView<String>  lstAvailableUsers;
+  private ArrayList<String> available;
 
   public ProjectAddMemberDialog()
   {
@@ -20,7 +20,7 @@ public class ProjectAddMemberDialog extends Dialog<ButtonType>
     BorderPane grid = new BorderPane();
     grid.setPadding(new Insets(20, 150, 10, 10));
 
-    lstAvailableUsers = new ListView<String>();
+    lstAvailableUsers = new ListView<>();
     lstAvailableUsers.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     ScrollPane spList = new ScrollPane(lstAvailableUsers);
