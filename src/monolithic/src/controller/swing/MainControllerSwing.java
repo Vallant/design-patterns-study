@@ -41,7 +41,7 @@ public class MainControllerSwing
   public void init(String frontend)
   {
     ViewManager.initInstance(frontend);
-    mainView = ViewManager.getInstance();
+    mainView = ViewManager.getInstanceSwing();
   }
 
 

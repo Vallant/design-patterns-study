@@ -29,7 +29,6 @@ public class LoginModelImpl
 
   }
 
-
   public void resetPassword(String email)
   {
     throw new UnsupportedOperationException(
