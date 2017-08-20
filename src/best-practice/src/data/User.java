@@ -39,6 +39,7 @@ public class User implements DBEntity
   private char[] newPassword;
   private char[] newPasswordAgain;
   private char[] oldPassword;
+
   public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email,
               byte[] password, byte[] salt)
   {

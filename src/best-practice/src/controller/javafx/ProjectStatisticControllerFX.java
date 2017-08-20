@@ -17,12 +17,12 @@ public class ProjectStatisticControllerFX implements ProjectStatisticController
   private ArrayList<Project>       projects;
   private ArrayList<ProjectPhase>  phases;
   private ProjectPhase             currentPhase;
-  private Project currentProject;
+  private Project                  currentProject;
   private ArrayList<Activity>      activities;
   private ArrayList<ProjectMember> members;
   private ProjectStatisticModel    model;
   private ProjectStatisticView     view;
-  private boolean inUpdate;
+  private boolean                  inUpdate;
 
   public ProjectStatisticControllerFX()
   {
@@ -48,7 +48,8 @@ public class ProjectStatisticControllerFX implements ProjectStatisticController
     {
       model.projectPeriodChanged(view.getSelectedProjectPeriod());
       if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUserPhase() == 0,
+        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
+          view.getSelectedUserPhase() == 0,
           members.get(view.getSelectedUserPhase()));
       if(activities != null)
       {
@@ -80,7 +81,7 @@ public class ProjectStatisticControllerFX implements ProjectStatisticController
       }
 
 
-      if(members != null )
+      if(members != null)
         model.phaseDropDownChanged(currentProject.getId(), selectedPeriodIndex, selectedUserIndex == 0,
           members.get(selectedUserIndex));
     }

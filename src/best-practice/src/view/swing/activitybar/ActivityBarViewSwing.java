@@ -10,8 +10,6 @@ import view.interfaces.ActivityBarView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -23,11 +21,11 @@ import java.util.TimerTask;
 public class ActivityBarViewSwing implements ActivityBarView
 {
   private final JFrame                frame;
-  private final ActivityBarPanel pMain;
+  private final ActivityBarPanel      pMain;
   private       ActivityBarController controller;
-  private Duration  duration;
-  private TimerTask task;
-  private Timer     timer;
+  private       Duration              duration;
+  private       TimerTask             task;
+  private       Timer                 timer;
 
 
   public ActivityBarViewSwing(JFrame frame)

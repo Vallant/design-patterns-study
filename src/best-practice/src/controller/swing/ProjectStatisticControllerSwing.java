@@ -18,7 +18,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
   private ArrayList<Project>       projects;
   private ArrayList<ProjectPhase>  phases;
   private ProjectPhase             currentPhase;
-  private Project currentProject;
+  private Project                  currentProject;
   private ArrayList<Activity>      activities;
   private ArrayList<ProjectMember> members;
   private ProjectStatisticModel    model;
@@ -43,7 +43,8 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
     {
       model.projectPeriodChanged(view.getSelectedProjectPeriod());
       if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUserPhase() == 0,
+        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
+          view.getSelectedUserPhase() == 0,
           members.get(view.getSelectedUserPhase()));
       if(activities != null)
       {
@@ -66,7 +67,7 @@ public class ProjectStatisticControllerSwing implements ProjectStatisticControll
       if(selectedPeriodIndex == -1 || selectedUserIndex == -1)
         return;
 
-      if(members != null )
+      if(members != null)
         model.phaseDropDownChanged(currentProject.getId(), selectedPeriodIndex, selectedUserIndex == 0,
           members.get(selectedUserIndex));
     }

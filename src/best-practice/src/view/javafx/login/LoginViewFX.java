@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.interfaces.LoginView;
-import view.javafx.FXDialogs;
 
 public class LoginViewFX implements LoginView
 {
@@ -39,7 +38,7 @@ public class LoginViewFX implements LoginView
   @Override
   public void switchToResetPassword()
   {
-    
+
   }
 
   @Override
@@ -65,7 +64,8 @@ public class LoginViewFX implements LoginView
   @Override
   public void showLoginFailed()
   {
-    FXDialogs.showError("Login failed", "Username or password incorrect");
+    Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password incorrect");
+    alert.showAndWait();
   }
 
   @Override
@@ -107,7 +107,8 @@ public class LoginViewFX implements LoginView
   @Override
   public void showDialog(String message)
   {
-    FXDialogs.showInformation("Information", message);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+    alert.showAndWait();
   }
 
   @Override
@@ -127,6 +128,7 @@ public class LoginViewFX implements LoginView
   {
     this.mainPane = mainPane;
   }
+
   public void setMainStage(Stage mainStage)
   {
     this.mainStage = mainStage;

@@ -19,30 +19,18 @@ import view.javafx.settings.SettingsViewFX;
 
 public class MainViewFX extends Application implements MainView
 {
-  private static MainViewFX theInstance;
-  private Stage             mainStage;
-  private BorderPane        mainPane;
-  private MainController    controller;
-
+  private static MainViewFX     theInstance;
   private final LoginViewFX             login;
   private final PersonalStatisticViewFX personalStatistic;
   private final ProjectStatisticViewFX  projectStatistic;
   private final SettingsViewFX          settings;
   private final ProjectViewFX           project;
   private final ActivityBarViewFX       activityBar;
-  private final SideBarViewFX sideBar;
+  private final SideBarViewFX           sideBar;
+  private        Stage          mainStage;
+  private        BorderPane     mainPane;
+  private        MainController controller;
 
-
-  public static MainViewFX getInstance()
-  {
-    if(theInstance == null)
-    {
-      new JFXPanel();
-      theInstance = new MainViewFX();
-    }
-
-    return theInstance;
-  }
 
   public MainViewFX()
   {
@@ -53,6 +41,17 @@ public class MainViewFX extends Application implements MainView
     activityBar = new ActivityBarViewFX();
     project = new ProjectViewFX();
     sideBar = new SideBarViewFX();
+  }
+
+  public static MainViewFX getInstance()
+  {
+    if(theInstance == null)
+    {
+      new JFXPanel();
+      theInstance = new MainViewFX();
+    }
+
+    return theInstance;
   }
 
   public Stage getMainStage()
@@ -109,17 +108,13 @@ public class MainViewFX extends Application implements MainView
   @Override
   public void showLoginView()
   {
-    Platform.runLater(new Runnable()
+    Platform.runLater(() ->
     {
-      @Override
-      public void run()
-      {
-        theInstance.sideBar.hide();
-        theInstance.activityBar.hide();
-        theInstance.login.switchToLogin();
-        theInstance.mainStage.show();
+      theInstance.sideBar.hide();
+      theInstance.activityBar.hide();
+      theInstance.login.switchToLogin();
+      theInstance.mainStage.show();
 
-      }
     });
 
   }

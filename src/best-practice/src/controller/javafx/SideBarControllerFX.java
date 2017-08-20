@@ -6,14 +6,12 @@ import view.interfaces.SideBarView;
 
 public class SideBarControllerFX implements SideBarController
 {
-  private SideBarView  view;
   private SideBarModel model;
 
 
   @Override
   public void setView(SideBarView view)
   {
-    this.view = view;
   }
 
   @Override

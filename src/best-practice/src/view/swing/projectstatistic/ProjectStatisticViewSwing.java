@@ -6,8 +6,6 @@ import view.interfaces.ProjectStatisticView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
@@ -20,7 +18,7 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView
   private final ProjectStatisticProjectPanel  pProject;
   private final ProjectStatisticPhasePanel    pPhase;
   private final ProjectStatisticActivityPanel pActivity;
-  private ProjectStatisticController controller;
+  private       ProjectStatisticController    controller;
 
   public ProjectStatisticViewSwing(JFrame frame)
   {
@@ -40,8 +38,9 @@ public class ProjectStatisticViewSwing implements ProjectStatisticView
 
     pPhase.cbPeriod.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
       pPhase.cbMembers.getSelectedIndex()));
-    pPhase.cbMembers.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
-      pPhase.cbMembers.getSelectedIndex()));
+    pPhase.cbMembers.addActionListener(
+      actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
+        pPhase.cbMembers.getSelectedIndex()));
 
     pActivity.cbPeriod.addActionListener(actionEvent -> controller.activityDropDownChanged(
       pActivity.cbPeriod.getSelectedIndex(),

@@ -32,6 +32,7 @@ public class ProjectMember implements DBEntity
   private Project project;
   private int     remoteHash;
   private ROLE    role;
+
   public ProjectMember(User user, Project project, ROLE role)
   {
     this.user = user;

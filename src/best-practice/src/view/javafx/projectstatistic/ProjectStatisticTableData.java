@@ -4,9 +4,9 @@ import java.time.Duration;
 
 public class ProjectStatisticTableData
 {
-  String projectName;
-  String duration;
-  String share;
+  private final String projectName;
+  private final String duration;
+  private final String share;
 
 
   public ProjectStatisticTableData(String projectName, Duration duration, Duration total)

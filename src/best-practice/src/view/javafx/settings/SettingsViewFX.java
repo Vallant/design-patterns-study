@@ -2,18 +2,16 @@ package view.javafx.settings;
 
 import controller.interfaces.SettingsController;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.interfaces.SettingsView;
-import view.javafx.FXDialogs;
 
 public class SettingsViewFX implements SettingsView
 {
-  private BorderPane mainPane;
-  private Stage mainStage;
+  private final SettingsViewPane   pMain;
+  private       BorderPane         mainPane;
+  private       Stage              mainStage;
   private       SettingsController controller;
-  private final SettingsViewPane pMain;
 
   public SettingsViewFX()
   {

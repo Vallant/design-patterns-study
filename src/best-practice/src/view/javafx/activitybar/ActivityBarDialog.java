@@ -1,14 +1,16 @@
 package view.javafx.activitybar;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
 
-public class ActivityBarDialog extends Dialog<ButtonType>
+class ActivityBarDialog extends Dialog<ButtonType>
 {
-  private TextField description;
-  private TextField comment;
+  private final TextField description;
+  private final TextField comment;
 
   public ActivityBarDialog()
   {

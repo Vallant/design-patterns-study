@@ -5,8 +5,6 @@ import view.interfaces.SettingsView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsViewSwing implements SettingsView
 {

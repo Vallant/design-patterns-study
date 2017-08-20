@@ -8,40 +8,32 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class SettingsViewPane extends BorderPane
+class SettingsViewPane extends BorderPane
 {
-  private final GridPane      pMain;
-  private final Label         lbFirst;
-  final         TextField     tfFirst;
-  private final Label         lbLast;
-  final         TextField     tfLast;
-  private final Label         lbEmail;
-  final         TextField     tfEmail;
-  private final Label         lbOldPw;
-  final         PasswordField tfOldPw;
-  private final Label         lbNewPw;
-  final         PasswordField tfNewPw;
-  private final Label         lbNewPwAgain;
-  final         PasswordField tfNewPwAgain;
+  final TextField     tfFirst;
+  final TextField     tfLast;
+  final TextField     tfEmail;
+  final PasswordField tfOldPw;
+  final PasswordField tfNewPw;
+  final PasswordField tfNewPwAgain;
 
-  private final FlowPane   pBottom;
-  final         Button btApply;
-  final         Button btReset;
+  final Button btApply;
+  final Button btReset;
 
   public SettingsViewPane()
   {
-    pMain = new GridPane();
-    lbFirst = new Label("First Name");
-    lbLast = new Label("Last Name");
+    GridPane pMain = new GridPane();
+    Label lbFirst = new Label("First Name");
+    Label lbLast = new Label("Last Name");
     tfFirst = new TextField("");
     tfLast = new TextField("");
-    lbEmail = new Label("Email");
+    Label lbEmail = new Label("Email");
     tfEmail = new TextField("");
-    lbOldPw = new Label("Old Password");
+    Label lbOldPw = new Label("Old Password");
     tfOldPw = new PasswordField();
-    lbNewPw = new Label("New Password");
+    Label lbNewPw = new Label("New Password");
     tfNewPw = new PasswordField();
-    lbNewPwAgain = new Label("Repeat new Password");
+    Label lbNewPwAgain = new Label("Repeat new Password");
     tfNewPwAgain = new PasswordField();
 
     pMain.add(lbFirst, 0, 0);
@@ -60,7 +52,7 @@ public class SettingsViewPane extends BorderPane
     pFlow.getChildren().add(pMain);
     setCenter(pFlow);
 
-    pBottom = new FlowPane();
+    FlowPane pBottom = new FlowPane();
     btApply = new Button("Apply Changes");
     btReset = new Button("Discard Changes");
     pBottom.getChildren().add(btApply);

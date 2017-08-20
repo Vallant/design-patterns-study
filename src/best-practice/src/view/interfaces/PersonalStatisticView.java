@@ -3,7 +3,6 @@ package view.interfaces;
 import controller.interfaces.PersonalStatisticController;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

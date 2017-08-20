@@ -1,6 +1,5 @@
 package view.javafx.personalstatistic;
 
-import controller.interfaces.LoginController;
 import controller.interfaces.PersonalStatisticController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,18 +8,30 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.interfaces.PersonalStatisticView;
-import view.javafx.projectstatistic.ProjectStatisticActivityTableData;
 import view.javafx.projectstatistic.ProjectStatisticTableData;
 
-import javax.swing.*;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 public class PersonalStatisticViewFX implements PersonalStatisticView
 {
+
+  private final PersonalStatisticProjectPane  pProject;
+  private final PersonalStatisticPhasePane    pPhase;
+  private final PersonalStatisticActivityPane pActivity;
+  private BorderPane mainPane;
+  private Stage      mainStage;
+  private       PersonalStatisticController   controller;
+  public PersonalStatisticViewFX()
+  {
+    pProject = new PersonalStatisticProjectPane();
+    pPhase = new PersonalStatisticPhasePane();
+    pActivity = new PersonalStatisticActivityPane();
+
+    setListeners();
+  }
 
   public void setMainPane(BorderPane mainPane)
   {
@@ -30,24 +41,6 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
   public void setMainStage(Stage mainStage)
   {
     this.mainStage = mainStage;
-  }
-
-  private BorderPane mainPane;
-  private Stage      mainStage;
-
-
-  private final PersonalStatisticProjectPane  pProject;
-  private final PersonalStatisticPhasePane    pPhase;
-  private final PersonalStatisticActivityPane pActivity;
-  private       PersonalStatisticController    controller;
-
-  public PersonalStatisticViewFX()
-  {
-    pProject = new PersonalStatisticProjectPane();
-    pPhase = new PersonalStatisticPhasePane();
-    pActivity = new PersonalStatisticActivityPane();
-
-    setListeners();
   }
 
   private void setListeners()
@@ -60,7 +53,8 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
     pActivity.cbPeriod.setOnAction(
       actionEvent -> controller.activityPeriodChanged(pActivity.cbPeriod.getSelectionModel().getSelectedIndex()));
 
-    pProject.tblProjects.setOnMouseClicked(mouseEvent -> {
+    pProject.tblProjects.setOnMouseClicked(mouseEvent ->
+    {
       if(mouseEvent.getClickCount() == 2)
       {
         int index = pProject.tblProjects.getSelectionModel().getSelectedIndex();
@@ -70,7 +64,8 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
       }
     });
 
-    pPhase.tblPhases.setOnMouseClicked(mouseEvent -> {
+    pPhase.tblPhases.setOnMouseClicked(mouseEvent ->
+    {
       if(mouseEvent.getClickCount() == 2)
       {
         int index = pPhase.tblPhases.getSelectionModel().getSelectedIndex();
@@ -93,7 +88,9 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < projectNames.size(); ++i)
@@ -111,7 +108,9 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < phaseNames.size(); ++i)
@@ -217,7 +216,8 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
   public void showAddActivityDialog()
   {
     PersonalStatisticActivityUpdateDialog dlg = new PersonalStatisticActivityUpdateDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
       if(response == ButtonType.OK)
       {
         String description = dlg.tfDescription.getText();
@@ -242,7 +242,8 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
   {
     PersonalStatisticActivityUpdateDialog dlg = new PersonalStatisticActivityUpdateDialog(description, comment,
       start, end);
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
       if(response == ButtonType.OK)
       {
         String newDescription = dlg.tfDescription.getText();

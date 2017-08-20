@@ -1,4 +1,5 @@
 package controller.javafx;
+
 import controller.interfaces.*;
 import data.User;
 import model.interfaces.*;
@@ -15,7 +16,6 @@ public class MainControllerFX implements MainController
   private final ProjectStatisticController  projectStatistic;
   private final SettingsController          settings;
   private       MainView                    mainView;
-  private       MainModel                   mainModel;
 
   public MainControllerFX()
   {
@@ -38,7 +38,6 @@ public class MainControllerFX implements MainController
   @Override
   public void setModel(MainModel model)
   {
-    mainModel = model;
   }
 
   @Override

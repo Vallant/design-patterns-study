@@ -9,7 +9,6 @@ import view.interfaces.PersonalStatisticView;
 
 import java.time.*;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 public class PersonalStatisticControllerFX implements PersonalStatisticController
 {

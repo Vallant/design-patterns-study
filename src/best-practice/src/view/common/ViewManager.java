@@ -35,9 +35,10 @@ public class ViewManager
 
   private static void launchFx(MainViewFX fx)
   {
-    new Thread(() -> fx.launchThis()).start();
+    new Thread(fx::launchThis).start();
     view = fx;
     while(MainViewFX.getInstance().getMainStage() == null)
+    {
       try
       {
         Thread.sleep(100);
@@ -46,6 +47,7 @@ public class ViewManager
       {
         e.printStackTrace();
       }
+    }
   }
 
   public static MainView getInstance()

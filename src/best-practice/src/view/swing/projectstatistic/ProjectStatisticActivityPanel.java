@@ -8,21 +8,19 @@ import java.util.ArrayList;
 
 class ProjectStatisticActivityPanel extends JPanel
 {
-  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
   final JComboBox<String> cbMembers;
 
-  final         ProjectStatisticActivityTableModel tblActivityModel;
+  final ProjectStatisticActivityTableModel tblActivityModel;
   final JTable                             tblActivity;
-  private final JScrollPane                        scrpTable;
-  final         JButton                            btBack;
+  final JButton                            btBack;
 
   public ProjectStatisticActivityPanel()
   {
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
-    this.pHeader = new JPanel(new FlowLayout(5));
+    JPanel pHeader = new JPanel(new FlowLayout(5));
 
     this.cbPeriod = new JComboBox<>();
     cbPeriod.addItem("All Time");
@@ -39,7 +37,7 @@ class ProjectStatisticActivityPanel extends JPanel
 
     this.tblActivityModel = new ProjectStatisticActivityTableModel();
     this.tblActivity = new JTable(tblActivityModel);
-    scrpTable = new JScrollPane(tblActivity);
+    JScrollPane scrpTable = new JScrollPane(tblActivity);
 
     tblActivity.setBorder(new LineBorder(Color.black, 1));
 

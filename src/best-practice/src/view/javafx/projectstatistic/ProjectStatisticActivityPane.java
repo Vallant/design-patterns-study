@@ -7,23 +7,19 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
-public class ProjectStatisticActivityPane extends BorderPane
+class ProjectStatisticActivityPane extends BorderPane
 {
-
-  private final BorderPane pHeader;
-  private final GridPane pHeaderGrid;
 
   final ComboBox<String> cbPeriod;
   final ComboBox<String> cbMembers;
 
-  final TableView  tblActivity;
-  private final ScrollPane scrpTable;
-  final         Button     btBack;
+  final TableView tblActivity;
+  final Button    btBack;
 
   public ProjectStatisticActivityPane()
   {
-    pHeader = new BorderPane();
-    pHeaderGrid = new GridPane();
+    BorderPane pHeader = new BorderPane();
+    GridPane pHeaderGrid = new GridPane();
 
 
     cbPeriod = new ComboBox<>();
@@ -42,7 +38,7 @@ public class ProjectStatisticActivityPane extends BorderPane
     btBack = new Button("Back");
 
     tblActivity = new TableView();
-    scrpTable = new ScrollPane(tblActivity);
+    ScrollPane scrpTable = new ScrollPane(tblActivity);
 
 
     pHeaderGrid.add(btBack, 0, 0);

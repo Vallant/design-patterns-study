@@ -9,12 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import view.javafx.projectstatistic.ProjectStatisticTableData;
 
-public class PersonalStatisticProjectPane extends BorderPane
+class PersonalStatisticProjectPane extends BorderPane
 {
-  private final BorderPane pHeader;
   final ComboBox<String> cbPeriod;
-  final         TableView  tblProjects;
-  private final ScrollPane scrpTable;
+  final TableView        tblProjects;
 
   public PersonalStatisticProjectPane()
   {
@@ -27,16 +25,16 @@ public class PersonalStatisticProjectPane extends BorderPane
     cbPeriod.getSelectionModel().clearAndSelect(0);
 
     tblProjects = new TableView();
-    scrpTable = new ScrollPane(tblProjects);
+    ScrollPane scrpTable = new ScrollPane(tblProjects);
 
-    pHeader = new BorderPane();
-    pHeader.setPadding(new Insets(0,0,5,0));
+    BorderPane pHeader = new BorderPane();
+    pHeader.setPadding(new Insets(0, 0, 5, 0));
     pHeader.setLeft(cbPeriod);
     setTop(pHeader);
     setCenter(scrpTable);
 
 
-    setPadding(new Insets(5,5,5,5));
+    setPadding(new Insets(5, 5, 5, 5));
 
     TableColumn<ProjectStatisticTableData, String> nameColumn = new TableColumn<>("Project Name");
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));

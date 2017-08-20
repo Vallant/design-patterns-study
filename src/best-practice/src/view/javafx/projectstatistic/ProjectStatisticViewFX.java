@@ -15,13 +15,12 @@ import java.util.ArrayList;
 
 public class ProjectStatisticViewFX implements ProjectStatisticView
 {
-  private BorderPane mainPane;
-  private Stage mainStage;
-  private ProjectStatisticController controller;
-
   private final ProjectStatisticProjectPane  pProject;
   private final ProjectStatisticPhasePane    pPhase;
   private final ProjectStatisticActivityPane pActivity;
+  private BorderPane                 mainPane;
+  private Stage                      mainStage;
+  private ProjectStatisticController controller;
 
   public ProjectStatisticViewFX()
   {
@@ -34,26 +33,31 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
 
   private void setListener()
   {
-    pProject.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.projectPeriodChanged(newValue.intValue());
-    });
+    pProject.cbPeriod.getSelectionModel()
+      .selectedIndexProperty()
+      .addListener((options, oldValue, newValue) -> controller.projectPeriodChanged(newValue.intValue()));
 
-    pPhase.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.phaseDropDownChanged(newValue.intValue(), pPhase.cbMembers.getSelectionModel().getSelectedIndex());
-    });
-    pPhase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
+    pPhase.cbPeriod.getSelectionModel()
+      .selectedIndexProperty()
+      .addListener((options, oldValue, newValue) -> controller.phaseDropDownChanged(newValue.intValue(),
+        pPhase.cbMembers.getSelectionModel().getSelectedIndex()));
+    pPhase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) ->
+    {
       System.out.println(newValue);
       controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
     });
 
-    pActivity.cbPeriod.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.activityDropDownChanged(newValue.intValue(), pActivity.cbMembers.getSelectionModel().getSelectedIndex());
-    });
-    pActivity.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) -> {
-      controller.activityDropDownChanged(pActivity.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
-    });
+    pActivity.cbPeriod.getSelectionModel()
+      .selectedIndexProperty()
+      .addListener((options, oldValue, newValue) -> controller.activityDropDownChanged(newValue.intValue(),
+        pActivity.cbMembers.getSelectionModel().getSelectedIndex()));
+    pActivity.cbMembers.getSelectionModel()
+      .selectedIndexProperty()
+      .addListener((options, oldValue, newValue) -> controller.activityDropDownChanged(
+        pActivity.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue()));
 
-    pProject.tblProjects.setOnMouseClicked(mouseEvent -> {
+    pProject.tblProjects.setOnMouseClicked(mouseEvent ->
+    {
       if(mouseEvent.getClickCount() == 2)
       {
         int index = pProject.tblProjects.getSelectionModel().getSelectedIndex();
@@ -65,14 +69,15 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
 
     pPhase.btBack.setOnAction(actionEvent -> controller.backToProjectClicked());
 
-    pPhase.tblPhases.setOnMouseClicked(mouseEvent -> {
-        if(mouseEvent.getClickCount() == 2)
-        {
-          int index = pPhase.tblPhases.getSelectionModel().getSelectedIndex();
-          if(index == -1)
-            return;
-          controller.doubleClickOnPhase(index);
-        }
+    pPhase.tblPhases.setOnMouseClicked(mouseEvent ->
+    {
+      if(mouseEvent.getClickCount() == 2)
+      {
+        int index = pPhase.tblPhases.getSelectionModel().getSelectedIndex();
+        if(index == -1)
+          return;
+        controller.doubleClickOnPhase(index);
+      }
     });
 
     pActivity.btBack.setOnAction(actionEvent -> controller.backToPhaseClicked());
@@ -118,7 +123,9 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < projectNames.size(); ++i)
@@ -148,7 +155,9 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
     Duration total = Duration.ZERO;
 
     for(Duration duration : durations)
+    {
       total = total.plus(duration);
+    }
 
     ObservableList<ProjectStatisticTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < phaseNames.size(); ++i)
@@ -181,8 +190,9 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
     ObservableList<ProjectStatisticActivityTableData> data = FXCollections.observableArrayList();
     for(int i = 0; i < users.size(); ++i)
     {
-      data.add(new ProjectStatisticActivityTableData(startTimes.get(i), endTimes.get(i), users.get(i), descriptions.get(i),
-        comments.get(i)));
+      data.add(
+        new ProjectStatisticActivityTableData(startTimes.get(i), endTimes.get(i), users.get(i), descriptions.get(i),
+          comments.get(i)));
     }
     pActivity.tblActivity.getItems().clear();
     pActivity.tblActivity.getItems().addAll(data);

@@ -12,12 +12,10 @@ import java.util.ArrayList;
 
 public class ProjectViewFX implements ProjectView
 {
-  private BorderPane mainPane;
-  private Stage mainStage;
-
-
-  private final ProjectViewPane       pMain;
+  private final ProjectViewPane   pMain;
   private final ProjectDetailPane pDetail;
+  private BorderPane mainPane;
+  private Stage      mainStage;
   private       ProjectController controller;
 
 
@@ -74,10 +72,10 @@ public class ProjectViewFX implements ProjectView
     pDetail.btUpdateDescription.setOnAction(actionEvent -> controller.updateDescriptionClicked());
 
     pDetail.lstPhases.setOnMouseClicked(listSelectionEvent ->
-      {
-        int index = pDetail.lstPhases.getSelectionModel().getSelectedIndex();
-        controller.projectPhaseHasSelection(index != -1);
-      });
+    {
+      int index = pDetail.lstPhases.getSelectionModel().getSelectedIndex();
+      controller.projectPhaseHasSelection(index != -1);
+    });
 
 
     pDetail.lstMembers.setOnMouseClicked(listSelectionEvent ->
@@ -155,9 +153,10 @@ public class ProjectViewFX implements ProjectView
   public void showProjectCreationDialog()
   {
     ProjectAddDialog dlg = new ProjectAddDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String description = dlg.getDescription();
         String name = dlg.getName();
@@ -169,7 +168,7 @@ public class ProjectViewFX implements ProjectView
           ButtonType.NO);
         alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.NO)
+        if(alert.getResult() == ButtonType.NO)
           showProjectCreationDialog();
       }
     });
@@ -219,10 +218,11 @@ public class ProjectViewFX implements ProjectView
         ObservableList<Integer> list = dlg.lstAvailableUsers.getSelectionModel().getSelectedIndices();
         int[] array = new int[list.size()];
         for(int i = 0; i < list.size(); i++)
+        {
           array[i] = list.get(i);
+        }
         controller.addMembers(array);
       }
-      ;
     });
   }
 
@@ -257,9 +257,10 @@ public class ProjectViewFX implements ProjectView
   {
 
     ProjectAddPhaseDialog dlg = new ProjectAddPhaseDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String name = dlg.getName();
         controller.addPhase(name);

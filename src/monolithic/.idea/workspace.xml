@@ -1,86 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/ActivityBarControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/ActivityBarControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/LoginControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/LoginControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/MainControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/MainControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/PersonalStatisticControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/PersonalStatisticControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/ProjectControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/ProjectControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/ProjectStatisticControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/ProjectStatisticControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/SettingsControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/SettingsControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/javafx/SideBarControllerFX.java" afterPath="$PROJECT_DIR$/src/controller/javafx/SideBarControllerFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/swing/MainControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/swing/MainControllerSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/swing/SideBarControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/swing/SideBarControllerSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Activity.java" afterPath="$PROJECT_DIR$/src/data/Activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Project.java" afterPath="$PROJECT_DIR$/src/data/Project.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectMember.java" afterPath="$PROJECT_DIR$/src/data/ProjectMember.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectPhase.java" afterPath="$PROJECT_DIR$/src/data/ProjectPhase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/User.java" afterPath="$PROJECT_DIR$/src/data/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db/common/DBManagerPostgres.java" afterPath="$PROJECT_DIR$/src/db/common/DBManagerPostgres.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Main.java" afterPath="$PROJECT_DIR$/src/test/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/common/ViewManager.java" afterPath="$PROJECT_DIR$/src/view/common/ViewManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/FXDialogs.java" afterPath="$PROJECT_DIR$/src/view/javafx/FXDialogs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/MainViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/MainViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/SideBarViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/SideBarViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/login/LoginViewPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/login/LoginViewPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityTableData.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityTableData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityUpdateDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityUpdateDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticPhasePane.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticPhasePane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticProjectPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticProjectPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticTableData.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticTableData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddMemberDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddMemberDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddPhaseDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectAddPhaseDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectDetailPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectDetailPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectViewPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectViewPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityTableData.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityTableData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticPhasePane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticPhasePane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticProjectPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticProjectPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticTableData.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticTableData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/MainViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/MainViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/login/LoginViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/login/LoginViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticActivityPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticActivityPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticPhasePanel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticPhasePanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticProjectPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticProjectPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticTableModel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticTableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/project/ProjectDetailAddMemberPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/project/ProjectDetailAddMemberPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/project/ProjectDetailViewPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/project/ProjectDetailViewPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/project/ProjectViewPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/project/ProjectViewPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticPhasePanel.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticPhasePanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticProjectPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticProjectPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticTableModel.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticTableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/settings/SettingsPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/settings/SettingsPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/settings/SettingsViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/settings/SettingsViewSwing.java" />
-    </list>
+    <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -563,7 +484,7 @@
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../best-practice" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -704,12 +625,12 @@
       <workItem from="1502294032993" duration="2514000" />
       <workItem from="1502297004127" duration="1612000" />
       <workItem from="1502360834139" duration="4412000" />
-      <workItem from="1503257656569" duration="2696000" />
+      <workItem from="1503257656569" duration="2726000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11367000" />
+    <option name="totallyTimeSpent" value="11397000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />

@@ -3,7 +3,6 @@ package view.javafx.activitybar;
 import controller.interfaces.ActivityBarController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -16,11 +15,10 @@ import java.util.TimerTask;
 
 public class ActivityBarViewFX implements ActivityBarView
 {
-  private BorderPane            mainPane;
-  private Stage                 mainStage;
-  private ActivityBarController controller;
-  private final ActivityBarPane pMain;
-
+  private final ActivityBarPane       pMain;
+  private       BorderPane            mainPane;
+  private       Stage                 mainStage;
+  private       ActivityBarController controller;
   private Duration  duration;
   private TimerTask task;
   private Timer     timer;
@@ -145,14 +143,8 @@ public class ActivityBarViewFX implements ActivityBarView
       {
         duration = duration.plusSeconds(1);
         long seconds = duration.getSeconds();
-        Platform.runLater(new Runnable()
-        {
-          @Override
-          public void run()
-          {
-            pMain.lbDuration.setText(String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60)));
-          }
-        });
+        Platform.runLater(() -> pMain.lbDuration.setText(
+          String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60))));
 
       }
     };
@@ -176,9 +168,10 @@ public class ActivityBarViewFX implements ActivityBarView
   public void showCommentDescriptionDialog()
   {
     ActivityBarDialog dlg = new ActivityBarDialog();
-    dlg.showAndWait().ifPresent(response -> {
+    dlg.showAndWait().ifPresent(response ->
+    {
 
-      if (response == ButtonType.OK)
+      if(response == ButtonType.OK)
       {
         String description = dlg.getDescription();
         String comment = dlg.getComment();
@@ -210,10 +203,11 @@ public class ActivityBarViewFX implements ActivityBarView
   @Override
   public void showFinishActivityDialog()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to discard the activity", ButtonType.YES, ButtonType.NO);
+    Alert alert =
+      new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to discard the activity", ButtonType.YES, ButtonType.NO);
     alert.showAndWait();
 
-    if (alert.getResult() == ButtonType.YES)
+    if(alert.getResult() == ButtonType.YES)
       controller.discardActivity();
     else
       showFinishActivityDialog();

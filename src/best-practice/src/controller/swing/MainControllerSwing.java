@@ -23,8 +23,7 @@ public class MainControllerSwing implements MainController
   private final PersonalStatisticController personalStatistic;
   private final ProjectStatisticController  projectStatistic;
   private final SettingsController          settings;
-  private MainView  mainView;
-  private MainModel mainModel;
+  private       MainView                    mainView;
 
   public MainControllerSwing()
   {
@@ -47,7 +46,6 @@ public class MainControllerSwing implements MainController
   @Override
   public void setModel(MainModel model)
   {
-    mainModel = model;
   }
 
   @Override

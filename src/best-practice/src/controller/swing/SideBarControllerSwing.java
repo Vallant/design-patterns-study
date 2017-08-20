@@ -9,14 +9,12 @@ import view.interfaces.SideBarView;
  */
 public class SideBarControllerSwing implements SideBarController
 {
-  private SideBarView  view;
   private SideBarModel model;
 
 
   @Override
   public void setView(SideBarView view)
   {
-    this.view = view;
   }
 
   @Override

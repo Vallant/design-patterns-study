@@ -9,8 +9,7 @@ import model.interfaces.SideBarModel;
  */
 public class SideBarModelImpl implements SideBarModel
 {
-  private MainModel         mainModel;
-  private SideBarController controller;
+  private MainModel mainModel;
 
   @Override
   public void setMainModel(MainModel model)
@@ -21,7 +20,6 @@ public class SideBarModelImpl implements SideBarModel
   @Override
   public void setController(SideBarController controller)
   {
-    this.controller = controller;
   }
 
   @Override

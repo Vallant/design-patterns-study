@@ -28,8 +28,8 @@ public class MainModelImpl implements MainModel
   private final PersonalStatisticModel personalStatistic;
   private final ProjectStatisticModel  projectStatistic;
   private final SettingsModel          settings;
-  private final DBManager db;
-  private       User      user;
+  private final DBManager              db;
+  private       User                   user;
 
 
   private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
@@ -88,7 +88,6 @@ public class MainModelImpl implements MainModel
     controller.showSideBar(user.getRole());
 
     controller.switchToProjectView();
-
 
 
     project.refresh();

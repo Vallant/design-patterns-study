@@ -1,7 +1,6 @@
 package view.javafx.login;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -10,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class LoginViewPane extends BorderPane
+class LoginViewPane extends BorderPane
 {
 
   final TextField     tfUsername;
@@ -37,7 +36,7 @@ public class LoginViewPane extends BorderPane
     //buttons.add(btResetPassword);
     buttons.add(btLogin, 1, 0);
     FlowPane flow2 = new FlowPane();
-    flow2.setPadding(new Insets(5,5,5,5));
+    flow2.setPadding(new Insets(5, 5, 5, 5));
     flow2.getChildren().add(buttons);
     setBottom(flow2);
 
