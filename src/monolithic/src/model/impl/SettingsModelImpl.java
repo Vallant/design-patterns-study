@@ -1,5 +1,6 @@
 package model.impl;
 
+import controller.javafx.SettingsControllerFX;
 import controller.swing.SettingsControllerSwing;
 import data.User;
 
@@ -16,7 +17,8 @@ public class SettingsModelImpl
 {
   private User                    user;
   private MainModelImpl           mainModel;
-  private SettingsControllerSwing controller;
+  private SettingsControllerSwing controllerSwing;
+  private SettingsControllerFX controllerFX;
 
   public void setUser(User user)
   {
@@ -32,14 +34,27 @@ public class SettingsModelImpl
 
   public void setController(SettingsControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
+  }
+  public void setController(SettingsControllerFX controller)
+  {
+    controllerFX = controller;
   }
 
 
   public void refresh()
   {
-    controller.show(user);
-    controller.refresh();
+    if(controllerSwing != null)
+    {
+      controllerSwing.show(user);
+      controllerSwing.refresh();
+    }
+    else
+    {
+      controllerFX.show(user);
+      controllerFX.refresh();
+    }
+
   }
 
 
@@ -69,8 +84,17 @@ public class SettingsModelImpl
 
 
     user.updateInDb(mainModel.db());
-    controller.updateSuccessful();
 
-    controller.refresh();
+    if(controllerSwing != null)
+    {
+      controllerSwing.updateSuccessful();
+      controllerSwing.refresh();
+    }
+    else
+    {
+      controllerFX.updateSuccessful();
+      controllerFX.refresh();
+    }
+
   }
 }

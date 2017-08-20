@@ -1,5 +1,6 @@
 package model.impl;
 
+import controller.javafx.ProjectStatisticControllerFX;
 import controller.swing.ProjectStatisticControllerSwing;
 import data.*;
 
@@ -23,7 +24,8 @@ public class ProjectStatisticModelImpl
 
   private User                            user;
   private MainModelImpl                   mainModel;
-  private ProjectStatisticControllerSwing controller;
+  private ProjectStatisticControllerSwing controllerSwing;
+  private ProjectStatisticControllerFX controllerFX;
 
 
   public void projectPeriodChanged(int selectedPeriodIndex) throws Exception
@@ -35,7 +37,10 @@ public class ProjectStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
     Activity.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
-    controller.setProjectData(projects, durations);
+    if(controllerSwing != null)
+      controllerSwing.setProjectData(projects, durations);
+    else
+      controllerFX.setProjectData(projects, durations);
   }
 
 
@@ -52,7 +57,11 @@ public class ProjectStatisticModelImpl
     else
       activities = Activity.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since,
         mainModel.db());
-    controller.setActivityData(activities);
+
+    if(controllerSwing != null)
+      controllerSwing.setActivityData(activities);
+    else
+      controllerFX.setActivityData(activities);
   }
 
 
@@ -74,7 +83,11 @@ public class ProjectStatisticModelImpl
         mainModel.db());
 
     members = ProjectMember.getMembersByProjectId(projectId, mainModel.db());
-    controller.setPhaseData(members, phases, durations);
+
+    if(controllerSwing != null)
+      controllerSwing.setPhaseData(members, phases, durations);
+    else
+      controllerFX.setPhaseData(members, phases, durations);
 
   }
 
@@ -93,27 +106,42 @@ public class ProjectStatisticModelImpl
 
   public void setController(ProjectStatisticControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
+  }
+  public void setController(ProjectStatisticControllerFX controller)
+  {
+    controllerFX = controller;
   }
 
 
   public void refresh()
   {
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
   public void requestedDetailFor(Project project) throws Exception
   {
     phaseDropDownChanged(project.getId(), PERIOD.ALLTIME.ordinal(), true, null);
-    controller.showPhaseView();
+
+    if(controllerSwing != null)
+      controllerSwing.showPhaseView();
+    else
+      controllerFX.showPhaseView();
   }
 
 
   public void requestedDetailFor(ProjectPhase projectPhase) throws Exception
   {
     activityDropDownChanged(projectPhase.getId(), PERIOD.ALLTIME.ordinal(), true, null);
-    controller.showActivityView();
+
+    if(controllerSwing != null)
+      controllerSwing.showActivityView();
+    else
+      controllerFX.showActivityView();
   }
 
   private ZonedDateTime subtract(PERIOD period)

@@ -5,6 +5,7 @@
  */
 package model.impl;
 
+import controller.javafx.ActivityBarControllerFX;
 import controller.swing.ActivityBarControllerSwing;
 import data.Activity;
 import data.Project;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
  */
 public class ActivityBarModelImpl
 {
-  private ActivityBarControllerSwing controller;
+  private ActivityBarControllerSwing controllerSwing;
+  private ActivityBarControllerFX controllerFX;
   private MainModelImpl              mainModel;
   private User                       user;
 
@@ -41,7 +43,12 @@ public class ActivityBarModelImpl
 
   public void setController(ActivityBarControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
+  }
+
+  public void setController(ActivityBarControllerFX controller)
+  {
+    this.controllerFX = controller;
   }
 
 
@@ -55,9 +62,19 @@ public class ActivityBarModelImpl
   {
     ongoingActivity = true;
     start = ZonedDateTime.now();
-    controller.startTimer();
-    controller.disableStartButton();
-    controller.enableStopButton();
+    if(controllerSwing != null)
+    {
+      controllerSwing.startTimer();
+      controllerSwing.disableStartButton();
+      controllerSwing.enableStopButton();
+    }
+    else
+    {
+      controllerFX.startTimer();
+      controllerFX.disableStartButton();
+      controllerFX.enableStopButton();
+    }
+
   }
 
 
@@ -65,8 +82,17 @@ public class ActivityBarModelImpl
   {
     assert (!ongoingActivity);
     stop = ZonedDateTime.now();
-    controller.disableComboBoxes();
-    controller.showCommentDescriptionDialog();
+    if(controllerSwing != null)
+    {
+      controllerSwing.disableComboBoxes();
+      controllerSwing.showCommentDescriptionDialog();
+    }
+    else
+    {
+      controllerFX.disableComboBoxes();
+      controllerFX.showCommentDescriptionDialog();
+    }
+
     ongoingActivity = false;
   }
 
@@ -80,7 +106,10 @@ public class ActivityBarModelImpl
 
   public void refresh()
   {
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -93,10 +122,21 @@ public class ActivityBarModelImpl
   public void activityFinished(String projectName, String projectPhaseName, String description, String comment)
     throws Exception
   {
-    controller.disableStopButton();
-    controller.enableStartButton();
-    controller.stopTimer();
-    controller.enableComboBoxes();
+    if(controllerSwing != null)
+    {
+      controllerSwing.disableStopButton();
+      controllerSwing.enableStartButton();
+      controllerSwing.stopTimer();
+      controllerSwing.enableComboBoxes();
+    }
+    else
+    {
+      controllerFX.disableStopButton();
+      controllerFX.enableStartButton();
+      controllerFX.stopTimer();
+      controllerFX.enableComboBoxes();
+    }
+
 
     ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.db());
     Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
@@ -106,10 +146,21 @@ public class ActivityBarModelImpl
 
   public void discardActivity()
   {
-    controller.disableStopButton();
-    controller.enableStartButton();
-    controller.stopTimer();
-    controller.enableComboBoxes();
+    if(controllerSwing != null)
+    {
+      controllerSwing.disableStopButton();
+      controllerSwing.enableStartButton();
+      controllerSwing.stopTimer();
+      controllerSwing.enableComboBoxes();
+    }
+    else
+    {
+      controllerFX.disableStopButton();
+      controllerFX.enableStartButton();
+      controllerFX.stopTimer();
+      controllerFX.enableComboBoxes();
+    }
+
     ongoingActivity = false;
 
   }
@@ -118,7 +169,12 @@ public class ActivityBarModelImpl
   public void finishActivity()
   {
     if(ongoingActivity)
-      controller.finishActivity();
+    {
+      if(controllerSwing != null)
+        controllerSwing.finishActivity();
+      else
+        controllerFX.finishActivity();
+    }
   }
 
 }

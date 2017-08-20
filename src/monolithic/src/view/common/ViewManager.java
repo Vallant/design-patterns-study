@@ -25,7 +25,7 @@ public class ViewManager
         viewSwing = new MainViewSwing();
         break;
       case "javafx":
-        viewFX = new MainViewFX();
+        viewFX = MainViewFX.getInstance();
         launchFx(viewFX);
         break;
       default:

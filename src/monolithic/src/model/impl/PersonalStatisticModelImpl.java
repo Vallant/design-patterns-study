@@ -1,5 +1,6 @@
 package model.impl;
 
+import controller.javafx.PersonalStatisticControllerFX;
 import controller.swing.PersonalStatisticControllerSwing;
 import data.Activity;
 import data.Project;
@@ -28,14 +29,18 @@ public class PersonalStatisticModelImpl
   }
 
   private MainModelImpl                    mainModel;
-  private PersonalStatisticControllerSwing controller;
+  private PersonalStatisticControllerSwing controllerSwing;
+  private PersonalStatisticControllerFX    controllerFX;
   private User                             user;
 
 
   public void deleteActivity(Activity toDelete) throws Exception
   {
     toDelete.deleteInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -47,14 +52,20 @@ public class PersonalStatisticModelImpl
     Activity a = new Activity(detailPhase, user, description, zdtStart, zdtEnd, comment);
 
     a.insertIntoDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
   public void updateActivity(Activity a) throws Exception
   {
     a.updateInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -72,13 +83,20 @@ public class PersonalStatisticModelImpl
 
   public void setController(PersonalStatisticControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
+  }
+  public void setController(PersonalStatisticControllerFX controller)
+  {
+    controllerFX = controller;
   }
 
 
   public void refresh()
   {
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -86,14 +104,20 @@ public class PersonalStatisticModelImpl
   {
 
     phasePeriodChanged(project.getId(), PERIOD.ALLTIME.ordinal());
-    controller.showPhaseView();
+    if(controllerSwing != null)
+      controllerSwing.showPhaseView();
+    else
+      controllerFX.showPhaseView();
   }
 
 
   public void requestedDetailFor(ProjectPhase detailPhase) throws Exception
   {
     activityPeriodChanged(detailPhase.getId(), PERIOD.ALLTIME.ordinal());
-    controller.showActivityView();
+    if(controllerSwing != null)
+      controllerSwing.showActivityView();
+    else
+      controllerFX.showActivityView();
   }
 
 
@@ -107,7 +131,10 @@ public class PersonalStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
     Activity.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations, mainModel.db());
-    controller.setPhaseData(phases, durations);
+    if(controllerSwing != null)
+      controllerSwing.setPhaseData(phases, durations);
+    else
+      controllerFX.setPhaseData(phases, durations);
   }
 
 
@@ -123,7 +150,10 @@ public class PersonalStatisticModelImpl
 
 
     Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
-    controller.setProjectData(projects, durations);
+    if(controllerSwing != null)
+      controllerSwing.setProjectData(projects, durations);
+    else
+      controllerFX.setProjectData(projects, durations);
   }
 
 
@@ -134,8 +164,17 @@ public class PersonalStatisticModelImpl
 
 
     ArrayList<Activity> activities = Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
-    controller.showActivityView();
-    controller.setActivityData(activities);
+    if(controllerSwing != null)
+    {
+      controllerSwing.showActivityView();
+      controllerSwing.setActivityData(activities);
+    }
+    else
+    {
+      controllerFX.showActivityView();
+      controllerFX.setActivityData(activities);
+    }
+
   }
 
   private ZonedDateTime subtract(PERIOD period)

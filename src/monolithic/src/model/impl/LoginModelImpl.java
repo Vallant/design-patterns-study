@@ -5,6 +5,7 @@
  */
 package model.impl;
 
+import controller.javafx.LoginControllerFX;
 import controller.swing.LoginControllerSwing;
 import data.User;
 
@@ -21,7 +22,8 @@ import java.util.Random;
  */
 public class LoginModelImpl
 {
-  private LoginControllerSwing controller;
+  private LoginControllerSwing controllerSwing;
+  private LoginControllerFX controllerFX;
   private MainModelImpl        mainModel;
 
   public LoginModelImpl()
@@ -45,7 +47,12 @@ public class LoginModelImpl
     SecretKey generateSecret = skf.generateSecret(ks);
 
     if(!Arrays.equals(generateSecret.getEncoded(), u.getPassword()))
-      controller.loginFailed();
+    {
+      if(controllerSwing != null)
+        controllerSwing.loginFailed();
+      else
+        controllerFX.loginFailed();
+    }
     else
       mainModel.loginSuccessfulFor(u);
   }
@@ -64,16 +71,29 @@ public class LoginModelImpl
 
     user.insertIntoDb(mainModel.db());
 
-    controller.showDialog("User creation successful");
-    controller.backToLoginClicked();
+    if(controllerSwing != null)
+    {
+      controllerSwing.showDialog("User creation successful");
+      controllerSwing.backToLoginClicked();
+    }
+    else
+    {
+      controllerFX.showDialog("User creation successful");
+      controllerFX.backToLoginClicked();
+    }
+
   }
 
 
-  public void setController(LoginControllerSwing controller)
+  public void setController(LoginControllerSwing controllerSwing)
   {
-    this.controller = controller;
+    this.controllerSwing = controllerSwing;
   }
 
+  public void setController(LoginControllerFX controllerFX)
+  {
+    this.controllerFX = controllerFX;
+  }
 
   public void setMainModel(MainModelImpl mainModel)
   {

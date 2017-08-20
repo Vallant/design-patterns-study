@@ -6,6 +6,7 @@
 package model.impl;
 
 import controller.common.ControllerManager;
+import controller.javafx.MainControllerFX;
 import controller.swing.MainControllerSwing;
 import data.User;
 import db.common.DBManagerPostgres;
@@ -18,7 +19,8 @@ import java.util.logging.Logger;
  */
 public class MainModelImpl
 {
-  private final MainControllerSwing controller;
+  private final MainControllerSwing controllerSwing;
+  private final MainControllerFX controllerFX;
 
   private final LoginModelImpl             login;
   private final ProjectModelImpl           project;
@@ -36,10 +38,21 @@ public class MainModelImpl
   {
 
     db = new DBManagerPostgres(driver, url, username, password);
+
     ControllerManager.initInstance(frontend);
 
-    controller = ControllerManager.getInstance();
-    controller.setModel(this);
+    if(frontend == "swing")
+    {
+      controllerSwing = ControllerManager.getInstanceSwing();
+      controllerSwing.setModel(this);
+      controllerFX = null;
+    }
+    else
+    {
+      controllerFX = ControllerManager.getInstanceFX();
+      controllerFX.setModel(this);
+      controllerSwing = null;
+    }
 
     login = new LoginModelImpl();
     pairLogin();
@@ -58,7 +71,10 @@ public class MainModelImpl
     settings = new SettingsModelImpl();
     pairSettings();
 
-    controller.switchToLogin();
+    if(controllerSwing != null)
+      controllerSwing.switchToLogin();
+    else
+      controllerFX.switchToLogin();
   }
 
 
@@ -83,9 +99,19 @@ public class MainModelImpl
     project.setUser(user);
     projectStatistic.setUser(user);
 
-    controller.switchToProjectView();
-    controller.showActivityBar();
-    controller.showSideBar(user.getRole());
+    if(controllerSwing != null)
+    {
+      controllerSwing.switchToProjectView();
+      controllerSwing.showActivityBar();
+      controllerSwing.showSideBar(user.getRole());
+    }
+    else
+    {
+      controllerFX.switchToProjectView();
+      controllerFX.showActivityBar();
+      controllerFX.showSideBar(user.getRole());
+    }
+
 
 
     project.refresh();
@@ -97,49 +123,75 @@ public class MainModelImpl
 
   public void showError(Exception ex)
   {
-    controller.showError(ex);
+
+    if(controllerSwing != null)
+      controllerSwing.showError(ex);
+    else
+      controllerFX.showError(ex);
+
   }
 
   private void pairLogin()
   {
     login.setMainModel(this);
-    controller.pairLogin(login);
+    if(controllerSwing != null)
+      controllerSwing.pairLogin(login);
+    else
+      controllerFX.pairLogin(login);
   }
 
   private void pairActivityBar()
   {
     activityBar.setMainModel(this);
-    controller.pairActivityBar(activityBar);
+    if(controllerSwing != null)
+      controllerSwing.pairActivityBar(activityBar);
+    else
+      controllerFX.pairActivityBar(activityBar);
   }
 
   private void pairProject()
   {
     project.setMainModel(this);
-    controller.pairProject(project);
+    if(controllerSwing != null)
+      controllerSwing.pairProject(project);
+    else
+      controllerFX.pairProject(project);
   }
 
   private void pairSideBar()
   {
     sideBar.setMainModel(this);
-    controller.pairSideBar(sideBar);
+    if(controllerSwing != null)
+      controllerSwing.pairSideBar(sideBar);
+    else
+      controllerFX.pairSideBar(sideBar);
   }
 
   private void pairPersonalStatistic()
   {
     personalStatistic.setMainModel(this);
-    controller.pairPersonalStatistic(personalStatistic);
+    if(controllerSwing != null)
+      controllerSwing.pairPersonalStatistic(personalStatistic);
+    else
+      controllerFX.pairPersonalStatistic(personalStatistic);
   }
 
   private void pairProjectStatistic()
   {
     projectStatistic.setMainModel(this);
-    controller.pairProjectStatistic(projectStatistic);
+    if(controllerSwing != null)
+      controllerSwing.pairProjectStatistic(projectStatistic);
+    else
+      controllerFX.pairProjectStatistic(projectStatistic);
   }
 
   private void pairSettings()
   {
     settings.setMainModel(this);
-    controller.pairSettings(settings);
+    if(controllerSwing != null)
+      controllerSwing.pairSettings(settings);
+    else
+      controllerFX.pairSettings(settings);
   }
 
 
@@ -151,25 +203,39 @@ public class MainModelImpl
 
   public void switchToPersonalStatistics()
   {
-    controller.switchToPersonalStatisticView();
+
+    if(controllerSwing != null)
+      controllerSwing.switchToPersonalStatisticView();
+    else
+      controllerFX.switchToPersonalStatisticView();
   }
 
 
   public void switchToProjects()
   {
-    controller.switchToProjectView();
+    if(controllerSwing != null)
+      controllerSwing.switchToProjectView();
+    else
+      controllerFX.switchToProjectView();
   }
 
 
   public void switchToAdministration()
   {
-    controller.switchToAdminView();
+    if(controllerSwing != null)
+      controllerSwing.switchToAdminView();
+    else
+      controllerFX.switchToAdminView();
   }
 
 
   public void switchToSettings()
   {
-    controller.switchToSettingsView();
+    if(controllerSwing != null)
+      controllerSwing.switchToSettingsView();
+    else
+      controllerFX.switchToSettingsView();
+
     settings.setUser(user);
     settings.refresh();
   }
@@ -183,14 +249,21 @@ public class MainModelImpl
 
   public void switchToProjectStatistic()
   {
-    controller.switchToProjectStatisticView();
+    if(controllerSwing != null)
+      controllerSwing.switchToProjectStatisticView();
+    else
+      controllerFX.switchToProjectStatisticView();
   }
 
 
   public void logout()
   {
     activityBar.finishActivity();
-    controller.switchToLogin();
+
+    if(controllerSwing != null)
+      controllerSwing.switchToLogin();
+    else
+      controllerFX.switchToLogin();
   }
 }
 

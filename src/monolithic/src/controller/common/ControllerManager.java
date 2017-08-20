@@ -5,6 +5,7 @@
  */
 package controller.common;
 
+import controller.javafx.MainControllerFX;
 import controller.swing.MainControllerSwing;
 
 /**
@@ -12,26 +13,39 @@ import controller.swing.MainControllerSwing;
  */
 public class ControllerManager
 {
-  private static MainControllerSwing controller;
+  private static MainControllerSwing controllerSwing;
+  private static MainControllerFX    controllerFX;
 
   public static void initInstance(String frontend)
   {
-    assert (controller == null);
+    assert (controllerSwing == null);
     switch(frontend)
     {
       case "swing":
-        controller = new MainControllerSwing();
+        controllerSwing = new MainControllerSwing();
+        break;
+      case "javafx":
+        controllerFX = new MainControllerFX();
         break;
       default:
         throw new UnsupportedOperationException();
     }
 
-    controller.init(frontend);
+    if(controllerSwing != null)
+      controllerSwing.init(frontend);
+    else
+      controllerFX.init(frontend);
   }
 
-  public static MainControllerSwing getInstance()
+  public static MainControllerSwing getInstanceSwing()
   {
-    assert (controller != null);
-    return controller;
+    assert (controllerSwing != null);
+    return controllerSwing;
+  }
+
+  public static MainControllerFX getInstanceFX()
+  {
+    assert (controllerFX != null);
+    return controllerFX;
   }
 }

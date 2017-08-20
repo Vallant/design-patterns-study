@@ -5,6 +5,7 @@
  */
 package model.impl;
 
+import controller.javafx.ProjectControllerFX;
 import controller.swing.ProjectControllerSwing;
 import data.Project;
 import data.ProjectMember;
@@ -20,7 +21,9 @@ public class ProjectModelImpl
 {
   private MainModelImpl          mainModel;
   private User                   user;
-  private ProjectControllerSwing controller;
+  private ProjectControllerSwing controllerSwing;
+  private ProjectControllerFX controllerFX;
+
 
   public ProjectModelImpl()
   {
@@ -42,13 +45,20 @@ public class ProjectModelImpl
 
   public void setController(ProjectControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
   }
 
+  public void setController(ProjectControllerFX controller)
+  {
+    controllerFX = controller;
+  }
 
   public void refresh()
   {
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -67,14 +77,20 @@ public class ProjectModelImpl
   public void leaveProject(ProjectMember member) throws Exception
   {
     member.deleteInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
   public void deleteProject(Project selectedProject) throws Exception
   {
     selectedProject.delete(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
     mainModel.refreshActivityBar();
 
   }
@@ -86,7 +102,10 @@ public class ProjectModelImpl
 
     ArrayList<ProjectPhase> phases = ProjectPhase.getByProjectId(project.getId(), mainModel.db());
 
-    controller.showDetail(project, phases, members);
+    if(controllerSwing != null)
+      controllerSwing.showDetail(project, phases, members);
+    else
+      controllerFX.showDetail(project, phases, members);
   }
 
 
@@ -96,7 +115,10 @@ public class ProjectModelImpl
     project.insertIntoDb(mainModel.db());
     ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
     pm.insertIntoDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
     mainModel.refreshActivityBar();
   }
 
@@ -105,7 +127,10 @@ public class ProjectModelImpl
   {
     ProjectPhase phase = new ProjectPhase(project, phaseName);
     phase.insertIntoDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
     mainModel.refreshActivityBar();
   }
 
@@ -113,7 +138,10 @@ public class ProjectModelImpl
   public void deletePhase(ProjectPhase projectPhase) throws Exception
   {
     projectPhase.deleteFromDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
     mainModel.refreshActivityBar();
   }
 
@@ -122,7 +150,10 @@ public class ProjectModelImpl
   {
     projectMember.setRole(ProjectMember.ROLE.LEADER);
     projectMember.updateInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -130,14 +161,20 @@ public class ProjectModelImpl
   {
     projectMember.setRole(ProjectMember.ROLE.MEMBER);
     projectMember.updateInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
   public void deleteMember(ProjectMember projectMember) throws Exception
   {
     projectMember.deleteInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
@@ -154,14 +191,20 @@ public class ProjectModelImpl
       ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
       member.insertIntoDb(mainModel.db());
     }
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 
   public void updateProject(Project project) throws Exception
   {
     project.updateInDb(mainModel.db());
-    controller.refresh();
+    if(controllerSwing != null)
+      controllerSwing.refresh();
+    else
+      controllerFX.refresh();
   }
 
 

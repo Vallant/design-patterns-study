@@ -1,6 +1,7 @@
 package model.impl;
 
 
+import controller.javafx.SideBarControllerFX;
 import controller.swing.SideBarControllerSwing;
 
 /**
@@ -9,7 +10,8 @@ import controller.swing.SideBarControllerSwing;
 public class SideBarModelImpl
 {
   private MainModelImpl          mainModel;
-  private SideBarControllerSwing controller;
+  private SideBarControllerSwing controllerSwing;
+  private SideBarControllerFX controllerFX;
 
   public void setMainModel(MainModelImpl model)
   {
@@ -19,7 +21,12 @@ public class SideBarModelImpl
 
   public void setController(SideBarControllerSwing controller)
   {
-    this.controller = controller;
+    this.controllerSwing = controller;
+  }
+
+  public void setController(SideBarControllerFX controller)
+  {
+    controllerFX = controller;
   }
 
 
