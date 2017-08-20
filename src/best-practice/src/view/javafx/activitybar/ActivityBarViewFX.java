@@ -100,6 +100,7 @@ public class ActivityBarViewFX implements ActivityBarView
   {
     pMain.cbPhase.getItems().clear();
     pMain.cbPhase.getItems().addAll(phases);
+    pMain.cbPhase.getSelectionModel().clearAndSelect(0);
   }
 
   @Override
@@ -107,6 +108,7 @@ public class ActivityBarViewFX implements ActivityBarView
   {
     pMain.cbProject.getItems().clear();
     pMain.cbProject.getItems().addAll(projects);
+    pMain.cbProject.getSelectionModel().clearAndSelect(0);
   }
 
   public void startTimer()

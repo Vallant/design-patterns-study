@@ -70,7 +70,9 @@ public class MainViewFX extends Application implements MainView
   public void start(Stage mainStage) throws Exception
   {
     this.mainStage = mainStage;
+
     theInstance = this;
+    mainStage.setTitle("Design Pattern Case Study");
     theInstance.mainPane = new BorderPane();
 
     theInstance.login.setMainPane(mainPane);

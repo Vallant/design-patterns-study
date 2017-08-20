@@ -1,5 +1,6 @@
 package view.javafx.personalstatistic;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,8 @@ public class PersonalStatisticActivityPane extends BorderPane
   {
     pHeader = new BorderPane();
     pHeaderGrid = new GridPane();
+    pHeaderGrid.setHgap(5);
+    pHeader.setPadding(new Insets(5,0,5,0));
 
 
     cbPeriod = new ComboBox<>();
@@ -42,6 +45,8 @@ public class PersonalStatisticActivityPane extends BorderPane
     scrpTable = new ScrollPane(tblActivity);
 
     pButtons = new GridPane();
+    pButtons.setVgap(5);
+    pButtons.setPadding(new Insets(0,0,0,5));
     btAddActivity = new Button("Add Activity");
     btDeleteActivity = new Button("Delete Activity");
     btUpdateActivity = new Button("Update Activity");

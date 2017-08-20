@@ -1,5 +1,6 @@
 package view.javafx.personalstatistic;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,8 @@ public class PersonalStatisticPhasePane extends BorderPane
   {
     pHeader = new BorderPane();
     pHeaderGrid = new GridPane();
+    pHeaderGrid.setHgap(5);
+    pHeader.setPadding(new Insets(5,0,5,0));
 
 
     cbPeriod = new ComboBox<>();
@@ -30,6 +33,7 @@ public class PersonalStatisticPhasePane extends BorderPane
     cbPeriod.getItems().add("Last Month");
     cbPeriod.getItems().add("Last Week");
     cbPeriod.getItems().add("Last Day");
+    cbPeriod.getSelectionModel().clearAndSelect(0);
 
 
 

@@ -84,6 +84,7 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
     pActivity.btDeleteActivity.setOnAction(actionEvent -> controller.deleteActivityClicked());
     pActivity.btUpdateActivity.setOnAction(actionEvent -> controller.updateActivityClicked());
     pActivity.btBack.setOnAction(actionEvent -> controller.backToPhaseViewClicked());
+    pPhase.btBack.setOnAction(actionEvent -> controller.backToOverviewClicked());
   }
 
   @Override
