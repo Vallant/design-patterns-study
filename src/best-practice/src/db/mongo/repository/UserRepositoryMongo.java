@@ -5,6 +5,8 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import data.User;
 import db.interfaces.UserRepository;
 import org.bson.Document;
@@ -13,7 +15,9 @@ import org.bson.types.Binary;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.ne;
 
 
 public class UserRepositoryMongo implements UserRepository
@@ -42,6 +46,7 @@ public class UserRepositoryMongo implements UserRepository
   @Override
   public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception
   {
+    //TODO
     return null;
   }
 
@@ -51,31 +56,56 @@ public class UserRepositoryMongo implements UserRepository
     MongoCollection<Document> coll = db.getCollection("user");
     Document toAdd = new Document("hash", item.getLocalHash())
       .append("login_name", item.getLoginName())
-    .append("first_name", item.getFirstName())
-    .append("last_name", item.getLastName())
-    .append("email", item.getEmail())
-    .append("salt", item.getSalt())
-    .append("password", item.getPassword())
-    .append("role", item.getRole().name());
+      .append("first_name", item.getFirstName())
+      .append("last_name", item.getLastName())
+      .append("email", item.getEmail())
+      .append("salt", item.getSalt())
+      .append("password", item.getPassword())
+      .append("role", item.getRole().name());
     coll.insertOne(toAdd);
   }
 
   @Override
   public void update(User item) throws Exception
   {
+    MongoCollection<Document> coll = db.getCollection("user");
+    Document toUpdate = new Document("hash", item.getLocalHash())
+      .append("login_name", item.getLoginName())
+      .append("first_name", item.getFirstName())
+      .append("last_name", item.getLastName())
+      .append("email", item.getEmail())
+      .append("salt", item.getSalt())
+      .append("password", item.getPassword())
+      .append("role", item.getRole().name());
+
+    UpdateResult result = coll.updateOne(and(eq("login_name", item.getLoginName()), eq("hash", item.getRemoteHash()
+    )), toUpdate);
+    if(result.getModifiedCount() != 1)
+      throw new Exception("Record was modyfied or not found");
 
   }
 
   @Override
   public void delete(User item) throws Exception
   {
-
+    MongoCollection<Document> coll = db.getCollection("user");
+    DeleteResult result = coll.deleteOne(and(eq("login_name", item.getLoginName()), eq("hash", item.getRemoteHash()
+    )));
+    if(result.getDeletedCount() != 1)
+      throw new Exception("Record was modyfied or not found");
   }
 
   @Override
   public List<User> getAll() throws Exception
   {
-    return null;
+    ArrayList<User> list = new ArrayList<>();
+    MongoCollection<Document> coll = db.getCollection("user");
+    FindIterable<Document> doc = coll.find();
+    MongoCursor<Document> cursor = doc.iterator();
+    while(cursor.hasNext())
+      list.add(extractUser(cursor.next()));
+
+    return list;
   }
 
   private User extractUser(Document current)
