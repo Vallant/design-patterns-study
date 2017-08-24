@@ -1,18 +1,24 @@
 package db.mongo.repository;
 
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import data.Activity;
+import data.Project;
 import data.User;
+import db.common.DBManager;
+import db.common.DBManagerMongo;
+import db.interfaces.ActivityRepository;
+import db.interfaces.ProjectRepository;
 import db.interfaces.UserRepository;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.Binary;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.and;
@@ -23,18 +29,18 @@ import static com.mongodb.client.model.Filters.ne;
 public class UserRepositoryMongo implements UserRepository
 {
 
-  private final MongoDatabase db;
+  private final DBManagerMongo manager;
 
 
-  public UserRepositoryMongo(MongoDatabase db)
+  public UserRepositoryMongo(DBManagerMongo manager)
   {
-    this.db = db;
+    this.manager= manager;
   }
 
   @Override
   public User getByPrimaryKey(String loginName) throws Exception
   {
-    MongoCollection<Document> coll = db.getCollection("user");
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
     FindIterable<Document> doc = coll.find(eq("login_name", loginName));
     MongoCursor<Document> cursor = doc.iterator();
     if(!cursor.hasNext())
@@ -46,14 +52,35 @@ public class UserRepositoryMongo implements UserRepository
   @Override
   public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception
   {
-    //TODO
-    return null;
+    ArrayList<User> list = new ArrayList<>();
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
+    Bson lookup = new Document("$lookup",
+      new Document("from", "project_member")
+        .append("localField", "login_name")
+        .append("foreignField", "user_login_name") //local field, remote field
+        .append("as", "project_member"));
+
+    Bson match = new Document("$match",
+      new Document("$or", Arrays.asList(
+        new Document("project_member.project_id", null),
+        new Document("project_member.project_id", projectId))
+      ));
+
+    List<Bson> filters = new ArrayList<>();
+    filters.add(lookup);
+    filters.add(match);
+    AggregateIterable<Document> it = coll.aggregate(filters);
+
+    for(Document row : it)
+      list.add(extractUser(row));
+
+    return list;
   }
 
   @Override
   public void add(User item) throws Exception
   {
-    MongoCollection<Document> coll = db.getCollection("user");
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
     Document toAdd = new Document("hash", item.getLocalHash())
       .append("login_name", item.getLoginName())
       .append("first_name", item.getFirstName())
@@ -68,7 +95,7 @@ public class UserRepositoryMongo implements UserRepository
   @Override
   public void update(User item) throws Exception
   {
-    MongoCollection<Document> coll = db.getCollection("user");
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
     Document toUpdate = new Document("hash", item.getLocalHash())
       .append("login_name", item.getLoginName())
       .append("first_name", item.getFirstName())
@@ -88,18 +115,32 @@ public class UserRepositoryMongo implements UserRepository
   @Override
   public void delete(User item) throws Exception
   {
-    MongoCollection<Document> coll = db.getCollection("user");
+    ProjectRepository pr = manager.getProjectRepository();
+    ArrayList<Project> ownedProjects = pr.getProjectsByUserName(item.getLoginName());
+    for(Project p : ownedProjects)
+      pr.delete(p);
+
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
     DeleteResult result = coll.deleteOne(and(eq("login_name", item.getLoginName()), eq("hash", item.getRemoteHash()
     )));
     if(result.getDeletedCount() != 1)
       throw new Exception("Record was modyfied or not found");
+
+    MongoCollection members = manager.getDb().getCollection("project_member");
+    members.deleteMany(eq("user_login_name", item.getLoginName()));
+
+    MongoCollection activities = manager.getDb().getCollection("activity");
+    activities.deleteMany(eq("user_login_name", item.getLoginName()));
+
+    MongoCollection project = manager.getDb().getCollection("project");
+    project.deleteMany(eq("user_login_name", item.getLoginName()));
   }
 
   @Override
   public List<User> getAll() throws Exception
   {
     ArrayList<User> list = new ArrayList<>();
-    MongoCollection<Document> coll = db.getCollection("user");
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
     FindIterable<Document> doc = coll.find();
     MongoCursor<Document> cursor = doc.iterator();
     while(cursor.hasNext())

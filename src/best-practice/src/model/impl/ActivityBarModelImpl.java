@@ -7,6 +7,7 @@ package model.impl;
 
 import controller.interfaces.ActivityBarController;
 import data.Activity;
+import data.Project;
 import data.ProjectPhase;
 import data.User;
 import db.interfaces.ActivityRepository;
@@ -15,6 +16,7 @@ import db.interfaces.ProjectRepository;
 import model.interfaces.ActivityBarModel;
 import model.interfaces.MainModel;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
@@ -58,7 +60,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
   public void startClicked()
   {
     ongoingActivity = true;
-    start = ZonedDateTime.now();
+    start = ZonedDateTime.now(ZoneId.systemDefault());
     controller.startTimer();
     controller.disableStartButton();
     controller.enableStopButton();
@@ -68,7 +70,7 @@ public class ActivityBarModelImpl implements ActivityBarModel
   public void stopClicked()
   {
     assert (!ongoingActivity);
-    stop = ZonedDateTime.now();
+    stop = ZonedDateTime.now(ZoneId.systemDefault());
     controller.disableComboBoxes();
     controller.showCommentDescriptionDialog();
     ongoingActivity = false;
@@ -92,7 +94,11 @@ public class ActivityBarModelImpl implements ActivityBarModel
   public ArrayList<String> getProjects() throws Exception
   {
     ProjectRepository r = mainModel.db().getProjectRepository();
-    return r.getProjectsByUserName(user.getLoginName());
+    ArrayList<Project> projects = r.getProjectsByUserName(user.getLoginName());
+    ArrayList<String> list = new ArrayList<>();
+    for(Project p : projects)
+      list.add(p.getName());
+    return list;
   }
 
   @Override

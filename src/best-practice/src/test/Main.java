@@ -9,6 +9,7 @@ import data.Project;
 import db.common.DBManager;
 import db.interfaces.ProjectRepository;
 
+import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,20 +20,6 @@ class Main
 {
   public static void main(String[] args)
   {
-    try
-    {
-      DBManager db =
-        DBManager.get("org.postgresql.Driver", "jdbc:postgresql://localhost/casestudy", "postgres", "postgres");
-
-      ProjectRepository r = db.getProjectRepository();
-
-      Project p2 = r.getByPrimaryKey(20);
-
-      System.out.println(p2.getName());
-    }
-    catch(Exception ex)
-    {
-      Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    System.out.println(ZonedDateTime.now().toInstant().toString());
   }
 }

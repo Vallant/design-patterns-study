@@ -1,14 +1,15 @@
 package db.common;
 
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import db.interfaces.*;
-import db.mongo.repository.UserRepositoryMongo;
+import db.mongo.repository.*;
+import org.bson.Document;
 
 import java.util.Arrays;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class DBManagerMongo extends DBManager
 {
@@ -27,30 +28,44 @@ public class DBManagerMongo extends DBManager
   @Override
   public UserRepository getUserRepository()
   {
-    return new UserRepositoryMongo(db);
+    return new UserRepositoryMongo(this);
   }
 
   @Override
   public ProjectRepository getProjectRepository()
   {
-    return null;
+    return new ProjectRepositoryMongo(this);
   }
 
   @Override
   public ProjectMemberRepository getProjectMemberRepository()
   {
-    return null;
+    return new ProjectMemberRepositoryMongo(this);
   }
 
   @Override
   public ProjectPhaseRepository getProjectPhaseRepository()
   {
-    return null;
+    return new ProjectPhaseRepositoryMongo(this);
   }
 
   @Override
   public ActivityRepository getActivityRepository()
   {
-    return null;
+    return new ActivityRepositoryMongo(this);
+  }
+
+  public MongoDatabase getDb()
+  {
+    return db;
+  }
+
+  public int getNextSequence(String columnName)
+  {
+    MongoCollection<Document> coll = db.getCollection("sequence");
+    Document update = new Document("$inc",
+      new Document("seq", 1));
+    Document doc = coll.findOneAndUpdate(eq("_id", columnName), update);
+    return doc.getDouble("seq").intValue();
   }
 }
