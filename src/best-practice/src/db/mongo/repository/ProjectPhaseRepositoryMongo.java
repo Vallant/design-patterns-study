@@ -141,10 +141,12 @@ public class ProjectPhaseRepositoryMongo implements ProjectPhaseRepository
     MongoCollection<Document> coll = manager.getDb().getCollection("project_phase");
     Document toUpdate = new Document("hash", item.getLocalHash())
       .append("name", item.getName())
-      .append("project_id", item.getProjectId());
-    UpdateResult result = coll.updateOne(and(eq("id", item.getId()), eq("hash", item.getRemoteHash())), toUpdate);
+      .append("project_id", item.getProjectId())
+      .append("id", item.getId());
+    UpdateResult result = coll.replaceOne(and(eq("id", item.getId()), eq("hash", item.getRemoteHash())), toUpdate);
     if(result.getModifiedCount() != 1)
       throw new Exception("Record was modyfied or not found");
+    item.setRemoteHash(item.getLocalHash());
   }
 
   @Override

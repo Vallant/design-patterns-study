@@ -122,11 +122,13 @@ public class ProjectMemberRepositoryMongo implements ProjectMemberRepository
       .append("project_id", item.getProjectId())
       .append("role", item.getRole().name());
 
-    UpdateResult result = coll.updateOne(and(and(eq("user_login_name", item.getUserLoginName()), eq("hash",item
+    UpdateResult result = coll.replaceOne(and(and(eq("user_login_name", item.getUserLoginName()), eq("hash",item
       .getRemoteHash())), eq
       ("project_id", item.getProjectId())), toUpdate);
     if(result.getModifiedCount() != 1)
       throw new Exception("Record was modyfied or not found");
+
+    item.setRemoteHash(item.getLocalHash());
   }
 
   @Override

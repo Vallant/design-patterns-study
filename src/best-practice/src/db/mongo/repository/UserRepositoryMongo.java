@@ -105,10 +105,11 @@ public class UserRepositoryMongo implements UserRepository
       .append("password", item.getPassword())
       .append("role", item.getRole().name());
 
-    UpdateResult result = coll.updateOne(and(eq("login_name", item.getLoginName()), eq("hash", item.getRemoteHash()
+    UpdateResult result = coll.replaceOne(and(eq("login_name", item.getLoginName()), eq("hash", item.getRemoteHash()
     )), toUpdate);
     if(result.getModifiedCount() != 1)
       throw new Exception("Record was modyfied or not found");
+    item.setRemoteHash(item.getLocalHash());
 
   }
 

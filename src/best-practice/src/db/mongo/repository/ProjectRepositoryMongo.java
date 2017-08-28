@@ -101,10 +101,13 @@ public class ProjectRepositoryMongo implements ProjectRepository
     MongoCollection<Document> coll = manager.getDb().getCollection("project");
     Document toUpdate = new Document("hash", item.getLocalHash())
       .append("name", item.getName())
-      .append("description", item.getDescription());
-    UpdateResult result = coll.updateOne(and(eq("id", item.getId()), eq("hash", item.getRemoteHash())), toUpdate);
+      .append("description", item.getDescription())
+      .append("id", item.getId())
+      .append("hash", item.getLocalHash());
+    UpdateResult result = coll.replaceOne(and(eq("id", item.getId()), eq("hash", item.getRemoteHash())), toUpdate);
     if(result.getModifiedCount() != 1)
       throw new Exception("Record was modyfied or not found");
+    item.setRemoteHash(item.getLocalHash());
   }
 
   @Override

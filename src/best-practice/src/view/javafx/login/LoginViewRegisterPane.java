@@ -1,11 +1,14 @@
 package view.javafx.login;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 class LoginViewRegisterPane extends BorderPane
 {
@@ -21,10 +24,18 @@ class LoginViewRegisterPane extends BorderPane
   public LoginViewRegisterPane()
   {
     GridPane main3 = new GridPane();
+    main3.setPadding(new Insets(5,5,5,5));
+    main3.setHgap(5);
+    main3.setPrefWidth(175);
 
+    ColumnConstraints columnConstraints = new ColumnConstraints();
+    columnConstraints.setFillWidth(true);
+    columnConstraints.setHgrow(Priority.ALWAYS);
+
+    main3.getColumnConstraints().add(columnConstraints);
     Label lb4 = new Label("Username");
     tfLoginName = new TextField();
-    tfLoginName.setPrefWidth(125);
+
     Label lb5 = new Label("First Name");
     tfFirstName = new TextField();
     Label lb6 = new Label("Last Name");
@@ -56,5 +67,8 @@ class LoginViewRegisterPane extends BorderPane
     buttons3.add(btBackNew, 0, 0);
     buttons3.add(btAdd, 1, 0);
     setBottom(buttons3);
+
+    buttons3.setPadding(new Insets(0,5,5,5));
+    buttons3.setHgap(5);
   }
 }

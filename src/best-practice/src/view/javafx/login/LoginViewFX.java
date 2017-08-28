@@ -45,6 +45,13 @@ public class LoginViewFX implements LoginView
   public void switchToAddNewUser()
   {
     mainPane.setCenter(register);
+    register.tfEmailNew.clear();
+    register.tfFirstName.clear();
+    register.tfLastName.clear();
+    register.tfLoginName.clear();
+    register.tfPasswordNew.clear();
+    register.tfPasswordNewAgain.clear();
+
     mainStage.show();
     mainPane.autosize();
     mainStage.sizeToScene();

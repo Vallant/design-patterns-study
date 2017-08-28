@@ -1,5 +1,6 @@
 package view.javafx.projectstatistic;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +21,8 @@ class ProjectStatisticActivityPane extends BorderPane
   {
     BorderPane pHeader = new BorderPane();
     GridPane pHeaderGrid = new GridPane();
+    pHeaderGrid.setHgap(5);
+    pHeader.setPadding(new Insets(5, 0, 5, 0));
 
 
     cbPeriod = new ComboBox<>();

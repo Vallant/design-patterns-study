@@ -43,7 +43,6 @@ public class ProjectStatisticViewFX implements ProjectStatisticView
         pPhase.cbMembers.getSelectionModel().getSelectedIndex()));
     pPhase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) ->
     {
-      System.out.println(newValue);
       controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
     });
 

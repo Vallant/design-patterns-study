@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class ProjectViewFX implements ProjectView
 {
-  private final ProjectViewPane   pMain;
-  private final ProjectDetailPane pDetail;
+  final ProjectViewPane   pMain;
+  final ProjectDetailPane pDetail;
   private BorderPane mainPane;
   private Stage      mainStage;
   private       ProjectController controller;

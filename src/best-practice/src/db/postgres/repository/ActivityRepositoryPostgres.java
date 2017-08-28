@@ -357,6 +357,8 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                    "AND ACTIVITY.START_TIME > ? " +
                    "AND ACTIVITY.PROJECT_ID = ? " +
                    "GROUP BY PROJECT_PHASES.ID";
+
+
       PreparedStatement ps = con.prepareStatement(sql);
       int index = 1;
 

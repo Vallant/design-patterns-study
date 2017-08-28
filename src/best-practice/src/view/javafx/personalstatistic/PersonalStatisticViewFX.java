@@ -14,13 +14,14 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class PersonalStatisticViewFX implements PersonalStatisticView
 {
 
-  private final PersonalStatisticProjectPane  pProject;
-  private final PersonalStatisticPhasePane    pPhase;
-  private final PersonalStatisticActivityPane pActivity;
+  final PersonalStatisticProjectPane  pProject;
+  final PersonalStatisticPhasePane    pPhase;
+  final PersonalStatisticActivityPane pActivity;
   private BorderPane mainPane;
   private Stage      mainStage;
   private       PersonalStatisticController   controller;
@@ -234,7 +235,9 @@ public class PersonalStatisticViewFX implements PersonalStatisticView
   {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this activity?", ButtonType.YES,
       ButtonType.NO);
-    return alert.getResult() == ButtonType.YES;
+    Optional<ButtonType> result = alert.showAndWait();
+
+    return result.isPresent() && alert.getResult() == ButtonType.YES;
   }
 
   @Override

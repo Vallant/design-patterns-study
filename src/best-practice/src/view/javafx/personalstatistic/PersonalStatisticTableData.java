@@ -2,7 +2,7 @@ package view.javafx.personalstatistic;
 
 import java.time.Duration;
 
-class PersonalStatisticTableData
+public class PersonalStatisticTableData
 {
   private final String projectName;
   private final String duration;
