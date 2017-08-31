@@ -13,6 +13,7 @@ class ProjectStatisticActivityPanel extends JPanel
   final JComboBox<String> cbMembers;
 
   final ProjectStatisticActivityTableModel tblActivityModel;
+  final JTable                             tblActivity;
   final JButton                            btBack;
 
   public ProjectStatisticActivityPanel()
@@ -35,38 +36,29 @@ class ProjectStatisticActivityPanel extends JPanel
     btBack = new JButton("Back");
 
     this.tblActivityModel = new ProjectStatisticActivityTableModel();
-    JTable tblActivity = new JTable(tblActivityModel);
+    this.tblActivity = new JTable(tblActivityModel);
     JScrollPane scrpTable = new JScrollPane(tblActivity);
 
     tblActivity.setBorder(new LineBorder(Color.black, 1));
-
-    JPanel pFlowPanel = new JPanel(new FlowLayout(5));
-    JPanel pButtons = new JPanel(new GridLayout(3, 1, 5, 5));
-    JButton btAddActivity = new JButton("Add Activity");
-    JButton btDeleteActivity = new JButton("Delete Activity");
-    JButton btUpdateActivity = new JButton("Update Activity");
-
-    pButtons.add(btAddActivity);
-    pButtons.add(btDeleteActivity);
-    pButtons.add(btUpdateActivity);
 
     pHeader.add(btBack);
     pHeader.add(cbPeriod);
     pHeader.add(cbMembers);
     add(pHeader, BorderLayout.NORTH);
     add(scrpTable, BorderLayout.CENTER);
-    pFlowPanel.add(pButtons);
-    add(pFlowPanel, BorderLayout.EAST);
   }
 
 
   public void setMembers(ArrayList<String> members)
   {
+    int index = cbMembers.getSelectedIndex();
     cbMembers.removeAllItems();
     cbMembers.addItem("All Members");
     for(String m : members)
     {
       cbMembers.addItem(m);
     }
+    if(index < cbMembers.getItemCount())
+      cbMembers.setSelectedIndex(index);
   }
 }

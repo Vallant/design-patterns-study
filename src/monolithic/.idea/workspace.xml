@@ -2,18 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../best-practice/src/db/mongo/repository/UserRepositoryMongo.java" afterPath="$PROJECT_DIR$/../best-practice/src/db/mongo/repository/UserRepositoryMongo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Activity.java" afterPath="$PROJECT_DIR$/src/data/Activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Project.java" afterPath="$PROJECT_DIR$/src/data/Project.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectMember.java" afterPath="$PROJECT_DIR$/src/data/ProjectMember.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/User.java" afterPath="$PROJECT_DIR$/src/data/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/view/javafx/FXDialogs.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/PersonalStatisticControllerSwing.java" afterPath="$PROJECT_DIR$/../best-practice/src/controller/swing/PersonalStatisticControllerSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityUpdateDialog.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticActivityUpdateDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticTableData.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticTableData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/project/ProjectDetailPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/project/ProjectDetailPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticActivityPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticPhasePane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticPhasePane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticProjectPane.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticProjectPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,140 +33,134 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SideBarModelImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
+      <file leaf-file-name="PersonalStatisticViewFX.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+            <state relative-caret-position="126">
+              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#500#501#0" expanded="true" />
-                <element signature="e#555#556#0" expanded="true" />
+                <element signature="e#1174#1175#0" expanded="true" />
+                <element signature="e#1208#1209#0" expanded="true" />
+                <element signature="e#1257#1258#0" expanded="true" />
+                <element signature="e#1293#1294#0" expanded="true" />
+                <element signature="e#4772#4773#0" expanded="true" />
+                <element signature="e#4810#4811#0" expanded="true" />
+                <element signature="e#4852#4853#0" expanded="true" />
+                <element signature="e#4868#4869#0" expanded="true" />
+                <element signature="e#5394#5395#0" expanded="true" />
+                <element signature="e#5467#5468#0" expanded="true" />
+                <element signature="e#5508#5509#0" expanded="true" />
+                <element signature="e#5585#5586#0" expanded="true" />
+                <marker date="1504207992069" expanded="false" signature="7456:7465" ph=" { " />
+                <marker date="1504207992069" expanded="false" signature="7527:7531" ph=" }" />
+                <marker date="1504207992069" expanded="false" signature="7574:7583" ph=" { " />
+                <marker date="1504207992069" expanded="false" signature="7648:7652" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
+      <file leaf-file-name="PersonalStatisticControllerSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
+            <state relative-caret-position="345">
+              <caret line="238" column="101" lean-forward="false" selection-start-line="238" selection-start-column="101" selection-end-line="238" selection-end-column="101" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/User.java">
+      <file leaf-file-name="ProjectStatisticControllerSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="421" column="36" lean-forward="false" selection-start-line="421" selection-start-column="36" selection-end-line="421" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1504205064621" expanded="true" signature="3096:3275" ph="SELECT HASH,... USERS" />
-                <marker date="1504205064621" expanded="true" signature="3777:4188" ph="SELECT USERS... USERS" />
-                <marker date="1504205064621" expanded="true" signature="4658:4792" ph="SELECT HASH,... USERS" />
-                <marker date="1504205064621" expanded="true" signature="7471:7662" ph="INSERT INTO USERS... " />
-                <marker date="1504205064621" expanded="true" signature="8303:8502" ph="UPDATE USERS... " />
-                <marker date="1504205064621" expanded="true" signature="9321:9396" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Project.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/Project.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="365" column="24" lean-forward="false" selection-start-line="365" selection-start-column="24" selection-end-line="365" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1504205408595" expanded="true" signature="2116:2201" ph="SELECT HASH,... PROJECT" />
-                <marker date="1504205408595" expanded="true" signature="2710:2888" ph="SELECT NAME PROJECT" />
-                <marker date="1504205408595" expanded="true" signature="3370:3440" ph="SELECT DESCR... PROJECT" />
-                <marker date="1504205408595" expanded="true" signature="3928:3975" ph="SELECT HASH,... PROJECT" />
-                <marker date="1504205408595" expanded="true" signature="5538:5671" ph="INSERT INTO PROJECT... " />
-                <marker date="1504205408595" expanded="true" signature="6263:6367" ph="UPDATE PROJE... " />
-                <marker date="1504205408595" expanded="true" signature="6959:7028" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectStatisticModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+            <state relative-caret-position="360">
+              <caret line="55" column="44" lean-forward="false" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/Activity.java">
+      <file leaf-file-name="LoginViewRegisterPane.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="812" column="20" lean-forward="false" selection-start-line="812" selection-start-column="14" selection-end-line="812" selection-end-column="20" />
-              <folding>
-                <marker date="1504205064611" expanded="true" signature="2879:3024" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="2879:3061" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="3793:4122" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="5227:5642" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="6764:7051" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="7831:8130" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="8988:9472" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="10605:11033" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="12052:12197" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504205064611" expanded="true" signature="15353:15575" ph="UPDATE ACTIV... " />
-                <marker date="1504205064611" expanded="true" signature="16612:16834" ph="INSERT INTO ACTIVITY... " />
-                <marker date="1504205064611" expanded="true" signature="17866:17936" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="31" />
-              <folding>
-                <element signature="e#5110#5111#0" expanded="true" />
-                <element signature="e#5129#5130#0" expanded="true" />
-                <element signature="e#5168#5169#0" expanded="true" />
-                <element signature="e#5192#5193#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="87" column="36" lean-forward="false" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="36" />
+            <state relative-caret-position="351">
+              <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonalStatisticModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
+      <file leaf-file-name="ProjectStatisticViewSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="164" column="106" lean-forward="false" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="106" />
+            <state relative-caret-position="524">
+              <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+              <folding>
+                <element signature="e#5564#5565#0" expanded="true" />
+                <marker date="1504208104394" expanded="true" signature="4157:4308" ph="{...}" />
+                <marker date="1504208104394" expanded="true" signature="4681:4858" ph="{...}" />
+                <marker date="1504208104394" expanded="false" signature="4898:4907" ph=" { " />
+                <marker date="1504208104394" expanded="false" signature="4949:4953" ph=" }" />
+                <marker date="1504208104394" expanded="false" signature="4996:5005" ph=" { " />
+                <marker date="1504208104394" expanded="false" signature="5050:5054" ph=" }" />
+                <marker date="1504208104394" expanded="false" signature="5096:5105" ph=" { " />
+                <marker date="1504208104394" expanded="false" signature="5149:5153" ph=" }" />
+                <marker date="1504208104394" expanded="false" signature="5191:5200" ph=" { " />
+                <marker date="1504208104394" expanded="false" signature="5243:5247" ph=" }" />
+                <marker date="1504208104394" expanded="false" signature="5284:5293" ph=" { " />
+                <marker date="1504208104394" expanded="false" signature="5329:5333" ph=" }" />
+                <marker date="1504208104394" expanded="true" signature="5376:5466" ph="{...}" />
+                <marker date="1504208104394" expanded="true" signature="5506:5515" ph=" { " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActivityBarViewSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
+      <file leaf-file-name="PersonalStatisticUpdateActivityDialogPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="641">
-              <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+            <state relative-caret-position="-15">
+              <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonalStatisticViewSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="220" column="36" lean-forward="true" selection-start-line="220" selection-start-column="36" selection-end-line="220" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginControllerSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/swing/LoginControllerSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainControllerSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/swing/MainControllerSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -248,16 +250,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/controller/swing/SettingsControllerSwing.java" />
-        <option value="$PROJECT_DIR$/src/controller/swing/SideBarControllerSwing.java" />
-        <option value="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" />
-        <option value="$PROJECT_DIR$/src/view/swing/login/LoginViewSwing.java" />
-        <option value="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
         <option value="$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java" />
-        <option value="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" />
         <option value="$PROJECT_DIR$/src/view/swing/MainViewSwing.java" />
         <option value="$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java" />
-        <option value="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" />
         <option value="$PROJECT_DIR$/src/view/swing/settings/SettingsViewSwing.java" />
         <option value="$PROJECT_DIR$/src/db/postgres/repository/ActivityRepositoryPostgres.java" />
         <option value="$PROJECT_DIR$/src/db/postgres/repository/ProjectRepositoryPostgres.java" />
@@ -276,7 +271,6 @@
         <option value="$PROJECT_DIR$/src/controller/javafx/SettingsControllerFX.java" />
         <option value="$PROJECT_DIR$/src/controller/javafx/SideBarControllerFX.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/activitybar/ActivityBarViewFX.java" />
-        <option value="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/project/ProjectViewFX.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewFX.java" />
@@ -299,6 +293,14 @@
         <option value="$PROJECT_DIR$/src/data/Project.java" />
         <option value="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
         <option value="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java" />
+        <option value="$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java" />
+        <option value="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" />
+        <option value="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" />
+        <option value="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
+        <option value="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" />
+        <option value="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" />
+        <option value="$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java" />
       </list>
     </option>
   </component>
@@ -309,10 +311,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1920" />
-    <option name="y" value="27" />
     <option name="width" value="1920" />
-    <option name="height" value="1053" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -416,62 +416,7 @@
               <item name="monolithic" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="javafx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="activitybar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="personalstatistic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="projectstatistic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="javafx" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
@@ -495,22 +440,6 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="swing" type="462c0819:PsiDirectoryNode" />
               <item name="personalstatistic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="swing" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="monolithic" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="swing" type="462c0819:PsiDirectoryNode" />
-              <item name="projectstatistic" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
@@ -555,7 +484,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="model.impl.MainModelImpl" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="org.postgresql.Driver jdbc:postgresql://localhost/casestudy postgres postgres javafx" />
+      <option name="PROGRAM_PARAMETERS" value="mongo localhost mongo mongo javafx" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -669,25 +598,26 @@
       <workItem from="1502360834139" duration="4412000" />
       <workItem from="1503257656569" duration="2726000" />
       <workItem from="1503957013306" duration="59000" />
-      <workItem from="1504201833680" duration="3720000" />
+      <workItem from="1504201833680" duration="6309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15176000" />
+    <option name="totallyTimeSpent" value="17765000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14984392" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36509636" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3548387" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -706,7 +636,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14989293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -753,55 +682,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/view/swing/login/LoginViewRegisterPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/login/LoginViewPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarDialogPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/swing/ActivityBarControllerSwing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ActivityRepositoryPostgres.java" />
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectRepositoryPostgres.java" />
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" />
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" />
     <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/UserRepositoryPostgres.java" />
     <entry file="file://$PROJECT_DIR$/src/db/common/DBManager.java" />
     <entry file="file://$PROJECT_DIR$/src/test/Main.java">
@@ -953,23 +833,23 @@
         <state relative-caret-position="101">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#214#215#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#303#304#0" expanded="true" />
-            <element signature="e#331#332#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#402#403#0" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-            <element signature="e#491#492#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#691#692#0" expanded="true" />
-            <element signature="e#732#733#0" expanded="true" />
-            <element signature="e#768#769#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#214#215#0" expanded="false" />
+            <element signature="e#250#251#0" expanded="false" />
+            <element signature="e#303#304#0" expanded="false" />
+            <element signature="e#331#332#0" expanded="false" />
+            <element signature="e#369#370#0" expanded="false" />
+            <element signature="e#402#403#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
+            <element signature="e#491#492#0" expanded="false" />
+            <element signature="e#535#536#0" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
+            <element signature="e#612#613#0" expanded="false" />
+            <element signature="e#645#646#0" expanded="false" />
+            <element signature="e#691#692#0" expanded="false" />
+            <element signature="e#732#733#0" expanded="false" />
+            <element signature="e#768#769#0" expanded="false" />
+            <element signature="e#799#800#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -995,26 +875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="255" column="3" lean-forward="true" selection-start-line="255" selection-start-column="3" selection-end-line="255" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#4695#4696#0" expanded="false" />
-            <element signature="e#4733#4734#0" expanded="false" />
-            <element signature="e#4775#4776#0" expanded="false" />
-            <element signature="e#4791#4792#0" expanded="false" />
-            <element signature="e#5317#5318#0" expanded="false" />
-            <element signature="e#5390#5391#0" expanded="false" />
-            <element signature="e#5431#5432#0" expanded="false" />
-            <element signature="e#5508#5509#0" expanded="false" />
-            <element signature="e#7375#7376#0" expanded="false" />
-            <element signature="e#7496#7497#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/javafx/project/ProjectViewFX.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="533">
@@ -1027,20 +887,9 @@
         <state relative-caret-position="947">
           <caret line="230" column="8" lean-forward="false" selection-start-line="230" selection-start-column="8" selection-end-line="230" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3044#3045#0" expanded="true" />
-            <element signature="e#3082#3083#0" expanded="true" />
-            <element signature="e#3365#3366#0" expanded="true" />
-            <element signature="e#3381#3382#0" expanded="true" />
-            <element signature="e#6012#6013#0" expanded="true" />
-            <element signature="e#6083#6084#0" expanded="true" />
-            <element signature="e#6130#6131#0" expanded="true" />
-            <element signature="e#6204#6205#0" expanded="true" />
-            <element signature="e#6250#6251#0" expanded="true" />
-            <element signature="e#6323#6324#0" expanded="true" />
-            <element signature="e#6365#6366#0" expanded="true" />
-            <element signature="e#6440#6441#0" expanded="true" />
-            <element signature="e#6921#6922#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3329#3330#0" expanded="false" />
+            <element signature="e#6329#6330#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1129,7 +978,7 @@
         <state relative-caret-position="396">
           <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1139,7 +988,7 @@
         <state relative-caret-position="1476">
           <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1225,14 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="101" column="21" lean-forward="false" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -1245,27 +1086,6 @@
             <marker date="1504205064621" expanded="true" signature="7471:7662" ph="INSERT INTO USERS... " />
             <marker date="1504205064621" expanded="true" signature="8303:8502" ph="UPDATE USERS... " />
             <marker date="1504205064621" expanded="true" signature="9321:9396" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="31" />
-          <folding>
-            <element signature="e#5110#5111#0" expanded="true" />
-            <element signature="e#5129#5130#0" expanded="true" />
-            <element signature="e#5168#5169#0" expanded="true" />
-            <element signature="e#5192#5193#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1291,22 +1111,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="164" column="106" lean-forward="false" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="106" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Project.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -1324,11 +1128,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="311">
+          <caret line="27" column="3" lean-forward="true" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#500#501#0" expanded="false" />
+            <element signature="e#555#556#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1340,15 +1148,177 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+        <state relative-caret-position="317">
+          <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="164" column="106" lean-forward="false" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#5110#5111#0" expanded="true" />
+            <element signature="e#5129#5130#0" expanded="true" />
+            <element signature="e#5168#5169#0" expanded="true" />
+            <element signature="e#5192#5193#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="95" column="26" lean-forward="false" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/lang/reflect/AccessibleObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/swing/LoginControllerSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/swing/MainControllerSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="220" column="36" lean-forward="true" selection-start-line="220" selection-start-column="36" selection-end-line="220" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="238" column="101" lean-forward="false" selection-start-line="238" selection-start-column="101" selection-end-line="238" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+          <folding>
+            <element signature="e#5564#5565#0" expanded="true" />
+            <marker date="1504208104394" expanded="true" signature="4157:4308" ph="{...}" />
+            <marker date="1504208104394" expanded="true" signature="4681:4858" ph="{...}" />
+            <marker date="1504208104394" expanded="false" signature="4898:4907" ph=" { " />
+            <marker date="1504208104394" expanded="false" signature="4949:4953" ph=" }" />
+            <marker date="1504208104394" expanded="false" signature="4996:5005" ph=" { " />
+            <marker date="1504208104394" expanded="false" signature="5050:5054" ph=" }" />
+            <marker date="1504208104394" expanded="false" signature="5096:5105" ph=" { " />
+            <marker date="1504208104394" expanded="false" signature="5149:5153" ph=" }" />
+            <marker date="1504208104394" expanded="false" signature="5191:5200" ph=" { " />
+            <marker date="1504208104394" expanded="false" signature="5243:5247" ph=" }" />
+            <marker date="1504208104394" expanded="false" signature="5284:5293" ph=" { " />
+            <marker date="1504208104394" expanded="false" signature="5329:5333" ph=" }" />
+            <marker date="1504208104394" expanded="true" signature="5376:5466" ph="{...}" />
+            <marker date="1504208104394" expanded="true" signature="5506:5515" ph=" { " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="e#1174#1175#0" expanded="true" />
+            <element signature="e#1208#1209#0" expanded="true" />
+            <element signature="e#1257#1258#0" expanded="true" />
+            <element signature="e#1293#1294#0" expanded="true" />
+            <element signature="e#4772#4773#0" expanded="true" />
+            <element signature="e#4810#4811#0" expanded="true" />
+            <element signature="e#4852#4853#0" expanded="true" />
+            <element signature="e#4868#4869#0" expanded="true" />
+            <element signature="e#5394#5395#0" expanded="true" />
+            <element signature="e#5467#5468#0" expanded="true" />
+            <element signature="e#5508#5509#0" expanded="true" />
+            <element signature="e#5585#5586#0" expanded="true" />
+            <marker date="1504207992069" expanded="false" signature="7456:7465" ph=" { " />
+            <marker date="1504207992069" expanded="false" signature="7527:7531" ph=" }" />
+            <marker date="1504207992069" expanded="false" signature="7574:7583" ph=" { " />
+            <marker date="1504207992069" expanded="false" signature="7648:7652" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="55" column="44" lean-forward="false" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/javafx/login/LoginViewRegisterPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>

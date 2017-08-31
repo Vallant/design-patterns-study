@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 public class ProjectStatisticViewSwing
 {
-  private final JFrame                        frame;
-  private final ProjectStatisticProjectPanel  pProject;
-  private final ProjectStatisticPhasePanel    pPhase;
-  private final ProjectStatisticActivityPanel pActivity;
-  private ProjectStatisticControllerSwing controller;
+  private final JFrame                          frame;
+  private final ProjectStatisticProjectPanel    pProject;
+  private final ProjectStatisticPhasePanel      pPhase;
+  private final ProjectStatisticActivityPanel   pActivity;
+  private       ProjectStatisticControllerSwing controller;
 
   public ProjectStatisticViewSwing(JFrame frame)
   {
@@ -135,6 +135,7 @@ public class ProjectStatisticViewSwing
     pPhase.tblPhaseModel.setFirstColumnContent(phaseNames);
     pPhase.tblPhaseModel.setWorkloadContent(durations);
     pPhase.setMemberNames(memberNames);
+    pPhase.tblPhases.updateUI();
     frame.revalidate();
     frame.repaint();
   }
@@ -159,6 +160,7 @@ public class ProjectStatisticViewSwing
   {
     pActivity.tblActivityModel.setValues(users, descriptions, comments, startTimes, endTimes);
     pActivity.setMembers(memberNames);
+    pActivity.tblActivity.updateUI();
   }
 
 
@@ -180,9 +182,9 @@ public class ProjectStatisticViewSwing
   }
 
 
-  public int getSelectedUser()
+  public int getSelectedUserPhase()
   {
-    throw new NotImplementedException();
+    return pPhase.cbMembers.getSelectedIndex();
   }
 
 
@@ -195,5 +197,10 @@ public class ProjectStatisticViewSwing
   public void showError(String error)
   {
     JOptionPane.showMessageDialog(frame, error, "Error", JOptionPane.ERROR_MESSAGE);
+  }
+
+  public int getSelectedUserActivity()
+  {
+    return pActivity.cbMembers.getSelectedIndex();
   }
 }

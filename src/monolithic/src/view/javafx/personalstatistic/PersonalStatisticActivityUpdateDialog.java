@@ -1,10 +1,13 @@
 package view.javafx.personalstatistic;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import jfxtras.scene.control.LocalDateTimePicker;
 
 import java.time.LocalDateTime;
@@ -43,6 +46,12 @@ class PersonalStatisticActivityUpdateDialog extends Dialog<ButtonType>
     dpEndTime = new LocalDateTimePicker();
 
     GridPane centerPanel = new GridPane();
+    centerPanel.setPadding(new Insets(5,5,5,5));
+    centerPanel.setVgap(5);
+    ColumnConstraints columnConstraints = new ColumnConstraints();
+    columnConstraints.setFillWidth(true);
+    columnConstraints.setHgrow(Priority.ALWAYS);
+    centerPanel.getColumnConstraints().add(columnConstraints);
 
     centerPanel.add(lbDescription, 0, 0);
     centerPanel.add(tfDescription, 1, 0);

@@ -7,10 +7,7 @@ import data.ProjectPhase;
 import model.interfaces.PersonalStatisticModel;
 import view.interfaces.PersonalStatisticView;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
 /**
@@ -253,8 +250,9 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
       view.showAddActivityDialog();
       return;
     }
-    ZonedDateTime zdtStart = start.atZone(ZoneOffset.UTC);
-    ZonedDateTime zdtEnd = end.atZone(ZoneOffset.UTC);
+    ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
+    ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
+
 
     try
     {
@@ -272,8 +270,9 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
   {
     Activity a = currentActivities.get(view.getSelectedActivity());
 
-    ZonedDateTime zdtStart = start.atZone(ZoneOffset.UTC);
-    ZonedDateTime zdtEnd = end.atZone(ZoneOffset.UTC);
+    ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
+    ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
+
     a.setDescription(description);
     a.setComments(comment);
     a.setStart(zdtStart);

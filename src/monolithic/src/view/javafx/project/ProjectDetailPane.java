@@ -23,10 +23,6 @@ class ProjectDetailPane extends BorderPane
   final         TextArea   taDescription;
   final         Button     btUpdateDescription;
   private final Label  lbProjectName;
-  private final Label            lbPhases;
-  private final Label  lbMembers;
-  private final Label      lbDescription;
-  private final BorderPane pDescriptionHeader;
 
 
   public ProjectDetailPane()
@@ -58,7 +54,7 @@ class ProjectDetailPane extends BorderPane
     pPhasesButtons.setVgap(5);
 
     pPhases.setTop(pPhasesHeader);
-    lbPhases = new Label("Phases");
+    Label lbPhases = new Label("Phases");
     pPhasesHeader.setLeft(lbPhases);
     pPhases.setRight(pPhasesButtons);
     pPhasesButtons.add(btAddPhase, 0, 0);
@@ -70,7 +66,7 @@ class ProjectDetailPane extends BorderPane
     BorderPane pMembers = new BorderPane();
     pMembers.setPadding(new Insets(0, 5, 5, 0));
     BorderPane pMembersHeader = new BorderPane();
-    lbMembers = new Label("Project Members");
+    Label lbMembers = new Label("Project Members");
     btAddMember = new Button("Add Members");
     btAddMember.setPrefWidth(BUTTON_WIDTH);
     btDeleteMember = new Button("Delete Member");
@@ -106,8 +102,8 @@ class ProjectDetailPane extends BorderPane
     pDescriptionButtons.setPadding(new Insets(0, 0, 5, 5));
     pDescription.setRight(pDescriptionButtons);
 
-    pDescriptionHeader = new BorderPane();
-    lbDescription = new Label("Project Description");
+    BorderPane pDescriptionHeader = new BorderPane();
+    Label lbDescription = new Label("Project Description");
     pDescriptionHeader.setLeft(lbDescription);
     pDescription.setTop(pDescriptionHeader);
 

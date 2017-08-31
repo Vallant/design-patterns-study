@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class PersonalStatisticViewFX
 {
@@ -20,8 +21,8 @@ public class PersonalStatisticViewFX
   private final PersonalStatisticProjectPane  pProject;
   private final PersonalStatisticPhasePane    pPhase;
   private final PersonalStatisticActivityPane pActivity;
-  private BorderPane mainPane;
-  private Stage      mainStage;
+  private       BorderPane                    mainPane;
+  private       Stage                         mainStage;
   private       PersonalStatisticControllerFX controller;
   public PersonalStatisticViewFX()
   {
@@ -230,9 +231,11 @@ public class PersonalStatisticViewFX
 
   public boolean confirmDeletion()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to deleteFromDb this activity?", ButtonType.YES,
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this activity?", ButtonType.YES,
       ButtonType.NO);
-    return alert.getResult() == ButtonType.YES;
+    Optional<ButtonType> result = alert.showAndWait();
+
+    return result.isPresent() && alert.getResult() == ButtonType.YES;
   }
 
 

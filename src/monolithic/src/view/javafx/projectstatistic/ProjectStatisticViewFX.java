@@ -42,7 +42,6 @@ public class ProjectStatisticViewFX
         pPhase.cbMembers.getSelectionModel().getSelectedIndex()));
     pPhase.cbMembers.getSelectionModel().selectedIndexProperty().addListener((options, oldValue, newValue) ->
     {
-      System.out.println(newValue);
       controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectionModel().getSelectedIndex(), newValue.intValue());
     });
 
@@ -225,7 +224,7 @@ public class ProjectStatisticViewFX
 
   public boolean confirmDeletion()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to deleteFromDb this project?", ButtonType.YES,
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this project?", ButtonType.YES,
       ButtonType.NO);
     return alert.getResult() == ButtonType.YES;
   }

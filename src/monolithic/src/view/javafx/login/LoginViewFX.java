@@ -5,7 +5,6 @@ import data.User;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import view.javafx.FXDialogs;
 
 public class LoginViewFX
 {
@@ -45,6 +44,12 @@ public class LoginViewFX
   public void switchToAddNewUser()
   {
     mainPane.setCenter(register);
+    register.tfEmailNew.clear();
+    register.tfFirstName.clear();
+    register.tfLastName.clear();
+    register.tfLoginName.clear();
+    register.tfPasswordNew.clear();
+    register.tfPasswordNewAgain.clear();
     mainStage.show();
     mainPane.autosize();
     mainStage.sizeToScene();
@@ -64,7 +69,8 @@ public class LoginViewFX
 
   public void showLoginFailed()
   {
-    FXDialogs.showError("Login failed", "Username or password incorrect");
+    Alert alert = new Alert(Alert.AlertType.ERROR, "Username or password incorrect");
+    alert.showAndWait();
   }
 
 
@@ -106,7 +112,8 @@ public class LoginViewFX
 
   public void showDialog(String message)
   {
-    FXDialogs.showInformation("Information", message);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+    alert.showAndWait();
   }
 
 

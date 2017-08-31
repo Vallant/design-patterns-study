@@ -13,7 +13,6 @@ class ProjectStatisticProjectPane extends BorderPane
   final ComboBox<String> cbPeriod;
 
   final         TableView  tblProjects;
-  private final BorderPane pHeader;
 
   public ProjectStatisticProjectPane()
   {
@@ -29,7 +28,7 @@ class ProjectStatisticProjectPane extends BorderPane
     tblProjects = new TableView();
     ScrollPane scrpTable = new ScrollPane(tblProjects);
 
-    pHeader = new BorderPane();
+    BorderPane pHeader = new BorderPane();
     pHeader.setPadding(new Insets(0, 0, 5, 0));
     pHeader.setLeft(cbPeriod);
     setTop(pHeader);
