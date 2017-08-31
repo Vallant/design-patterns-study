@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.ne;
+import static com.mongodb.client.model.Filters.*;
 
 
 public class UserRepositoryMongo implements UserRepository
@@ -60,19 +58,34 @@ public class UserRepositoryMongo implements UserRepository
         .append("foreignField", "user_login_name") //local field, remote field
         .append("as", "project_member"));
 
-    Bson match = new Document("$match",
-      new Document("$or", Arrays.asList(
-        new Document("project_member.project_id", null),
-        new Document("project_member.project_id", projectId))
-      ));
+
 
     List<Bson> filters = new ArrayList<>();
     filters.add(lookup);
-    filters.add(match);
+
     AggregateIterable<Document> it = coll.aggregate(filters);
 
+
     for(Document row : it)
-      list.add(extractUser(row));
+    {
+      boolean add = true;
+      ArrayList<Document> members = (ArrayList<Document>) row.get("project_member");
+      for(Document doc : members)
+      {
+        if(doc.getInteger("project_id") == projectId)
+        {
+          add = false;
+          break;
+        }
+
+
+      }
+
+
+      if(add)
+        list.add(extractUser(row));
+
+    }
 
     return list;
   }
