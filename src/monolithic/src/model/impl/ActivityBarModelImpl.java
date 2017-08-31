@@ -99,7 +99,10 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjectPhasesFor(String project) throws Exception
   {
-    return ProjectPhase.getNamesByProjectName(project, mainModel.db());
+    if(mainModel.db() != null)
+      return ProjectPhase.getNamesByProjectName(project, mainModel.db());
+    else
+      return ProjectPhase.getNamesByProjectName(project, mainModel.dbMongo());
 
   }
 
@@ -115,7 +118,17 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjects() throws Exception
   {
-    return Project.getProjectsByUserName(user.getLoginName(), mainModel.db());
+    if(mainModel.db() != null)
+      return Project.getProjectsByUserName(user.getLoginName(), mainModel.db());
+    else
+    {
+      ArrayList<String> list = new ArrayList<>();
+      ArrayList<Project> projectList = Project.getProjectsByUserName(user.getLoginName(), mainModel.dbMongo());
+      for(Project p : projectList)
+        list.add(p.getName());
+      return list;
+    }
+
   }
 
 
@@ -137,10 +150,19 @@ public class ActivityBarModelImpl
       controllerFX.enableComboBoxes();
     }
 
+    if(mainModel.db() != null)
+    {
+      ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.db());
+      Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
+      activity.insertIntoDb(mainModel.db());
+    }
+    else
+    {
+      ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.dbMongo());
+      Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
+      activity.insertIntoDb(mainModel.dbMongo());
+    }
 
-    ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.db());
-    Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
-    activity.insertIntoDb(mainModel.db());
   }
 
 

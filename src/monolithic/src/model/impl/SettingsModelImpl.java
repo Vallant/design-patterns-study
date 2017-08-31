@@ -84,7 +84,10 @@ public class SettingsModelImpl
     user.setNewPassword(null);
 
 
-    user.updateInDb(mainModel.db());
+    if(mainModel.db() != null)
+      user.updateInDb(mainModel.db());
+    else
+      user.updateInDb(mainModel.dbMongo());
 
     if(controllerSwing != null)
     {

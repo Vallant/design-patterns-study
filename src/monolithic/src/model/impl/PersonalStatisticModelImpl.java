@@ -26,7 +26,11 @@ public class PersonalStatisticModelImpl
 
   public void deleteActivity(Activity toDelete) throws Exception
   {
-    toDelete.deleteInDb(mainModel.db());
+    if(mainModel.db() != null)
+      toDelete.deleteFromDb(mainModel.db());
+    else
+      toDelete.deleteFromDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -40,7 +44,11 @@ public class PersonalStatisticModelImpl
       throw new Exception("Start date has to be before End date");
     Activity a = new Activity(detailPhase, user, description, zdtStart, zdtEnd, comment);
 
-    a.insertIntoDb(mainModel.db());
+    if(mainModel.db() != null)
+      a.insertIntoDb(mainModel.db());
+    else
+      a.insertIntoDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -49,7 +57,10 @@ public class PersonalStatisticModelImpl
 
   public void updateActivity(Activity a) throws Exception
   {
-    a.updateInDb(mainModel.db());
+    if(mainModel.db() != null)
+      a.updateInDb(mainModel.db());
+    else
+      a.updateInDb(mainModel.dbMongo());
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -112,7 +123,10 @@ public class PersonalStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
-    Activity.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations, mainModel.db());
+    if(mainModel.db() != null)
+      Activity.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations, mainModel.db());
+    else
+      Activity.getPhasesAndWorkloadSince(user.getLoginName(), projectId, since, phases, durations, mainModel.dbMongo());
     if(controllerSwing != null)
       controllerSwing.setPhaseData(phases, durations);
     else
@@ -128,8 +142,12 @@ public class PersonalStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
+    if(mainModel.db() != null)
+      Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
+    else
+      Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel
+        .dbMongo());
 
-    Activity.getParticipatingProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.db());
     if(controllerSwing != null)
       controllerSwing.setProjectData(projects, durations);
     else
@@ -142,8 +160,12 @@ public class PersonalStatisticModelImpl
     ZonedDateTime since = subtract(period);
 
 
-    ArrayList<Activity> activities =
-      Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
+    ArrayList<Activity> activities = null;
+    if(mainModel.db() != null)
+      activities = Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.db());
+    else
+      activities = Activity.getActivitiesForPhaseSince(user.getLoginName(), phaseId, since, mainModel.dbMongo());
+
     if(controllerSwing != null)
     {
       controllerSwing.showActivityView();

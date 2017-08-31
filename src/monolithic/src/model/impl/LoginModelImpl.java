@@ -40,7 +40,12 @@ public class LoginModelImpl
 
   public void login(String username, char[] password) throws Exception
   {
-    User u = User.getByPrimaryKey(username, mainModel.db());
+    User u = null;
+    if(mainModel.db() != null)
+      u = User.getByPrimaryKey(username, mainModel.db());
+    else
+      u = User.getByPrimaryKey(username, mainModel.dbMongo());
+
     SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
     Random r = new SecureRandom();
     KeySpec ks = new PBEKeySpec(password, u.getSalt(), 1000, 512);
@@ -69,7 +74,10 @@ public class LoginModelImpl
     user.setPassword(generateSecret.getEncoded());
     user.setSalt(salt);
 
-    user.insertIntoDb(mainModel.db());
+    if(mainModel.db() != null)
+      user.insertIntoDb(mainModel.db());
+    else
+      user.insertIntoDb(mainModel.dbMongo());
 
     if(controllerSwing != null)
     {

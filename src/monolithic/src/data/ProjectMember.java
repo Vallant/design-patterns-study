@@ -323,7 +323,7 @@ public class ProjectMember implements DBEntity
     }
   }
 
-  public void deleteInDb(DBManagerPostgres db) throws Exception
+  public void deleteFromDb(DBManagerPostgres db) throws Exception
   {
 
     try(Connection con = db.getConnection())

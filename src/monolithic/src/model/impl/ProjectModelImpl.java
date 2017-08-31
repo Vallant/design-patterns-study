@@ -64,19 +64,30 @@ public class ProjectModelImpl
 
   public ArrayList<ProjectMember> getOwnedProjects() throws Exception
   {
-    return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.db());
+    if(mainModel.db() != null)
+      return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.db());
+    else
+      return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.dbMongo());
+
   }
 
 
   public ArrayList<ProjectMember> getInvolvedProjects() throws Exception
   {
-    return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.db());
+    if(mainModel.db() != null)
+      return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.db());
+    else
+      return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.dbMongo());
   }
 
 
   public void leaveProject(ProjectMember member) throws Exception
   {
-    member.deleteInDb(mainModel.db());
+    if(mainModel.db() != null)
+      member.deleteFromDb(mainModel.db());
+    else
+      member.deleteFromDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -86,7 +97,11 @@ public class ProjectModelImpl
 
   public void deleteProject(Project selectedProject) throws Exception
   {
-    selectedProject.deleteFromDb(mainModel.db());
+    if(mainModel.db() != null)
+      selectedProject.deleteFromDb(mainModel.db());
+    else
+      selectedProject.deleteFromDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -98,9 +113,17 @@ public class ProjectModelImpl
 
   public void requestedDetailForProject(Project project) throws Exception
   {
-    ArrayList<ProjectMember> members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.db());
+    ArrayList<ProjectMember> members = null;
+    if(mainModel.db() != null)
+      members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.db());
+    else
+      members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.dbMongo());
 
-    ArrayList<ProjectPhase> phases = ProjectPhase.getByProjectId(project.getId(), mainModel.db());
+    ArrayList<ProjectPhase> phases = null;
+    if(mainModel.db() != null)
+      phases = ProjectPhase.getByProjectId(project.getId(), mainModel.db());
+    else
+      phases = ProjectPhase.getByProjectId(project.getId(), mainModel.dbMongo());
 
     if(controllerSwing != null)
       controllerSwing.showDetail(project, phases, members);
@@ -112,9 +135,18 @@ public class ProjectModelImpl
   public void addProject(String name, String description) throws Exception
   {
     Project project = new Project(name, description);
-    project.insertIntoDb(mainModel.db());
+
+    if(mainModel.db() != null)
+      project.insertIntoDb(mainModel.db());
+    else
+      project.insertIntoDb(mainModel.dbMongo());
+
     ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
-    pm.insertIntoDb(mainModel.db());
+    if(mainModel.db() != null)
+      pm.insertIntoDb(mainModel.db());
+    else
+      pm.insertIntoDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -126,7 +158,10 @@ public class ProjectModelImpl
   public void addPhase(Project project, String phaseName) throws Exception
   {
     ProjectPhase phase = new ProjectPhase(project, phaseName);
-    phase.insertIntoDb(mainModel.db());
+    if(mainModel.db() != null)
+      phase.insertIntoDb(mainModel.db());
+    else
+      phase.insertIntoDb(mainModel.dbMongo());
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -137,7 +172,11 @@ public class ProjectModelImpl
 
   public void deletePhase(ProjectPhase projectPhase) throws Exception
   {
-    projectPhase.deleteFromDb(mainModel.db());
+    if(mainModel.db() != null)
+      projectPhase.deleteFromDb(mainModel.db());
+    else
+      projectPhase.deleteFromDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -149,7 +188,11 @@ public class ProjectModelImpl
   public void promoteToLeader(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.LEADER);
-    projectMember.updateInDb(mainModel.db());
+    if(mainModel.db() != null)
+      projectMember.updateInDb(mainModel.db());
+    else
+      projectMember.updateInDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -160,7 +203,11 @@ public class ProjectModelImpl
   public void degradeToMember(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.MEMBER);
-    projectMember.updateInDb(mainModel.db());
+    if(mainModel.db() != null)
+      projectMember.updateInDb(mainModel.db());
+    else
+      projectMember.updateInDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -170,7 +217,11 @@ public class ProjectModelImpl
 
   public void deleteMember(ProjectMember projectMember) throws Exception
   {
-    projectMember.deleteInDb(mainModel.db());
+    if(mainModel.db() != null)
+      projectMember.deleteFromDb(mainModel.db());
+    else
+      projectMember.deleteFromDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
@@ -180,7 +231,10 @@ public class ProjectModelImpl
 
   public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception
   {
-    return User.getAvailableUsersFor(projectId, mainModel.db());
+    if(mainModel.db() != null)
+      return User.getAvailableUsersFor(projectId, mainModel.db());
+    else
+      return User.getAvailableUsersFor(projectId, mainModel.dbMongo());
   }
 
 
@@ -189,7 +243,11 @@ public class ProjectModelImpl
     for(User u : toAdd)
     {
       ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
-      member.insertIntoDb(mainModel.db());
+
+      if(mainModel.db() != null)
+        member.insertIntoDb(mainModel.db());
+      else
+        member.insertIntoDb(mainModel.dbMongo());
     }
     if(controllerSwing != null)
       controllerSwing.refresh();
@@ -200,7 +258,11 @@ public class ProjectModelImpl
 
   public void updateProject(Project project) throws Exception
   {
-    project.updateInDb(mainModel.db());
+    if(mainModel.db() != null)
+      project.updateInDb(mainModel.db());
+    else
+      project.updateInDb(mainModel.dbMongo());
+
     if(controllerSwing != null)
       controllerSwing.refresh();
     else

@@ -9,6 +9,7 @@ import controller.common.ControllerManager;
 import controller.javafx.MainControllerFX;
 import controller.swing.MainControllerSwing;
 import data.User;
+import db.common.DBManagerMongo;
 import db.common.DBManagerPostgres;
 
 import java.util.Objects;
@@ -31,13 +32,24 @@ public class MainModelImpl
   private final ProjectStatisticModelImpl  projectStatistic;
   private final SettingsModelImpl          settings;
   private final DBManagerPostgres db;
+  private final DBManagerMongo dbMongo;
   private       User              user;
 
 
   private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
   {
 
-    db = new DBManagerPostgres(driver, url, username, password);
+    if(driver.equals("mongo"))
+    {
+      dbMongo = new DBManagerMongo(url, username, password);
+      db = null;
+    }
+    else
+    {
+      db = new DBManagerPostgres(driver, url, username, password);
+      dbMongo = null;
+    }
+
 
     ControllerManager.initInstance(frontend);
 
@@ -53,6 +65,8 @@ public class MainModelImpl
       controllerFX.setModel(this);
       controllerSwing = null;
     }
+
+
 
     login = new LoginModelImpl();
     pairLogin();
@@ -199,6 +213,10 @@ public class MainModelImpl
     return db;
   }
 
+  public DBManagerMongo dbMongo()
+  {
+    return dbMongo;
+  }
 
   public void switchToPersonalStatistics()
   {

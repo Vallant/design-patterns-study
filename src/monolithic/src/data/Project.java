@@ -363,7 +363,7 @@ public class Project implements DBEntity
     setId(toAdd.getInteger("id"));
   }
 
-  public void update(DBManagerMongo manager) throws Exception
+  public void updateInDb(DBManagerMongo manager) throws Exception
   {
     MongoCollection<Document> coll = manager.getDb().getCollection("project");
     Document toUpdate = new Document("hash", getLocalHash())

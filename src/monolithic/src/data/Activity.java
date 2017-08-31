@@ -559,7 +559,7 @@ public class Activity implements DBEntity
     }
   }
 
-  public void deleteInDb(DBManagerPostgres db) throws Exception
+  public void deleteFromDb(DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
     {
@@ -770,7 +770,7 @@ public class Activity implements DBEntity
     }
   }
 
-  public void insertInto(DBManagerMongo manager) throws Exception
+  public void insertIntoDb(DBManagerMongo manager) throws Exception
   {
     MongoCollection<Document> coll = manager.getDb().getCollection("activity");
 

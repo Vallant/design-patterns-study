@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/db/common/DBManagerMongo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/monolithic.iml" afterPath="$PROJECT_DIR$/monolithic.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../best-practice/src/db/mongo/repository/UserRepositoryMongo.java" afterPath="$PROJECT_DIR$/../best-practice/src/db/mongo/repository/UserRepositoryMongo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Activity.java" afterPath="$PROJECT_DIR$/src/data/Activity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Project.java" afterPath="$PROJECT_DIR$/src/data/Project.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectMember.java" afterPath="$PROJECT_DIR$/src/data/ProjectMember.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectPhase.java" afterPath="$PROJECT_DIR$/src/data/ProjectPhase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/User.java" afterPath="$PROJECT_DIR$/src/data/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/personalstatistic/PersonalStatisticViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" afterPath="$PROJECT_DIR$/src/view/javafx/projectstatistic/ProjectStatisticViewFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,23 +25,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginViewFX.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java">
+      <file leaf-file-name="SideBarModelImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1476">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state relative-caret-position="293">
+              <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#500#501#0" expanded="true" />
+                <element signature="e#555#556#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActivityBarModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
+      <file leaf-file-name="LoginModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="176" column="5" lean-forward="false" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
+            <state relative-caret-position="286">
+              <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -50,27 +52,17 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="388" column="14" lean-forward="false" selection-start-line="388" selection-start-column="14" selection-end-line="388" selection-end-column="14" />
+            <state relative-caret-position="312">
+              <caret line="421" column="36" lean-forward="false" selection-start-line="421" selection-start-column="36" selection-end-line="421" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1504202965859" expanded="true" signature="2970:3149" ph="SELECT HASH,... USERS" />
-                <marker date="1504202965859" expanded="true" signature="3651:4062" ph="SELECT USERS... USERS" />
-                <marker date="1504202965859" expanded="true" signature="4532:4666" ph="SELECT HASH,... USERS" />
-                <marker date="1504202965859" expanded="true" signature="7345:7536" ph="INSERT INTO USERS... " />
-                <marker date="1504202965859" expanded="true" signature="8177:8376" ph="UPDATE USERS... " />
-                <marker date="1504202965859" expanded="true" signature="9195:9270" ph="DELETE FROM " />
+                <marker date="1504205064621" expanded="true" signature="3096:3275" ph="SELECT HASH,... USERS" />
+                <marker date="1504205064621" expanded="true" signature="3777:4188" ph="SELECT USERS... USERS" />
+                <marker date="1504205064621" expanded="true" signature="4658:4792" ph="SELECT HASH,... USERS" />
+                <marker date="1504205064621" expanded="true" signature="7471:7662" ph="INSERT INTO USERS... " />
+                <marker date="1504205064621" expanded="true" signature="8303:8502" ph="UPDATE USERS... " />
+                <marker date="1504205064621" expanded="true" signature="9321:9396" ph="DELETE FROM " />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -78,130 +70,96 @@
       <file leaf-file-name="Project.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/Project.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="803">
-              <caret line="354" column="24" lean-forward="false" selection-start-line="354" selection-start-column="24" selection-end-line="354" selection-end-column="24" />
+            <state relative-caret-position="281">
+              <caret line="365" column="24" lean-forward="false" selection-start-line="365" selection-start-column="24" selection-end-line="365" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1504203305623" expanded="true" signature="2116:2201" ph="SELECT HASH,... PROJECT" />
-                <marker date="1504203305623" expanded="true" signature="2710:2888" ph="SELECT NAME PROJECT" />
-                <marker date="1504203305623" expanded="true" signature="3370:3440" ph="SELECT DESCR... PROJECT" />
-                <marker date="1504203305623" expanded="true" signature="3928:3975" ph="SELECT HASH,... PROJECT" />
-                <marker date="1504203305623" expanded="true" signature="5538:5671" ph="INSERT INTO PROJECT... " />
-                <marker date="1504203305623" expanded="true" signature="6263:6367" ph="UPDATE PROJE... " />
-                <marker date="1504203305623" expanded="true" signature="6959:7028" ph="DELETE FROM " />
+                <marker date="1504205408595" expanded="true" signature="2116:2201" ph="SELECT HASH,... PROJECT" />
+                <marker date="1504205408595" expanded="true" signature="2710:2888" ph="SELECT NAME PROJECT" />
+                <marker date="1504205408595" expanded="true" signature="3370:3440" ph="SELECT DESCR... PROJECT" />
+                <marker date="1504205408595" expanded="true" signature="3928:3975" ph="SELECT HASH,... PROJECT" />
+                <marker date="1504205408595" expanded="true" signature="5538:5671" ph="INSERT INTO PROJECT... " />
+                <marker date="1504205408595" expanded="true" signature="6263:6367" ph="UPDATE PROJE... " />
+                <marker date="1504205408595" expanded="true" signature="6959:7028" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBManagerPostgres.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/common/DBManagerPostgres.java">
+      <file leaf-file-name="ProjectStatisticModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#1352#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="317">
+              <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectPhase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/ProjectPhase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5092">
-              <caret line="437" column="5" lean-forward="true" selection-start-line="437" selection-start-column="5" selection-end-line="437" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1504203054950" expanded="true" signature="7106:7196" ph="SELECT HASH,... PROJECT_PHASES" />
-                <marker date="1504203054950" expanded="true" signature="7773:7871" ph="SELECT HASH,... PROJECT_PHASES" />
-                <marker date="1504203054950" expanded="true" signature="8437:8609" ph="SELECT PROJE... PROJECT_PHASES" />
-                <marker date="1504203054950" expanded="true" signature="9163:9378" ph="SELECT PROJE... PROJECT_PHASES" />
-                <marker date="1504203054950" expanded="true" signature="10068:10121" ph="SELECT HASH,... PROJECT_PHASES" />
-                <marker date="1504203054950" expanded="false" signature="10792:10801" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="10842:10846" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11035:11044" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11059:11063" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11106:11115" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11138:11142" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11169:11178" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11190:11194" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11230:11239" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11256:11260" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11290:11299" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11317:11321" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11360:11369" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11387:11391" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11426:11435" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11460:11464" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11493:11502" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11525:11529" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11551:11560" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11570:11574" ph=" }" />
-                <marker date="1504203054950" expanded="false" signature="11604:11613" ph=" { " />
-                <marker date="1504203054950" expanded="false" signature="11626:11630" ph=" }" />
-                <marker date="1504203054950" expanded="true" signature="11773:11888" ph="INSERT INTO PROJECT_PHASES... " />
-                <marker date="1504203054950" expanded="true" signature="12533:12645" ph="UPDATE PROJE... " />
-                <marker date="1504203054950" expanded="true" signature="13283:13359" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectMember.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/ProjectMember.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="263" column="8" lean-forward="false" selection-start-line="263" selection-start-column="8" selection-end-line="263" selection-end-column="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7087#7088#0" expanded="true" />
-                <element signature="e#7119#7120#0" expanded="true" />
-                <marker date="1504203818508" expanded="true" signature="2219:2286" ph="SELECT HASH,... PROJECT_MEMBERS" />
-                <marker date="1504203818508" expanded="true" signature="2719:2786" ph="SELECT HASH,... PROJECT_MEMBERS" />
-                <marker date="1504203818508" expanded="true" signature="3429:3676" ph="SELECT PROJE... PROJECT_MEMBERS" />
-                <marker date="1504203818508" expanded="true" signature="4220:4537" ph="SELECT PROJE... PROJECT_MEMBERS" />
-                <marker date="1504203818508" expanded="true" signature="5080:5397" ph="SELECT PROJE... PROJECT_MEMBERS" />
-                <marker date="1504203818508" expanded="true" signature="7336:7472" ph="INSERT INTO PROJECT_MEMBERS... " />
-                <marker date="1504203818508" expanded="true" signature="8085:8249" ph="UPDATE PROJE... " />
-                <marker date="1504203818508" expanded="true" signature="8991:9087" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1804">
-              <caret line="800" column="29" lean-forward="true" selection-start-line="800" selection-start-column="29" selection-end-line="800" selection-end-column="29" />
+            <state relative-caret-position="340">
+              <caret line="812" column="20" lean-forward="false" selection-start-line="812" selection-start-column="14" selection-end-line="812" selection-end-column="20" />
               <folding>
-                <marker date="1504204039234" expanded="true" signature="2879:3024" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="2879:3061" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="3793:4122" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="5227:5642" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="6764:7051" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="7831:8130" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="8988:9472" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="10605:11033" ph="SELECT PROJE... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="12052:12197" ph="SELECT HASH,... ACTIVITY" />
-                <marker date="1504204039234" expanded="true" signature="15353:15575" ph="UPDATE ACTIV... " />
-                <marker date="1504204039234" expanded="true" signature="16612:16834" ph="INSERT INTO ACTIVITY... " />
-                <marker date="1504204039234" expanded="true" signature="17864:17934" ph="DELETE FROM " />
+                <marker date="1504205064611" expanded="true" signature="2879:3024" ph="SELECT HASH,... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="2879:3061" ph="SELECT HASH,... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="3793:4122" ph="SELECT PROJE... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="5227:5642" ph="SELECT PROJE... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="6764:7051" ph="SELECT HASH,... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="7831:8130" ph="SELECT HASH,... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="8988:9472" ph="SELECT PROJE... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="10605:11033" ph="SELECT PROJE... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="12052:12197" ph="SELECT HASH,... ACTIVITY" />
+                <marker date="1504205064611" expanded="true" signature="15353:15575" ph="UPDATE ACTIV... " />
+                <marker date="1504205064611" expanded="true" signature="16612:16834" ph="INSERT INTO ACTIVITY... " />
+                <marker date="1504205064611" expanded="true" signature="17866:17936" ph="DELETE FROM " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBManagerMongo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db/common/DBManagerMongo.java">
+      <file leaf-file-name="MainModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="33" column="3" lean-forward="false" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+            <state relative-caret-position="281">
+              <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#5110#5111#0" expanded="true" />
+                <element signature="e#5129#5130#0" expanded="true" />
+                <element signature="e#5168#5169#0" expanded="true" />
+                <element signature="e#5192#5193#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingsModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="87" column="36" lean-forward="false" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonalStatisticModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="164" column="106" lean-forward="false" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="106" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectModelImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="641">
+              <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,16 +175,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MainModelSwing</find>
-      <find>LoginController</find>
-      <find>ActivityBarController</find>
-      <find>ProjectController</find>
-      <find>SideBarController</find>
-      <find>PersonalStatisticController</find>
-      <find>ProjectStatisticController</find>
-      <find>LoginModel</find>
-      <find>ProjectModel</find>
-      <find>SideBarModel</find>
       <find>ProjectStatisticModel</find>
       <find>SettingsModel</find>
       <find>PersonalStatisticView</find>
@@ -242,11 +190,21 @@
       <find>@Override</find>
       <find>controllerSwing</find>
       <find>getByProjectAndPhaseName</find>
-      <find>delete</find>
       <find>deleteFrom</find>
-      <find>DeleteResult</find>
       <find>deleteF</find>
+      <find>DeleteResult</find>
+      <find>insertIntoDb</find>
+      <find>DbManagerMongo</find>
+      <find>db</find>
+      <find>insert</find>
+      <find>add</find>
+      <find>DBManagerMongo</find>
       <find>item.</find>
+      <find>extractUs</find>
+      <find>extractUser(Do</find>
+      <find>delete</find>
+      <find>update</find>
+      <find>db()</find>
     </findStrings>
     <replaceStrings>
       <replace>ActivityBarModelImpl</replace>
@@ -324,23 +282,23 @@
         <option value="$PROJECT_DIR$/src/view/javafx/settings/SettingsViewFX.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/MainViewFX.java" />
         <option value="$PROJECT_DIR$/src/controller/javafx/MainControllerFX.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
         <option value="$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java" />
         <option value="$PROJECT_DIR$/src/controller/common/ControllerManager.java" />
         <option value="$PROJECT_DIR$/src/view/common/ViewManager.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java" />
         <option value="$PROJECT_DIR$/src/db/common/DBManagerMongo.java" />
-        <option value="$PROJECT_DIR$/src/data/User.java" />
         <option value="$PROJECT_DIR$/src/data/ProjectPhase.java" />
-        <option value="$PROJECT_DIR$/src/data/Project.java" />
         <option value="$PROJECT_DIR$/src/data/ProjectMember.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
         <option value="$PROJECT_DIR$/src/data/Activity.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/data/User.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/data/Project.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
       </list>
     </option>
   </component>
@@ -711,12 +669,12 @@
       <workItem from="1502360834139" duration="4412000" />
       <workItem from="1503257656569" duration="2726000" />
       <workItem from="1503957013306" duration="59000" />
-      <workItem from="1504201833680" duration="2212000" />
+      <workItem from="1504201833680" duration="3720000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13668000" />
+    <option name="totallyTimeSpent" value="15176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -834,6 +792,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -854,6 +815,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#362#363#0" expanded="false" />
+            <element signature="e#390#391#0" expanded="false" />
+            <element signature="e#442#443#0" expanded="false" />
+            <element signature="e#468#469#0" expanded="false" />
+            <element signature="e#711#712#0" expanded="false" />
+            <element signature="e#741#742#0" expanded="false" />
+            <element signature="e#775#776#0" expanded="false" />
+            <element signature="e#804#805#0" expanded="false" />
+            <element signature="e#1333#1334#0" expanded="false" />
+            <element signature="e#1367#1368#0" expanded="false" />
+            <element signature="e#1418#1419#0" expanded="false" />
+            <element signature="e#1463#1464#0" expanded="false" />
+            <element signature="e#1496#1497#0" expanded="false" />
+            <element signature="e#1523#1524#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1581#1582#0" expanded="false" />
+            <element signature="e#1622#1623#0" expanded="false" />
+            <element signature="e#1651#1652#0" expanded="false" />
+            <element signature="e#1691#1692#0" expanded="false" />
+            <element signature="e#1719#1720#0" expanded="false" />
+            <element signature="e#1759#1760#0" expanded="false" />
+            <element signature="e#1787#1788#0" expanded="false" />
+            <element signature="e#1826#1827#0" expanded="false" />
+            <element signature="e#1853#1854#0" expanded="false" />
+            <element signature="e#1892#1893#0" expanded="false" />
+            <element signature="e#1925#1926#0" expanded="false" />
+            <element signature="e#1963#1964#0" expanded="false" />
+            <element signature="e#1996#1997#0" expanded="false" />
+            <element signature="e#2033#2034#0" expanded="false" />
+            <element signature="e#2074#2075#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -958,6 +952,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#214#215#0" expanded="true" />
+            <element signature="e#250#251#0" expanded="true" />
+            <element signature="e#303#304#0" expanded="true" />
+            <element signature="e#331#332#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#535#536#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#612#613#0" expanded="true" />
+            <element signature="e#645#646#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#732#733#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1062,72 +1075,14 @@
           <caret line="83" column="15" lean-forward="false" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1213#1214#0" expanded="true" />
-            <element signature="e#1762#1763#0" expanded="true" />
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#2328#2329#0" expanded="true" />
-            <element signature="e#2382#2383#0" expanded="true" />
-            <element signature="e#2430#2431#0" expanded="true" />
-            <element signature="e#2466#2467#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="81" column="40" lean-forward="true" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
-          <folding>
-            <element signature="e#2412#2413#0" expanded="false" />
-            <element signature="e#2460#2461#0" expanded="false" />
-            <element signature="e#2525#2526#0" expanded="false" />
-            <element signature="e#2567#2568#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="174" column="18" lean-forward="false" selection-start-line="174" selection-start-column="18" selection-end-line="174" selection-end-column="18" />
-          <folding>
-            <element signature="e#1961#1962#0" expanded="false" />
-            <element signature="e#1996#1997#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1908">
-          <caret line="126" column="38" lean-forward="false" selection-start-line="126" selection-start-column="38" selection-end-line="126" selection-end-column="38" />
-          <folding>
-            <element signature="e#3122#3123#0" expanded="false" />
-            <element signature="e#3157#3158#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1332">
-          <caret line="96" column="18" lean-forward="false" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
-          <folding>
-            <element signature="e#916#917#0" expanded="true" />
-            <element signature="e#951#952#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#500#501#0" expanded="false" />
-            <element signature="e#555#556#0" expanded="false" />
+            <element signature="e#1172#1173#0" expanded="false" />
+            <element signature="e#1213#1214#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1798#1799#0" expanded="false" />
+            <element signature="e#2328#2329#0" expanded="false" />
+            <element signature="e#2382#2383#0" expanded="false" />
+            <element signature="e#2430#2431#0" expanded="false" />
+            <element signature="e#2466#2467#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1179,14 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4248">
-          <caret line="254" column="3" lean-forward="false" selection-start-line="254" selection-start-column="3" selection-end-line="254" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/javafx/login/LoginViewFX.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1476">
@@ -1197,14 +1144,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="176" column="5" lean-forward="false" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/db/common/DBManagerMongo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1212,14 +1151,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1234,39 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="388" column="14" lean-forward="false" selection-start-line="388" selection-start-column="14" selection-end-line="388" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1504202965859" expanded="true" signature="2970:3149" ph="SELECT HASH,... USERS" />
-            <marker date="1504202965859" expanded="true" signature="3651:4062" ph="SELECT USERS... USERS" />
-            <marker date="1504202965859" expanded="true" signature="4532:4666" ph="SELECT HASH,... USERS" />
-            <marker date="1504202965859" expanded="true" signature="7345:7536" ph="INSERT INTO USERS... " />
-            <marker date="1504202965859" expanded="true" signature="8177:8376" ph="UPDATE USERS... " />
-            <marker date="1504202965859" expanded="true" signature="9195:9270" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="354" column="24" lean-forward="false" selection-start-line="354" selection-start-column="24" selection-end-line="354" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1504203305623" expanded="true" signature="2116:2201" ph="SELECT HASH,... PROJECT" />
-            <marker date="1504203305623" expanded="true" signature="2710:2888" ph="SELECT NAME PROJECT" />
-            <marker date="1504203305623" expanded="true" signature="3370:3440" ph="SELECT DESCR... PROJECT" />
-            <marker date="1504203305623" expanded="true" signature="3928:3975" ph="SELECT HASH,... PROJECT" />
-            <marker date="1504203305623" expanded="true" signature="5538:5671" ph="INSERT INTO PROJECT... " />
-            <marker date="1504203305623" expanded="true" signature="6263:6367" ph="UPDATE PROJE... " />
-            <marker date="1504203305623" expanded="true" signature="6959:7028" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/ProjectMember.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -1275,14 +1173,14 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7087#7088#0" expanded="true" />
             <element signature="e#7119#7120#0" expanded="true" />
-            <marker date="1504203818508" expanded="true" signature="2219:2286" ph="SELECT HASH,... PROJECT_MEMBERS" />
-            <marker date="1504203818508" expanded="true" signature="2719:2786" ph="SELECT HASH,... PROJECT_MEMBERS" />
-            <marker date="1504203818508" expanded="true" signature="3429:3676" ph="SELECT PROJE... PROJECT_MEMBERS" />
-            <marker date="1504203818508" expanded="true" signature="4220:4537" ph="SELECT PROJE... PROJECT_MEMBERS" />
-            <marker date="1504203818508" expanded="true" signature="5080:5397" ph="SELECT PROJE... PROJECT_MEMBERS" />
-            <marker date="1504203818508" expanded="true" signature="7336:7472" ph="INSERT INTO PROJECT_MEMBERS... " />
-            <marker date="1504203818508" expanded="true" signature="8085:8249" ph="UPDATE PROJE... " />
-            <marker date="1504203818508" expanded="true" signature="8991:9087" ph="DELETE FROM " />
+            <marker date="1504205282720" expanded="true" signature="2219:2286" ph="SELECT HASH,... PROJECT_MEMBERS" />
+            <marker date="1504205282720" expanded="true" signature="2719:2786" ph="SELECT HASH,... PROJECT_MEMBERS" />
+            <marker date="1504205282720" expanded="true" signature="3429:3676" ph="SELECT PROJE... PROJECT_MEMBERS" />
+            <marker date="1504205282720" expanded="true" signature="4220:4537" ph="SELECT PROJE... PROJECT_MEMBERS" />
+            <marker date="1504205282720" expanded="true" signature="5080:5397" ph="SELECT PROJE... PROJECT_MEMBERS" />
+            <marker date="1504205282720" expanded="true" signature="7336:7472" ph="INSERT INTO PROJECT_MEMBERS... " />
+            <marker date="1504205282720" expanded="true" signature="8085:8249" ph="UPDATE PROJE... " />
+            <marker date="1504205282720" expanded="true" signature="8993:9089" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -1327,23 +1225,129 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="101" column="21" lean-forward="false" selection-start-line="101" selection-start-column="17" selection-end-line="101" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="421" column="36" lean-forward="false" selection-start-line="421" selection-start-column="36" selection-end-line="421" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1504205064621" expanded="true" signature="3096:3275" ph="SELECT HASH,... USERS" />
+            <marker date="1504205064621" expanded="true" signature="3777:4188" ph="SELECT USERS... USERS" />
+            <marker date="1504205064621" expanded="true" signature="4658:4792" ph="SELECT HASH,... USERS" />
+            <marker date="1504205064621" expanded="true" signature="7471:7662" ph="INSERT INTO USERS... " />
+            <marker date="1504205064621" expanded="true" signature="8303:8502" ph="UPDATE USERS... " />
+            <marker date="1504205064621" expanded="true" signature="9321:9396" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="31" />
+          <folding>
+            <element signature="e#5110#5111#0" expanded="true" />
+            <element signature="e#5129#5130#0" expanded="true" />
+            <element signature="e#5168#5169#0" expanded="true" />
+            <element signature="e#5192#5193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1804">
-          <caret line="800" column="29" lean-forward="true" selection-start-line="800" selection-start-column="29" selection-end-line="800" selection-end-column="29" />
+        <state relative-caret-position="340">
+          <caret line="812" column="20" lean-forward="false" selection-start-line="812" selection-start-column="14" selection-end-line="812" selection-end-column="20" />
           <folding>
-            <marker date="1504204039234" expanded="true" signature="2879:3024" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="2879:3061" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="3793:4122" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="5227:5642" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="6764:7051" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="7831:8130" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="8988:9472" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="10605:11033" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="12052:12197" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1504204039234" expanded="true" signature="15353:15575" ph="UPDATE ACTIV... " />
-            <marker date="1504204039234" expanded="true" signature="16612:16834" ph="INSERT INTO ACTIVITY... " />
-            <marker date="1504204039234" expanded="true" signature="17864:17934" ph="DELETE FROM " />
+            <marker date="1504205064611" expanded="true" signature="2879:3024" ph="SELECT HASH,... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="2879:3061" ph="SELECT HASH,... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="3793:4122" ph="SELECT PROJE... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="5227:5642" ph="SELECT PROJE... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="6764:7051" ph="SELECT HASH,... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="7831:8130" ph="SELECT HASH,... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="8988:9472" ph="SELECT PROJE... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="10605:11033" ph="SELECT PROJE... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="12052:12197" ph="SELECT HASH,... ACTIVITY" />
+            <marker date="1504205064611" expanded="true" signature="15353:15575" ph="UPDATE ACTIV... " />
+            <marker date="1504205064611" expanded="true" signature="16612:16834" ph="INSERT INTO ACTIVITY... " />
+            <marker date="1504205064611" expanded="true" signature="17866:17936" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="164" column="106" lean-forward="false" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="263" column="20" lean-forward="true" selection-start-line="263" selection-start-column="20" selection-end-line="263" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/Project.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="365" column="24" lean-forward="false" selection-start-line="365" selection-start-column="24" selection-end-line="365" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1504205408595" expanded="true" signature="2116:2201" ph="SELECT HASH,... PROJECT" />
+            <marker date="1504205408595" expanded="true" signature="2710:2888" ph="SELECT NAME PROJECT" />
+            <marker date="1504205408595" expanded="true" signature="3370:3440" ph="SELECT DESCR... PROJECT" />
+            <marker date="1504205408595" expanded="true" signature="3928:3975" ph="SELECT HASH,... PROJECT" />
+            <marker date="1504205408595" expanded="true" signature="5538:5671" ph="INSERT INTO PROJECT... " />
+            <marker date="1504205408595" expanded="true" signature="6263:6367" ph="UPDATE PROJE... " />
+            <marker date="1504205408595" expanded="true" signature="6959:7028" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="87" column="36" lean-forward="false" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
           </folding>
         </state>
       </provider>
