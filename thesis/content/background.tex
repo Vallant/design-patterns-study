@@ -1,6 +1,19 @@
 \chapter{Background}
-\section{Fundamentals of Object-Oriented programming}
+
+This chapter is intended to provide information on some basic principles in terms of the Object Oriented Programming. The list is by no means exhaustive, however is meant to help understanding the focus of this thesis.
+
+\section{Fundamentals of Object-Oriented Programming}
+
+The paradigm of Object Oriented Programming (OOP) uses \emph{Classes} as primary mean to gather and structure data. The data within a class is mostly called \emph{attributes}, means to interact with it are called \emph{methods} \citep[80]{Castagna97}. \\
+While a class is the abstract definition of such a container an \emph{object} is a concrete instance filled with actual data. Attributes that may differ between each instance are therefore also called \emph{instance variables}. Variables that belong to the class itself and thus are only instantiated once per class are called \emph{class variables}. A prominent problem often mentioned in this context is the \emph{Diamond Problem} in the sense of multiple inheritance. It describes a situation in which at least two parents of a derived class share a single base class. \cite{Truyen04} If now a method of the topmost class is overridden by both ancestors of lowermost class, the question arises which of the two possible methods should be called. Some languages, such as Java or C#, do not support multiple inheritance for this reason, while others explicitly allow it, such as C++ or Python. In this cases if a situation as described in the Diamond Problem arises the results can cause undefined behaviour.
+
+\subsection{Polymorphism and Inheritance}
+
+Inheritance describes the concept of a child class inheriting all attributes, methods and other properties from a parent class. The child class is therefore a superset of the base class as it can be extended to meet the requirements. This concept is important as it encourages develpers to reuse existing code and in that way lower the risk of programming errors. \cite{johnson91}\\
+Polymorphism is closely tied to Inheritance. It describes the ability of a language to choose between equally-called methods and attributes of a base class and its child class. This means that a derived class can override methods of the base which are then called \emph{virtual}. At runtime it is determined which method should be called \footnote{https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/polymorphism, accessed 31.08.2017}.
+
 \subsection{Single Responsibility Principle}
+
 \subsection{Open Closed Principle}
 
 \section{Design Patterns}
@@ -12,11 +25,11 @@
 \section{Architecture Patterns}
 \subsection{Multi-Layer Architecture}
 \subsection{Multi-Tier Architecture}
+\subsection{Client-Server}
+\subsection{Publish-Subscribe}
 
 \section{Software Project Management}
 \subsection{Waterfall}
 \subsection{Scrum}
 \subsection{Extreme Programming}
 \newpage
-%\subsection{Client-Server}
-%\subsection{Publish-Subscribe}
