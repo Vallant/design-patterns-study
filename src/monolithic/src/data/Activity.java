@@ -17,17 +17,29 @@
 
 package data;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
+import db.common.DBManagerMongo;
 import db.common.DBManagerPostgres;
 import db.interfaces.DBEntity;
 import exception.ElementChangedException;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.sql.*;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.*;
 
 /**
  * @author stephan
@@ -564,6 +576,258 @@ public class Activity implements DBEntity
       if(numRowsAffected == 0)
         throw new ElementChangedException();
     }
+  }
+
+  public static Activity getByPrimaryKey(int id, DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> doc = coll.find(eq("id", id));
+    MongoCursor<Document> cursor = doc.iterator();
+    if(!cursor.hasNext())
+      throw new Exception("no such record");
+
+    return extractActivity(cursor.next(), manager);
+  }
+
+  private static Activity extractActivity(Document next, DBManagerMongo manager) throws Exception
+  {
+    int id = next.getInteger("id");
+    int hash = next.getInteger("hash");
+    int projectPhaseId = next.getInteger("project_phase_id");
+    int projectId = next.getInteger("project_id");
+    String userLoginName = next.getString("user_login_name");
+    String description = next.getString("description");
+    Instant start = next.getDate("start_time").toInstant();
+    ZonedDateTime zonedStart = ZonedDateTime.ofInstant(start, ZoneId.systemDefault());
+    Instant end = next.getDate("end_time").toInstant();
+    ZonedDateTime zonedEnd = ZonedDateTime.ofInstant(end, ZoneId.systemDefault());
+    String comments = next.getString("comment");
+
+
+    ProjectPhase phase = ProjectPhase.getByPrimaryKey(projectPhaseId, manager);
+    User user = User.getByPrimaryKey(userLoginName, manager);
+    return new Activity(hash, id, phase, user, description, zonedStart, zonedEnd, comments);
+  }
+
+  public static void getParticipatingProjectsAndWorkloadSince(String loginName, ZonedDateTime since,
+                                                       ArrayList<Project> projects, ArrayList<Duration> durations,
+                                                              DBManagerMongo manager)
+    throws Exception
+  {
+    MongoCollection coll = manager.getDb().getCollection("activity");
+    ArrayList<ProjectMember> owned = ProjectMember.getInvolvedProjects(loginName, manager);
+    owned.addAll(ProjectMember.getOwnedProject(loginName, manager));
+    for(ProjectMember m : owned)
+    {
+      projects.add(m.getProject());
+      FindIterable<Document> result = coll.find(
+        and(
+          eq("user_login_name", loginName),
+          gte("start_time", java.util.Date.from(since.toInstant())),
+          eq("project_id", m.getProjectId())
+        )
+      );
+      Duration sum = Duration.ZERO;
+      for(Document doc : result)
+      {
+        java.util.Date startDate = doc.getDate("start_time");
+        Date endDate = doc.getDate("end_time");
+        Duration duration = Duration.between(startDate.toInstant(), endDate.toInstant());
+        sum = sum.plus(duration);
+      }
+      durations.add(sum);
+    }
+  }
+
+  public static void getPhasesAndWorkloadSince(String loginName, int projectId, ZonedDateTime since,
+                                        ArrayList<ProjectPhase> phases, ArrayList<Duration> durations, DBManagerMongo
+                                        manager) throws
+    Exception
+  {
+    Date sinceDate = Date.from(since.toInstant());
+    Bson match = and(
+      eq("user_login_name", loginName),
+      gt("start_time", sinceDate),
+      eq("project_id", projectId)
+    );
+
+    MongoCollection coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> result = coll.find(match);
+
+
+    for(Document doc : result)
+    {
+      int projectPhaseId = doc.getInteger("project_phase_id");
+      ProjectPhase projectPhase = ProjectPhase.getByPrimaryKey(projectPhaseId, manager);
+      phases.add(projectPhase);
+
+      Date startDate = doc.getDate("start_time");
+      Date endDate = doc.getDate("end_time");
+      Duration duration = Duration.between(startDate.toInstant(), endDate.toInstant());
+      durations.add(duration);
+    }
+  }
+
+  public static ArrayList<Activity> getActivitiesForPhaseSince(String loginName, int phaseId, ZonedDateTime since,
+                                                               DBManagerMongo manager)
+    throws Exception
+  {
+    ArrayList<Activity> list = new ArrayList<>();
+    Date sinceDate = Date.from(since.toInstant());
+    MongoCollection coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> result = coll.find(
+      and(
+        eq("user_login_name", loginName),
+        gte("start_time", sinceDate),
+        eq("project_phase_id", phaseId)
+      )
+    );
+
+    for(Document doc : result)
+      list.add(extractActivity(doc, manager));
+    return list;
+  }
+
+  public static ArrayList<Activity> getActivitiesByUserForPhaseSince(String loginName, int phaseId, ZonedDateTime
+    since, DBManagerMongo manager)
+    throws Exception
+  {
+    ArrayList<Activity> list = new ArrayList<>();
+    Date sinceDate = Date.from(since.toInstant());
+    MongoCollection coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> result = coll.find(
+      and(
+        loginName.isEmpty() ?
+          not(eq("user_login_name", ""))
+          : eq("user_login_name", loginName),
+        gte("start_time", sinceDate),
+        eq("project_phase_id", phaseId)
+      )
+    );
+
+    for(Document doc : result)
+      list.add(extractActivity(doc, manager));
+    return list;
+  }
+
+  public static void getOwnedProjectsAndWorkloadSince(String loginName, ZonedDateTime since, ArrayList<Project>
+    projects,
+                                               ArrayList<Duration> durations, DBManagerMongo manager) throws Exception
+  {
+    MongoCollection coll = manager.getDb().getCollection("activity");
+
+    ArrayList<ProjectMember> owned = ProjectMember.getOwnedProject(loginName, manager);
+    for(ProjectMember m : owned)
+    {
+      projects.add(m.getProject());
+      FindIterable<Document> result = coll.find(
+        and(
+          eq("user_login_name", loginName),
+          gte("start_time", Date.from(since.toInstant())),
+          eq("project_id", m.getProjectId())
+        )
+      );
+      Duration sum = Duration.ZERO;
+      for(Document doc : result)
+      {
+        Date startDate = doc.getDate("start_time");
+        Date endDate = doc.getDate("end_time");
+        Duration duration = Duration.between(startDate.toInstant(), endDate.toInstant());
+        sum = sum.plus(duration);
+      }
+      durations.add(sum);
+    }
+  }
+
+  public static void getPhasesAndWorkloadForUserSince(String loginName, int projectId, ZonedDateTime since,
+                                               ArrayList<ProjectPhase> phases, ArrayList<Duration> durations, 
+                                                      DBManagerMongo manager)
+    throws Exception
+  {
+    Date sinceDate = Date.from(since.toInstant());
+    Bson match = and(
+      loginName.isEmpty() ?
+        not(eq("user_login_name", ""))
+        : eq("user_login_name", loginName),
+      gt("start_time", sinceDate),
+      eq("project_id", projectId)
+    );
+
+    MongoCollection coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> result = coll.find(match);
+    
+
+    for(Document doc : result)
+    {
+      int projectPhaseId = doc.getInteger("project_phase_id");
+      ProjectPhase projectPhase = ProjectPhase.getByPrimaryKey(projectPhaseId, manager);
+      phases.add(projectPhase);
+
+      Date startDate = doc.getDate("start_time");
+      Date endDate = doc.getDate("end_time");
+      Duration duration = Duration.between(startDate.toInstant(), endDate.toInstant());
+      durations.add(duration);
+    }
+  }
+
+  public void insertInto(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("activity");
+
+    Document toAdd = new Document("hash", getLocalHash())
+      .append("project_phase_id", getProjectPhaseId())
+      .append("project_id", getProjectId())
+      .append("user_login_name", getUserLoginName())
+      .append("description", getDescription())
+      .append("start_time", Date.from(getStart().toLocalDateTime().atZone(ZoneId.of("UTC")).toInstant()))
+      .append("end_time", Date.from(getStop().toLocalDateTime().atZone(ZoneId.of("UTC")).toInstant()))
+      .append("comment", getComments())
+      .append("id", manager.getNextSequence("activity"));
+    coll.insertOne(toAdd);
+    setId(toAdd.getInteger("id"));
+  }
+
+  public void updateInDb(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("activity");
+    Document toUpdate = new Document("hash", getLocalHash())
+      .append("project_phase_id", getProjectPhaseId())
+      .append("project_id", getProjectId())
+      .append("user_login_name", getUserLoginName())
+      .append("description", getDescription())
+      .append("start_time", Date.from(getStart().toLocalDateTime().atZone(ZoneId.of("UTC")).toInstant()))
+      .append("end_time", Date.from(getStop().toLocalDateTime().atZone(ZoneId.of("UTC")).toInstant()))
+      .append("comment", getComments())
+      .append("id", getId());
+
+    UpdateResult result = coll.replaceOne(
+      and(
+        eq("id", getId()),
+        eq("hash", getRemoteHash())), toUpdate);
+    if(result.getModifiedCount() != 1)
+      throw new Exception("Record was modified or not found");
+
+    setRemoteHash(getLocalHash());
+  }
+
+  public void deleteFromDb(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("activity");
+    DeleteResult result = coll.deleteOne(and(eq("id", getId()), eq("hash", getRemoteHash())));
+    if(result.getDeletedCount() != 1)
+      throw new Exception("Record was modified or not found");
+  }
+
+  public static List<Activity> getAll(DBManagerMongo manager) throws Exception
+  {
+    ArrayList<Activity> list = new ArrayList<>();
+    MongoCollection<Document> coll = manager.getDb().getCollection("activity");
+    FindIterable<Document> doc = coll.find();
+    MongoCursor<Document> cursor = doc.iterator();
+    while(cursor.hasNext())
+      list.add(extractActivity(cursor.next(), manager));
+
+    return list;
   }
 
 

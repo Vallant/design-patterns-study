@@ -17,15 +17,25 @@
 
 package data;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.result.DeleteResult;
+import db.common.DBManagerMongo;
 import db.common.DBManagerPostgres;
 import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.bson.Document;
+import org.bson.types.Binary;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * @author stephan
@@ -342,7 +352,7 @@ public class User implements DBEntity
     }
   }
 
-  public void delete(DBManagerPostgres db) throws Exception
+  public void deleteFromDb(DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
     {
@@ -359,6 +369,66 @@ public class User implements DBEntity
       if(numRowsAffected == 0)
         throw new Exception("Record has changed or was not found!");
     }
+  }
+
+  public static User getByPrimaryKey(String loginName, DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
+    FindIterable<Document> doc = coll.find(eq("login_name", loginName));
+    MongoCursor<Document> cursor = doc.iterator();
+    if(!cursor.hasNext())
+      throw new Exception("no such record");
+
+    return extractUser(cursor.next());
+  }
+
+  public void deleteFromDb(DBManagerMongo manager) throws Exception
+  {
+    ArrayList<Project> ownedProjects = Project.getProjectsByUserName(getLoginName(), manager);
+    for(Project p : ownedProjects)
+      p.deleteFromDb(manager);
+
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
+    DeleteResult result = coll.deleteOne(and(eq("login_name", getLoginName()), eq("hash", getRemoteHash()
+    )));
+    if(result.getDeletedCount() != 1)
+      throw new Exception("Record was modyfied or not found");
+
+    MongoCollection members = manager.getDb().getCollection("project_member");
+    members.deleteMany(eq("user_login_name", getLoginName()));
+
+    MongoCollection activities = manager.getDb().getCollection("activity");
+    activities.deleteMany(eq("user_login_name", getLoginName()));
+
+    MongoCollection project = manager.getDb().getCollection("project");
+    project.deleteMany(eq("user_login_name", getLoginName()));
+  }
+
+  public static List<User> getAll(DBManagerMongo manager) throws Exception
+  {
+    ArrayList<User> list = new ArrayList<>();
+    MongoCollection<Document> coll = manager.getDb().getCollection("user");
+    FindIterable<Document> doc = coll.find();
+    MongoCursor<Document> cursor = doc.iterator();
+    while(cursor.hasNext())
+      list.add(extractUser(cursor.next()));
+
+    return list;
+  }
+
+  private static User extractUser(Document current)
+  {
+    String loginName = (String) current.get("login_name");
+    int hash = (Integer) current.get("hash");
+    String firstName = (String) current.get("first_name");
+    String lastName = (String) current.get("last_name");
+    String role = (String) current.get("role");
+    String email = (String) current.get("email");
+    Binary saltBinary = (Binary) current.get("salt");
+    byte[] salt = saltBinary.getData();
+    Binary passwordBinary = (Binary) current.get("password");
+    byte[] password = passwordBinary.getData();
+    return new User(hash, loginName, firstName, lastName, User.ROLE.valueOf(role), email, password, salt);
   }
 
   public enum ROLE

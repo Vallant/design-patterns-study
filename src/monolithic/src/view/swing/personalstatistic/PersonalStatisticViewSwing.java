@@ -199,7 +199,7 @@ public class PersonalStatisticViewSwing
   public boolean confirmDeletion()
   {
 
-    return JOptionPane.showConfirmDialog(null, "Are you sure to delete this activity?", "Confirmation",
+    return JOptionPane.showConfirmDialog(null, "Are you sure to deleteFromDb this activity?", "Confirmation",
       JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION;
   }
 

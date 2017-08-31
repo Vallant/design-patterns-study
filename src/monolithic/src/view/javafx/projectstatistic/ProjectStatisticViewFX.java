@@ -225,7 +225,7 @@ public class ProjectStatisticViewFX
 
   public boolean confirmDeletion()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this project?", ButtonType.YES,
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to deleteFromDb this project?", ButtonType.YES,
       ButtonType.NO);
     return alert.getResult() == ButtonType.YES;
   }

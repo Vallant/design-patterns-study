@@ -230,7 +230,7 @@ public class PersonalStatisticViewFX
 
   public boolean confirmDeletion()
   {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this activity?", ButtonType.YES,
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to deleteFromDb this activity?", ButtonType.YES,
       ButtonType.NO);
     return alert.getResult() == ButtonType.YES;
   }

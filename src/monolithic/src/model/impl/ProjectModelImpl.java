@@ -86,7 +86,7 @@ public class ProjectModelImpl
 
   public void deleteProject(Project selectedProject) throws Exception
   {
-    selectedProject.delete(mainModel.db());
+    selectedProject.deleteFromDb(mainModel.db());
     if(controllerSwing != null)
       controllerSwing.refresh();
     else
