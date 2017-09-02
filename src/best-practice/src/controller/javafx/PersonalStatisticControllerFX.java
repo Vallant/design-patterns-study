@@ -247,8 +247,8 @@ public class PersonalStatisticControllerFX implements PersonalStatisticControlle
       view.showAddActivityDialog();
       return;
     }
-    ZonedDateTime zdtStart = start.atZone(ZoneOffset.UTC);
-    ZonedDateTime zdtEnd = end.atZone(ZoneOffset.UTC);
+    ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
+    ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
 
     try
     {
