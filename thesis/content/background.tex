@@ -29,9 +29,50 @@ The Open-Closed-Principle states that each class should be open to extension and
 \section{Design Patterns}
 In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of books, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and Jphn Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common.
 \subsection{Repository}
-The repository pattern is a programming strategy that is useful when operating with some kind of data persistence service. It provides an abstraction layer between the business code and the place where data of the application is actually saved, providing a simple and clean interface for the business code and leads to a looser coupling. All actions dealing with specialized database operations, object retrieval and others are hidden by a repository. To create one repository per business object (data class) is the most basic way of implementing this pattern. Asides from the basic \emph{CRUD}-Operations \footnote{Create, read, update, delete}, each repository should provide specialized object retrieval methods that are only valid for the business model it was programmed for. For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}. 
+\label{sec:repository}
+The repository pattern is a programming strategy that is useful when operating with some kind of data persistence service. It provides an abstraction layer between the business code and the place where data of the application is actually saved, providing a simple and clean interface for the business code and leads to a looser coupling. All actions dealing with specialized database operations, object retrieval and others are hidden by a repository. To create one repository per business object (data class) is the most basic way of implementing this pattern. Asides from the basic \emph{CRUD}-Operations \footnote{Create, read, update, delete}, each repository should provide specialized object retrieval methods that are only valid for the business model it was programmed for. For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}.
 \subsection{Model-View-Controller}
+The Model-View-Controller (MVC) design pattern is a strategy that describes a separation of a program in three layers. Its goal is to improve flexibility and extensibility of an application which can help to port a program from one platform to another. It consists of three components, from which the model contains the business logic, the controller processes interactions and the view presents some kind of user interface. 
+
+This pattern is not very well defined and is subject of constant discussions. While it is commonly agreed upon that the application should be split in the three layers, the data flows and connections between the components are described in many different ways. The original concept of MVC developed for Smalltalk as described before the model holds logic and data of the application. Views subscribe at the model for notifications on changes of data in order to be able to update and refresh themselves. The controller was responsible of managing user interaction, which includes switching between views and forwarding requests to the model. This situation can be seen in Figure \ref{fig:mvc-smalltalk}. This direct interaction between model and view is often not desirable, especially in the context of web applications, which leaves it deprecated today. 
+
+\begin{figure}[htbp]
+	\centering
+	\label{fig:mvc-smalltalk}
+	
+	\includegraphics[width=0.5\textwidth]{./content/pictures/mvc-smalltalk.jpg}
+	\caption{Classical Model-View-Controller concept as used in Smalltalk. Model and View know each other.}
+	\caption*{Source: \href{https://www.mimuw.edu.pl/\~sl/teaching/00\_01/Delfin\_EC/Overviews/MVC.htm}{https://www.mimuw.edu.pl}, accessed 5.9.2017}
+\end{figure}
+
 \subsection{Model-View-Presenter}
+The Model-View-Presenter (MVP) is similar to the MVC-model as it shares the concept of separating the application into three layers. However the responsibilities differ considerably, as can be seen in Figure \ref{fig:mvp}. The view only communicates with the presenter and does not know about the model. The presenter handles user input and requests, gathers data from the model, updates it and finally is responsible for refreshing the view with new data. This implies that the model does not know about the existence of view or presenter and at least in the original concept of MVP all business logic is placed in the presenter classes. It is important to note that it is vital for the use of this pattern to implement it using interfaces. This ensures that its main goal, easy testability, can be reached easily. 
+
+\begin{figure}[htbp]
+	\centering
+	\label{fig:mvp}
+	\includegraphics[width=0.5\textwidth]{./content/pictures/mvp.png}
+	\caption{Diagram of Model-View-Presenter. While the view again only holds the means for displaying the data and interacting, in opposite to the MVC-model it does not know about the model but only corresponds with the presenter. The presenter is responsible for gathering the necessary data from the model and forwards it to the view. The model does not know about the presenter.}
+	\caption*{Source: \href{https://de.wikipedia.org/wiki/Model-View-Presenter}{https://de.wikipedia.org/wiki/Model-View-Presenter}, accessed on 5.9.2017, by Daniel.Cardenas - Own Content, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=19794348}
+\end{figure}
+
+
+After some years Martin Fowler drafted two design patterns that are closely connected to MVP. In his blog entry \footnote{\href{https://martinfowler.com/eaaDev/ModelViewPresenter.html}{https://martinfowler.com/eaaDev/ModelViewPresenter.html}} he explained that he felt the need to split the MVP-pattern into two resulting in the following concepts, briefly described in Figure \ref{fig:passive-view-supervision-controller}. 
+
+\begin{figure}[htbp]
+	\centering
+	\label{fig:passive-view-supervision-controller}
+	\includegraphics[width=0.5\textwidth]{./content/pictures/passive-view.png}
+	\caption{Basic diagrams of the Passive View (left) and Supervising Controller patterns (right). In the former as little logic as possible is placed in the view making it easy replaceable by a mock object for testing. Synchronization logic needs to be placed in the Presenter. In the latter view and model are connected trough data bindings empowering these two to perform synchronization tasks on their own. This simplifies the role of the presenter.}
+	\caption*{Source: \href{https://msdn.microsoft.com/en-us/library/ff709839.aspx}{https://msdn.microsoft.com/en-us/library/ff709839.aspx}, accessed on 5.9.2017}
+\end{figure}
+
+\subsubsection{Supervising Controller}
+In this concept it is the views responsibility to perform data synchronization using shared classes between it and the model. This simplifies the tasks to be performed by the presentation layer while reducing the level of testability possible. 
+\subsubsection{Passive view}
+In the concept of passive view the model is not connected with the view, which in terms only corresponds with the presenter. It is desired to minimize the logic placed in the view, leaving it (as the name describes) passive and therefore easy to mock. This is especially useful for automated testing, as it allows the tester not only to test the basic logic placed in the presenter but also its synchronization capabilities. The drawback of this clearly lies in the additional responsibilities that need to be met by the presenter.
+
+\footnote{http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
 
 \section{Architecture Patterns}
 \subsection{Multi-Layer Architecture} 
