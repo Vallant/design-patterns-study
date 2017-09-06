@@ -1,4 +1,16 @@
 \chapter{Introduction}
 
-TODO Ask the question that will be solved by this thesis
-e.g. "What is the impact of using best practice software architecture patterns over ad-hoc monilithic software development?"
+The topic of design patterns and architectural styles are vital to the subject of software development. They empower inexperienced programmers to write maintainable applications and provide guidelines that may be adopted but are implemented in each application in one way or another. 
+
+Many books are available on the topic of software design and architectural styles, on how to write maintainable and extensible applications. The books are written by software engineers with many years of experience , like Martin Fowler with his book \emph{Patterns of Enterprise Application Architecture} \footnote{IBAN: 978-0321127426}, Robert C. Martin with \emph{Agile Software Development. Principles, Patterns, and Practices} \footnote{IBAN: 978-0135974445} or \emph{Design Patterns. Elements of Reusable Object-Oriented Software} by John Vlissides, Richard Helm, Ralph Johnson and Erich Gamma \footnote{IBAN: 978-0201633610}. 
+
+The same topics are to a certain degree taught at universities however they all lack one substantial flaw: While they propose some pattern, explain when it is applying and how to implement it, they do not provide any evidence that when using the pattern in a real-world application there is an advantage to gain.  Many patterns claim that they improve the extensibility and increase the decoupling of code however in most of the example code only the basic implementation is showed. The impact on the code when a extension is actually implemented is not being shown by the books which leaves the reader to believe the promises made by the author. 
+
+While the patterns are in extensive use and are with no doubt of use litte scientific research is done on this topic. \href{http://ieeexplore.ieee.org/abstract/document/4493325/?reload=true}{http://ieeexplore.ieee.org/abstract/document/4493325/?reload=true} and \href{http://www.sciencedirect.com/science/article/pii/S0950584911002151;}{http://www.sciencedirect.com/science/article/pii/S0950584911002151;}
+
+This is not a very desirable situation and little to nothing scientific research is done on this topic which may be because of the difficulties about objectifying the process of software development. The patterns and strategies largely depend on the use case and will vary substantially from application to application which makes comparisons difficult. 
+
+This thesis intends to give insights on how the use of well-established architectural and design pattern that claim to improve extensibility impact the code quality when this extensions are in fact implemented. This is done by developing two applications that are both designed to meet the same use cases and requirements. One is programmed by using established patterns while the other is programmed without considerations regarding code quality. 
+After meeting the basis requirements new features are being implemented, namely another type of persistence, a different kind of user interface and lastly means for caching data in the application to reduce the need of database queries. After realizing these changes in both programs the costs of implementing can be compared in both quantitative and qualitative ways. 
+
+While the development of an application is highly subjective and depends on the coding style and experience of the engineer this thesis may provide means to develop a feeling for how the use of the patterns change the code and how they may be implemented.  
