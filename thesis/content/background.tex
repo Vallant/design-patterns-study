@@ -26,13 +26,16 @@ This important principle states that each class should only full-fill one partic
 \subsection{Open Closed Principle}
 The Open-Closed-Principle states that each class should be open to extension and closed for modification \cite{ocp}. As already written code is assumed to be well tested and working as intended it should be avoided to modify it afterwards to add new functionality. Every change could lead to unwanted side effects that may only occur in very specific situations and are therefore difficult to prevent. Inheritance addresses this problem as it empowers the programmer to add new features while preserving all of the old code. Even when overriding methods in terms of polymorphism the principle is not violated at the original class is preserved as-is. 
 
-\section{Design Patterns}
-In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of books, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and Jphn Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common.
+\section{Design Patterns and Architectural Patterns}
+In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of books, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and Jphn Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common. 
+
+The main difference between architectural and design patterns lies in different phases they are applied at. Architectural patterns provide high-level strategies providing a big picture often describing the interaction between so-called \emph{components}, which can vary widely in its complexity and each of them providing a well-described service and fulfilling a certain purpose. Design patterns focuses more on the actual implementation and describes a way to solve a problem on class and interface level. 
+
 \subsection{Repository}
 \label{sec:repository}
-The repository pattern is a programming strategy that is useful when operating with some kind of data persistence service. It provides an abstraction layer between the business code and the place where data of the application is actually saved, providing a simple and clean interface for the business code and leads to a looser coupling. All actions dealing with specialized database operations, object retrieval and others are hidden by a repository. To create one repository per business object (data class) is the most basic way of implementing this pattern. Asides from the basic \emph{CRUD}-Operations \footnote{Create, read, update, delete}, each repository should provide specialized object retrieval methods that are only valid for the business model it was programmed for. For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}.
+The repository design pattern is a programming strategy that is useful when operating with some kind of data persistence service. It provides an abstraction layer between the business code and the place where data of the application is actually saved, providing a simple and clean interface for the business code and leads to a looser coupling. All actions dealing with specialized database operations, object retrieval and others are hidden by a repository. To create one repository per business object (data class) is the most basic way of implementing this pattern. Asides from the basic \emph{CRUD}-Operations \footnote{Create, read, update, delete}, each repository should provide specialized object retrieval methods that are only valid for the business model it was programmed for. For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}.
 \subsection{Model-View-Controller}
-The Model-View-Controller (MVC) design pattern is a strategy that describes a separation of a program in three layers. Its goal is to improve flexibility and extensibility of an application which can help to port a program from one platform to another. It consists of three components, from which the model contains the business logic, the controller processes interactions and the view presents some kind of user interface. 
+The Model-View-Controller (MVC) is considered a design and architectural pattern and is a strategy that describes a separation of a program in three layers. It is considered both a design and a architectural pattern, depending on the point of view.  Its goal is to improve flexibility and extensibility of an application which can help to port a program from one platform to another. It consists of three components, from which the model contains the business logic, the controller processes interactions and the view presents some kind of user interface. 
 
 This pattern is not very well defined and is subject of constant discussions. While it is commonly agreed upon that the application should be split in the three layers, the data flows and connections between the components are described in many different ways. The original concept of MVC developed for Smalltalk as described before the model holds logic and data of the application. Views subscribe at the model for notifications on changes of data in order to be able to update and refresh themselves. The controller was responsible of managing user interaction, which includes switching between views and forwarding requests to the model. This situation can be seen in Figure \ref{fig:mvc-smalltalk}. This direct interaction between model and view is often not desirable, especially in the context of web applications, which leaves it deprecated today. 
 
@@ -46,7 +49,7 @@ This pattern is not very well defined and is subject of constant discussions. Wh
 \end{figure}
 
 \subsection{Model-View-Presenter}
-The Model-View-Presenter (MVP) is similar to the MVC-model as it shares the concept of separating the application into three layers. However the responsibilities differ considerably, as can be seen in Figure \ref{fig:mvp}. The view only communicates with the presenter and does not know about the model. The presenter handles user input and requests, gathers data from the model, updates it and finally is responsible for refreshing the view with new data. This implies that the model does not know about the existence of view or presenter and at least in the original concept of MVP all business logic is placed in the presenter classes. It is important to note that it is vital for the use of this pattern to implement it using interfaces. This ensures that its main goal, easy testability, can be reached easily. 
+The Model-View-Presenter (MVP) pattern is similar to the MVC-model as it shares the concept of separating the application into three layers. However the responsibilities differ considerably, as can be seen in Figure \ref{fig:mvp}. The view only communicates with the presenter and does not know about the model. The presenter handles user input and requests, gathers data from the model, updates it and finally is responsible for refreshing the view with new data. This implies that the model does not know about the existence of view or presenter and at least in the original concept of MVP all business logic is placed in the presenter classes. It is important to note that it is vital for the use of this pattern to implement it using interfaces. This ensures that its main goal, easy testability, can be reached easily. 
 
 \begin{figure}[htbp]
 	\centering
@@ -74,12 +77,34 @@ In the concept of passive view the model is not connected with the view, which i
 
 \footnote{http://www.wildcrest.com/Potel/Portfolio/mvp.pdf}
 
-\section{Architecture Patterns}
-\subsection{Multi-Layer Architecture} 
-\subsection{Multi-Tier Architecture}
-\label{sec:multi-tier}
+
 \subsection{Client-Server}
-\subsection{Publish-Subscribe}
+The Client-Server model describes a way to separate tasks within a network. While the client, which can be any kind of computer program, requests a resource from the server. It is designated to be used within the internet and is still on of the cornerstones of current web infrastructure. A prominent example of the client-server model is the Domain-Name-System (DNS). When a user types in the domain name of a service he wants to access, the browser needs to translate the name into a IP-Address he can work with. In order to do that he sends a request to a DNS-Server, making him a client. While he does not need to know how exactly the resolving takes places he requires the server response to have a certain format described in the communication protocol. 
+
+There are several benefits of using this architecture. For starters it centralizes the administration which lowers the effort to managing access rights, accounts and so on. Because the important data is in one place it is easier to create backups and ensure security policies. However a server is considered a \emph{Single Point of Failure}, meaning that a whole service will be unavailable if the server for any reason is not reachable, making it a worthy target of attacks. While the impact depends on the actual service built, scalability and extensibility are important factors. It is easier to extend the features provided by a service when using the client-server-model it reduces scalability as the hardware needs to be upgraded from time to time to meet a increased number of requests directed to the server.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./content/pictures/client-server.jpg}
+	\caption{Client-Server setup. The client sends a request to a server by messages defined in the protocol. The processing of the request is transparent to the client, it does not know about the actions taken by the server and awaits a response in a certain format.}
+	\caption*{Source: \href{https://abcnetworking.wikispaces.com/Client+Server+Networking}{https://abcnetworking.wikispaces.com/Client+Server+Networking}, accessed on 6.9.2017}
+\end{figure}
+
+\subsection{Peer-to-Peer}
+Peer-to-Peer (P2P) infrastructure is the counterpart of client-server-models. No central server exists which means that each of the clients are equally featured, each client has the means to request and provide resources. P2P-Networks are considered more robust and scalable than Client-Server set-ups, as the failure of one node does not lead to the breakdown of the whole system.
+
+\subsection{Multi-Tier and Multi-Layer Architecture}
+\label{sec:multi-tier}
+Multi-Tier architecture is mostly mentioned in the context of web applications. In general it describes the separation of responsibilities on different \emph{physical} places \footnote{In this context physical separation means that there has to be going on any kind of communication between independent processes within the same machine or connected trough the internet.}. This is the main difference to a multi-layer-system where the responsibilities are separated but placed at the same process which indicates the use of interfaces. 
+
+A 3-Tier-Architecture nowadays refers mostly to the typical set-up of a web application as it can be seen in Figure \ref{fig:multi-tier}. It has to be noted that it is very common to use multi-tier and multi-layer architecture mutually. For example, the logic tier in the figure could use a data-access-layer to abstract the communication with the 
+
+\begin{figure}[htbp]
+	\centering
+	\label{fig:multi-tier}
+	\includegraphics[width=0.5\textwidth]{./content/pictures/multi-tier.jpg}
+	\caption{Multi-Tier set-up. The tiers are physically separated.}
+	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}
+\end{figure}
 
 \section{Software Project Management}
 \subsection{Waterfall}
