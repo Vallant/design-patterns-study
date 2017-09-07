@@ -116,18 +116,29 @@ A 3-Tier-Architecture nowadays refers mostly to the typical set-up of a web appl
 	\label{fig:multi-tier}
 	\includegraphics[width=0.5\textwidth]{./content/pictures/multi-tier.jpg}
 	\caption{Multi-Tier set-up. The tiers are physically separated.}
-	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}
+	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier\_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}
 \end{figure}
 
-\section{Software Project Management}
-\subsection{Waterfall}
-\subsection{Scrum}
-\subsection{Extreme Programming}
-
 \section{Technologies}
+\subsection{Java}
+This project is written in Java, an object oriented programming language released by Sun Microsystems in 1995  \footnote{\href{https://java.com/en/download/faq/whatis_java.xml}{https://java.com/en/download/faq/whatis\_java.xml}, accessed 7.9.2017}. In 2010 the company Oracle bought it and is developing and distributing the language since. It is split up into two main components, its development kit (JDK) and its runtime environment (JRE). The JRE is providing a virtual environment called Java Virtual Machine (JVM) which is used to run so-called Java Bytecode which is comparable to x86 assembler. This bytecode can be compiled from plain Java programs as well as other languages such as Scala or Groovy. 
+This approach helps reaching one major goal of the language: portability. Java bytecode can be executed on every platform, as long as a JRE is installed, which nowadays includes mobile phones, embedded platforms and with reduced functionality even smart cards \footnote{\href{http://www.oracle.com/technetwork/java/embedded/javacard/overview/index.html}{http://www.oracle.com/technetwork/java/embedded/javacard/overview/index.html}, accessed 7.9.2017}. 
+
+The JRE uses an interpreter and a just-in-time (JIT) compiler to generate native machine code that can be executed of the platforms processor. A JIT-Compiler generates the necessary machine code at runtime for some parts of the application. This can lead to significant performance improvements compared to the exclusive use of an interpreter.
+
+As of September 2017 according to the TIOBE-Index it is the most popular programming language with a share of more than 12\% \footnote{\href{https://www.tiobe.com/tiobe-index/}{https://www.tiobe.com/tiobe-index/}, accessed 7.9.2017}. 
 \subsection{Swing}
+
+Swing is a Graphical-User-Interface (GUI) Library for Java and was first published in 1997. It is rendered directly by Java thus it is not necessary for a platform to provide specific controls. However this leads to a significant difference to applications natively written for the platform as some control concepts may differ or buttons may be placed at other positions. This problem is bypassed by the introduction of different \emph{Look-and-Feels} which intend to adopt the application to be as similar to a native program as possible.
+
 \subsection{JavaFX}
+
+JavaFX is a framework \footnote{The main difference between a framework and a library is the so-called \emph{Inversion of Control}. While a library is called by the programmer, when using a framework it is in control and calls methods provided by the developer.} for GUI programming in Java and was released in 2014, replacing Swing as the main method for graphical programming. In opposite to Swing it implements its own multimedia-stack able to access graphics card feature through OpenGL and Windows Direct3D.  
+
 \subsection{PostgreSQL}
+
+
+
 \subsection{MongoDB}
 \subsection{Cached Controller}
 \newpage
