@@ -8,9 +8,8 @@ Therefore it is divided into three general areas:
 \item \textbf{Phase}: Each project exists of one or more phases that are used to monitor the progress of the project.
 \item \textbf{Activity}: A activity represents a workload that is done by a specific member in a specific phase for a specific project.
 \end{itemize}
-In order to be able to safely administer the system, three roles of members exist:
+In this application, two basic roles exist.
 \begin{itemize}
-\item \textbf{Administrator}: This member is responsible for creating and deleting users, resetting passwords and is allowed to perform all actions to project, phases, ect.
 \item \textbf{Project Leader}: A project leader has the responsibility of maintaining project specific data, such as description, phases and assigning project members. He is \emph{not} allowed to create new users. After creating a new project, one is automatically project leader. A project leader is allowed to monitor the statistics of his projects including the workloads of the project members
 \item \textbf{Member}: As a simple member one is allowed to add, delete and modify activities created by the user. A member is only allowed to perform this actions for projects he is assigned to. He is also only allowed to monitor his own statistics.
 \end{itemize}
@@ -32,13 +31,6 @@ The user has the possibility to reset his password by activating a button and pr
 \subsubsection{Project leader Use-Cases}
 \begin{enumerate}
 \item \textbf{Project statistics:} Other than normal users, a project leader can monitor the statistics of all of his projects by using the according button on the side bar. The main panel lists all projects he is leader of. After choosing one project he can choose the period he is interested in at the top of the panel. At the left side of the main window now all project members are listed. After choosing one or more project members, the time they spent working for the different phases of the project is listed at the center.
-\end{enumerate}
-
-
-\subsubsection{Administrator Use-Cases}
-\begin{enumerate}
-\item \textbf{Manage Projects:} As administrator it is possible to manage \emph{all} projects as he would be project leader.
-\item \textbf{Manage Users:} By clicking on the associated button, users can be managed, e.g. changing their passwords or create new users.
 \end{enumerate}
 
 
