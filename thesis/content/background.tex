@@ -135,10 +135,18 @@ Swing is a Graphical-User-Interface (GUI) Library for Java and was first publish
 
 JavaFX is a framework \footnote{The main difference between a framework and a library is the so-called \emph{Inversion of Control}. While a library is called by the programmer, when using a framework it is in control and calls methods provided by the developer.} for GUI programming in Java and was released in 2014, replacing Swing as the main method for graphical programming. In opposite to Swing it implements its own multimedia-stack able to access graphics card feature through OpenGL and Windows Direct3D.  
 
-\subsection{PostgreSQL}
+\subsection{Relational Databases and PostgreSQL}
 
+PostgreSQL is a open source object-relational database management system (ORDBMS) that was first published in 2002. Other than many database management systems it is focused on maintaining a good SQL standard compliance and is currently ranked as the 4th most popular engine. \footnote{ \href{https://www.postgresql.org/about/}{https://www.postgresql.org/about/}} \footnote{\href{https://db-engines.com/de/ranking}{https://db-engines.com/de/ranking}}
+
+Almost all database systems that are considered as relational use the Structured Query Language (SQL) or a dialect of it as language for querying and manipulating the database. Such a system is characterized by structuring the data into \emph{tables}, which consists of \emph{columns} and \emph{rows} (also: \emph{records}). Many systems require each row to have a unique identifier, also called \emph{primary key}. This key can consist of one or more columns per row, if more columns are considered it is also called \emph{composite key}. 
+
+If it is wanted to refer from one table row to the a record from another table a \emph{foreign key} is used which corresponds to the primary key of the original table. This is vital for maintaining the so-called \emph{referential integrity}, which indicates that all references have valid targets. Depending on the policy set in the database management system or specified in the foreign key definition of the table the deletion of a row that is referred by another record could be prevented.
 
 
 \subsection{MongoDB}
+As a prominent example for NoSQL\footnote{Not only SQL}-databases MongoDB is a database engine written in C++ and published in 2009. In opposite to relational databases it persists the data in \emph{documents} which are structured in a JSON\footnote{JavaScript Object Notation, a syntax for exchanging data which is easy to read for humans and efficiently processable by machines. It is build around key-value-pairs which can be nested.}-like manner. 
+
+Documents can be stored in \emph{collections} which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.
 \subsection{Cached Controller}
 \newpage
