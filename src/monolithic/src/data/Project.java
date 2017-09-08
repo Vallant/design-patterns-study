@@ -41,21 +41,7 @@ public class Project implements DBEntity
   private String description;
 
 
-  public int getLocalHash()
-  {
-    return new HashCodeBuilder()
-      .append(name.hashCode())
-      .append(id)
-      .append(description.hashCode())
-      .hashCode();
-  }
-
-  public int getRemoteHash()
-  {
-    return remoteHash;
-  }
-
-  public Project(int hash, int id, String name, String description)
+  private Project(int hash, int id, String name, String description)
   {
     this.remoteHash = hash;
     this.name = name;
@@ -67,131 +53,6 @@ public class Project implements DBEntity
   {
     this.name = name;
     this.description = description;
-  }
-
-
-  public int getHash()
-  {
-    return remoteHash;
-  }
-
-  public void setHash(int hash)
-  {
-    this.remoteHash = hash;
-  }
-
-  public String getName()
-  {
-    return name;
-  }
-
-  public void setName(String name)
-  {
-    this.name = name;
-  }
-
-  public String getDescription()
-  {
-    return description;
-  }
-
-  public void setDescription(String description)
-  {
-    this.description = description;
-  }
-
-
-  public boolean isChanged()
-  {
-    return getLocalHash() != getRemoteHash();
-  }
-
-
-  public void setRemoteHash(int hash)
-  {
-    this.remoteHash = hash;
-  }
-
-  public int getId()
-  {
-    return id;
-  }
-
-  public void setId(int id)
-  {
-    this.id = id;
-  }
-  
-  public void insertIntoDb(DBManagerPostgres db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "INSERT INTO PROJECT(HASH, NAME, "
-                   + "DESCRIPTION) "
-                   + "VALUES "
-                   + "(?, ?, ?)";
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-      int index = 1;
-      ps.setInt(index++, getLocalHash());
-      ps.setString(index++, getName());
-      ps.setString(index++, getDescription());
-
-      ps.executeUpdate();
-      ResultSet rs = ps.getGeneratedKeys();
-      if(rs.next())
-      {
-        int id = rs.getInt("ID");
-        setId(id);
-      }
-      setRemoteHash(getLocalHash());
-    }
-  }
-
-  public void updateInDb(DBManagerPostgres db) throws Exception
-  {
-
-    try(Connection con = db.getConnection())
-    {
-
-      String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
-                   + "WHERE ID = ? AND HASH = ?";
-      PreparedStatement ps = con.prepareStatement(sql);
-
-      int index = 1;
-      ps.setInt(index++, getLocalHash());
-      ps.setString(index++, getName());
-      ps.setString(index++, getDescription());
-
-      ps.setInt(index++, getId());
-      ps.setInt(index++, getRemoteHash());
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new Exception("Record has changed or was not found!");
-
-    }
-  }
-
-  public void delete(DBManagerPostgres db) throws Exception
-  {
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "DELETE FROM PROJECT "
-                   + "WHERE ID = ? AND HASH = ?";
-      PreparedStatement ps = con.prepareStatement(sql);
-      int index = 1;
-      ps.setInt(index++, getId());
-      ps.setInt(index++, getRemoteHash());
-
-      int numRowsAffected = ps.executeUpdate();
-      if(numRowsAffected == 0)
-        throw new Exception("Record has changed or was not found!");
-
-      setRemoteHash(getLocalHash());
-
-    }
   }
 
   public static Project getByPrimaryKey(int projectId, DBManagerPostgres db) throws Exception
@@ -287,6 +148,143 @@ public class Project implements DBEntity
 
     return new Project(hash, id, name, description);
   }
+
+  public int getLocalHash()
+  {
+    return new HashCodeBuilder()
+      .append(name.hashCode())
+      .append(id)
+      .append(description.hashCode())
+      .hashCode();
+  }
+
+  public int getRemoteHash()
+  {
+    return remoteHash;
+  }
+
+  public void setRemoteHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public int getHash()
+  {
+    return remoteHash;
+  }
+
+  public void setHash(int hash)
+  {
+    this.remoteHash = hash;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
+
+  public boolean isChanged()
+  {
+    return getLocalHash() != getRemoteHash();
+  }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  private void setId(int id)
+  {
+    this.id = id;
+  }
+
+  public void insertIntoDb(DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "INSERT INTO PROJECT(HASH, NAME, "
+                   + "DESCRIPTION) "
+                   + "VALUES "
+                   + "(?, ?, ?)";
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getName());
+      ps.setString(index++, getDescription());
+
+      ps.executeUpdate();
+      ResultSet rs = ps.getGeneratedKeys();
+      if(rs.next())
+      {
+        int id = rs.getInt("ID");
+        setId(id);
+      }
+      setRemoteHash(getLocalHash());
+    }
+  }
+
+  public void updateInDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+
+      String sql = "UPDATE PROJECT SET HASH = ?, NAME = ?, DESCRIPTION = ? "
+                   + "WHERE ID = ? AND HASH = ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      int index = 1;
+      ps.setInt(index++, getLocalHash());
+      ps.setString(index++, getName());
+      ps.setString(index++, getDescription());
+
+      ps.setInt(index++, getId());
+      ps.setInt(index++, getRemoteHash());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Record has changed or was not found!");
+
+    }
+  }
+
+  public void deleteFromDb(DBManagerPostgres db) throws Exception
+  {
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "DELETE FROM PROJECT "
+                   + "WHERE ID = ? AND HASH = ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setInt(index++, getId());
+      ps.setInt(index++, getRemoteHash());
+
+      int numRowsAffected = ps.executeUpdate();
+      if(numRowsAffected == 0)
+        throw new Exception("Record has changed or was not found!");
+
+      setRemoteHash(getLocalHash());
+
+    }
+  }
+
 }
 
 

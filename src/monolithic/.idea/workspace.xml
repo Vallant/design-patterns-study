@@ -105,12 +105,32 @@
       <file leaf-file-name="SideBarControllerStandard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/standard/SideBarControllerStandard.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="244">
               <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
               <folding>
                 <element signature="e#384#385#0" expanded="true" />
                 <element signature="e#420#421#0" expanded="true" />
                 <element signature="e#501#502#0" expanded="true" />
+=======
+            <state relative-caret-position="172">
+              <caret line="17" column="3" lean-forward="false" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+              <folding>
+                <marker date="1504904927261" expanded="false" signature="379:388" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="407:411" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="445:454" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="478:482" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="525:534" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="567:571" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="611:620" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="650:654" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="688:697" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="721:725" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="767:776" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="808:812" ph=" }" />
+                <marker date="1504904927261" expanded="false" signature="844:853" ph=" { " />
+                <marker date="1504904927261" expanded="false" signature="875:879" ph=" }" />
+>>>>>>> monoV1
               </folding>
             </state>
           </provider>
@@ -119,6 +139,7 @@
       <file leaf-file-name="ProjectControllerStandard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/standard/ProjectControllerStandard.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="189">
               <caret line="134" column="52" lean-forward="false" selection-start-line="134" selection-start-column="52" selection-end-line="134" selection-end-column="52" />
               <folding>
@@ -126,6 +147,12 @@
                 <element signature="e#1092#1093#0" expanded="true" />
                 <element signature="e#1143#1144#0" expanded="true" />
                 <element signature="e#1173#1174#0" expanded="true" />
+=======
+            <state relative-caret-position="-243">
+              <caret line="104" column="7" lean-forward="false" selection-start-line="104" selection-start-column="7" selection-end-line="104" selection-end-column="7" />
+              <folding>
+                <marker date="1504904927258" expanded="true" signature="6860:6907" ph="{...}" />
+>>>>>>> monoV1
               </folding>
             </state>
           </provider>
@@ -135,12 +162,21 @@
         <entry file="file://$PROJECT_DIR$/src/controller/standard/LoginControllerStandard.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
+<<<<<<< HEAD
               <caret line="174" column="0" lean-forward="true" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
               <folding>
                 <element signature="e#3239#3240#0" expanded="true" />
                 <element signature="e#3275#3276#0" expanded="true" />
                 <element signature="e#3324#3325#0" expanded="true" />
                 <element signature="e#3354#3355#0" expanded="true" />
+=======
+              <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+              <folding>
+                <marker date="1504904927258" expanded="true" signature="2208:2231" ph="{...}" />
+                <marker date="1504904927258" expanded="true" signature="2269:2487" ph="{...}" />
+                <marker date="1504904927258" expanded="false" signature="2534:2543" ph=" { " />
+                <marker date="1504904927258" expanded="false" signature="2562:2566" ph=" }" />
+>>>>>>> monoV1
               </folding>
             </state>
           </provider>
@@ -149,6 +185,7 @@
       <file leaf-file-name="ActivityBarControllerStandard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/standard/ActivityBarControllerStandard.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="334">
               <caret line="38" column="25" lean-forward="false" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
               <folding>
@@ -156,6 +193,12 @@
                 <element signature="e#895#896#0" expanded="true" />
                 <element signature="e#3591#3592#0" expanded="true" />
                 <element signature="e#3624#3625#0" expanded="true" />
+=======
+            <state relative-caret-position="424">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding>
+                <marker date="1504904927258" expanded="true" signature="2738:2784" ph="{...}" />
+>>>>>>> monoV1
               </folding>
             </state>
           </provider>
@@ -259,7 +302,6 @@
         <option value="$PROJECT_DIR$/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" />
         <option value="$PROJECT_DIR$/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" />
         <option value="$PROJECT_DIR$/src/db/postgres/repository/UserRepositoryPostgres.java" />
-        <option value="$PROJECT_DIR$/src/data/User.java" />
         <option value="$PROJECT_DIR$/src/db/common/DBManager.java" />
         <option value="$PROJECT_DIR$/src/data/Activity.java" />
         <option value="$PROJECT_DIR$/src/data/ProjectPhase.java" />
@@ -267,9 +309,7 @@
         <option value="$PROJECT_DIR$/src/db/common/DBManagerPostgres.java" />
         <option value="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
         <option value="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
         <option value="$PROJECT_DIR$/src/data/ProjectMember.java" />
-        <option value="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
         <option value="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
         <option value="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
         <option value="$PROJECT_DIR$/src/test/Main.java" />
@@ -284,11 +324,17 @@
         <option value="$PROJECT_DIR$/src/controller/standard/LoginControllerStandard.java" />
         <option value="$PROJECT_DIR$/src/controller/standard/SideBarControllerStandard.java" />
         <option value="$PROJECT_DIR$/src/controller/standard/PersonalStatisticControllerStandard.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/controller/standard/ProjectControllerStandard.java" />
         <option value="$PROJECT_DIR$/src/controller/standard/ProjectStatisticControllerStandard.java" />
         <option value="$PROJECT_DIR$/src/controller/standard/SettingsControllerStandard.java" />
         <option value="$PROJECT_DIR$/src/view/javafx/MainViewFX.java" />
         <option value="$PROJECT_DIR$/src/controller/standard/MainControllerStandard.java" />
+=======
+        <option value="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
+        <option value="$PROJECT_DIR$/src/data/User.java" />
+>>>>>>> monoV1
       </list>
     </option>
   </component>
@@ -401,6 +447,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
@@ -448,6 +495,8 @@
               <item name="view" type="462c0819:PsiDirectoryNode" />
               <item name="javafx" type="462c0819:PsiDirectoryNode" />
               <item name="projectstatistic" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> monoV1
             </path>
             <path>
               <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
@@ -615,7 +664,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="12322000" />
+=======
+    <option name="totallyTimeSpent" value="9594000" />
+>>>>>>> monoV1
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -664,11 +717,104 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectViewPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectDetailViewPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectDetailAddMemberPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectAddPhasePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/project/ProjectAddDialogPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticProjectPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticPhasePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticActivityTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> monoV1
     <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticActivityPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -704,9 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9">
           <caret line="25" column="25" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -714,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -722,6 +864,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
           <folding />
         </state>
       </provider>
@@ -1077,6 +1222,25 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/view/common/ViewManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/standard/MainControllerStandard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="262" column="16" lean-forward="false" selection-start-line="262" selection-start-column="16" selection-end-line="262" selection-end-column="16" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+>>>>>>> monoV1
     <entry file="file://$PROJECT_DIR$/src/view/common/ViewManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">

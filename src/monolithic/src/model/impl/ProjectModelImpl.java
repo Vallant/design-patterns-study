@@ -66,14 +66,14 @@ public class ProjectModelImpl
 
   public void leaveProject(ProjectMember member) throws Exception
   {
-    member.deleteInDb(mainModel.db());
+    member.deleteFromDb(mainModel.db());
     controller.refresh();
   }
 
 
   public void deleteProject(Project selectedProject) throws Exception
   {
-    selectedProject.delete(mainModel.db());
+    selectedProject.deleteFromDb(mainModel.db());
     controller.refresh();
     mainModel.refreshActivityBar();
 
@@ -136,7 +136,7 @@ public class ProjectModelImpl
 
   public void deleteMember(ProjectMember projectMember) throws Exception
   {
-    projectMember.deleteInDb(mainModel.db());
+    projectMember.deleteFromDb(mainModel.db());
     controller.refresh();
   }
 

@@ -35,39 +35,19 @@ public class User implements DBEntity
 {
 
 
-  public void setOldPassword(char[] oldPassword)
-  {
-    this.oldPassword = oldPassword;
-  }
-
-  public enum ROLE
-  {
-    ADMIN,
-    USER
-  }
-
   private int    remoteHash;
   private String loginName;
-
   private String firstName;
   private String lastName;
   private ROLE   role;
   private String email;
   private byte[] password;
   private byte[] salt;
-
   private char[] newPassword;
   private char[] newPasswordAgain;
-
-  public char[] getOldPassword()
-  {
-    return oldPassword;
-  }
-
   private char[] oldPassword;
-
-  public User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email,
-              byte[] password, byte[] salt)
+  private User(int remoteHash, String loginName, String firstName, String lastName, ROLE role, String email,
+               byte[] password, byte[] salt)
   {
     this.remoteHash = remoteHash;
     this.loginName = loginName;
@@ -103,6 +83,99 @@ public class User implements DBEntity
     this.newPasswordAgain = passwordAgain;
   }
 
+  public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                   + "FROM USERS "
+                   + "WHERE LOGIN_NAME = ?";
+
+      int index = 1;
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setString(index++, loginName);
+
+      ResultSet rs = ps.executeQuery();
+      if(!rs.next())
+        throw new Exception("No such record");
+
+      return extractUser(rs, db);
+    }
+  }
+
+  public static ArrayList<User> getAvailableUsersFor(int projectId, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<User> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT USERS.HASH, USERS.FIRST_NAME, USERS.LAST_NAME, USERS.ROLE, " +
+                   "USERS.SALT, USERS.PASSWORD, USERS.LOGIN_NAME, USERS.EMAIL " +
+                   "FROM USERS " +
+                   "RIGHT JOIN PROJECT_MEMBERS " +
+                   "ON PROJECT_MEMBERS.USER_LOGIN_NAME = USERS.LOGIN_NAME " +
+                   "WHERE PROJECT_MEMBERS.PROJECT_ID IS NULL OR PROJECT_MEMBERS.PROJECT_ID != ?";
+      PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setInt(index++, projectId);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        User u = extractUser(rs, db);
+        l.add(u);
+      }
+    }
+    return l;
+  }
+
+  public static List<User> getAll(DBManagerPostgres db) throws Exception
+  {
+    ArrayList<User> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
+                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
+                   + "FROM USERS ";
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        User u = extractUser(rs, db);
+        l.add(u);
+      }
+    }
+    return l;
+  }
+
+  private static User extractUser(ResultSet rs, DBManagerPostgres db) throws Exception
+  {
+    int hash = rs.getInt("HASH");
+    String firstName = rs.getString("FIRST_NAME");
+    String lastName = rs.getString("LAST_NAME");
+    String role = rs.getString("ROLE");
+    byte[] salt = rs.getBytes("SALT");
+    byte[] password = rs.getBytes("PASSWORD");
+    String loginName = rs.getString("LOGIN_NAME");
+    String email = rs.getString("EMAIL");
+
+    return new User(hash, loginName, firstName, lastName,
+      User.ROLE.valueOf(role), email, password, salt);
+  }
+
+  public char[] getOldPassword()
+  {
+    return oldPassword;
+  }
+
+  public void setOldPassword(char[] oldPassword)
+  {
+    this.oldPassword = oldPassword;
+  }
+
   public char[] getNewPasswordAgain()
   {
     return newPasswordAgain;
@@ -127,7 +200,6 @@ public class User implements DBEntity
   {
     this.salt = salt;
   }
-
 
   public String getLoginName()
   {
@@ -179,12 +251,10 @@ public class User implements DBEntity
     this.email = email;
   }
 
-
   public boolean isChanged()
   {
     return getLocalHash() != getRemoteHash();
   }
-
 
   public int getLocalHash()
   {
@@ -197,12 +267,10 @@ public class User implements DBEntity
       hashCode();
   }
 
-
   public int getRemoteHash()
   {
     return remoteHash;
   }
-
 
   public void setRemoteHash(int hash)
   {
@@ -218,7 +286,6 @@ public class User implements DBEntity
   {
     this.newPassword = newPassword;
   }
-
 
   public void insertIntoDb(DBManagerPostgres db) throws Exception
   {
@@ -244,7 +311,6 @@ public class User implements DBEntity
       setRemoteHash(getLocalHash());
     }
   }
-
 
   public void updateInDb(DBManagerPostgres db) throws Exception
   {
@@ -276,8 +342,7 @@ public class User implements DBEntity
     }
   }
 
-
-  public void delete(DBManagerPostgres db) throws Exception
+  public void deleteFromDb(DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
     {
@@ -296,89 +361,9 @@ public class User implements DBEntity
     }
   }
 
-
-  public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception
+  public enum ROLE
   {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
-                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
-                   + "FROM USERS "
-                   + "WHERE LOGIN_NAME = ?";
-
-      int index = 1;
-      PreparedStatement ps = con.prepareStatement(sql);
-      ps.setString(index++, loginName);
-
-      ResultSet rs = ps.executeQuery();
-      if(!rs.next())
-        throw new Exception("No such record");
-
-      return extractUser(rs, db);
-    }
-  }
-
-
-  public static ArrayList<User> getAvailableUsersFor(int projectId, DBManagerPostgres db) throws Exception
-  {
-    ArrayList<User> l = new ArrayList<>();
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT USERS.HASH, USERS.FIRST_NAME, USERS.LAST_NAME, USERS.ROLE, " +
-                   "USERS.SALT, USERS.PASSWORD, USERS.LOGIN_NAME, USERS.EMAIL " +
-                   "FROM USERS " +
-                   "RIGHT JOIN PROJECT_MEMBERS " +
-                   "ON PROJECT_MEMBERS.USER_LOGIN_NAME = USERS.LOGIN_NAME " +
-                   "WHERE PROJECT_MEMBERS.PROJECT_ID IS NULL OR PROJECT_MEMBERS.PROJECT_ID != ?";
-      PreparedStatement ps = con.prepareStatement(sql);
-      int index = 1;
-      ps.setInt(index++, projectId);
-
-      ResultSet rs = ps.executeQuery();
-      while(rs.next())
-      {
-        User u = extractUser(rs, db);
-        l.add(u);
-      }
-    }
-    return l;
-  }
-
-
-  public static List<User> getAll(DBManagerPostgres db) throws Exception
-  {
-    ArrayList<User> l = new ArrayList<>();
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT HASH, FIRST_NAME, LAST_NAME, ROLE, "
-                   + "SALT, PASSWORD, LOGIN_NAME, EMAIL "
-                   + "FROM USERS ";
-      PreparedStatement ps = con.prepareStatement(sql);
-
-      ResultSet rs = ps.executeQuery();
-      while(rs.next())
-      {
-        User u = extractUser(rs, db);
-        l.add(u);
-      }
-    }
-    return l;
-  }
-
-  private static User extractUser(ResultSet rs, DBManagerPostgres db) throws Exception
-  {
-    int hash = rs.getInt("HASH");
-    String firstName = rs.getString("FIRST_NAME");
-    String lastName = rs.getString("LAST_NAME");
-    String role = rs.getString("ROLE");
-    byte[] salt = rs.getBytes("SALT");
-    byte[] password = rs.getBytes("PASSWORD");
-    String loginName = rs.getString("LOGIN_NAME");
-    String email = rs.getString("EMAIL");
-
-    return new User(hash, loginName, firstName, lastName,
-      User.ROLE.valueOf(role), email, password, salt);
+    ADMIN,
+    USER
   }
 }
