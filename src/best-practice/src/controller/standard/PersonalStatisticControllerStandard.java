@@ -1,4 +1,4 @@
-package controller.swing;
+package controller.standard;
 
 import controller.interfaces.PersonalStatisticController;
 import data.Activity;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by stephan on 17/07/17.
  */
-public class PersonalStatisticControllerSwing implements PersonalStatisticController
+public class PersonalStatisticControllerStandard implements PersonalStatisticController
 {
   private PersonalStatisticModel model;
   private PersonalStatisticView  view;
@@ -27,7 +27,7 @@ public class PersonalStatisticControllerSwing implements PersonalStatisticContro
   private Project                 detailProject;
   private ProjectPhase            detailPhase;
 
-  public PersonalStatisticControllerSwing()
+  public PersonalStatisticControllerStandard()
   {
 
   }

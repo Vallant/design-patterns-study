@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.swing;
+package controller.standard;
 
 import controller.interfaces.LoginController;
 import data.User;
@@ -16,12 +16,12 @@ import java.util.Arrays;
 /**
  * @author stephan
  */
-public class LoginControllerSwing implements LoginController
+public class LoginControllerStandard implements LoginController
 {
   private LoginView  view;
   private LoginModel model;
 
-  public LoginControllerSwing()
+  public LoginControllerStandard()
   {
 
   }

@@ -1,4 +1,4 @@
-package controller.swing;
+package controller.standard;
 
 import controller.interfaces.SideBarController;
 import model.interfaces.SideBarModel;
@@ -7,7 +7,7 @@ import view.interfaces.SideBarView;
 /**
  * Created by stephan on 08.07.17.
  */
-public class SideBarControllerSwing implements SideBarController
+public class SideBarControllerStandard implements SideBarController
 {
   private SideBarView  view;
   private SideBarModel model;

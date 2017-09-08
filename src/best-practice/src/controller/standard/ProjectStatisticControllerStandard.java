@@ -1,4 +1,4 @@
-package controller.swing;
+package controller.standard;
 
 import controller.interfaces.ProjectStatisticController;
 import data.Activity;
@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-public class ProjectStatisticControllerSwing implements ProjectStatisticController
+public class ProjectStatisticControllerStandard implements ProjectStatisticController
 {
 
   private ArrayList<Project>       projects;

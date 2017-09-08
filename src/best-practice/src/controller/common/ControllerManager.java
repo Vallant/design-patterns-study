@@ -6,7 +6,7 @@
 package controller.common;
 
 import controller.interfaces.MainController;
-import controller.swing.MainControllerSwing;
+import controller.standard.MainControllerStandard;
 
 /**
  * @author stephan
@@ -20,8 +20,8 @@ public class ControllerManager
     assert (controller == null);
     switch(frontend)
     {
-      case "swing":
-        controller = new MainControllerSwing();
+      case "standard":
+        controller = new MainControllerStandard();
         break;
       default:
         throw new UnsupportedOperationException();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.swing;
+package controller.standard;
 
 import controller.interfaces.*;
 import data.User;
@@ -14,7 +14,7 @@ import view.interfaces.MainView;
 /**
  * @author stephan
  */
-public class MainControllerSwing implements MainController
+public class MainControllerStandard implements MainController
 {
   private final LoginController             login;
   private final ActivityBarController       activityBar;
@@ -26,15 +26,15 @@ public class MainControllerSwing implements MainController
   private MainView  mainView;
   private MainModel mainModel;
 
-  public MainControllerSwing()
+  public MainControllerStandard()
   {
-    login = new LoginControllerSwing();
-    project = new ProjectControllerSwing();
-    activityBar = new ActivityBarControllerSwing();
-    sideBar = new SideBarControllerSwing();
-    personalStatistic = new PersonalStatisticControllerSwing();
-    projectStatistic = new ProjectStatisticControllerSwing();
-    settings = new SettingsControllerSwing();
+    login = new LoginControllerStandard();
+    project = new ProjectControllerStandard();
+    activityBar = new ActivityBarControllerStandard();
+    sideBar = new SideBarControllerStandard();
+    personalStatistic = new PersonalStatisticControllerStandard();
+    projectStatistic = new ProjectStatisticControllerStandard();
+    settings = new SettingsControllerStandard();
   }
 
   @Override
