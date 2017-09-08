@@ -31,7 +31,7 @@ public class MainModelImpl
 
   private final DBManagerMongo    dbMongo;
   private       User              user;
-  private final DBManagerPostgres dbPostre;
+  private final DBManagerPostgres dbPostres;
 
 
   private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
@@ -40,11 +40,11 @@ public class MainModelImpl
     if(driver.equals("mongo"))
     {
       dbMongo = new DBManagerMongo(url, username, password);
-      dbPostre = null;
+      dbPostres = null;
     }
     else
     {
-      dbPostre = new DBManagerPostgres(driver, url, username, password);
+      dbPostres = new DBManagerPostgres(driver, url, username, password);
       dbMongo = null;
     }
 
@@ -156,9 +156,9 @@ public class MainModelImpl
   }
 
 
-  public DBManagerPostgres dbPostgre()
+  public DBManagerPostgres dbPostgres()
   {
-    return dbPostre;
+    return dbPostres;
   }
 
   public DBManagerMongo dbMongo()

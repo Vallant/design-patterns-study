@@ -40,8 +40,8 @@ public class LoginModelImpl
   public void login(String username, char[] password) throws Exception
   {
     User u = null;
-    if(mainModel.dbPostgre() != null)
-      u = User.getByPrimaryKey(username, mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      u = User.getByPrimaryKey(username, mainModel.dbPostgres());
     else
       u = User.getByPrimaryKey(username, mainModel.dbMongo());
 
@@ -68,8 +68,8 @@ public class LoginModelImpl
     user.setPassword(generateSecret.getEncoded());
     user.setSalt(salt);
 
-    if(mainModel.dbPostgre() != null)
-      user.insertIntoDb(mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      user.insertIntoDb(mainModel.dbPostgres());
     else
       user.insertIntoDb(mainModel.dbMongo());
 

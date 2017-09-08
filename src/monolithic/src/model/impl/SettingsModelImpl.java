@@ -68,8 +68,8 @@ public class SettingsModelImpl
     user.setNewPassword(null);
 
 
-    if(mainModel.dbPostgre() != null)
-      user.updateInDb(mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      user.updateInDb(mainModel.dbPostgres());
     else
       user.updateInDb(mainModel.dbMongo());
 

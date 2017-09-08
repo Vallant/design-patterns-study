@@ -73,8 +73,8 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjectPhasesFor(String project) throws Exception
   {
-    if(mainModel.dbPostgre() != null)
-      return ProjectPhase.getNamesByProjectName(project, mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      return ProjectPhase.getNamesByProjectName(project, mainModel.dbPostgres());
     else
       return ProjectPhase.getNamesByProjectName(project, mainModel.dbMongo());
 
@@ -89,8 +89,8 @@ public class ActivityBarModelImpl
 
   public ArrayList<String> getProjects() throws Exception
   {
-    if(mainModel.dbPostgre() != null)
-      return Project.getProjectsByUserName(user.getLoginName(), mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      return Project.getProjectsByUserName(user.getLoginName(), mainModel.dbPostgres());
     else
     {
       ArrayList<String> list = new ArrayList<>();
@@ -110,11 +110,11 @@ public class ActivityBarModelImpl
     controller.stopTimer();
     controller.enableComboBoxes();
 
-    if(mainModel.dbPostgre() != null)
+    if(mainModel.dbPostgres() != null)
     {
-      ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.dbPostgre());
+      ProjectPhase projectPhase = ProjectPhase.getByProjectAndPhaseName(projectName, projectPhaseName, mainModel.dbPostgres());
       Activity activity = new Activity(projectPhase, user, description, start, stop, comment);
-      activity.insertIntoDb(mainModel.dbPostgre());
+      activity.insertIntoDb(mainModel.dbPostgres());
     }
     else
     {

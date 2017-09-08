@@ -34,8 +34,8 @@ public class ProjectStatisticModelImpl
 
     ZonedDateTime since = subtract(period);
 
-    if(mainModel.dbPostgre() != null)
-      Activity.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      Activity.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.dbPostgres());
     else
       Activity.getOwnedProjectsAndWorkloadSince(user.getLoginName(), since, projects, durations, mainModel.dbMongo());
     controller.setProjectData(projects, durations);
@@ -52,16 +52,16 @@ public class ProjectStatisticModelImpl
 
     if(selectedUser == null)
     {
-      if(mainModel.dbPostgre() != null)
-        activities = Activity.getActivitiesByUserForPhaseSince("", phaseId, since, mainModel.dbPostgre());
+      if(mainModel.dbPostgres() != null)
+        activities = Activity.getActivitiesByUserForPhaseSince("", phaseId, since, mainModel.dbPostgres());
       else
         activities = Activity.getActivitiesByUserForPhaseSince("", phaseId, since, mainModel.dbMongo());
     }
 
     else
     {
-      if(mainModel.dbPostgre() != null)
-        activities = Activity.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since, mainModel.dbPostgre());
+      if(mainModel.dbPostgres() != null)
+        activities = Activity.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since, mainModel.dbPostgres());
       else
         activities = Activity.getActivitiesByUserForPhaseSince(selectedUser.getUserLoginName(), phaseId, since,
           mainModel.dbMongo());
@@ -83,24 +83,24 @@ public class ProjectStatisticModelImpl
 
     if(selectedUser == null)
     {
-      if(mainModel.dbPostgre() != null)
-        Activity.getPhasesAndWorkloadForUserSince("", projectId, since, phases, durations, mainModel.dbPostgre());
+      if(mainModel.dbPostgres() != null)
+        Activity.getPhasesAndWorkloadForUserSince("", projectId, since, phases, durations, mainModel.dbPostgres());
       else
         Activity.getPhasesAndWorkloadForUserSince("", projectId, since, phases, durations, mainModel.dbMongo());
     }
     else
     {
-      if(mainModel.dbPostgre() != null)
+      if(mainModel.dbPostgres() != null)
         Activity.getPhasesAndWorkloadForUserSince(selectedUser.getUserLoginName(), projectId, since, phases, durations,
-          mainModel.dbPostgre());
+          mainModel.dbPostgres());
       else
         Activity.getPhasesAndWorkloadForUserSince(selectedUser.getUserLoginName(), projectId, since, phases, durations,
           mainModel.dbMongo());
     }
 
 
-    if(mainModel.dbPostgre() != null)
-      members = ProjectMember.getMembersByProjectId(projectId, mainModel.dbPostgre());
+    if(mainModel.dbPostgres() != null)
+      members = ProjectMember.getMembersByProjectId(projectId, mainModel.dbPostgres());
     else
       members = ProjectMember.getMembersByProjectId(projectId, mainModel.dbMongo());
     controller.setPhaseData(members, phases, durations);
