@@ -34,7 +34,7 @@ public class PersonalStatisticModelImpl
 
   public void deleteActivity(Activity toDelete) throws Exception
   {
-    toDelete.deleteInDb(mainModel.db());
+    toDelete.deleteFromDb(mainModel.db());
     controller.refresh();
   }
 

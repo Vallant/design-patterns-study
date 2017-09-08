@@ -41,7 +41,7 @@ public class ProjectPhase implements DBEntity
   private String  name;
   private int     id;
 
-  public ProjectPhase(int hash, Project project, String name, int id)
+  private ProjectPhase(int hash, Project project, String name, int id)
   {
     this.remoteHash = hash;
     this.project = project;
@@ -55,12 +55,135 @@ public class ProjectPhase implements DBEntity
     this.name = name;
   }
 
+  public static ProjectPhase getByPrimaryKey(int id, DBManagerPostgres db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES "
+                   + "WHERE ID = ?";
+
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      int index = 1;
+      ps.setInt(index++, id);
+      ResultSet rs = ps.executeQuery();
+
+      if(!rs.next())
+        throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id));
+
+      return extractPhase(rs, db);
+    }
+  }
+
+  public static ArrayList<ProjectPhase> getByProjectId(int projectId, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectPhase> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES " +
+                   "WHERE PROJECT_ID = ?";
+
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      int index = 1;
+      ps.setInt(index++, projectId);
+
+      ResultSet rs = ps.executeQuery();
+
+      while(rs.next())
+      {
+        ProjectPhase phase = extractPhase(rs, db);
+        l.add(phase);
+      }
+    }
+    return l;
+  }
+
+  public static ArrayList<String> getNamesByProjectName(String projectName, DBManagerPostgres db) throws Exception
+  {
+    ArrayList<String> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT PROJECT_PHASES.NAME FROM PROJECT_PHASES " +
+                   "JOIN PROJECT ON PROJECT.NAME = ? " +
+                   "WHERE PROJECT_PHASES.PROJECT_ID = PROJECT.ID ";
+
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      int index = 1;
+      ps.setString(index++, projectName);
+
+      ResultSet rs = ps.executeQuery();
+
+      while(rs.next())
+      {
+        String name = rs.getString("NAME");
+
+        l.add(name);
+      }
+    }
+    return l;
+  }
+
+  public static ProjectPhase getByProjectAndPhaseName(String projectName, String projectPhaseName, DBManagerPostgres
+    db) throws Exception
+  {
+    try(Connection con = db.getConnection())
+    {
+      String sql =
+        "SELECT PROJECT_PHASES.HASH, PROJECT_PHASES.ID, PROJECT_PHASES.PROJECT_ID, PROJECT_PHASES.NAME FROM " +
+        "PROJECT_PHASES " +
+        "JOIN PROJECT ON PROJECT.NAME = ? " +
+        "WHERE PROJECT_PHASES.NAME = ?";
+
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      int index = 1;
+      ps.setString(index++, projectName);
+      ps.setString(index++, projectPhaseName);
+      ResultSet rs = ps.executeQuery();
+
+      if(!rs.next())
+        throw new Exception("Element not found");
+      //throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id)); //TODO change to correct output
+
+      return extractPhase(rs, db);
+    }
+  }
+
+  public static List<ProjectPhase> getAll(DBManagerPostgres db) throws Exception
+  {
+    ArrayList<ProjectPhase> l = new ArrayList<>();
+
+    try(Connection con = db.getConnection())
+    {
+      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES ";
+
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      ResultSet rs = ps.executeQuery();
+      while(rs.next())
+      {
+        ProjectPhase phase = extractPhase(rs, db);
+        l.add(phase);
+      }
+    }
+    return l;
+  }
+
+  private static ProjectPhase extractPhase(ResultSet rs, DBManagerPostgres db) throws Exception
+  {
+    int hash = rs.getInt("HASH");
+    int id = rs.getInt("ID");
+    int projectId = rs.getInt("PROJECT_ID");
+    String name = rs.getString("NAME");
+
+    Project project = Project.getByPrimaryKey(projectId, db);
+
+    return new ProjectPhase(hash, project, name, id);
+  }
 
   public boolean isChanged()
   {
     return getLocalHash() != getRemoteHash();
   }
-
 
   public int getLocalHash()
   {
@@ -91,19 +214,17 @@ public class ProjectPhase implements DBEntity
     this.name = name;
   }
 
-
   public int getRemoteHash()
   {
     return remoteHash;
   }
-
 
   public void setRemoteHash(int hash)
   {
     remoteHash = hash;
   }
 
-  public String getProjectName()
+  private String getProjectName()
   {
     return project.getName();
   }
@@ -118,7 +239,7 @@ public class ProjectPhase implements DBEntity
     return id;
   }
 
-  public void setId(int id)
+  private void setId(int id)
   {
     this.id = id;
   }
@@ -176,7 +297,6 @@ public class ProjectPhase implements DBEntity
     }
   }
 
-
   public void deleteFromDb(DBManagerPostgres db) throws Exception
   {
     try(Connection con = db.getConnection())
@@ -195,135 +315,6 @@ public class ProjectPhase implements DBEntity
       setRemoteHash(getLocalHash());
 
     }
-  }
-
-  public static ProjectPhase getByPrimaryKey(int id, DBManagerPostgres db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES "
-                   + "WHERE ID = ?";
-
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      int index = 1;
-      ps.setInt(index++, id);
-      ResultSet rs = ps.executeQuery();
-
-      if(!rs.next())
-        throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id));
-
-      return extractPhase(rs, db);
-    }
-  }
-
-
-  public static ArrayList<ProjectPhase> getByProjectId(int projectId, DBManagerPostgres db) throws Exception
-  {
-    ArrayList<ProjectPhase> l = new ArrayList<>();
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES " +
-                   "WHERE PROJECT_ID = ?";
-
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      int index = 1;
-      ps.setInt(index++, projectId);
-
-      ResultSet rs = ps.executeQuery();
-
-      while(rs.next())
-      {
-        ProjectPhase phase = extractPhase(rs, db);
-        l.add(phase);
-      }
-    }
-    return l;
-  }
-
-
-  public static ArrayList<String> getNamesByProjectName(String projectName, DBManagerPostgres db) throws Exception
-  {
-    ArrayList<String> l = new ArrayList<>();
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT PROJECT_PHASES.NAME FROM PROJECT_PHASES " +
-                   "JOIN PROJECT ON PROJECT.NAME = ? " +
-                   "WHERE PROJECT_PHASES.PROJECT_ID = PROJECT.ID ";
-
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      int index = 1;
-      ps.setString(index++, projectName);
-
-      ResultSet rs = ps.executeQuery();
-
-      while(rs.next())
-      {
-        String name = rs.getString("NAME");
-
-        l.add(name);
-      }
-    }
-    return l;
-  }
-
-
-  public static ProjectPhase getByProjectAndPhaseName(String projectName, String projectPhaseName, DBManagerPostgres
-    db) throws Exception
-  {
-    try(Connection con = db.getConnection())
-    {
-      String sql =
-        "SELECT PROJECT_PHASES.HASH, PROJECT_PHASES.ID, PROJECT_PHASES.PROJECT_ID, PROJECT_PHASES.NAME FROM " +
-        "PROJECT_PHASES " +
-        "JOIN PROJECT ON PROJECT.NAME = ? " +
-        "WHERE PROJECT_PHASES.NAME = ?";
-
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      int index = 1;
-      ps.setString(index++, projectName);
-      ps.setString(index++, projectPhaseName);
-      ResultSet rs = ps.executeQuery();
-
-      if(!rs.next())
-        throw new Exception("Element not found");
-      //throw new ElementNotFoundException("ProjectPhase", "ID", Integer.toString(id)); //TODO change to correct output
-
-      return extractPhase(rs, db);
-    }
-  }
-
-
-  public static List<ProjectPhase> getAll(DBManagerPostgres db) throws Exception
-  {
-    ArrayList<ProjectPhase> l = new ArrayList<>();
-
-    try(Connection con = db.getConnection())
-    {
-      String sql = "SELECT HASH, ID, PROJECT_ID, NAME FROM PROJECT_PHASES ";
-
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      ResultSet rs = ps.executeQuery();
-      while(rs.next())
-      {
-        ProjectPhase phase = extractPhase(rs, db);
-        l.add(phase);
-      }
-    }
-    return l;
-  }
-
-  private static ProjectPhase extractPhase(ResultSet rs, DBManagerPostgres db) throws Exception
-  {
-    int hash = rs.getInt("HASH");
-    int id = rs.getInt("ID");
-    int projectId = rs.getInt("PROJECT_ID");
-    String name = rs.getString("NAME");
-
-    Project project = Project.getByPrimaryKey(projectId, db);
-
-    return new ProjectPhase(hash, project, name, id);
   }
 
 
