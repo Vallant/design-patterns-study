@@ -21,6 +21,7 @@ public class ProjectStatisticControllerStandard
 
   private ArrayList<ProjectPhase> phases;
   private ProjectPhase            currentPhase;
+  private Project                  currentProject;
 
   private ArrayList<Activity> activities;
 
@@ -45,13 +46,14 @@ public class ProjectStatisticControllerStandard
     {
       model.projectPeriodChanged(view.getSelectedProjectPeriod());
       if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUser() == 0,
-          members.get(view.getSelectedUser()));
+        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
+          view.getSelectedUserPhase() == 0,
+          members.get(view.getSelectedUserPhase()));
       if(activities != null)
       {
         assert currentPhase != null;
         model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(),
-          view.getSelectedUser() == 0, members.get(view.getSelectedUser()));
+          view.getSelectedUserActivity() == 0, members.get(view.getSelectedUserActivity()));
       }
     }
     catch(Exception e)
@@ -65,9 +67,12 @@ public class ProjectStatisticControllerStandard
   {
     try
     {
-      if(members != null && currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0,
-          members.get(selectedPeriodIndex));
+      if(selectedPeriodIndex == -1 || selectedUserIndex == -1)
+        return;
+
+      if(members != null)
+        model.phaseDropDownChanged(currentProject.getId(), selectedPeriodIndex, selectedUserIndex == 0,
+          members.get(selectedUserIndex));
     }
     catch(Exception e)
     {
@@ -95,8 +100,10 @@ public class ProjectStatisticControllerStandard
   {
     try
     {
+      if(selectedPeriodIndex == -1 || selectedUserIndex == -1)
+        return;
       model.activityDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0,
-        members.get(selectedPeriodIndex));
+        members.get(selectedUserIndex));
     }
     catch(Exception e)
     {
@@ -106,7 +113,7 @@ public class ProjectStatisticControllerStandard
   }
 
 
-  private void showProjectView()
+  public void showProjectView()
   {
     view.showProjectView();
     refresh();
@@ -137,6 +144,7 @@ public class ProjectStatisticControllerStandard
   {
     this.phases = phases;
     this.members = members;
+    this.members.add(0, null);
     ArrayList<String> phaseNames = new ArrayList<>();
 
     for(ProjectPhase pp : phases)
@@ -147,7 +155,9 @@ public class ProjectStatisticControllerStandard
     ArrayList<String> memberNames = new ArrayList<>();
     for(ProjectMember pm : members)
     {
-      memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+      if(pm != null)
+        memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+
     }
 
     view.setPhaseData(phaseNames, durations, memberNames);
@@ -180,7 +190,9 @@ public class ProjectStatisticControllerStandard
     ArrayList<String> memberNames = new ArrayList<>();
     for(ProjectMember pm : members)
     {
-      memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+      if(pm != null)
+        memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+
     }
 
     view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
@@ -203,6 +215,10 @@ public class ProjectStatisticControllerStandard
 
   public void backToProjectClicked()
   {
+    currentPhase = null;
+    currentProject = null;
+    activities = null;
+    phases = null;
     showProjectView();
   }
 

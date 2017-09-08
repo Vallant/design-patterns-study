@@ -12,21 +12,18 @@ import java.util.ArrayList;
 class ProjectStatisticPhasePanel extends JPanel
 {
 
-  private final JPanel pHeader;
-
   final JComboBox<String> cbPeriod;
   final JComboBox<String> cbMembers;
 
-  final         ProjectStatisticTableModel tblPhaseModel;
-  final         JTable                     tblPhases;
-  private final JScrollPane                scrpTable;
-  final         JButton                    btBack;
+  final ProjectStatisticTableModel tblPhaseModel;
+  final JTable                     tblPhases;
+  final JButton                    btBack;
 
   public ProjectStatisticPhasePanel()
   {
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
-    this.pHeader = new JPanel(new FlowLayout(5));
+    JPanel pHeader = new JPanel(new FlowLayout(5));
 
     this.cbPeriod = new JComboBox<>();
     cbPeriod.addItem("All Time");
@@ -43,7 +40,7 @@ class ProjectStatisticPhasePanel extends JPanel
 
     this.tblPhaseModel = new ProjectStatisticTableModel("Phasename");
     this.tblPhases = new JTable(tblPhaseModel);
-    scrpTable = new JScrollPane(tblPhases);
+    JScrollPane scrpTable = new JScrollPane(tblPhases);
 
     tblPhases.setBorder(new LineBorder(Color.black, 1));
     pHeader.add(btBack);

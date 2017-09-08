@@ -38,8 +38,9 @@ public class ProjectStatisticViewSwing
       actionEvent -> controller.projectPeriodChanged(pProject.cbPeriod.getSelectedIndex()));
     pPhase.cbPeriod.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
       pPhase.cbMembers.getSelectedIndex()));
-    pPhase.cbMembers.addActionListener(actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
-      pPhase.cbMembers.getSelectedIndex()));
+    pPhase.cbMembers.addActionListener(
+      actionEvent -> controller.phaseDropDownChanged(pPhase.cbPeriod.getSelectedIndex(),
+        pPhase.cbMembers.getSelectedIndex()));
 
     pActivity.cbPeriod.addActionListener(actionEvent -> controller.activityDropDownChanged(
       pActivity.cbPeriod.getSelectedIndex(),
@@ -136,6 +137,7 @@ public class ProjectStatisticViewSwing
     pPhase.tblPhaseModel.setFirstColumnContent(phaseNames);
     pPhase.tblPhaseModel.setWorkloadContent(durations);
     pPhase.setMemberNames(memberNames);
+    pPhase.tblPhases.updateUI();
     frame.revalidate();
     frame.repaint();
   }
@@ -160,6 +162,7 @@ public class ProjectStatisticViewSwing
   {
     pActivity.tblActivityModel.setValues(users, descriptions, comments, startTimes, endTimes);
     pActivity.setMembers(memberNames);
+    pActivity.tblActivity.updateUI();
   }
 
 
@@ -181,9 +184,9 @@ public class ProjectStatisticViewSwing
   }
 
 
-  public int getSelectedUser()
+  public int getSelectedUserPhase()
   {
-    throw new NotImplementedException();
+    return pPhase.cbMembers.getSelectedIndex();
   }
 
 
@@ -196,5 +199,10 @@ public class ProjectStatisticViewSwing
   public void showError(String error)
   {
     JOptionPane.showMessageDialog(frame, error, "Error", JOptionPane.ERROR_MESSAGE);
+  }
+
+  public int getSelectedUserActivity()
+  {
+    return pActivity.cbMembers.getSelectedIndex();
   }
 }

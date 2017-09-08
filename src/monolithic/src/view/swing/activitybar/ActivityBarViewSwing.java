@@ -151,13 +151,9 @@ public class ActivityBarViewSwing
       String phase = (String) pMain.cbPhase.getSelectedItem();
       controller.activityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
     }
-    else if(JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?", "Confirmation",
-      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
-    {
-      showCommentDescriptionDialog();
-    }
     else
-      controller.discardActivity();
+      showFinishActivityDialog();
+
     dialogPanel.tfComment.setText("");
     dialogPanel.tfDescription.setText("");
   }

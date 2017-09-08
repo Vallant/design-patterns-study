@@ -12,40 +12,20 @@ import java.util.ArrayList;
  */
 class ProjectDetailViewPanel extends JPanel
 {
-  private final JPanel  pHeader;
   final         JButton btBack;
-  private final JLabel  lbProjectName;
-
-  private final JPanel pCenter;
-
-  private final JPanel                   pFlowPanel1;
-  private final JPanel                   pPhases;
-  private final JPanel                   pPhasesHeader;
-  //final JLabel lbPhases;
-  private final JPanel                   pPhasesButtons;
   final         JButton                  btAddPhase;
   final         JButton                  btDeletePhase;
-  private final DefaultListModel<String> lstPhasesModel;
   final         JList<String>            lstPhases;
-
-  private final JPanel  pFlowPanel2;
-  private final JPanel  pMembers;
-  private final JPanel  pMembersHeader;
-  //final JLabel lbMembers;
-  private final JPanel  pMembersButtons;
-  final         JButton btAddMember;
-  final         JButton btDeleteMember;
-  final         JButton btPromoteToAdmin;
-  final         JButton btDegradeToMember;
-
-  private final DefaultListModel<String> lstMemberModel;
+  final JButton btAddMember;
+  final JButton btDeleteMember;
+  final JButton btPromoteToAdmin;
+  final JButton btDegradeToMember;
   final         JList                    lstMembers;
-
-  private final JPanel    pDescription;
-  private final JPanel    pFlowPanel3;
-  private final JPanel    pDescriptionButtons;
-  final         JTextArea taDescription;
-  final         JButton   btUpdateDescription;
+  final JTextArea taDescription;
+  final JButton   btUpdateDescription;
+  private final JLabel  lbProjectName;
+  private final DefaultListModel<String> lstPhasesModel;
+  private final DefaultListModel<String> lstMemberModel;
 
 
   public ProjectDetailViewPanel()
@@ -53,17 +33,17 @@ class ProjectDetailViewPanel extends JPanel
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
     //setPreferredSize(new Dimension(700, 700));
-    pCenter = new JPanel(new GridLayout(3, 1, 5, 5));
+    JPanel pCenter = new JPanel(new GridLayout(3, 1, 5, 5));
 
-    pHeader = new JPanel(new BorderLayout(5, 5));
+    JPanel pHeader = new JPanel(new BorderLayout(5, 5));
     btBack = new JButton("Back");
     lbProjectName = new JLabel("Detail for Project: ");
     pHeader.add(btBack, BorderLayout.WEST);
     pHeader.add(lbProjectName, BorderLayout.CENTER);
 
-    pFlowPanel1 = new JPanel(new FlowLayout(5));
-    pPhases = new JPanel(new BorderLayout(5, 5));
-    pPhasesHeader = new JPanel(new BorderLayout(5, 5));
+    JPanel pFlowPanel1 = new JPanel(new FlowLayout(5));
+    JPanel pPhases = new JPanel(new BorderLayout(5, 5));
+    JPanel pPhasesHeader = new JPanel(new BorderLayout(5, 5));
     //  lbPhases = new JLabel("Project Phases");
     btAddPhase = new JButton("Add Phase");
     btAddPhase.setPreferredSize(new Dimension(175, 25));
@@ -87,7 +67,7 @@ class ProjectDetailViewPanel extends JPanel
                               }
     );
     //lstPhases.setBorder(new LineBorder(Color.black, 1));
-    pPhasesButtons = new JPanel(new GridLayout(2, 1, 5, 5));
+    JPanel pPhasesButtons = new JPanel(new GridLayout(2, 1, 5, 5));
 
     pPhases.add(pPhasesHeader, BorderLayout.NORTH);
     //pPhasesHeader.add(lbPhases, BorderLayout.CENTER);
@@ -100,9 +80,9 @@ class ProjectDetailViewPanel extends JPanel
     pPhases.add(spPhases, BorderLayout.CENTER);
 
 
-    pFlowPanel2 = new JPanel(new FlowLayout(5));
-    pMembers = new JPanel(new BorderLayout(5, 5));
-    pMembersHeader = new JPanel(new BorderLayout(5, 5));
+    JPanel pFlowPanel2 = new JPanel(new FlowLayout(5));
+    JPanel pMembers = new JPanel(new BorderLayout(5, 5));
+    JPanel pMembersHeader = new JPanel(new BorderLayout(5, 5));
     //        lbMembers = new JLabel("Project Members");
     btAddMember = new JButton("Add Members");
     btAddMember.setPreferredSize(new Dimension(175, 25));
@@ -130,7 +110,7 @@ class ProjectDetailViewPanel extends JPanel
                                  }
                                }
     );
-    pMembersButtons = new JPanel(new GridLayout(4, 1, 5, 5));
+    JPanel pMembersButtons = new JPanel(new GridLayout(4, 1, 5, 5));
 
     pMembers.add(pMembersHeader, BorderLayout.NORTH);
     pMembers.add(pFlowPanel2, BorderLayout.EAST);
@@ -143,9 +123,9 @@ class ProjectDetailViewPanel extends JPanel
     spMembers.setBorder(new TitledBorder(new LineBorder(Color.black, 1), "Project Members"));
     pMembers.add(spMembers, BorderLayout.CENTER);
 
-    pDescription = new JPanel(new BorderLayout(5, 5));
-    pDescriptionButtons = new JPanel(new GridLayout(1, 1, 5, 5));
-    pFlowPanel3 = new JPanel(new FlowLayout(5));
+    JPanel pDescription = new JPanel(new BorderLayout(5, 5));
+    JPanel pDescriptionButtons = new JPanel(new GridLayout(1, 1, 5, 5));
+    JPanel pFlowPanel3 = new JPanel(new FlowLayout(5));
     taDescription = new JTextArea();
     btUpdateDescription = new JButton("Update Description");
     btUpdateDescription.setPreferredSize(new Dimension(175, 25));
