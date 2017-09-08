@@ -4,6 +4,7 @@ import data.Activity;
 import data.Project;
 import data.ProjectPhase;
 import model.impl.PersonalStatisticModelImpl;
+import view.javafx.personalstatistic.PersonalStatisticViewFX;
 import view.swing.personalstatistic.PersonalStatisticViewSwing;
 
 import java.time.*;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 public class PersonalStatisticControllerStandard
 {
   private PersonalStatisticModelImpl model;
-  private PersonalStatisticViewSwing view;
+  private PersonalStatisticViewSwing viewSwing;
+  private PersonalStatisticViewFX viewFX;
 
   private ArrayList<Project>      currentProjects;
   private ArrayList<ProjectPhase> currentPhases;
@@ -35,29 +37,51 @@ public class PersonalStatisticControllerStandard
   }
 
 
-  public void setView(PersonalStatisticViewSwing view)
+  public void setViewSwing(PersonalStatisticViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
   }
 
+  public void setViewFX(PersonalStatisticViewFX viewFX)
+  {
+    this.viewFX = viewFX;
+  }
 
   public void refresh()
   {
     try
     {
-      if(detailProject != null)
-        model.phasePeriodChanged(detailProject.getId(), view.getSelectedPhasePeriod());
-      if(currentActivities != null)
-        model.activityPeriodChanged(detailPhase.getId(), view.getSelectedActivityPeriod());
+      if(viewSwing != null)
+      {
+        if(detailProject != null)
+          model.phasePeriodChanged(detailProject.getId(), viewSwing.getSelectedPhasePeriod());
+        if(currentActivities != null)
+          model.activityPeriodChanged(detailPhase.getId(), viewSwing.getSelectedActivityPeriod());
 
-      model.projectPeriodChanged(view.getSelectedProjectPeriod());
+        model.projectPeriodChanged(viewSwing.getSelectedProjectPeriod());
 
-      view.updateUI();
+        viewSwing.updateUI();
+      }
+      else
+      {
+        if(detailProject != null)
+          model.phasePeriodChanged(detailProject.getId(), viewFX.getSelectedPhasePeriod());
+        if(currentActivities != null)
+          model.activityPeriodChanged(detailPhase.getId(), viewFX.getSelectedActivityPeriod());
+
+        model.projectPeriodChanged(viewFX.getSelectedProjectPeriod());
+
+        viewFX.updateUI();
+      }
+
 
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -72,7 +96,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -86,7 +113,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -101,7 +131,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -117,7 +150,10 @@ public class PersonalStatisticControllerStandard
     {
       projectNames.add(p.getName());
     }
-    view.setProjectData(projectNames, durations);
+    if(viewSwing != null)
+      viewSwing.setProjectData(projectNames, durations);
+    else
+      viewFX.setProjectData(projectNames, durations);
   }
 
 
@@ -130,19 +166,29 @@ public class PersonalStatisticControllerStandard
       phaseNames.add(pp.getName());
     }
 
-    view.setPhaseData(phaseNames, durations);
+    if(viewSwing != null)
+      viewSwing.setPhaseData(phaseNames, durations);
+    else
+      viewFX.setPhaseData(phaseNames, durations);
   }
 
 
   private void showProjectView()
   {
-    view.showProjectView();
+
+    if(viewSwing != null)
+      viewSwing.showProjectView();
+    else
+      viewFX.showProjectView();
   }
 
 
   public void showPhaseView()
   {
-    view.showPhaseView();
+    if(viewSwing != null)
+      viewSwing.showPhaseView();
+    else
+      viewFX.showPhaseView();
   }
 
 
@@ -162,7 +208,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -177,7 +226,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -197,7 +249,10 @@ public class PersonalStatisticControllerStandard
       startTimes.add(a.getStart());
       endTimes.add(a.getStop());
     }
-    view.setActivityData(descriptions, comments, startTimes, endTimes);
+    if(viewSwing != null)
+      viewSwing.setActivityData(descriptions, comments, startTimes, endTimes);
+    else
+      viewFX.setActivityData(descriptions, comments, startTimes, endTimes);
 
 
   }
@@ -205,28 +260,47 @@ public class PersonalStatisticControllerStandard
 
   public void showActivityView()
   {
-    view.showActivityView();
+    if(viewSwing != null)
+      viewSwing.showActivityView();
+    else
+      viewFX.showActivityView();
   }
 
 
   public void addActivityClicked()
   {
-    view.showAddActivityDialog();
+    if(viewSwing != null)
+      viewSwing.showAddActivityDialog();
+    else
+      viewFX.showAddActivityDialog();
   }
 
 
   public void deleteActivityClicked()
   {
-    if(view.confirmDeletion())
+    boolean confirmed;
+    if(viewSwing != null)
+      confirmed = viewSwing.confirmDeletion();
+    else
+      confirmed = viewFX.confirmDeletion();
+
+    if(confirmed)
     {
-      Activity toDelete = currentActivities.get(view.getSelectedActivity());
+      Activity toDelete;
+      if(viewSwing != null)
+        toDelete = currentActivities.get(viewSwing.getSelectedActivity());
+      else
+        toDelete = currentActivities.get(viewFX.getSelectedActivity());
       try
       {
         model.deleteActivity(toDelete);
       }
       catch(Exception e)
       {
-        view.showError(e.getLocalizedMessage());
+        if(viewSwing != null)
+          viewSwing.showError(e.getLocalizedMessage());
+        else
+          viewFX.showError(e.getLocalizedMessage());
         e.printStackTrace();
       }
     }
@@ -235,9 +309,19 @@ public class PersonalStatisticControllerStandard
 
   public void updateActivityClicked()
   {
-    Activity a = currentActivities.get(view.getSelectedActivity());
-    view.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDateTime(),
-      a.getStop().toLocalDateTime());
+    if(viewSwing != null)
+    {
+      Activity a = currentActivities.get(viewSwing.getSelectedActivity());
+      viewSwing.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDateTime(),
+        a.getStop().toLocalDateTime());
+    }
+    else
+    {
+      Activity a = currentActivities.get(viewFX.getSelectedActivity());
+      viewFX.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDateTime(),
+        a.getStop().toLocalDateTime());
+    }
+
   }
 
 
@@ -245,8 +329,17 @@ public class PersonalStatisticControllerStandard
   {
     if(description.isEmpty())
     {
-      view.showError("Description of the Activity cannot be empty.");
-      view.showAddActivityDialog();
+      if(viewSwing != null)
+      {
+        viewSwing.showError("Description of the Activity cannot be empty.");
+        viewSwing.showAddActivityDialog();
+      }
+      else
+      {
+        viewFX.showError("Description of the Activity cannot be empty.");
+        viewFX.showAddActivityDialog();
+      }
+
       return;
     }
     ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
@@ -258,7 +351,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -266,7 +362,11 @@ public class PersonalStatisticControllerStandard
 
   public void updateActivity(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
-    Activity a = currentActivities.get(view.getSelectedActivity());
+    Activity a;
+    if(viewSwing != null)
+      a = currentActivities.get(viewSwing.getSelectedActivity());
+    else
+      a = currentActivities.get(viewFX.getSelectedActivity());
 
     ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
     ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
@@ -280,7 +380,10 @@ public class PersonalStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
 

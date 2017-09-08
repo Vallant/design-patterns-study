@@ -1,6 +1,7 @@
 package controller.standard;
 
 import model.impl.SideBarModelImpl;
+import view.javafx.SideBarViewFX;
 import view.swing.SideBarViewSwing;
 
 /**
@@ -8,15 +9,20 @@ import view.swing.SideBarViewSwing;
  */
 public class SideBarControllerStandard
 {
-  private SideBarViewSwing view;
+  private SideBarViewSwing viewSwing;
+  private SideBarViewFX viewFX;
   private SideBarModelImpl model;
 
 
-  public void setView(SideBarViewSwing view)
+  public void setViewSwing(SideBarViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
   }
 
+  public void setViewFX(SideBarViewFX viewFX)
+  {
+    this.viewFX = viewFX;
+  }
 
   public void setModel(SideBarModelImpl model)
   {

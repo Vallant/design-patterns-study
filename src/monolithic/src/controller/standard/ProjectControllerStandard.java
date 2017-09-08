@@ -10,6 +10,7 @@ import data.ProjectMember;
 import data.ProjectPhase;
 import data.User;
 import model.impl.ProjectModelImpl;
+import view.javafx.project.ProjectViewFX;
 import view.swing.project.ProjectViewSwing;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 public class ProjectControllerStandard
 {
   private ProjectModelImpl model;
-  private ProjectViewSwing view;
+  private ProjectViewSwing viewSwing;
+  private ProjectViewFX viewFX;
 
   private ArrayList<ProjectMember> ownedProjects;
   private ArrayList<ProjectMember> involvedProjects;
@@ -39,11 +41,15 @@ public class ProjectControllerStandard
   }
 
 
-  public void setView(ProjectViewSwing view)
+  public void setViewSwing(ProjectViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
   }
 
+  public void setViewFX(ProjectViewFX viewFX)
+  {
+    this.viewFX = viewFX;
+  }
 
   public void refresh()
   {
@@ -61,9 +67,17 @@ public class ProjectControllerStandard
       {
         involved.add(m.getProjectName());
       }
+      if(viewSwing != null)
+      {
+        viewSwing.setOwnedProjects(owned);
+        viewSwing.setParticipatingProjects(involved);
+      }
+      else
+      {
+        viewFX.setOwnedProjects(owned);
+        viewFX.setParticipatingProjects(involved);
+      }
 
-      view.setOwnedProjects(owned);
-      view.setParticipatingProjects(involved);
 
       if(detailProject != null)
         model.requestedDetailForProject(detailProject);
@@ -72,7 +86,10 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
 
   }
@@ -80,7 +97,11 @@ public class ProjectControllerStandard
 
   public void leaveProjectClicked()
   {
-    int index = view.getSelectedInvolvedProjectIndex();
+    int index;
+    if(viewSwing != null)
+      index = viewSwing.getSelectedInvolvedProjectIndex();
+    else
+      index = viewFX.getSelectedInvolvedProjectIndex();
     try
     {
       model.leaveProject(involvedProjects.get(index));
@@ -88,20 +109,30 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void addProjectClicked()
   {
-    view.showProjectCreationDialog();
+    if(viewSwing != null)
+      viewSwing.showProjectCreationDialog();
+    else
+      viewFX.showProjectCreationDialog();
   }
 
 
   public void deleteProjectClicked()
   {
-    int index = view.getSelectedOwnedProjectIndex();
+    int index;
+    if(viewSwing != null)
+      index = viewSwing.getSelectedOwnedProjectIndex();
+    else
+      index = viewFX.getSelectedOwnedProjectIndex();
     try
     {
       model.deleteProject(ownedProjects.get(index).getProject());
@@ -109,20 +140,29 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void ownedProjectsHasSelection(boolean hasSelection)
   {
-    view.setOwnedProjectsButtonsEnabled(hasSelection);
+    if(viewSwing != null)
+      viewSwing.setOwnedProjectsButtonsEnabled(hasSelection);
+    else
+      viewFX.setOwnedProjectsButtonsEnabled(hasSelection);
   }
 
 
   public void involvedProjectsHasSelection(boolean hasSelection)
   {
-    view.setInvolvedProjectsButtonsEnabled(hasSelection);
+    if(viewSwing != null)
+      viewSwing.setInvolvedProjectsButtonsEnabled(hasSelection);
+    else
+      viewFX.setInvolvedProjectsButtonsEnabled(hasSelection);
   }
 
 
@@ -135,7 +175,10 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
@@ -161,15 +204,20 @@ public class ProjectControllerStandard
       memberNames.add(m.getUser().getFirstName() + " " + m.getUser().getLastName());
       memberRoles.add(m.getRole().name());
     }
-
-    view.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
+    if(viewSwing != null)
+      viewSwing.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
+    else
+      viewFX.showDetail(project.getName(), phaseNames, memberNames, memberRoles, project.getDescription());
   }
 
 
   public void backClicked()
   {
     detailProject = null;
-    view.showOverview();
+    if(viewSwing != null)
+      viewSwing.showOverview();
+    else
+      viewFX.showOverview();
   }
 
 
@@ -182,14 +230,21 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void deletePhaseClicked()
   {
-    int index = view.getSelectedPhaseIndex();
+    int index;
+    if(viewSwing != null)
+      index = viewSwing.getSelectedPhaseIndex();
+    else
+      index = viewFX.getSelectedPhaseIndex();
     try
     {
       model.deletePhase(projectPhases.get(index));
@@ -197,20 +252,31 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void addPhaseClicked()
   {
-    view.showAddPhaseDialog();
+    if(viewSwing != null)
+      viewSwing.showAddPhaseDialog();
+    else
+      viewFX.showAddPhaseDialog();
   }
 
 
   public void deleteMemberClicked()
   {
-    int index = view.getSelectedMemberIndex();
+    int index;
+    if(viewSwing != null)
+      index = viewSwing.getSelectedMemberIndex();
+    else
+      index = viewFX.getSelectedMemberIndex();
+
     try
     {
       model.deleteMember(projectMembers.get(index));
@@ -218,14 +284,21 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void promoteToAdminClicked()
   {
-    int index = view.getSelectedMemberIndex();
+    int index;
+    if(viewSwing != null)
+      index = viewSwing.getSelectedMemberIndex();
+    else
+      index = viewFX.getSelectedMemberIndex();
     try
     {
       model.promoteToLeader(projectMembers.get(index));
@@ -233,7 +306,10 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
@@ -243,13 +319,21 @@ public class ProjectControllerStandard
 
     try
     {
-      int index = view.getSelectedMemberIndex();
+      int index;
+      if(viewSwing != null)
+        index = viewSwing.getSelectedMemberIndex();
+      else
+        index = viewFX.getSelectedMemberIndex();
+
       model.degradeToMember(projectMembers.get(index));
     }
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
@@ -266,13 +350,19 @@ public class ProjectControllerStandard
       {
         availableString.add(u.getFirstName() + " " + u.getLastName());
       }
-      view.showAddMemberDialog(availableString);
+      if(viewSwing != null)
+        viewSwing.showAddMemberDialog(availableString);
+      else
+        viewFX.showAddMemberDialog(availableString);
 
     }
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
 
   }
@@ -288,7 +378,10 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
@@ -309,7 +402,10 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
 
     }
 
@@ -318,7 +414,12 @@ public class ProjectControllerStandard
 
   public void updateDescriptionClicked()
   {
-    String newDescription = view.getDescription();
+    String newDescription;
+    if(viewSwing != null)
+      newDescription = viewSwing.getDescription();
+    else
+      newDescription = viewFX.getDescription();
+
     detailProject.setDescription(newDescription);
     try
     {
@@ -327,20 +428,29 @@ public class ProjectControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
 
   public void projectPhaseHasSelection(boolean hasSelection)
   {
-    view.setProjectPhaseButtonsEnabled(hasSelection);
+    if(viewSwing != null)
+      viewSwing.setProjectPhaseButtonsEnabled(hasSelection);
+    else
+      viewFX.setProjectPhaseButtonsEnabled(hasSelection);
   }
 
 
   public void memberTableHasSelection(boolean hasSelection)
   {
-    view.setMemberListButtonsEnabled(hasSelection);
+    if(viewSwing != null)
+      viewSwing.setMemberListButtonsEnabled(hasSelection);
+    else
+      viewFX.setMemberListButtonsEnabled(hasSelection);
   }
 
 }

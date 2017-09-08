@@ -84,14 +84,14 @@ public class MainViewSwing
 
   public void pairLogin(LoginControllerStandard controller)
   {
-    controller.setView(login);
+    controller.setViewSwing(login);
     login.setController(controller);
   }
 
 
   public void pairProject(ProjectControllerStandard controller)
   {
-    controller.setView(project);
+    controller.setViewSwing(project);
     project.setController(controller);
   }
 
@@ -99,7 +99,7 @@ public class MainViewSwing
   public void pairActivityBar(ActivityBarControllerStandard controller)
   {
     activityBar.setActivityBarController(controller);
-    controller.setView(activityBar);
+    controller.setViewSwing(activityBar);
   }
 
 
@@ -118,7 +118,7 @@ public class MainViewSwing
   public void pairSideBar(SideBarControllerStandard controller)
   {
     sideBar.setController(controller);
-    controller.setView(sideBar);
+    controller.setViewSwing(sideBar);
   }
 
 
@@ -166,14 +166,14 @@ public class MainViewSwing
 
   public void pairPersonalStatistic(PersonalStatisticControllerStandard controller)
   {
-    controller.setView(personalStatistic);
+    controller.setViewSwing(personalStatistic);
     personalStatistic.setController(controller);
   }
 
 
   public void pairProjectStatistic(ProjectStatisticControllerStandard controller)
   {
-    controller.setView(projectStatistic);
+    controller.setViewSwing(projectStatistic);
     projectStatistic.setController(controller);
   }
 
@@ -188,7 +188,7 @@ public class MainViewSwing
 
   public void pairSettings(SettingsControllerStandard controller)
   {
-    controller.setView(settings);
+    controller.setViewSwing(settings);
     settings.setController(controller);
   }
 

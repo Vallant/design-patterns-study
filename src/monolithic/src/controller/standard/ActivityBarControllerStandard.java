@@ -6,6 +6,7 @@
 package controller.standard;
 
 import model.impl.ActivityBarModelImpl;
+import view.javafx.activitybar.ActivityBarViewFX;
 import view.swing.activitybar.ActivityBarViewSwing;
 
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 public class ActivityBarControllerStandard
 {
   private ActivityBarModelImpl model;
-  private ActivityBarViewSwing view;
+  private ActivityBarViewSwing viewSwing;
+  private ActivityBarViewFX    viewFX;
 
 
   public ActivityBarControllerStandard()
@@ -28,21 +30,31 @@ public class ActivityBarControllerStandard
     this.model = model;
   }
 
-  public void setView(ActivityBarViewSwing view)
+  public void setViewSwing(ActivityBarViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
+  }
+  public void setViewFX(ActivityBarViewFX viewFX)
+  {
+    this.viewFX = viewFX;
   }
 
   public void refresh()
   {
     try
     {
-      view.setProjects(model.getProjects());
+      if(viewSwing != null)
+        viewSwing.setProjects(model.getProjects());
+      else
+        viewFX.setProjects(model.getProjects());
     }
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 
@@ -62,72 +74,115 @@ public class ActivityBarControllerStandard
     try
     {
       phases = model.getProjectPhasesFor(project);
-      view.setProjectPhases(phases);
+      if(viewSwing != null)
+        viewSwing.setProjectPhases(phases);
+      else
+        viewFX.setProjectPhases(phases);
     }
     catch(Exception ex)
     {
       ex.printStackTrace();
-      view.showError(ex.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(ex.getLocalizedMessage());
+      else
+        viewFX.showError(ex.getLocalizedMessage());
     }
   }
 
   public void phaseSelected(String projectPhase)
   {
     if(projectPhase == null || projectPhase.isEmpty())
-      view.disableStart();
+    {
+      if(viewSwing != null)
+        viewSwing.disableStart();
+      else
+        viewFX.disableStart();
+    }
     else
-      view.enableStart();
+    {
+      if(viewSwing != null)
+        viewSwing.enableStart();
+      else
+        viewFX.enableStart();
+    }
+
   }
 
   public void disableComboBoxes()
   {
-    view.disableComboBoxes();
+    if(viewSwing != null)
+      viewSwing.disableComboBoxes();
+    else
+      viewFX.disableComboBoxes();
   }
 
   public void showCommentDescriptionDialog()
   {
-    view.showCommentDescriptionDialog();
+    if(viewSwing != null)
+      viewSwing.showCommentDescriptionDialog();
+    else
+      viewFX.showCommentDescriptionDialog();
   }
 
   public void startTimer()
   {
-    view.startTimer();
+    if(viewSwing != null)
+      viewSwing.startTimer();
+    else
+      viewFX.startTimer();
   }
 
 
   public void stopTimer()
   {
-    view.stopTimer();
+    if(viewSwing != null)
+      viewSwing.stopTimer();
+    else
+      viewFX.stopTimer();
   }
 
 
   public void disableStartButton()
   {
-    view.disableStart();
+    if(viewSwing != null)
+      viewSwing.disableStart();
+    else
+      viewFX.disableStart();
   }
 
 
   public void disableStopButton()
   {
-    view.disableStop();
+    if(viewSwing != null)
+      viewSwing.disableStop();
+    else
+      viewFX.disableStop();
   }
 
 
   public void enableStartButton()
   {
-    view.enableStart();
+    if(viewSwing != null)
+      viewSwing.enableStart();
+    else
+      viewFX.enableStart();
   }
 
 
   public void enableStopButton()
   {
-    view.enableStop();
+    if(viewSwing != null)
+      viewSwing.enableStop();
+    else
+      viewFX.enableStop();
   }
-
 
   public void enableComboBoxes()
   {
-    view.enableComboBoxes();
+    if(viewSwing != null)
+      viewSwing.enableComboBoxes();
+    else
+      viewFX.enableComboBoxes();
   }
 
 
@@ -139,7 +194,10 @@ public class ActivityBarControllerStandard
 
   public void finishActivity()
   {
-    view.showFinishActivityDialog();
+    if(viewSwing != null)
+      viewSwing.showFinishActivityDialog();
+    else
+      viewFX.showFinishActivityDialog();
   }
 
 
@@ -149,8 +207,17 @@ public class ActivityBarControllerStandard
     {
       if(description.isEmpty())
       {
-        view.showError("Activity Description cannot be empty");
-        view.showCommentDescriptionDialog();
+        if(viewSwing != null)
+        {
+          viewSwing.showError("Activity Description cannot be empty");
+          viewSwing.showCommentDescriptionDialog();
+        }
+        else
+        {
+          viewFX.showError("Activity Description cannot be empty");
+          viewFX.showCommentDescriptionDialog();
+        }
+
       }
       else
         model.activityFinished(project, projectPhase, description, comment);
@@ -158,7 +225,10 @@ public class ActivityBarControllerStandard
     catch(Exception e)
     {
       e.printStackTrace();
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
     }
   }
 

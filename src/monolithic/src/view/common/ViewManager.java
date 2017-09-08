@@ -5,6 +5,7 @@
  */
 package view.common;
 
+import view.javafx.MainViewFX;
 import view.swing.MainViewSwing;
 
 /**
@@ -12,24 +13,51 @@ import view.swing.MainViewSwing;
  */
 public class ViewManager
 {
-  private static MainViewSwing view;
+  private static MainViewSwing viewSwing;
+  private static MainViewFX    viewFX;
 
   public static void initInstance(String frontend)
   {
-    assert (view == null);
+    assert (viewSwing == null && viewFX == null);
     switch(frontend)
     {
-      case "standard":
-        view = new MainViewSwing();
+      case "swing":
+        viewSwing = new MainViewSwing();
+        break;
+      case "javafx":
+        viewFX = MainViewFX.getInstance();
+        launchFx(viewFX);
         break;
       default:
         throw new UnsupportedOperationException();
     }
   }
 
-  public static MainViewSwing getInstance()
+  public static MainViewSwing getInstanceSwing()
   {
-    assert (view != null);
-    return view;
+    assert (viewSwing != null);
+    return viewSwing;
+  }
+
+  public static MainViewFX getInstanceFX()
+  {
+    assert (viewFX != null);
+    return viewFX;
+  }
+
+  private static void launchFx(MainViewFX fx)
+  {
+    new Thread(fx::launchThis).start();
+    while(MainViewFX.getInstance().getMainStage() == null)
+    {
+      try
+      {
+        Thread.sleep(100);
+      }
+      catch(InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
   }
 }
