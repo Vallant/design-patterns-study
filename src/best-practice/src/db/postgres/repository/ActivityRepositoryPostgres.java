@@ -65,10 +65,9 @@ public class ActivityRepositoryPostgres implements ActivityRepository
       ps.setInt(index++, item.getProjectId());
       ps.setString(index++, item.getUserLoginName());
       ps.setString(index++, item.getDescription());
-      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
-
+      ZonedDateTime zdtStart = item.getStart().toLocalDateTime().atZone(ZoneId.of("UTC"));
       ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
-      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(item.getStop().toInstant(), ZoneId.of("UTC"));
+      ZonedDateTime zdtStop = item.getStop().toLocalDateTime().atZone(ZoneId.of("UTC"));
       ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
       ps.setString(index++, item.getComments());
 
@@ -99,9 +98,9 @@ public class ActivityRepositoryPostgres implements ActivityRepository
       ps.setInt(index++, item.getProjectId());
       ps.setString(index++, item.getUserLoginName());
       ps.setString(index++, item.getDescription());
-      ZonedDateTime zdtStart = ZonedDateTime.ofInstant(item.getStart().toInstant(), ZoneId.of("UTC"));
+      ZonedDateTime zdtStart = item.getStart().toLocalDateTime().atZone(ZoneId.of("UTC"));
       ps.setTimestamp(index++, Timestamp.from(zdtStart.toInstant()));
-      ZonedDateTime zdtStop = ZonedDateTime.ofInstant(item.getStop().toInstant(), ZoneId.of("UTC"));
+      ZonedDateTime zdtStop = item.getStop().toLocalDateTime().atZone(ZoneId.of("UTC"));
       ps.setTimestamp(index++, Timestamp.from(zdtStop.toInstant()));
       ps.setString(index++, item.getComments());
 
@@ -141,8 +140,11 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     try(Connection con = db.getConnection())
     {
       String sql = "SELECT HASH, ID, PROJECT_PHASE_ID, PROJECT_ID, USER_LOGIN_NAME, DESCRIPTION, "
-                   + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY ";
+                   + "START_TIME, END_TIME, COMMENTS FROM ACTIVITY "
+                   + "WHERE ID = ?";
       PreparedStatement ps = con.prepareStatement(sql);
+      int index = 1;
+      ps.setInt(index, id);
 
       ResultSet rs = ps.executeQuery();
       if(!rs.next())
@@ -355,6 +357,8 @@ public class ActivityRepositoryPostgres implements ActivityRepository
                    "AND ACTIVITY.START_TIME > ? " +
                    "AND ACTIVITY.PROJECT_ID = ? " +
                    "GROUP BY PROJECT_PHASES.ID";
+
+
       PreparedStatement ps = con.prepareStatement(sql);
       int index = 1;
 
@@ -414,9 +418,9 @@ public class ActivityRepositoryPostgres implements ActivityRepository
     String userLoginName = rs.getString("USER_LOGIN_NAME");
     String description = rs.getString("DESCRIPTION");
     Timestamp tsStart = rs.getTimestamp("START_TIME");
-    ZonedDateTime start = ZonedDateTime.ofInstant(tsStart.toInstant(), ZoneId.systemDefault());
+    ZonedDateTime start = tsStart.toLocalDateTime().atZone(ZoneId.systemDefault());
     Timestamp tsEnd = rs.getTimestamp("END_TIME");
-    ZonedDateTime end = ZonedDateTime.ofInstant(tsEnd.toInstant(), ZoneId.systemDefault());
+    ZonedDateTime end = tsEnd.toLocalDateTime().atZone(ZoneId.systemDefault());
     String comments = rs.getString("COMMENTS");
 
 

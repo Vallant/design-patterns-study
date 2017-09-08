@@ -8,27 +8,19 @@ import java.util.ArrayList;
 
 class ProjectStatisticActivityPanel extends JPanel
 {
-  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
   final JComboBox<String> cbMembers;
 
-  final         ProjectStatisticActivityTableModel tblActivityModel;
-  private final JTable                             tblActivity;
-  private final JScrollPane                        scrpTable;
-  final         JButton                            btBack;
-
-  private final JPanel  pButtons;
-  private final JPanel  pFlowPanel;
-  private final JButton btDeleteActivity;
-  private final JButton btAddActivity;
-  private final JButton btUpdateActivity;
+  final ProjectStatisticActivityTableModel tblActivityModel;
+  final JTable                             tblActivity;
+  final JButton                            btBack;
 
   public ProjectStatisticActivityPanel()
   {
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
-    this.pHeader = new JPanel(new FlowLayout(5));
+    JPanel pHeader = new JPanel(new FlowLayout(5));
 
     this.cbPeriod = new JComboBox<>();
     cbPeriod.addItem("All Time");
@@ -45,37 +37,28 @@ class ProjectStatisticActivityPanel extends JPanel
 
     this.tblActivityModel = new ProjectStatisticActivityTableModel();
     this.tblActivity = new JTable(tblActivityModel);
-    scrpTable = new JScrollPane(tblActivity);
+    JScrollPane scrpTable = new JScrollPane(tblActivity);
 
     tblActivity.setBorder(new LineBorder(Color.black, 1));
-
-    pFlowPanel = new JPanel(new FlowLayout(5));
-    pButtons = new JPanel(new GridLayout(3, 1, 5, 5));
-    btAddActivity = new JButton("Add Activity");
-    btDeleteActivity = new JButton("Delete Activity");
-    btUpdateActivity = new JButton("Update Activity");
-
-    pButtons.add(btAddActivity);
-    pButtons.add(btDeleteActivity);
-    pButtons.add(btUpdateActivity);
 
     pHeader.add(btBack);
     pHeader.add(cbPeriod);
     pHeader.add(cbMembers);
     add(pHeader, BorderLayout.NORTH);
     add(scrpTable, BorderLayout.CENTER);
-    pFlowPanel.add(pButtons);
-    add(pFlowPanel, BorderLayout.EAST);
   }
 
 
   public void setMembers(ArrayList<String> members)
   {
+    int index = cbMembers.getSelectedIndex();
     cbMembers.removeAllItems();
     cbMembers.addItem("All Members");
     for(String m : members)
     {
       cbMembers.addItem(m);
     }
+    if(index < cbMembers.getItemCount())
+      cbMembers.setSelectedIndex(index);
   }
 }

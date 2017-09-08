@@ -7,7 +7,7 @@ import model.interfaces.PersonalStatisticModel;
 import view.interfaces.PersonalStatisticView;
 
 import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -53,7 +53,7 @@ public interface PersonalStatisticController
 
   void setProjectData(ArrayList<Project> projects, ArrayList<Duration> durations);
 
-  void addActivity(String description, String comment, LocalDate start, LocalDate end);
+  void addActivity(String description, String comment, LocalDateTime start, LocalDateTime end);
 
-  void updateActivity(String description, String comment, LocalDate start, LocalDate end);
+  void updateActivity(String description, String comment, LocalDateTime start, LocalDateTime end);
 }

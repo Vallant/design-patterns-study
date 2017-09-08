@@ -9,11 +9,7 @@ import controller.interfaces.ProjectController;
 import view.interfaces.ProjectView;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -23,10 +19,10 @@ import java.util.ArrayList;
  */
 public class ProjectViewSwing implements ProjectView
 {
-  private final JFrame            frame;
+  private final JFrame                 frame;
   private final ProjectViewPanel       pMain;
   private final ProjectDetailViewPanel pDetail;
-  private       ProjectController controller;
+  private       ProjectController      controller;
 
 
   public ProjectViewSwing(JFrame frame)

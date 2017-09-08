@@ -10,8 +10,6 @@ import view.interfaces.ActivityBarView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -23,11 +21,11 @@ import java.util.TimerTask;
 public class ActivityBarViewSwing implements ActivityBarView
 {
   private final JFrame                frame;
-  private final ActivityBarPanel pMain;
+  private final ActivityBarPanel      pMain;
   private       ActivityBarController controller;
-  private Duration  duration;
-  private TimerTask task;
-  private Timer     timer;
+  private       Duration              duration;
+  private       TimerTask             task;
+  private       Timer                 timer;
 
 
   public ActivityBarViewSwing(JFrame frame)
@@ -46,7 +44,7 @@ public class ActivityBarViewSwing implements ActivityBarView
   }
 
   @Override
-  public void setActivityBarController(ActivityBarController controller)
+  public void setController(ActivityBarController controller)
   {
     this.controller = controller;
   }
@@ -151,13 +149,9 @@ public class ActivityBarViewSwing implements ActivityBarView
       String phase = (String) pMain.cbPhase.getSelectedItem();
       controller.activityFinished(project, phase, dialogPanel.tfDescription.getText(), dialogPanel.tfComment.getText());
     }
-    else if(JOptionPane.showConfirmDialog(null, "Are you sure to discard the activity?", "Confirmation",
-      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION)
-    {
-      showCommentDescriptionDialog();
-    }
     else
-      controller.discardActivity();
+      showFinishActivityDialog();
+
     dialogPanel.tfComment.setText("");
     dialogPanel.tfDescription.setText("");
   }

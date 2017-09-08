@@ -23,7 +23,7 @@ import javax.swing.*;
 public class MainViewSwing implements MainView
 {
 
-  private final JFrame frame;
+  private final JFrame                frame;
   private final LoginView             login;
   private final ProjectView           project;
   private final SettingsView          settings;
@@ -32,11 +32,10 @@ public class MainViewSwing implements MainView
   private final ActivityBarView       activityBar;
   private final SideBarView           sideBar;
   private final ProjectStatisticView  projectStatistic;
-  private       JPanel loginPanel;
+  private       JPanel                loginPanel;
   private       JMenuBar              menuBar;
   private       JMenu                 file;
   private       JMenuItem             logout;
-  private       MainController        controller;
 
 
   public MainViewSwing()
@@ -79,7 +78,6 @@ public class MainViewSwing implements MainView
   @Override
   public void setMainController(MainController controller)
   {
-    this.controller = controller;
   }
 
   @Override
@@ -99,7 +97,7 @@ public class MainViewSwing implements MainView
   @Override
   public void pairActivityBar(ActivityBarController controller)
   {
-    activityBar.setActivityBarController(controller);
+    activityBar.setController(controller);
     controller.setView(activityBar);
   }
 

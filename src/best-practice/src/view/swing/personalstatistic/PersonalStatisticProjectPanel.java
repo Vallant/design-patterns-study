@@ -10,19 +10,17 @@ import java.awt.*;
  */
 class PersonalStatisticProjectPanel extends JPanel
 {
-  private final JPanel pHeader;
 
   final JComboBox<String> cbPeriod;
 
-  final         PersonalStatisticTableModel tblProjectsModel;
-  final         JTable                      tblProjects;
-  private final JScrollPane                 scrpTable;
+  final PersonalStatisticTableModel tblProjectsModel;
+  final JTable                      tblProjects;
 
   public PersonalStatisticProjectPanel()
   {
     super(new BorderLayout(5, 5));
     setBorder(new EtchedBorder());
-    this.pHeader = new JPanel(new FlowLayout(5));
+    JPanel pHeader = new JPanel(new FlowLayout(5));
 
     this.cbPeriod = new JComboBox<>();
     cbPeriod.addItem("All Time");
@@ -35,7 +33,7 @@ class PersonalStatisticProjectPanel extends JPanel
 
     this.tblProjectsModel = new PersonalStatisticTableModel("Projectname");
     this.tblProjects = new JTable(tblProjectsModel);
-    scrpTable = new JScrollPane(tblProjects);
+    JScrollPane scrpTable = new JScrollPane(tblProjects);
 
     tblProjects.setBorder(new LineBorder(Color.black, 1));
     pHeader.add(cbPeriod);

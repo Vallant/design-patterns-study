@@ -18,6 +18,7 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   private ArrayList<Project>       projects;
   private ArrayList<ProjectPhase>  phases;
   private ProjectPhase             currentPhase;
+  private Project                  currentProject;
   private ArrayList<Activity>      activities;
   private ArrayList<ProjectMember> members;
   private ProjectStatisticModel    model;
@@ -42,13 +43,14 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
     {
       model.projectPeriodChanged(view.getSelectedProjectPeriod());
       if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(), view.getSelectedUser() == 0,
-          members.get(view.getSelectedUser()));
+        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
+          view.getSelectedUserPhase() == 0,
+          members.get(view.getSelectedUserPhase()));
       if(activities != null)
       {
         assert currentPhase != null;
         model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(),
-          view.getSelectedUser() == 0, members.get(view.getSelectedUser()));
+          view.getSelectedUserActivity() == 0, members.get(view.getSelectedUserActivity()));
       }
     }
     catch(Exception e)
@@ -62,9 +64,12 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   {
     try
     {
-      if(members != null && currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0,
-          members.get(selectedPeriodIndex));
+      if(selectedPeriodIndex == -1 || selectedUserIndex == -1)
+        return;
+
+      if(members != null)
+        model.phaseDropDownChanged(currentProject.getId(), selectedPeriodIndex, selectedUserIndex == 0,
+          members.get(selectedUserIndex));
     }
     catch(Exception e)
     {
@@ -92,8 +97,10 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   {
     try
     {
+      if(selectedPeriodIndex == -1 || selectedUserIndex == -1)
+        return;
       model.activityDropDownChanged(currentPhase.getId(), selectedPeriodIndex, selectedUserIndex == 0,
-        members.get(selectedPeriodIndex));
+        members.get(selectedUserIndex));
     }
     catch(Exception e)
     {
@@ -134,6 +141,7 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   {
     this.phases = phases;
     this.members = members;
+    this.members.add(0, null);
     ArrayList<String> phaseNames = new ArrayList<>();
 
     for(ProjectPhase pp : phases)
@@ -144,7 +152,8 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
     ArrayList<String> memberNames = new ArrayList<>();
     for(ProjectMember pm : members)
     {
-      memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+      if(pm != null)
+        memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
     }
 
     view.setPhaseData(phaseNames, durations, memberNames);
@@ -177,7 +186,8 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
     ArrayList<String> memberNames = new ArrayList<>();
     for(ProjectMember pm : members)
     {
-      memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
+      if(pm != null)
+        memberNames.add(pm.getUser().getFirstName() + " " + pm.getUser().getLastName());
     }
 
     view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
@@ -188,6 +198,7 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   {
     try
     {
+      currentProject = projects.get(index);
       model.requestedDetailFor(projects.get(index));
     }
     catch(Exception e)
@@ -200,6 +211,10 @@ public class ProjectStatisticControllerStandard implements ProjectStatisticContr
   @Override
   public void backToProjectClicked()
   {
+    currentPhase = null;
+    currentProject = null;
+    activities = null;
+    phases = null;
     showProjectView();
   }
 

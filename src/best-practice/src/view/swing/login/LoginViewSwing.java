@@ -10,19 +10,17 @@ import data.User;
 import view.interfaces.LoginView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author stephan
  */
 public class LoginViewSwing implements LoginView
 {
-  private final JFrame frame;
+  private final JFrame                 frame;
   private final LoginViewPanel         pLogin;
   private final LoginViewRegisterPanel pNewUser;
   private final LoginViewResetPWPanel  pResetPassword;
-  private LoginController controller;
+  private       LoginController        controller;
 
 
   public LoginViewSwing(JFrame frame)

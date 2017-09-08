@@ -137,9 +137,9 @@ public class ProjectRepositoryPostgres implements ProjectRepository
   }
 
   @Override
-  public ArrayList<String> getProjectsByUserName(String loginName) throws Exception
+  public ArrayList<Project> getProjectsByUserName(String loginName) throws Exception
   {
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<Project> list = new ArrayList<>();
 
     try(Connection con = db.getConnection())
     {
@@ -154,8 +154,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
       ResultSet rs = ps.executeQuery();
       while(rs.next())
       {
-        String name = rs.getString("NAME");
-        list.add(name);
+        list.add(extractProject(rs));
       }
     }
     return list;

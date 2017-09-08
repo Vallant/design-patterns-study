@@ -67,7 +67,7 @@ public class ActivityBarControllerStandard implements ActivityBarController
   @Override
   public void projectSelected(String project)
   {
-    ArrayList<String> phases = null;
+    ArrayList<String> phases;
     try
     {
       phases = model.getProjectPhasesFor(project);

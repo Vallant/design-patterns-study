@@ -7,10 +7,7 @@ import data.ProjectPhase;
 import model.interfaces.PersonalStatisticModel;
 import view.interfaces.PersonalStatisticView;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
 /**
@@ -240,12 +237,12 @@ public class PersonalStatisticControllerStandard implements PersonalStatisticCon
   public void updateActivityClicked()
   {
     Activity a = currentActivities.get(view.getSelectedActivity());
-    view.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDate(),
-      a.getStop().toLocalDate());
+    view.showUpdateActivityDialog(a.getDescription(), a.getComments(), a.getStart().toLocalDateTime(),
+      a.getStop().toLocalDateTime());
   }
 
   @Override
-  public void addActivity(String description, String comment, LocalDate start, LocalDate end)
+  public void addActivity(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     if(description.isEmpty())
     {
@@ -253,8 +250,9 @@ public class PersonalStatisticControllerStandard implements PersonalStatisticCon
       view.showAddActivityDialog();
       return;
     }
-    ZonedDateTime zdtStart = start.atStartOfDay(ZoneOffset.UTC);
-    ZonedDateTime zdtEnd = end.atStartOfDay(ZoneOffset.UTC);
+    ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
+    ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
+
 
     try
     {
@@ -268,12 +266,13 @@ public class PersonalStatisticControllerStandard implements PersonalStatisticCon
   }
 
   @Override
-  public void updateActivity(String description, String comment, LocalDate start, LocalDate end)
+  public void updateActivity(String description, String comment, LocalDateTime start, LocalDateTime end)
   {
     Activity a = currentActivities.get(view.getSelectedActivity());
 
-    ZonedDateTime zdtStart = start.atStartOfDay(ZoneOffset.UTC);
-    ZonedDateTime zdtEnd = end.atStartOfDay(ZoneOffset.UTC);
+    ZonedDateTime zdtStart = start.atZone(ZoneId.of("UTC"));
+    ZonedDateTime zdtEnd = end.atZone(ZoneId.of("UTC"));
+
     a.setDescription(description);
     a.setComments(comment);
     a.setStart(zdtStart);

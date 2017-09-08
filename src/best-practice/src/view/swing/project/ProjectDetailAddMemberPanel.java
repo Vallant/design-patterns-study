@@ -13,7 +13,7 @@ class ProjectDetailAddMemberPanel extends JPanel
 {
   final         JList<String>            lstAvailableUsers;
   private final DefaultListModel<String> lstAvailableUsersModel;
-  private ArrayList<String> available;
+  private       ArrayList<String>        available;
 
 
   public ProjectDetailAddMemberPanel()

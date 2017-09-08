@@ -70,6 +70,7 @@ public class MainModelImpl implements MainModel
     }
     catch(Exception ex)
     {
+      ex.printStackTrace();
       Logger.getLogger(MainModelImpl.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
@@ -83,10 +84,10 @@ public class MainModelImpl implements MainModel
     project.setUser(user);
     projectStatistic.setUser(user);
 
-    controller.switchToProjectView();
     controller.showActivityBar();
     controller.showSideBar(user.getRole());
 
+    controller.switchToProjectView();
 
     project.refresh();
     activityBar.refresh();

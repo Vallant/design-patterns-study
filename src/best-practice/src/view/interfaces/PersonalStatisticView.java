@@ -3,7 +3,7 @@ package view.interfaces;
 import controller.interfaces.PersonalStatisticController;
 
 import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public interface PersonalStatisticView
 
   boolean confirmDeletion();
 
-  void showUpdateActivityDialog(String description, String comment, LocalDate start, LocalDate end);
+  void showUpdateActivityDialog(String description, String comment, LocalDateTime start, LocalDateTime end);
 
   int getSelectedPhasePeriod();
 
