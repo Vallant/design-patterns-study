@@ -31,3 +31,4 @@ build.xml
 
 src/best-practice/.idea/*
 src/best-practice/*.iml
+workspace.xml
