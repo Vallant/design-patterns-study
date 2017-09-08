@@ -2,35 +2,102 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/common/DBManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/ActivityRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/ProjectMemberRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/ProjectPhaseRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/ProjectRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/Repository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/RepositoryFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/interfaces/UserRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/postgres/repository/ActivityRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/postgres/repository/ProjectRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/db/postgres/repository/UserRepositoryPostgres.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ActivityRepositoryPostgres.java" afterPath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ActivityRepositoryPostgres.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Activity.java" afterPath="$PROJECT_DIR$/src/data/Activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/Project.java" afterPath="$PROJECT_DIR$/src/data/Project.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectMember.java" afterPath="$PROJECT_DIR$/src/data/ProjectMember.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/ProjectPhase.java" afterPath="$PROJECT_DIR$/src/data/ProjectPhase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/User.java" afterPath="$PROJECT_DIR$/src/data/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db/common/DBManagerPostgres.java" afterPath="$PROJECT_DIR$/src/db/common/DBManagerPostgres.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Main.java" afterPath="$PROJECT_DIR$/src/test/Main.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/common/ControllerManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ActivityBarController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/LoginController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/MainController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/PersonalStatisticController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ProjectController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ProjectStatisticController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/SettingsController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/SideBarController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ActivityBarControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/LoginControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/MainControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/PersonalStatisticControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ProjectControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ProjectStatisticControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/SettingsControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/SideBarControllerSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/Activity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/Project.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/ProjectMember.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/ProjectPhase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/User.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/common/DBManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/common/DBManagerPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ActivityRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/DBEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectMemberRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectPhaseRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/Repository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/RepositoryFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/UserRepository.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ActivityRepositoryPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectRepositoryPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/UserRepositoryPostgres.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementChangedException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementInsertFailedException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementNotFoundException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ActivityBarModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/LoginModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/MainModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/PersonalStatisticModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ProjectModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ProjectStatisticModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/SettingsModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/SideBarModelImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ActivityBarModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/LoginModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/MainModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/PersonalStatisticModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ProjectModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ProjectStatisticModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/SettingsModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/SideBarModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/test/Main.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/common/ViewManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ActivityBarView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/LoginView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/MainView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/PersonalStatisticView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ProjectStatisticView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ProjectView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/SettingsView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/SideBarView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/MainViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/SideBarViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarDialogPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewRegisterPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewResetPWPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticActivityPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticActivityTableModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticPhasePanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticProjectPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticTableModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectAddDialogPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectAddPhasePanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectDetailAddMemberPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectDetailViewPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectViewPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticActivityTableModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticPhasePanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticProjectPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticTableModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/settings/SettingsPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/settings/SettingsViewSwing.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,13 +108,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="PersonalStatisticModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="135" column="124" lean-forward="false" selection-start-line="135" selection-start-column="124" selection-end-line="135" selection-end-column="124" />
-              <folding />
+            <state relative-caret-position="2034">
+              <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="3922:3926" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,9 +124,11 @@
       <file leaf-file-name="ProjectStatisticModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-458">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="1098">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="3711:3715" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,9 +136,24 @@
       <file leaf-file-name="SideBarModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="126">
+              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+              <folding>
+                <marker date="1504896281784" expanded="false" signature="417:421" ph=" }" />
+                <marker date="1504896281784" expanded="true" signature="450:456" ph="{}" />
+                <marker date="1504896281784" expanded="false" signature="490:499" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="528:532" ph=" }" />
+                <marker date="1504896281784" expanded="false" signature="575:584" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="623:627" ph=" }" />
+                <marker date="1504896281784" expanded="false" signature="667:676" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="711:715" ph=" }" />
+                <marker date="1504896281784" expanded="false" signature="749:758" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="787:791" ph=" }" />
+                <marker date="1504896281784" expanded="false" signature="833:842" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="879:883" ph=" }" />
+                <marker date="1504896281784" expanded="false" signature="915:924" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="943:947" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,8 +161,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="21" column="6" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+            <state relative-caret-position="288">
+              <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -85,9 +171,11 @@
       <file leaf-file-name="SettingsModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="70" column="36" lean-forward="true" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="972">
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="1755:1759" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,9 +183,11 @@
       <file leaf-file-name="ProjectModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="162" column="23" lean-forward="false" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="1872">
+              <caret line="108" column="8" lean-forward="false" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="3891:3906" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,19 +195,9 @@
       <file leaf-file-name="ProjectMember.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/ProjectMember.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1502364065840" expanded="true" signature="2838:2974" ph="INSERT INTO PROJECT_MEMBERS... " />
-                <marker date="1502364065840" expanded="true" signature="3595:3759" ph="UPDATE PROJE... " />
-                <marker date="1502364065840" expanded="true" signature="4501:4597" ph="DELETE FROM " />
-                <marker date="1502364065840" expanded="true" signature="5149:5216" ph="SELECT HASH,... PROJECT_MEMBERS" />
-                <marker date="1502364065840" expanded="true" signature="5649:5716" ph="SELECT HASH,... PROJECT_MEMBERS" />
-                <marker date="1502364065840" expanded="true" signature="6359:6606" ph="SELECT PROJE... PROJECT_MEMBERS" />
-                <marker date="1502364065840" expanded="true" signature="7150:7467" ph="SELECT PROJE... PROJECT_MEMBERS" />
-                <marker date="1502364065840" expanded="true" signature="8010:8327" ph="SELECT PROJE... PROJECT_MEMBERS" />
-              </folding>
+            <state relative-caret-position="630">
+              <caret line="72" column="9" lean-forward="false" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,9 +205,11 @@
       <file leaf-file-name="ActivityBarModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
-              <folding />
+            <state relative-caret-position="1170">
+              <caret line="69" column="28" lean-forward="false" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="2665:2669" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,9 +217,12 @@
       <file leaf-file-name="LoginModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="918">
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding>
+                <marker date="1504896281784" expanded="false" signature="2127:2136" ph=" { " />
+                <marker date="1504896281784" expanded="false" signature="2163:2167" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,9 +230,11 @@
       <file leaf-file-name="MainModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-134">
-              <caret line="145" column="26" lean-forward="false" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="1728">
+              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding>
+                <marker date="1504896281784" expanded="true" signature="4122:4143" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -299,6 +386,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -412,17 +501,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../best-practice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -563,44 +650,45 @@
       <workItem from="1502294032993" duration="2514000" />
       <workItem from="1502297004127" duration="1612000" />
       <workItem from="1502360834139" duration="4344000" />
+      <workItem from="1504896352698" duration="11000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8603000" />
+    <option name="totallyTimeSpent" value="8614000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
+    <frame x="1920" y="27" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -793,9 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="21" column="31" lean-forward="false" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -864,64 +949,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ActivityRepositoryPostgres.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectRepositoryPostgres.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/UserRepositoryPostgres.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ActivityRepositoryPostgres.java" />
+    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectRepositoryPostgres.java" />
+    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" />
+    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" />
+    <entry file="file://$PROJECT_DIR$/src/db/postgres/repository/UserRepositoryPostgres.java" />
     <entry file="file://$PROJECT_DIR$/src/data/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="749">
           <caret line="540" column="43" lean-forward="false" selection-start-line="540" selection-start-column="43" selection-end-line="540" selection-end-column="43" />
-          <folding>
-            <marker date="1502364013746" expanded="true" signature="4241:4463" ph="UPDATE ACTIV... " />
-            <marker date="1502364013746" expanded="true" signature="5502:5724" ph="INSERT INTO ACTIVITY... " />
-            <marker date="1502364013746" expanded="true" signature="6754:6824" ph="DELETE FROM " />
-            <marker date="1502364013746" expanded="true" signature="7283:7428" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="7283:7465" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="8128:8457" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="9555:9970" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="11092:11379" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="12159:12458" ph="SELECT HASH,... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="13305:13789" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="14915:15343" ph="SELECT PROJE... ACTIVITY" />
-            <marker date="1502364013746" expanded="true" signature="16362:16507" ph="SELECT HASH,... ACTIVITY" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -931,13 +968,6 @@
           <caret line="266" column="55" lean-forward="true" selection-start-line="266" selection-start-column="55" selection-end-line="266" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1502362823389" expanded="true" signature="2532:2665" ph="INSERT INTO PROJECT... " />
-            <marker date="1502362823389" expanded="true" signature="3257:3361" ph="UPDATE PROJE... " />
-            <marker date="1502362823389" expanded="true" signature="3947:4016" ph="DELETE FROM " />
-            <marker date="1502362823389" expanded="true" signature="4542:4627" ph="SELECT HASH,... PROJECT" />
-            <marker date="1502362823389" expanded="true" signature="5136:5314" ph="SELECT NAME PROJECT" />
-            <marker date="1502362823389" expanded="true" signature="5796:5866" ph="SELECT DESCR... PROJECT" />
-            <marker date="1502362823389" expanded="true" signature="6354:6401" ph="SELECT HASH,... PROJECT" />
           </folding>
         </state>
       </provider>
@@ -948,14 +978,6 @@
           <caret line="323" column="59" lean-forward="false" selection-start-line="323" selection-start-column="59" selection-end-line="323" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1502363664480" expanded="true" signature="2575:2690" ph="INSERT INTO PROJECT_PHASES... " />
-            <marker date="1502363664480" expanded="true" signature="3335:3447" ph="UPDATE PROJE... " />
-            <marker date="1502363664480" expanded="true" signature="4086:4162" ph="DELETE FROM " />
-            <marker date="1502363664480" expanded="true" signature="4695:4785" ph="SELECT HASH,... PROJECT_PHASES" />
-            <marker date="1502363664480" expanded="true" signature="5363:5461" ph="SELECT HASH,... PROJECT_PHASES" />
-            <marker date="1502363664480" expanded="true" signature="6028:6200" ph="SELECT PROJE... PROJECT_PHASES" />
-            <marker date="1502363664480" expanded="true" signature="6755:6970" ph="SELECT PROJE... PROJECT_PHASES" />
-            <marker date="1502363664480" expanded="true" signature="7661:7714" ph="SELECT HASH,... PROJECT_PHASES" />
           </folding>
         </state>
       </provider>
@@ -968,24 +990,11 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3629#3630#0" expanded="true" />
             <element signature="e#3657#3658#0" expanded="true" />
-            <marker date="1502363427907" expanded="true" signature="4390:4581" ph="INSERT INTO USERS... " />
-            <marker date="1502363427907" expanded="true" signature="5223:5422" ph="UPDATE USERS... " />
-            <marker date="1502363427907" expanded="true" signature="6236:6311" ph="DELETE FROM " />
-            <marker date="1502363427907" expanded="true" signature="6811:6990" ph="SELECT HASH,... USERS" />
-            <marker date="1502363427907" expanded="true" signature="7493:7904" ph="SELECT USERS... USERS" />
-            <marker date="1502363427907" expanded="true" signature="8375:8509" ph="SELECT HASH,... USERS" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/common/DBManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="21" column="31" lean-forward="false" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/common/DBManager.java" />
     <entry file="file://$PROJECT_DIR$/src/db/common/DBManagerPostgres.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -999,90 +1008,110 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="1170">
+          <caret line="69" column="28" lean-forward="false" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="2665:2669" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="918">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <marker date="1504896281784" expanded="false" signature="2127:2136" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="2163:2167" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-134">
-          <caret line="145" column="26" lean-forward="false" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="1728">
+          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="4122:4143" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="135" column="124" lean-forward="false" selection-start-line="135" selection-start-column="124" selection-end-line="135" selection-end-column="124" />
-          <folding />
+        <state relative-caret-position="2034">
+          <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="3922:3926" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data/ProjectMember.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1502364065840" expanded="true" signature="2838:2974" ph="INSERT INTO PROJECT_MEMBERS... " />
-            <marker date="1502364065840" expanded="true" signature="3595:3759" ph="UPDATE PROJE... " />
-            <marker date="1502364065840" expanded="true" signature="4501:4597" ph="DELETE FROM " />
-            <marker date="1502364065840" expanded="true" signature="5149:5216" ph="SELECT HASH,... PROJECT_MEMBERS" />
-            <marker date="1502364065840" expanded="true" signature="5649:5716" ph="SELECT HASH,... PROJECT_MEMBERS" />
-            <marker date="1502364065840" expanded="true" signature="6359:6606" ph="SELECT PROJE... PROJECT_MEMBERS" />
-            <marker date="1502364065840" expanded="true" signature="7150:7467" ph="SELECT PROJE... PROJECT_MEMBERS" />
-            <marker date="1502364065840" expanded="true" signature="8010:8327" ph="SELECT PROJE... PROJECT_MEMBERS" />
-          </folding>
+        <state relative-caret-position="630">
+          <caret line="72" column="9" lean-forward="false" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="162" column="23" lean-forward="false" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="1872">
+          <caret line="108" column="8" lean-forward="false" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="3891:3906" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="70" column="36" lean-forward="true" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="972">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="1755:1759" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-458">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1098">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <marker date="1504896281784" expanded="true" signature="3711:3715" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="126">
+          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding>
+            <marker date="1504896281784" expanded="false" signature="417:421" ph=" }" />
+            <marker date="1504896281784" expanded="true" signature="450:456" ph="{}" />
+            <marker date="1504896281784" expanded="false" signature="490:499" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="528:532" ph=" }" />
+            <marker date="1504896281784" expanded="false" signature="575:584" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="623:627" ph=" }" />
+            <marker date="1504896281784" expanded="false" signature="667:676" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="711:715" ph=" }" />
+            <marker date="1504896281784" expanded="false" signature="749:758" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="787:791" ph=" }" />
+            <marker date="1504896281784" expanded="false" signature="833:842" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="879:883" ph=" }" />
+            <marker date="1504896281784" expanded="false" signature="915:924" ph=" { " />
+            <marker date="1504896281784" expanded="false" signature="943:947" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="21" column="6" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="288">
+          <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
           <folding />
         </state>
       </provider>
