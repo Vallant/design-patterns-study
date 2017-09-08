@@ -32,11 +32,12 @@ public class MainModelImpl implements MainModel
   private       User      user;
 
 
-  private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
+  private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
+                        frontend) throws Exception
   {
 
     db = DBManager.get(driver, url, username, password);
-    ControllerManager.initInstance(frontend);
+    ControllerManager.initInstance(controllerImpl, frontend);
 
     controller = ControllerManager.getInstance();
     controller.setModel(this);
@@ -66,7 +67,7 @@ public class MainModelImpl implements MainModel
   {
     try
     {
-      new MainModelImpl(args[0], args[1], args[2], args[3], args[4]);
+      new MainModelImpl(args[0], args[1], args[2], args[3], args[4], args[5]);
     }
     catch(Exception ex)
     {
