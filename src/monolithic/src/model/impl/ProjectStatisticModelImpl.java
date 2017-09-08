@@ -1,6 +1,6 @@
 package model.impl;
 
-import controller.swing.ProjectStatisticControllerSwing;
+import controller.standard.ProjectStatisticControllerStandard;
 import data.*;
 
 import java.time.Duration;
@@ -21,9 +21,9 @@ public class ProjectStatisticModelImpl
     DAY
   }
 
-  private User                            user;
-  private MainModelImpl                   mainModel;
-  private ProjectStatisticControllerSwing controller;
+  private User                               user;
+  private MainModelImpl                      mainModel;
+  private ProjectStatisticControllerStandard controller;
 
 
   public void projectPeriodChanged(int selectedPeriodIndex) throws Exception
@@ -91,7 +91,7 @@ public class ProjectStatisticModelImpl
   }
 
 
-  public void setController(ProjectStatisticControllerSwing controller)
+  public void setController(ProjectStatisticControllerStandard controller)
   {
     this.controller = controller;
   }

@@ -5,7 +5,7 @@
  */
 package model.impl;
 
-import controller.swing.LoginControllerSwing;
+import controller.standard.LoginControllerStandard;
 import data.User;
 
 import javax.crypto.SecretKey;
@@ -21,8 +21,8 @@ import java.util.Random;
  */
 public class LoginModelImpl
 {
-  private LoginControllerSwing controller;
-  private MainModelImpl        mainModel;
+  private LoginControllerStandard controller;
+  private MainModelImpl           mainModel;
 
   public LoginModelImpl()
   {
@@ -70,7 +70,7 @@ public class LoginModelImpl
   }
 
 
-  public void setController(LoginControllerSwing controller)
+  public void setController(LoginControllerStandard controller)
   {
     this.controller = controller;
   }

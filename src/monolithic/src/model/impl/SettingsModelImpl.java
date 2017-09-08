@@ -1,6 +1,6 @@
 package model.impl;
 
-import controller.swing.SettingsControllerSwing;
+import controller.standard.SettingsControllerStandard;
 import data.User;
 
 import javax.crypto.SecretKey;
@@ -14,9 +14,9 @@ import java.util.Random;
 
 public class SettingsModelImpl
 {
-  private User                    user;
-  private MainModelImpl           mainModel;
-  private SettingsControllerSwing controller;
+  private User                       user;
+  private MainModelImpl              mainModel;
+  private SettingsControllerStandard controller;
 
   public void setUser(User user)
   {
@@ -30,7 +30,7 @@ public class SettingsModelImpl
   }
 
 
-  public void setController(SettingsControllerSwing controller)
+  public void setController(SettingsControllerStandard controller)
   {
     this.controller = controller;
   }

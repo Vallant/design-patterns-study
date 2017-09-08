@@ -5,7 +5,7 @@
  */
 package model.impl;
 
-import controller.swing.ProjectControllerSwing;
+import controller.standard.ProjectControllerStandard;
 import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
  */
 public class ProjectModelImpl
 {
-  private MainModelImpl          mainModel;
-  private User                   user;
-  private ProjectControllerSwing controller;
+  private MainModelImpl             mainModel;
+  private User                      user;
+  private ProjectControllerStandard controller;
 
   public ProjectModelImpl()
   {
@@ -40,7 +40,7 @@ public class ProjectModelImpl
   }
 
 
-  public void setController(ProjectControllerSwing controller)
+  public void setController(ProjectControllerStandard controller)
   {
     this.controller = controller;
   }

@@ -1,4 +1,4 @@
-package controller.swing;
+package controller.standard;
 
 import data.User;
 import model.impl.SettingsModelImpl;
@@ -7,7 +7,7 @@ import view.swing.settings.SettingsViewSwing;
 import java.util.Arrays;
 
 
-public class SettingsControllerSwing
+public class SettingsControllerStandard
 {
   private SettingsModelImpl model;
   private SettingsViewSwing view;

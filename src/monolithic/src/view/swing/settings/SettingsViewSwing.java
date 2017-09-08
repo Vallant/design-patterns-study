@@ -1,18 +1,16 @@
 package view.swing.settings;
 
-import controller.swing.SettingsControllerSwing;
+import controller.standard.SettingsControllerStandard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsViewSwing
 {
 
-  private       SettingsControllerSwing controller;
-  private final JFrame                  frame;
-  private final SettingsPanel           pMain;
+  private       SettingsControllerStandard controller;
+  private final JFrame                     frame;
+  private final SettingsPanel              pMain;
 
   public SettingsViewSwing(JFrame frame)
   {
@@ -37,7 +35,7 @@ public class SettingsViewSwing
   }
 
 
-  public void setController(SettingsControllerSwing controller)
+  public void setController(SettingsControllerStandard controller)
   {
     this.controller = controller;
   }

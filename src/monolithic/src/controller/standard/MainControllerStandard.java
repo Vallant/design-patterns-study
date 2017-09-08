@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.swing;
+package controller.standard;
 
 import data.User;
 import model.impl.*;
@@ -13,28 +13,28 @@ import view.swing.MainViewSwing;
 /**
  * @author stephan
  */
-public class MainControllerSwing
+public class MainControllerStandard
 {
   private MainViewSwing mainView;
   private MainModelImpl mainModel;
 
-  private final LoginControllerSwing             login;
-  private final ActivityBarControllerSwing       activityBar;
-  private final ProjectControllerSwing           project;
-  private final SideBarControllerSwing           sideBar;
-  private final PersonalStatisticControllerSwing personalStatistic;
-  private final ProjectStatisticControllerSwing  projectStatistic;
-  private final SettingsControllerSwing          settings;
+  private final LoginControllerStandard             login;
+  private final ActivityBarControllerStandard       activityBar;
+  private final ProjectControllerStandard           project;
+  private final SideBarControllerStandard           sideBar;
+  private final PersonalStatisticControllerStandard personalStatistic;
+  private final ProjectStatisticControllerStandard  projectStatistic;
+  private final SettingsControllerStandard          settings;
 
-  public MainControllerSwing()
+  public MainControllerStandard()
   {
-    login = new LoginControllerSwing();
-    project = new ProjectControllerSwing();
-    activityBar = new ActivityBarControllerSwing();
-    sideBar = new SideBarControllerSwing();
-    personalStatistic = new PersonalStatisticControllerSwing();
-    projectStatistic = new ProjectStatisticControllerSwing();
-    settings = new SettingsControllerSwing();
+    login = new LoginControllerStandard();
+    project = new ProjectControllerStandard();
+    activityBar = new ActivityBarControllerStandard();
+    sideBar = new SideBarControllerStandard();
+    personalStatistic = new PersonalStatisticControllerStandard();
+    projectStatistic = new ProjectStatisticControllerStandard();
+    settings = new SettingsControllerStandard();
   }
 
 

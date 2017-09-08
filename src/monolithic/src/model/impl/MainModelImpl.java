@@ -6,7 +6,7 @@
 package model.impl;
 
 import controller.common.ControllerManager;
-import controller.swing.MainControllerSwing;
+import controller.standard.MainControllerStandard;
 import data.User;
 import db.common.DBManagerPostgres;
 
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class MainModelImpl
 {
-  private final MainControllerSwing controller;
+  private final MainControllerStandard controller;
 
   private final LoginModelImpl             login;
   private final ProjectModelImpl           project;

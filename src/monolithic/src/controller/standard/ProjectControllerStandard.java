@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.swing;
+package controller.standard;
 
 import data.Project;
 import data.ProjectMember;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * @author stephan
  */
-public class ProjectControllerSwing
+public class ProjectControllerStandard
 {
   private ProjectModelImpl model;
   private ProjectViewSwing view;

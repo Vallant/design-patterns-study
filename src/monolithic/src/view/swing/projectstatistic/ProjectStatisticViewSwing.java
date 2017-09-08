@@ -1,12 +1,10 @@
 package view.swing.projectstatistic;
 
-import controller.swing.ProjectStatisticControllerSwing;
+import controller.standard.ProjectStatisticControllerStandard;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 
 public class ProjectStatisticViewSwing
 {
-  private ProjectStatisticControllerSwing controller;
+  private ProjectStatisticControllerStandard controller;
 
 
   private final JFrame                        frame;
@@ -83,7 +81,7 @@ public class ProjectStatisticViewSwing
   }
 
 
-  public void setController(ProjectStatisticControllerSwing controller)
+  public void setController(ProjectStatisticControllerStandard controller)
   {
     this.controller = controller;
   }

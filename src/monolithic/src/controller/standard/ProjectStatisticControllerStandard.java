@@ -1,4 +1,4 @@
-package controller.swing;
+package controller.standard;
 
 import data.Activity;
 import data.Project;
@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-public class ProjectStatisticControllerSwing
+public class ProjectStatisticControllerStandard
 {
 
   private ProjectStatisticModelImpl model;

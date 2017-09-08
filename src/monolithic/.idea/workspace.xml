@@ -2,102 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fcd5eb1c-29b7-4d11-bf4b-e8b5bdfc553c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/common/ControllerManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ActivityBarController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/LoginController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/MainController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/PersonalStatisticController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ProjectController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/ProjectStatisticController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/SettingsController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/interfaces/SideBarController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ActivityBarControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/LoginControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/MainControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/PersonalStatisticControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ProjectControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/ProjectStatisticControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/SettingsControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/controller/swing/SideBarControllerSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/Activity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/Project.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/ProjectMember.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/ProjectPhase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/data/User.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/common/DBManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/common/DBManagerPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ActivityRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/DBEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectMemberRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectPhaseRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/ProjectRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/Repository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/RepositoryFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/interfaces/UserRepository.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ActivityRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectMemberRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectPhaseRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/ProjectRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/db/postgres/repository/UserRepositoryPostgres.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementChangedException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementInsertFailedException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/exception/ElementNotFoundException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ActivityBarModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/LoginModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/MainModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/PersonalStatisticModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ProjectModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/ProjectStatisticModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/SettingsModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/impl/SideBarModelImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ActivityBarModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/LoginModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/MainModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/PersonalStatisticModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ProjectModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/ProjectStatisticModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/SettingsModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/model/interfaces/SideBarModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/test/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/common/ViewManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ActivityBarView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/LoginView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/MainView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/PersonalStatisticView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ProjectStatisticView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/ProjectView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/SettingsView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/interfaces/SideBarView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/MainViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/SideBarViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarDialogPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/activitybar/ActivityBarViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewRegisterPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewResetPWPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/login/LoginViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticActivityPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticActivityTableModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticPhasePanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticProjectPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticTableModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticUpdateActivityDialogPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectAddDialogPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectAddPhasePanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectDetailAddMemberPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectDetailViewPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectViewPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/project/ProjectViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticActivityPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticActivityTableModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticPhasePanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticProjectPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticTableModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/settings/SettingsPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../best-practice/src/view/swing/settings/SettingsViewSwing.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/ActivityBarControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/ActivityBarControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/LoginControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/LoginControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/MainControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/MainControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/PersonalStatisticControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/PersonalStatisticControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/ProjectControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/ProjectControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/ProjectStatisticControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/ProjectStatisticControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/SettingsControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/SettingsControllerStandard.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/controller/swing/SideBarControllerSwing.java" afterPath="$PROJECT_DIR$/src/controller/standard/SideBarControllerStandard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/common/ControllerManager.java" afterPath="$PROJECT_DIR$/src/controller/common/ControllerManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/LoginModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/MainModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SettingsModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java" afterPath="$PROJECT_DIR$/src/model/impl/SideBarModelImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/common/ViewManager.java" afterPath="$PROJECT_DIR$/src/view/common/ViewManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/MainViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/MainViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/activitybar/ActivityBarViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/login/LoginViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/login/LoginViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/project/ProjectViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/projectstatistic/ProjectStatisticViewSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/swing/settings/SettingsViewSwing.java" afterPath="$PROJECT_DIR$/src/view/swing/settings/SettingsViewSwing.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,25 +39,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PersonalStatisticModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/PersonalStatisticModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2034">
-              <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
-              <folding>
-                <marker date="1504896281784" expanded="true" signature="3922:3926" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ProjectStatisticModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/ProjectStatisticModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1098">
               <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
-                <marker date="1504896281784" expanded="true" signature="3711:3715" ph="{...}" />
+                <marker date="1504896617934" expanded="true" signature="3729:3733" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -139,30 +57,30 @@
             <state relative-caret-position="126">
               <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
               <folding>
-                <marker date="1504896281784" expanded="false" signature="417:421" ph=" }" />
-                <marker date="1504896281784" expanded="true" signature="450:456" ph="{}" />
-                <marker date="1504896281784" expanded="false" signature="490:499" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="528:532" ph=" }" />
-                <marker date="1504896281784" expanded="false" signature="575:584" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="623:627" ph=" }" />
-                <marker date="1504896281784" expanded="false" signature="667:676" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="711:715" ph=" }" />
-                <marker date="1504896281784" expanded="false" signature="749:758" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="787:791" ph=" }" />
-                <marker date="1504896281784" expanded="false" signature="833:842" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="879:883" ph=" }" />
-                <marker date="1504896281784" expanded="false" signature="915:924" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="943:947" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="432:436" ph=" }" />
+                <marker date="1504896617871" expanded="true" signature="465:471" ph="{}" />
+                <marker date="1504896617871" expanded="false" signature="505:514" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="543:547" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="590:599" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="638:642" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="682:691" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="726:730" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="764:773" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="802:806" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="848:857" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="894:898" ph=" }" />
+                <marker date="1504896617871" expanded="false" signature="930:939" ph=" { " />
+                <marker date="1504896617871" expanded="false" signature="958:962" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+            <state relative-caret-position="396">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -174,7 +92,7 @@
             <state relative-caret-position="972">
               <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
-                <marker date="1504896281784" expanded="true" signature="1755:1759" ph="{...}" />
+                <marker date="1504896618004" expanded="true" signature="1773:1777" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -186,18 +104,8 @@
             <state relative-caret-position="1872">
               <caret line="108" column="8" lean-forward="false" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
               <folding>
-                <marker date="1504896281784" expanded="true" signature="3891:3906" ph="{...}" />
+                <marker date="1504896617944" expanded="true" signature="3909:3924" ph="{...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectMember.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/ProjectMember.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="72" column="9" lean-forward="false" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -205,11 +113,39 @@
       <file leaf-file-name="ActivityBarModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1170">
-              <caret line="69" column="28" lean-forward="false" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-              <folding>
-                <marker date="1504896281784" expanded="true" signature="2665:2669" ph="{...}" />
-              </folding>
+            <state relative-caret-position="180">
+              <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ControllerManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/common/ControllerManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonalStatisticViewSwing.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3330">
+              <caret line="213" column="36" lean-forward="true" selection-start-line="213" selection-start-column="36" selection-end-line="213" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SideBarViewSwing.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="29" column="44" lean-forward="false" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,24 +153,9 @@
       <file leaf-file-name="LoginModelImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
+            <state relative-caret-position="244">
               <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding>
-                <marker date="1504896281784" expanded="false" signature="2127:2136" ph=" { " />
-                <marker date="1504896281784" expanded="false" signature="2163:2167" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainModelImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/impl/MainModelImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1728">
-              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-              <folding>
-                <marker date="1504896281784" expanded="true" signature="4122:4143" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -370,7 +291,9 @@
     <option name="width" value="1920" />
     <option name="height" value="1053" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -418,7 +341,7 @@
               <item name="monolithic" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="standard" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="monolithic" type="b2602c69:ProjectViewProjectNode" />
@@ -655,7 +578,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8614000" />
+    <option name="totallyTimeSpent" value="8734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1080" extended-state="6" />
@@ -675,6 +598,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32778355" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -682,13 +606,32 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -708,14 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-507">
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -816,16 +751,6 @@
         <state relative-caret-position="126">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="213" column="49" lean-forward="false" selection-start-line="213" selection-start-column="49" selection-end-line="213" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -931,21 +856,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/swing/ActivityBarControllerSwing.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/standard/ActivityBarControllerStandard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/common/ControllerManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -988,8 +905,6 @@
           <caret line="361" column="7" lean-forward="true" selection-start-line="361" selection-start-column="7" selection-end-line="361" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3629#3630#0" expanded="true" />
-            <element signature="e#3657#3658#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1000,29 +915,7 @@
         <state relative-caret-position="46">
           <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
           <folding>
-            <element signature="e#0#1376#0" expanded="true" />
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="69" column="28" lean-forward="false" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-          <folding>
-            <marker date="1504896281784" expanded="true" signature="2665:2669" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <marker date="1504896281784" expanded="false" signature="2127:2136" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="2163:2167" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1032,7 +925,7 @@
         <state relative-caret-position="1728">
           <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding>
-            <marker date="1504896281784" expanded="true" signature="4122:4143" ph="{...}" />
+            <marker date="1504896617847" expanded="true" signature="4131:4152" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1042,7 +935,7 @@
         <state relative-caret-position="2034">
           <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
           <folding>
-            <marker date="1504896281784" expanded="true" signature="3922:3926" ph="{...}" />
+            <marker date="1504896617974" expanded="true" signature="3940:3944" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1060,7 +953,7 @@
         <state relative-caret-position="1872">
           <caret line="108" column="8" lean-forward="false" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
           <folding>
-            <marker date="1504896281784" expanded="true" signature="3891:3906" ph="{...}" />
+            <marker date="1504896617944" expanded="true" signature="3909:3924" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1070,7 +963,7 @@
         <state relative-caret-position="972">
           <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <marker date="1504896281784" expanded="true" signature="1755:1759" ph="{...}" />
+            <marker date="1504896618004" expanded="true" signature="1773:1777" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1080,7 +973,7 @@
         <state relative-caret-position="1098">
           <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
-            <marker date="1504896281784" expanded="true" signature="3711:3715" ph="{...}" />
+            <marker date="1504896617934" expanded="true" signature="3729:3733" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1090,28 +983,68 @@
         <state relative-caret-position="126">
           <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
           <folding>
-            <marker date="1504896281784" expanded="false" signature="417:421" ph=" }" />
-            <marker date="1504896281784" expanded="true" signature="450:456" ph="{}" />
-            <marker date="1504896281784" expanded="false" signature="490:499" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="528:532" ph=" }" />
-            <marker date="1504896281784" expanded="false" signature="575:584" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="623:627" ph=" }" />
-            <marker date="1504896281784" expanded="false" signature="667:676" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="711:715" ph=" }" />
-            <marker date="1504896281784" expanded="false" signature="749:758" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="787:791" ph=" }" />
-            <marker date="1504896281784" expanded="false" signature="833:842" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="879:883" ph=" }" />
-            <marker date="1504896281784" expanded="false" signature="915:924" ph=" { " />
-            <marker date="1504896281784" expanded="false" signature="943:947" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="432:436" ph=" }" />
+            <marker date="1504896617871" expanded="true" signature="465:471" ph="{}" />
+            <marker date="1504896617871" expanded="false" signature="505:514" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="543:547" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="590:599" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="638:642" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="682:691" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="726:730" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="764:773" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="802:806" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="848:857" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="894:898" ph=" }" />
+            <marker date="1504896617871" expanded="false" signature="930:939" ph=" { " />
+            <marker date="1504896617871" expanded="false" signature="958:962" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        <state relative-caret-position="396">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/LoginModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/impl/ActivityBarModelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/common/ControllerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/personalstatistic/PersonalStatisticViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="213" column="36" lean-forward="true" selection-start-line="213" selection-start-column="36" selection-end-line="213" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/swing/SideBarViewSwing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="29" column="44" lean-forward="false" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
           <folding />
         </state>
       </provider>

@@ -1,11 +1,9 @@
 package view.swing.personalstatistic;
 
-import controller.swing.PersonalStatisticControllerSwing;
+import controller.standard.PersonalStatisticControllerStandard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.Duration;
@@ -19,11 +17,11 @@ import java.util.ArrayList;
 public class PersonalStatisticViewSwing
 {
 
-  private final JFrame                           frame;
-  private       PersonalStatisticControllerSwing controller;
-  private final PersonalStatisticProjectPanel    pProject;
-  private final PersonalStatisticPhasePanel      pPhase;
-  private final PersonalStatisticActivityPanel   pActivity;
+  private final JFrame                              frame;
+  private       PersonalStatisticControllerStandard controller;
+  private final PersonalStatisticProjectPanel       pProject;
+  private final PersonalStatisticPhasePanel         pPhase;
+  private final PersonalStatisticActivityPanel      pActivity;
 
   public PersonalStatisticViewSwing(JFrame frame)
   {
@@ -117,7 +115,7 @@ public class PersonalStatisticViewSwing
   }
 
 
-  public void setController(PersonalStatisticControllerSwing controller)
+  public void setController(PersonalStatisticControllerStandard controller)
   {
     this.controller = controller;
   }

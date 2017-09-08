@@ -5,7 +5,7 @@
  */
 package view.swing;
 
-import controller.swing.*;
+import controller.standard.*;
 import data.User;
 import view.swing.activitybar.ActivityBarViewSwing;
 import view.swing.login.LoginViewSwing;
@@ -36,7 +36,7 @@ public class MainViewSwing
   private       JMenuBar                   menuBar;
   private       JMenu                      file;
   private       JMenuItem                  logout;
-  private       MainControllerSwing        controller;
+  private       MainControllerStandard     controller;
 
 
   public MainViewSwing()
@@ -76,27 +76,27 @@ public class MainViewSwing
   }
 
 
-  public void setMainController(MainControllerSwing controller)
+  public void setMainController(MainControllerStandard controller)
   {
     this.controller = controller;
   }
 
 
-  public void pairLogin(LoginControllerSwing controller)
+  public void pairLogin(LoginControllerStandard controller)
   {
     controller.setView(login);
     login.setController(controller);
   }
 
 
-  public void pairProject(ProjectControllerSwing controller)
+  public void pairProject(ProjectControllerStandard controller)
   {
     controller.setView(project);
     project.setController(controller);
   }
 
 
-  public void pairActivityBar(ActivityBarControllerSwing controller)
+  public void pairActivityBar(ActivityBarControllerStandard controller)
   {
     activityBar.setActivityBarController(controller);
     controller.setView(activityBar);
@@ -115,7 +115,7 @@ public class MainViewSwing
   }
 
 
-  public void pairSideBar(SideBarControllerSwing controller)
+  public void pairSideBar(SideBarControllerStandard controller)
   {
     sideBar.setController(controller);
     controller.setView(sideBar);
@@ -164,14 +164,14 @@ public class MainViewSwing
   }
 
 
-  public void pairPersonalStatistic(PersonalStatisticControllerSwing controller)
+  public void pairPersonalStatistic(PersonalStatisticControllerStandard controller)
   {
     controller.setView(personalStatistic);
     personalStatistic.setController(controller);
   }
 
 
-  public void pairProjectStatistic(ProjectStatisticControllerSwing controller)
+  public void pairProjectStatistic(ProjectStatisticControllerStandard controller)
   {
     controller.setView(projectStatistic);
     projectStatistic.setController(controller);
@@ -186,7 +186,7 @@ public class MainViewSwing
   }
 
 
-  public void pairSettings(SettingsControllerSwing controller)
+  public void pairSettings(SettingsControllerStandard controller)
   {
     controller.setView(settings);
     settings.setController(controller);

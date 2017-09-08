@@ -5,19 +5,17 @@
  */
 package view.swing.login;
 
-import controller.swing.LoginControllerSwing;
+import controller.standard.LoginControllerStandard;
 import data.User;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author stephan
  */
 public class LoginViewSwing
 {
-  private LoginControllerSwing controller;
+  private LoginControllerStandard controller;
 
   private final JFrame frame;
 
@@ -133,7 +131,7 @@ public class LoginViewSwing
   }
 
 
-  public void setController(LoginControllerSwing controller)
+  public void setController(LoginControllerStandard controller)
   {
     this.controller = controller;
   }

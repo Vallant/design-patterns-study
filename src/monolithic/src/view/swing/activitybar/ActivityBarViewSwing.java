@@ -6,12 +6,10 @@
 package view.swing.activitybar;
 
 
-import controller.swing.ActivityBarControllerSwing;
+import controller.standard.ActivityBarControllerStandard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -22,8 +20,8 @@ import java.util.TimerTask;
  */
 public class ActivityBarViewSwing
 {
-  private final JFrame                     frame;
-  private       ActivityBarControllerSwing controller;
+  private final JFrame                        frame;
+  private       ActivityBarControllerStandard controller;
 
   private final ActivityBarPanel pMain;
 
@@ -49,7 +47,7 @@ public class ActivityBarViewSwing
   }
 
 
-  public void setActivityBarController(ActivityBarControllerSwing controller)
+  public void setActivityBarController(ActivityBarControllerStandard controller)
   {
     this.controller = controller;
   }

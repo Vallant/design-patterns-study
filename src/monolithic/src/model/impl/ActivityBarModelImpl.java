@@ -5,7 +5,7 @@
  */
 package model.impl;
 
-import controller.swing.ActivityBarControllerSwing;
+import controller.standard.ActivityBarControllerStandard;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
  */
 public class ActivityBarModelImpl
 {
-  private ActivityBarControllerSwing controller;
-  private MainModelImpl              mainModel;
-  private User                       user;
+  private ActivityBarControllerStandard controller;
+  private MainModelImpl                 mainModel;
+  private User                          user;
 
   private ZonedDateTime start;
   private ZonedDateTime stop;
@@ -39,7 +39,7 @@ public class ActivityBarModelImpl
   }
 
 
-  public void setController(ActivityBarControllerSwing controller)
+  public void setController(ActivityBarControllerStandard controller)
   {
     this.controller = controller;
   }

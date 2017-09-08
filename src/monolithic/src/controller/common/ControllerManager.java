@@ -5,22 +5,22 @@
  */
 package controller.common;
 
-import controller.swing.MainControllerSwing;
+import controller.standard.MainControllerStandard;
 
 /**
  * @author stephan
  */
 public class ControllerManager
 {
-  private static MainControllerSwing controller;
+  private static MainControllerStandard controller;
 
   public static void initInstance(String frontend)
   {
     assert (controller == null);
     switch(frontend)
     {
-      case "swing":
-        controller = new MainControllerSwing();
+      case "standard":
+        controller = new MainControllerStandard();
         break;
       default:
         throw new UnsupportedOperationException();
@@ -29,7 +29,7 @@ public class ControllerManager
     controller.init(frontend);
   }
 
-  public static MainControllerSwing getInstance()
+  public static MainControllerStandard getInstance()
   {
     assert (controller != null);
     return controller;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.swing;
+package controller.standard;
 
 import model.impl.ActivityBarModelImpl;
 import view.swing.activitybar.ActivityBarViewSwing;
@@ -13,13 +13,13 @@ import java.util.ArrayList;
 /**
  * @author stephan
  */
-public class ActivityBarControllerSwing
+public class ActivityBarControllerStandard
 {
   private ActivityBarModelImpl model;
   private ActivityBarViewSwing view;
 
 
-  public ActivityBarControllerSwing()
+  public ActivityBarControllerStandard()
   {
   }
 

@@ -1,6 +1,6 @@
 package model.impl;
 
-import controller.swing.PersonalStatisticControllerSwing;
+import controller.standard.PersonalStatisticControllerStandard;
 import data.Activity;
 import data.Project;
 import data.ProjectPhase;
@@ -27,9 +27,9 @@ public class PersonalStatisticModelImpl
     DAY
   }
 
-  private MainModelImpl                    mainModel;
-  private PersonalStatisticControllerSwing controller;
-  private User                             user;
+  private MainModelImpl                       mainModel;
+  private PersonalStatisticControllerStandard controller;
+  private User                                user;
 
 
   public void deleteActivity(Activity toDelete) throws Exception
@@ -70,7 +70,7 @@ public class PersonalStatisticModelImpl
   }
 
 
-  public void setController(PersonalStatisticControllerSwing controller)
+  public void setController(PersonalStatisticControllerStandard controller)
   {
     this.controller = controller;
   }

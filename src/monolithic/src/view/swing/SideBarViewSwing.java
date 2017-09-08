@@ -1,14 +1,12 @@
 package view.swing;
 
-import controller.swing.SideBarControllerSwing;
+import controller.standard.SideBarControllerStandard;
 import data.User;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by stephan on 08.07.17.
@@ -29,7 +27,7 @@ public class SideBarViewSwing
   private final JPanel pFloatPanel;
   //private final JButton btHelp;
 
-  private SideBarControllerSwing controller;
+  private SideBarControllerStandard controller;
 
   public SideBarViewSwing(JFrame frame)
   {
@@ -71,7 +69,7 @@ public class SideBarViewSwing
   }
 
 
-  public void setController(SideBarControllerSwing controller)
+  public void setController(SideBarControllerStandard controller)
   {
     this.controller = controller;
   }

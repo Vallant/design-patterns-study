@@ -1,15 +1,15 @@
 package model.impl;
 
 
-import controller.swing.SideBarControllerSwing;
+import controller.standard.SideBarControllerStandard;
 
 /**
  * Created by stephan on 08.07.17.
  */
 public class SideBarModelImpl
 {
-  private MainModelImpl          mainModel;
-  private SideBarControllerSwing controller;
+  private MainModelImpl             mainModel;
+  private SideBarControllerStandard controller;
 
   public void setMainModel(MainModelImpl model)
   {
@@ -17,7 +17,7 @@ public class SideBarModelImpl
   }
 
 
-  public void setController(SideBarControllerSwing controller)
+  public void setController(SideBarControllerStandard controller)
   {
     this.controller = controller;
   }
