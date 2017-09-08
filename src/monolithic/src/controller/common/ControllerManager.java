@@ -14,10 +14,10 @@ public class ControllerManager
 {
   private static MainControllerStandard controller;
 
-  public static void initInstance(String frontend)
+  public static void initInstance(String controllerImpl, String frontend)
   {
     assert (controller == null);
-    switch(frontend)
+    switch(controllerImpl)
     {
       case "standard":
         controller = new MainControllerStandard();

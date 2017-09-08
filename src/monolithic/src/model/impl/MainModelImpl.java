@@ -34,9 +34,9 @@ public class MainModelImpl
   private final DBManagerPostgres dbPostres;
 
 
-  private MainModelImpl(String driver, String url, String username, String password, String frontend) throws Exception
+  private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
+                        frontend) throws Exception
   {
-
     if(driver.equals("mongo"))
     {
       dbMongo = new DBManagerMongo(url, username, password);
@@ -49,7 +49,7 @@ public class MainModelImpl
     }
 
 
-    ControllerManager.initInstance(frontend);
+    ControllerManager.initInstance(controllerImpl, frontend);
 
     controller = ControllerManager.getInstance();
     controller.setModel(this);
@@ -79,7 +79,7 @@ public class MainModelImpl
   {
     try
     {
-      new MainModelImpl(args[0], args[1], args[2], args[3], args[4]);
+      new MainModelImpl(args[0], args[1], args[2], args[3], args[4], args[5]);
     }
     catch(Exception ex)
     {
