@@ -17,9 +17,18 @@
 
 package data;
 
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
+import db.common.DBManagerMongo;
 import db.common.DBManagerPostgres;
 import db.interfaces.DBEntity;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +36,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * @author stephan
@@ -285,6 +297,114 @@ public class Project implements DBEntity
     }
   }
 
+  public static Project getByPrimaryKey(int projectId, DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    FindIterable<Document> doc = coll.find(eq("id", projectId));
+    MongoCursor<Document> cursor = doc.iterator();
+    if(!cursor.hasNext())
+      throw new Exception("no such record");
+
+    return extractProject(cursor.next());
+  }
+
+  private static Project extractProject(Document next)
+  {
+    int hash = next.getInteger("hash");
+    int id = next.getInteger("id");
+    String name = next.getString("name");
+    String description = next.getString("description");
+    return new Project(hash, id, name, description);
+  }
+
+  public static ArrayList<Project> getProjectsByUserName(String loginName, DBManagerMongo manager) throws Exception
+  {
+    ArrayList<Project> list = new ArrayList<>();
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    Bson lookup = new Document("$lookup",
+      new Document("from", "project_member")
+        .append("localField", "id")
+        .append("foreignField", "project_id")
+        .append("as", "project_member"));
+
+    Bson match = new Document("$match",
+      new Document("project_member.user_login_name", loginName));
+
+    List<Bson> filters = new ArrayList<>();
+    filters.add(lookup);
+    filters.add(match);
+    AggregateIterable<Document> it = coll.aggregate(filters);
+
+    for(Document row : it)
+      list.add(extractProject(row));
+
+    return list;
+  }
+
+  public static String getDescriptionByProjectName(String projectName, DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    FindIterable<Document> doc = coll.find(eq("name", projectName));
+    MongoCursor<Document> cursor = doc.iterator();
+    if(!cursor.hasNext())
+      throw new Exception("no such record");
+
+    return cursor.next().getString("description");
+  }
+
+  public void insertIntoDb(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    Document toAdd = new Document("hash", getLocalHash())
+      .append("name", getName())
+      .append("description", getDescription())
+      .append("id", manager.getNextSequence("project"));
+    coll.insertOne(toAdd);
+    setId(toAdd.getInteger("id"));
+  }
+
+  public void updateInDb(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    Document toUpdate = new Document("hash", getLocalHash())
+      .append("name", getName())
+      .append("description", getDescription())
+      .append("id", getId())
+      .append("hash", getLocalHash());
+    UpdateResult result = coll.replaceOne(and(eq("id", getId()), eq("hash", getRemoteHash())), toUpdate);
+    if(result.getModifiedCount() != 1)
+      throw new Exception("Record was modyfied or not found");
+    setRemoteHash(getLocalHash());
+  }
+
+  public void deleteFromDb(DBManagerMongo manager) throws Exception
+  {
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    DeleteResult result = coll.deleteOne(and(eq("id", getId()), eq("hash", getRemoteHash())));
+    if(result.getDeletedCount() != 1)
+      throw new Exception("Record was modyfied or not found");
+
+    MongoCollection members = manager.getDb().getCollection("project_member");
+    members.deleteMany(eq("project_id", getId()));
+
+    MongoCollection phases = manager.getDb().getCollection("project_phase");
+    phases.deleteMany(eq("project_id", getId()));
+
+    MongoCollection activities = manager.getDb().getCollection("activity");
+    activities.deleteMany(eq("project_id", getId()));
+  }
+
+  public static List<Project> getAll(DBManagerMongo manager) throws Exception
+  {
+    ArrayList<Project> list = new ArrayList<>();
+    MongoCollection<Document> coll = manager.getDb().getCollection("project");
+    FindIterable<Document> doc = coll.find();
+    MongoCursor<Document> cursor = doc.iterator();
+    while(cursor.hasNext())
+      list.add(extractProject(cursor.next()));
+
+    return list;
+  }
 }
 
 
