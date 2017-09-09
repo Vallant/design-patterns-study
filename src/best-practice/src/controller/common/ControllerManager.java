@@ -5,6 +5,7 @@
  */
 package controller.common;
 
+import controller.cached.MainControllerCached;
 import controller.interfaces.MainController;
 import controller.standard.MainControllerStandard;
 
@@ -22,6 +23,9 @@ public class ControllerManager
     {
       case "standard":
         controller = new MainControllerStandard();
+        break;
+      case "cached":
+        controller = new MainControllerCached();
         break;
       default:
         throw new UnsupportedOperationException();
