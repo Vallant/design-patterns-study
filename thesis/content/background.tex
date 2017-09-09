@@ -148,5 +148,12 @@ If it is wanted to refer from one table row to the a record from another table a
 As a prominent example for NoSQL\footnote{Not only SQL}-databases MongoDB is a database engine written in C++ and published in 2009. In opposite to relational databases it persists the data in \emph{documents} which are structured in a JSON\footnote{JavaScript Object Notation, a syntax for exchanging data which is easy to read for humans and efficiently processable by machines. It is build around key-value-pairs which can be nested.}-like manner. 
 
 Documents can be stored in \emph{collections} which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.
+
 \subsection{Cached Controller}
+
+Caching is the process to hold often needed data in memory to reduce the time necessary for gathering. While most of modern database management systems already provide advanced caching techniques out of the box, the application could be physically separated from the server by a low-bandwidth network. Therefore client-side caching may be necessary for reducing latency. 
+
+In most of the cases placing the cache in the data access layer (see section \ref{sec:multi-tier}) leads to the simplest implementation as all data accesses are passing through here. However depending on the structure and needs of the application it may be necessary to implement the cache in the business code, which according to software developers introduces a lot of complexity to the layer. 
+
+In either cases it is necessary to give the cache implementation a lot of thought. 
 \newpage
