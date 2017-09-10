@@ -48,6 +48,7 @@ For example, in a booking system there may be a data class \texttt{Order}. A rep
 
 
 \subsection{Model-View-Controller}
+\label{sec:mvc}
 The Model-View-Controller (MVC) is a pattern that describes a separation of a program in three layers, it is considered both a design and a architectural pattern, depending on the point of view.  Its goal is to improve flexibility and extensibility of an application which can help to improve maintainability. It consists of three components, from which the \emph{model} contains the business logic, the \emph{controller} processes interactions and the \emph{view} presents some kind of user interface. 
 
 This pattern is not very well defined and is subject of constant discussions. While it is commonly agreed upon that the application should be split in the three layers, the data flows and connections between the components are described in many different ways. The original concept of MVC developed for Smalltalk as described before the model holds logic and data of the application. Views subscribe at the model for notifications on changes of data in order to be able to update and refresh themselves. The controller was responsible of managing user interaction, which includes switching between views and forwarding requests to the model. This situation can be seen in Figure \ref{fig:mvc-smalltalk}. This direct interaction between model and view is often not desirable, especially in the context of web applications, which leaves it deprecated today. 
@@ -128,15 +129,15 @@ The JRE uses an interpreter and a just-in-time (JIT) compiler to generate native
 
 As of September 2017 according to the TIOBE-Index it is the most popular programming language with a share of more than 12\% \footnote{\href{https://www.tiobe.com/tiobe-index/}{https://www.tiobe.com/tiobe-index/}, accessed 7.9.2017}. 
 \subsection{Swing}
-
+\label{sec:swing}
 Swing is a Graphical-User-Interface (GUI) Library for Java and was first published in 1997. It is rendered directly by Java thus it is not necessary for a platform to provide specific controls. However this leads to a significant difference to applications natively written for the platform as some control concepts may differ or buttons may be placed at other positions. This problem is bypassed by the introduction of different \emph{Look-and-Feels} which intend to adopt the application to be as similar to a native program as possible.
 
 \subsection{JavaFX}
-
+\label{sec:javafx}
 JavaFX is a framework \footnote{The main difference between a framework and a library is the so-called \emph{Inversion of Control}. While a library is called by the programmer, when using a framework it is in control and calls methods provided by the developer.} for GUI programming in Java and was released in 2014, replacing Swing as the main method for graphical programming. In opposite to Swing it implements its own multimedia-stack able to access graphics card feature through OpenGL and Windows Direct3D.  
 
 \subsection{Relational Databases and PostgreSQL}
-
+\label{sec:postgres}
 PostgreSQL is a open source object-relational database management system (ORDBMS) that was first published in 2002. Other than many database management systems it is focused on maintaining a good SQL standard compliance and is currently ranked as the 4th most popular engine. \footnote{ \href{https://www.postgresql.org/about/}{https://www.postgresql.org/about/}} \footnote{\href{https://db-engines.com/de/ranking}{https://db-engines.com/de/ranking}}
 
 Almost all database systems that are considered as relational use the Structured Query Language (SQL) or a dialect of it as language for querying and manipulating the database. Such a system is characterized by structuring the data into \emph{tables}, which consists of \emph{columns} and \emph{rows} (also: \emph{records}). Many systems require each row to have a unique identifier, also called \emph{primary key}. This key can consist of one or more columns per row, if more columns are considered it is also called \emph{composite key}. 
@@ -145,6 +146,7 @@ If it is wanted to refer from one table row to the a record from another table a
 
 
 \subsection{MongoDB}
+\label{sec:mongodb}
 As a prominent example for NoSQL\footnote{Not only SQL}-databases MongoDB is a database engine written in C++ and published in 2009. In opposite to relational databases it persists the data in \emph{documents} which are structured in a JSON\footnote{JavaScript Object Notation, a syntax for exchanging data which is easy to read for humans and efficiently processable by machines. It is build around key-value-pairs which can be nested.}-like manner. 
 
 Documents can be stored in \emph{collections} which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.

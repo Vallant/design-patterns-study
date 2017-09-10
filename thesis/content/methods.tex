@@ -63,7 +63,7 @@ To ensure comparability the structure described in the previous section applies 
 After the setting of basic requirements more and more modifications and extensions being added. This should simulate an ongoing discussion process with the (virtual) stakeholders of the application, the extensions are called \emph{phases} and are described in detail in this section. The new requirements can be seen as a refinement of the use cases specified in the previous sections.
 
 \subsubsection{Phase 1: Basic requirements} 
-For starters the application should provide a graphical user interface by using the Swing-library (section \ref{sec:swing}) and as data tier a PostgreSQL database (section \ref{sec:postres}) should be used.
+For starters the application should provide a graphical user interface by using the Swing-library (section \ref{sec:swing}) and as data tier a PostgreSQL database (section \ref{sec:postgres}) should be used.
 
 \subsection{Phase 2: Support of a different graphical user interface library}
 After meeting the basic requirements the virtual stakeholders are requesting the support of a different GUI library, namely JavaFX (section \ref{sec:javafx}). By providing application start-up arguments the user should be able to decide which GUI should be presented to him. All other use-cases and requirements regarding the work flow apply nevertheless.
@@ -84,8 +84,10 @@ The persistent storage has a quite simple structure, as can be seen in figure \r
 
 \clearpage
 
-\section{Phase 1: One Databse and UI}
-\subsection{Monolithic Code Samples}
+\section{Phase 1: Basic Requirements}
+In this section it is explained in detail how the two applications meet the requirements.
+
+\subsection{Ad-hoc Code Samples}
 %\subsubsection{Database Access}
 %\subsubsection{UI Interaction}
 
