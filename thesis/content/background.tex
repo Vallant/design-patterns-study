@@ -149,11 +149,41 @@ As a prominent example for NoSQL\footnote{Not only SQL}-databases MongoDB is a d
 
 Documents can be stored in \emph{collections} which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.
 
-\subsection{Cached Controller}
+\subsection{Caching}
 
 Caching is the process to hold often needed data in memory to reduce the time necessary for gathering. While most of modern database management systems already provide advanced caching techniques out of the box, the application could be physically separated from the server by a low-bandwidth network. Therefore client-side caching may be necessary for reducing latency. 
 
-In most of the cases placing the cache in the data access layer (see section \ref{sec:multi-tier}) leads to the simplest implementation as all data accesses are passing through here. However depending on the structure and needs of the application it may be necessary to implement the cache in the business code, which according to software developers introduces a lot of complexity to the layer. 
+In most of the cases placing the cache in the data access layer (see section \ref{sec:multi-tier}) leads to the simplest implementation as all data accesses are passing through here, however depending on the structure and needs of the application it may be necessary to implement the cache in the business code.
 
-In either cases it is necessary to give the cache implementation a lot of thought. 
-\newpage
+\subsubsection{Caching strategies}
+There are two main types of caching policies: \emph{write-through} and \emph{write-back}. When performing write-trough-caching all data is first persisted and then immediately updated in the cache, this operation blocks until all necessary writes are completed. This ensures that at all times a up-to-date copy of the data is available \footnote{\href{http://searchsolidstatestorage.techtarget.com/answer/Comparing-write-through-write-back-and-write-around-caching}, accessed 10.9.2017}. 
+
+The write-back-policy on the other hand also caches write accesses without directly persisting it. The write operation onto the data tier is being performed asynchronously, this may then happen when the system load is low and therefore the overall performance may be improved. However it is considered more dangerous in terms of data loss due to system crashes or other errors as the only valid copy of the data is only resided in the cache  \footnote{\href{http://www.computerweekly.com/feature/Write-through-write-around-write-back-Cache-explained}{http://www.computerweekly.com/feature/Write-through-write-around-write-back-Cache-explained}, accessed 10.9.2017}.
+
+\subsubsection{Cache Replacement Policies}
+As memory is a scare resource it is necessary to limit caching space and thus not all data can be cached at the same time. This introduces the necessary of means to decide which cache entries are to abolish, this mechanism is called a \emph{Cache Replacement Policy}. 
+
+The best policy clearly would be to replace the cache entry that will be needed again the latest. This is information that is not available the associated \textbf{Bélády's algorithm} is considered theoretical and is only used for measuring and comparing the performance of other policies.
+
+There are several possibilities which differ significantly depending on the data access pattern (list not exhaustive):
+\begin{itemize}
+	\item \textbf{First-In, First-Out (FIFO)}: When caching with the FIFO policy as soon the cache runs full the \emph{oldest} entry will be replaced. This is typically implemented as a Queue because it reduces the efforts to keep track of the entries age.
+	\item \textbf{Least Recently Used (LRU)}: This algorithm keeps track of the last reference to cache entries. When a replacement is necessary it frees the page which reference dates back the longest. 
+	\item \textbf{Least Frequently Used (LFU)}: Research has shown that LRU performs poorly for some access patterns, so instead of deciding which page is to replace upon the access time, LFU decides upon the number of accesses.
+	\item \textbf{Most Recently Used (MRU)}: Access patterns exist where it is preferred to abolish the entry that was accessed most recently, an example for this scenario would be the sequentially scanning of a file. The implementation is very similar to LRU.
+	\item \textbf{Random}: Interestingly research has shown that random replacement can be considered a good strategy as well, especially as it is easy to implement and efficient. Most of the more advanced policies may perform better with certain access patterns while performing worse in others. In many cases it is not possible to predict how the accesses will take place which introduces the risk of experiencing a unfavourable pattern. Random replacement is not sensitive to this problems while providing solid performance.
+\end{itemize}
+
+\subsubsection{Cache invalidation}
+In the context of cache invalidation a quote from Phil Karlton is especially famous\footnote{It is not clear if the quote is genuinely made by Karlton, however it is generally attributed to him.}: 
+\begin{quote}
+There are only two hard things in Computer Science: cache invalidation and naming things.
+\end{quote}
+
+A Cache invalidation mechanism is necessary if the data tier can be updated from more than one location or clients which is especially in the terms of web application the standard case. 
+
+Most caching strategies therefore feature a so-called time based expiry. It provides each cache record with a time-out after that it will be evicted \footnote{\href{http://tutorials.jenkov.com/software-architecture/caching-techniques.html}{http://tutorials.jenkov.com/software-architecture/caching-techniques.html}, accessed 10.9.2017}
+
+Another method is active cache invalidation which evicts either cache entry or the whole cache after a change in the data tier. To support this some kind of messaging mechanism is necessary to let the persistent storage notify all clients about the update. 
+
+In the case of multiple clients it has to be noted that it could be desirable to store additional version information for the table rows, for instance a incrementing counter or a hash of the data set. Because of the possibility of multiple clients updating the same row concurrently from different locations race conditions can occur that lead to the overwriting of newly entered data. Even with active cache invalidation it cannot be guaranteed that the update notification reaches the second client in-time. 
