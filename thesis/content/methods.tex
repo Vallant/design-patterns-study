@@ -41,24 +41,10 @@ The \textbf{controller} is the layer between model and view. As stated in the de
 
 As stated before the data access layer is realized by implementing the repository pattern, access to the repositories is provided through the main model.  Again only a interface to the repositories is returned to maximize flexibility.
 
-In figure \ref{fig:bp-model} a model of the program setup can be seen. 
-
-\begin{figure}
-	\label{fig:bp-model}
-	%TODO
-	\caption{Model of the program setup of the best pratice version of the application. All layers are connected only by interfaces. The data access is realized by repositories.}
-\end{figure}
-
 \subsection{Ad-hoc implementation}
 \label{sec:ad-hoc}
 To ensure comparability the structure described in the previous section applies to the ad-hoc implementation as well. However two serious differences are realized: Firstly the different layers are \emph{not} connected by interfaces but rather by concrete implementations. Secondly no data access layer is being used, the functionality is provided by the data classes. Therefore asides from the basic getter and setter methods static methods for data retrieval and updating the persistent storage are supplied. This is shown by the sample code in section \ref{code:static-methods}. Figure \ref{fig:adhoc-model} shows the setup for the ad-hoc version of the application. 
 
-
-\begin{figure}
-	\label{fig:adhoc-model}
-	%TODO
-	\caption{Model of the program setup of the ad-hoc version of the application. All layers are connected by concrete implementations. The data access is realized by static methods provided by the data classes.}
-\end{figure}
 
 \subsection{Experiment phases}
 After the setting of basic requirements more and more modifications and extensions being added. This should simulate an ongoing discussion process with the (virtual) stakeholders of the application, the extensions are called \emph{phases} and are described in detail in this section. The new requirements can be seen as a refinement of the use cases specified in the previous sections.
@@ -74,16 +60,6 @@ During the process the stakeholders request that the application should add supp
 
 \subsection{Phase 4: Implementation of a cached controller}
 Several months after the deployment a customer reports performance issues and heavy load on their database server. Therefore it is decided to implement a caching algorithm for the controller to reduce expensive database calls. Again by starting the application with different arguments either the standard controller or the caching implementation should be used.
-
-
-The persistent storage has a quite simple structure, as can be seen in figure \ref{fig:database}. It is notable that the roles are described as text and therefore are human-readable. 
-\begin{figure}[htbp]
-\includegraphics[width=\textwidth]{./content/pictures/database.png}
-\caption{Database diagram}
-\label{fig:database}
-\end{figure}
-
-\clearpage
 
 \section{Phase 1: Basic Requirements}
 \label{sec:code-samples}
