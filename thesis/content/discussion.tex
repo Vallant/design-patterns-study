@@ -1,4 +1,13 @@
 \chapter{Discussion}
+In this chapter all data gathered in the last section is revisited and put into context. 
+\section{Meaning and significance of the file count}
+As clearly visible in section \ref{sec:file-count} the ad-hoc version of the program does not need as many files as the best practice implementation. This is mainly due to the missing interface files, as well as the files for repositories. Especially in phase 3, where a new database should be supported, this factor can be easily observed. In the ad-hoc version all code concerning the database interaction was put into existing classes. 
 
-\section{Programming Overhead}
-\section{Use of OOP in General}
+\section{Meaning and significance of the line count}
+The same statement as above applies to the count of total lines as seen in section \ref{sec:line-count}. Each interface class consists of various method declarations that are counted as well. As stated in the footnote of table \ref{table:lines-of-code} for better comparison in addition to the total line count for the best practice implementation another count was made excluding the \texttt{@Override}-Annotation lines as they bias the result. 
+
+Here a interesting observation can be made for the line count: While the total count of the best practice version is higher for both phases 1 and two, the increase of lines is between the phases is significantly lower. While the best practice version added 2960 lines of code, the ad-hoc version added 3600 lines of code. This difference of about 700 lines does not seem much, however it has to be noted that this lines were mainly necessary because of case distinctions as can be seen in section \ref{sec:ad-hoc-javafx}. 
+
+The fact that the increase in lines between phase 2 and 3 is nearly the same is easily explained as the added files differ significantly. Due to the overhead of declaring a class including its constructor etcetera leads to a high number of additions which are not necessary in the ad-hoc version.
+
+Consequentially to the lower number of files and the comparable number of lines in the two programs, the ad-hoc implementation on average contains noticeably more code per file. As the two implementations offer exact the same functionality this means that responsibilities have shifted and each class is in charge of more actions. However this fact is a clear violation of the Single-Responsibility-Principle (see section \ref{sec:srp}) which may introduce more programming errors in the future. 

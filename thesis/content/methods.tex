@@ -86,6 +86,7 @@ The persistent storage has a quite simple structure, as can be seen in figure \r
 \clearpage
 
 \section{Phase 1: Basic Requirements}
+\label{sec:code-samples}
 In this section it is explained in detail how the two applications meet the requirements. This is only a short overview, the whole project is available on Github. For more information on the project structure see the appendix section.
 
 \subsection{Best-Practice Code Samples}
@@ -254,6 +255,7 @@ public class ViewManager
 \end{lstlisting}
 
 \subsection{Ad-hoc Code Samples}
+\label{sec:ad-hoc-javafx}
 Because the controllers do not rely on interfaces but on actual implementations now each call to a view class has to be differentiated which bloats the code. The following if-else statement is necessary at every call to a view. Obviously with more views the code is bloated even more, maybe even a switch-case would be necessary.
 
 \begin{lstlisting}

@@ -10,6 +10,12 @@
 \usepackage{listings}
 
 \usepackage{color}
+\usepackage{pgfplots}
+
+\usepackage{footnote}
+\usepackage{appendix}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -28,7 +34,7 @@
 	frame=single,	                   % adds a frame around the code
 	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
 	keywordstyle=\color{blue},       % keyword style
-	language=Octave,                 % the language of the code
+	language=Java,                 % the language of the code
 	morekeywords={*,...},            % if you want to add more keywords to the set
 	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
 	numbersep=5pt,                   % how far the line-numbers are from the code
@@ -48,8 +54,8 @@
 \frontmatter
 
 \input{template/colophon}
-%\input{\mytitlepage}
-%\input{template/declaration_TU_Graz}
+\input{\mytitlepage}
+\input{template/declaration_TU_Graz}
 %\cleardoublepage
 
 \tableofcontents
@@ -66,7 +72,7 @@
 \input{content/result.tex}
 \input{content/discussion.tex}
 \input{content/conclusion.tex}
-\input{content/future_work.tex}
+%\input{content/future_work.tex}
 
 
 %\cite{Gof94}
@@ -74,13 +80,9 @@
 %\cite{Aspect06}
 \cite{Composing06}
 
-\appendix
-
+\printbibliography	
 \listoffigures
 \listoftables
-
-\printbibliography
-
 
 \end{document}
 
