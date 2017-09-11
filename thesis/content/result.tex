@@ -1,11 +1,13 @@
 \chapter{Results}
-In order to make serious statements about the quality of the code and the effects of using the design patterns some indicators were chosen to compare the two application types. Because the two programs are similar in its work-flow and basic structure these comparisons are actually meaningful. Due to the use git version control bug-fixes do not influence the results.
+In order to make serious statements about the quality of the code and the effects of using the design patterns some indicators were chosen to compare the two application types. Because the two programs are similar in its work-flow and basic structure these comparisons are actually meaningful. Due to the use git version control bug-fixes do not influence the results. 
+
+This section only lists the findings while section \ref{sec:discussion} puts the results into context and explains them.
 
 \section{Lines of Code}
 \label{sec:line-count}
-In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed.
+In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} a chart line count development can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
 
-\begin{table}
+\begin{table}[htbp]
 	\centering
 	\label{table:lines-of-code}
 	\begin{tabular}{|c|c|c|c|c|} \hline
@@ -17,8 +19,9 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	\caption{Lines of code for both program versions and all phases}
 \end{table}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
+	\label{fig:lines-of-code}
 	\begin{tikzpicture}
 	\begin{axis}[
 	height=0.7\textwidth,
@@ -64,13 +67,13 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	\end{axis}
 	
 	\end{tikzpicture}
-	\caption{Lines of Code for both program versions and all phases}
+	\caption{Lines of Code for both program versions and all phases. The best practice implementation of the program both in the adjusted and original version consists of more code lines in all phases.}
 \end{figure}
 
 
 \section{Touched and Edited Files}
 \label{sec:file-count}
-In this section the total number of files and the files that needed to be adopted throughout the phases are compared.
+The development of the file count is listed in this section. Table \ref{table:files} and figure \ref{fig:files} shows how many files are needed for the programs while table \ref{table:touched-files} list the number of files that were modified or created during the implementation of the requirements.
 
 \begin{table}
 	\centering
@@ -85,6 +88,7 @@ In this section the total number of files and the files that needed to be adopte
 
 \begin{figure}
 	\centering
+	\label{fig:files}
 	\begin{tikzpicture}
 	\begin{axis}[
 	xlabel={Phases},

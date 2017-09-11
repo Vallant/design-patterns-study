@@ -34,6 +34,8 @@ The Open-Closed-Principle states that each class should be open to extension and
 
 Inheritance addresses this problem as it empowers the programmer to add new features while preserving all of the old code. Even when overriding methods in terms of polymorphism the principle is not violated at the original class is preserved as-is. 
 
+
+
 \section{Design Patterns and Architectural Patterns}
 In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of books, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and Jphn Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common. 
 
@@ -46,6 +48,9 @@ The repository design pattern is a programming strategy that is useful when oper
 To create one repository per business object (data class) is the most basic way of implementing this pattern. Asides from the basic \emph{CRUD}-Operations \footnote{Create, read, update, delete}, each repository should provide specialized object retrieval methods that are only valid for the business model it was programmed for. 
 
 For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}.
+
+\subsection{Dependency Injection}
+Dependency Injection is a very common and important pattern that is used in object oriented programming. 
 
 
 \subsection{Model-View-Controller}
