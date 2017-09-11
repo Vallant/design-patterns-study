@@ -9,7 +9,7 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 
 \begin{table}[htbp]
 	\centering
-	\label{table:lines-of-code}
+
 	\begin{tabular}{|c|c|c|c|c|} \hline
 	\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
 	Best practice & 9264 & 12275 & 13306 \\ \hline
@@ -17,11 +17,12 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	Ad-hoc & 7572 & 11172 & 12168 \\ \hline
 	\end{tabular}
 	\caption{Lines of code for both program versions and all phases}
+	\label{table:lines-of-code}
 \end{table}
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:lines-of-code}
+
 	\begin{tikzpicture}
 	\begin{axis}[
 	height=0.7\textwidth,
@@ -68,6 +69,7 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	
 	\end{tikzpicture}
 	\caption{Lines of Code for both program versions and all phases. The best practice implementation of the program both in the adjusted and original version consists of more code lines in all phases.}
+	\label{fig:lines-of-code}
 \end{figure}
 
 
@@ -77,7 +79,7 @@ The development of the file count is listed in this section. Table \ref{table:fi
 
 \begin{table}
 	\centering
-	\label{table:files}
+
 	\begin{tabular}{|c|c|c|c|c|} \hline
 		\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
 		Best practice & 96 & 125 & 131 \\ \hline
@@ -88,7 +90,7 @@ The development of the file count is listed in this section. Table \ref{table:fi
 
 \begin{figure}
 	\centering
-	\label{fig:files}
+
 	\begin{tikzpicture}
 	\begin{axis}[
 	xlabel={Phases},
@@ -126,17 +128,18 @@ The development of the file count is listed in this section. Table \ref{table:fi
 	
 	\end{tikzpicture}
 	\caption{Total number of files for both program versions and all phases}
+	\label{fig:files}
 \end{figure}
 
  \begin{table}
  	\centering
- 	\label{table:touched-files}
+
  	\begin{tabular}{|c|c|c|} \hline
  		\textbf{Program version} &\textbf{Phase 1 to Phase 2} & \textbf{Phase 2 to Phase 3} \\ \hline
  		Best practice & 30 & 7 \\ \hline
  		Ad-hoc & 39 & 13\\ \hline
  	\end{tabular}
- 	\caption{Number of files modified or added for both program versions and all phases}
+ 	\caption{Number of files modified or added for both program versions and all phases} 	\label{table:touched-files}
  \end{table}
 
 \section{Average line count per file}
@@ -145,7 +148,7 @@ Another interesting aspect of the data is the comparison of the average line cou
 
 \begin{table}
 	\centering
-	\label{table:avg-lines}
+
 	\begin{tabular}{|c|c|c|c|} \hline
 		\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
 		Best practice & 96 & 98 & 102 \\ \hline
@@ -153,10 +156,11 @@ Another interesting aspect of the data is the comparison of the average line cou
 		Ad-hoc & 128 & 127 & 137 \\ \hline
 	\end{tabular}
 	\caption{Average lines per file for both program versions and all phases}
+	\label{table:avg-lines}
 \end{table}
 
 \begin{figure}
-	\label{fig:avg-lines}
+
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -203,4 +207,5 @@ Another interesting aspect of the data is the comparison of the average line cou
 	
 	\end{tikzpicture}
 	\caption{Total number of files for both program versions and all phases}
+	\label{fig:avg-lines}
 \end{figure}

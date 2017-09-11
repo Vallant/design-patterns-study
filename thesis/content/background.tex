@@ -50,6 +50,7 @@ To create one repository per business object (data class) is the most basic way 
 For example, in a booking system there may be a data class \texttt{Order}. A repository for this class may then provide a method called \texttt{getOrdersByUsername}. In general only methods that are actually needed should be implemented, which is described in the \emph{YAGNI}-principle \footnote{You aren't gonna need it}.
 
 \subsection{Dependency Injection}
+\label{sec:di}
 Dependency Injection is a very common and important pattern that is used in object oriented programming. It serves the Single-Responsibility-Principle in saying that a object should not be responsible of creating its own dependencies, instead some third supervising party \emph{injects} the dependency either using constructor parameters or associated setters \cite[p.159]{clean-code}. Furthermore it encourages the use of interfaces and therefore helps to switch between implementations of dependencies. Especially in the terms of testing this is considered a huge advantage as it enables testers to introduce mock objects \footnote{\href{https://javaranch.com/journal/200709/dependency-injection-unit-testing.html}{https://javaranch.com/journal/200709/dependency-injection-unit-testing.html}}.
 
 
@@ -61,10 +62,11 @@ This pattern is not very well defined and is subject of constant discussions. Wh
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:mvc-smalltalk}
+
 	
 	\includegraphics[width=0.5\textwidth]{./content/pictures/mvc-smalltalk.jpg}
 	\caption{Classical Model-View-Controller concept as used in Smalltalk. Model and View know each other.}
+	\label{fig:mvc-smalltalk}
 	\caption*{Source: \href{https://www.mimuw.edu.pl/\~sl/teaching/00\_01/Delfin\_EC/Overviews/MVC.htm}{https://www.mimuw.edu.pl}, accessed 5.9.2017}
 \end{figure}
 
@@ -73,9 +75,10 @@ The Model-View-Presenter (MVP) pattern is similar to the MVC-model as it shares 
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:mvp}
+
 	\includegraphics[width=0.5\textwidth]{./content/pictures/mvp.png}
 	\caption{Diagram of Model-View-Presenter. While the view again only holds the means for displaying the data and interacting, in opposite to the MVC-model it does not know about the model but only corresponds with the presenter. The presenter is responsible for gathering the necessary data from the model and forwards it to the view. The model does not know about the presenter.}
+	\label{fig:mvp}
 	\caption*{Source: \href{https://de.wikipedia.org/wiki/Model-View-Presenter}{https://de.wikipedia.org/wiki/Model-View-Presenter}, accessed on 5.9.2017, by Daniel.Cardenas - Own Content, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=19794348}
 \end{figure}
 
@@ -84,9 +87,10 @@ After some years Martin Fowler drafted two design patterns that are closely conn
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:passive-view-supervision-controller}
+
 	\includegraphics[width=0.5\textwidth]{./content/pictures/passive-view.png}
 	\caption{Basic diagrams of the Passive View (left) and Supervising Controller patterns (right). In the former as little logic as possible is placed in the view making it easy replaceable by a mock object for testing. Synchronization logic needs to be placed in the Presenter. In the latter view and model are connected trough data bindings empowering these two to perform synchronization tasks on their own. This simplifies the role of the presenter.}
+	\label{fig:passive-view-supervision-controller}
 	\caption*{Source: \href{https://msdn.microsoft.com/en-us/library/ff709839.aspx}{https://msdn.microsoft.com/en-us/library/ff709839.aspx}, accessed on 5.9.2017}
 \end{figure}
 
@@ -114,10 +118,10 @@ Peer-to-Peer (P2P) infrastructure is the counterpart of client-server-models. No
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:p2p}
 	\includegraphics[width=0.5\textwidth]{./content/pictures/P2P-network.jpg}
 	\caption{Peer-to-peer setup. Each peer has the same rights, no central server exists.}
-	\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=2551723}{https://commons.wikimedia.org/w/index.php?curid=2551723}, accessed on 6.9.2017}
+	\label{fig:p2p}
+	%\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=2551723}{https://commons.wikimedia.org/w/index.php?curid=2551723}, accessed on 6.9.2017}
 \end{figure}
 
 \subsection{Multi-Tier and Multi-Layer Architecture}
@@ -128,9 +132,10 @@ A 3-Tier-Architecture nowadays refers mostly to the typical set-up of a web appl
 
 \begin{figure}[htbp]
 	\centering
-	\label{fig:multi-tier}
+
 	\includegraphics[width=0.5\textwidth]{./content/pictures/multi-tier.jpg}
 	\caption{Multi-Tier set-up. The tiers are physically separated.}
+	\label{fig:multi-tier}
 	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier\_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}
 \end{figure}
 

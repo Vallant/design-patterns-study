@@ -22,7 +22,6 @@
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \lstset{ %
-	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
 	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
 	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
 	breaklines=true,                 % sets automatic line breaking
@@ -45,8 +44,7 @@
 	showtabs=false,                  % show tabs within strings adding particular underscores
 	stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
 	stringstyle=\color{mymauve},     % string literal style
-	tabsize=2,	                   % sets default tabsize to 2 spaces
-	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+	tabsize=2,	                   % sets default tabsize to 2 spaces \lstinputlisting; also try caption instead of title
 }
 
 \begin{document}
@@ -78,11 +76,19 @@
 %\cite{Gof94}
 %\cite{Hfd04}
 %\cite{Aspect06}
-\cite{Composing06}
+%\cite{Composing06}
 
+\cleardoublepage
+
+\let\LaTeXStandardClearpage\clearpage
+\let\clearpage\relax  % Do nothing when a \clearpage command appears 
+\let\cleardoublepage\relax
 \printbibliography	
 \listoffigures
 \listoftables
+\lstlistoflistings
+
+\let\clearpage\LaTeXStandardClearpage % Return to the old definition
 
 \end{document}
 

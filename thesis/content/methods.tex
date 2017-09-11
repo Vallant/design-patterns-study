@@ -8,7 +8,7 @@ The application provides a time-tracking solution for small businesses. The basi
 	\item \textbf{User}: A user is considered employee of the firm. He can participate in existing projects or create new projects on his own.
 	\item \textbf{Project}: A project is the overall term for a distinguishable amount of work that is done for a specific customer. A project has one or more project leaders and zero or more project members.
 	\item \textbf{Project Phase}: Each project exists of one or more phases that are used to monitor the progress of the project. Project leaders are able to create, adopt and delete phases for their projects. 
-	\item \textbf{Project Member}: A user is considered project member of a specific project as soon he participates or leads it. Two roles exist, he can either be leader or member. A project leader has the responsibility of maintaining project specific data, such as description, phases and assigning project members. He is \emph{not} allowed to create new users. After creating a new project, one is automatically project leader. A project leader is allowed to monitor the statistics of his projects including the workloads of the project members. As a simple member one is allowed to add, delete and modify activities created by the user. A member is only allowed to perform this actions for projects he is assigned to. He is also only allowed to monitor his own statistics.
+	\item \textbf{Project Member}: A user is considered project member of a specific project as soon he participates or leads it. Two roles exist, he can either be leader or member. A project leader has the responsibility of maintaining project specific data, such as description, phases and assigning project members. He is \emph{not} allowed to create new users. After creating a new project, one is automatically project leader. A project leader is allowed to monitor the statistics of his projects including the workloads of the project members. As a simple member one is allowed to add, delete and modify activities created by the user and is only allowed to perform this actions for projects he is assigned to. He is also only allowed to monitor his own statistics for projects he participates.
 	\item \textbf{Activity}: A activity represents a workload that is done by a specific member in a specific phase for a specific project.
 \end{itemize}
 
@@ -31,25 +31,25 @@ To specify in depth how the program should work the following use-cases are set.
 \section{Experiment set-up}
 Two applications were developed both serving and meeting the requirements stated in the previous section. The programs must not differ in its features, behaviour or appearance, the difference has to be in the code. 
 \subsection{Best practice implementation}
-In the first application well-known and widely spread patterns should be applied. The data access to any persistent storage is abstracted by implementing the repository-pattern (see section \ref{sec:repository}). The program is structured according to the Model-View-Controller pattern (section \ref{sec:mvc}), the layers are connected only by interfaces. Each of the use-cases listed before corresponds to a own set of model, view and controller to keep the program structure clear. In addition to the classes described a main model, controller and view exists. These classes hold instances of all other use-case-specific classes. This allowed to pair the models with the controllers and the views with the controllers. Furthermore the main model holds the reference to the data access layer. Each specific model has therefore a reference to the main model. This is also needed for switching between the five big areas of the application.
+In the first application well-known and widely spread patterns are being applied. The data access to any persistent storage is abstracted by implementing the repository-pattern (see section \ref{sec:repository}). The program is structured according to the Model-View-Controller pattern (section \ref{sec:mvc}), layers are connected by interfaces rather than concrete implementations. Each of the use-cases listed before corresponds to a own set of model, view and controller to keep the program structure clear. In addition to the classes described a main model, controller and view exists. These classes hold instances of all other use-case-specific classes. This allowed to pair the models with the controllers and the views with the controllers. Furthermore the main model holds the reference to the data access layer. Each specific model has therefore a reference to the main model. This is also needed for switching between the five big areas of the application.
 
 The \textbf{model} holds all of the business logic and controls the program flow. It utilizes the data access layer for retrieving and saving data from and to the persistent storage. Furthermore it is responsible for instantiating controller and view, generating responses to requests after user actions. The requests are forwarded from the view by the controller. This means that each model has a reference to the corresponding controller instance of the use-case. 
 
-The \textbf{view} is only responsible of presenting the data to the user and providing means to interact with the program trough buttons and other controls. However the view does \emph{not} know about underlying data structures and is therefore only supplied with plain-old-java-objects (POJOs). This setup provides high flexibility on how the view is implemented and any front-end can theoretically supported. The view does not hold any business logic, does not react to user actions on its own and forwards requests and interactions to the corresponding controller. 
+The \textbf{view} is only responsible for presenting the data to the user and providing means to interact with the program trough buttons and other controls. However the view does \emph{not} know about underlying data structures and is therefore only supplied with plain-old-java-objects (POJOs). This setup provides high flexibility on how the view is implemented and any front-end can theoretically be supported. The view does not hold any business logic, does not react to user actions on its own and forwards requests and interactions to the corresponding controller. 
 
 The \textbf{controller} is the layer between model and view. As stated in the description of the view, all user interactions are routed to the controller and processed here. Any actions, for instance clicks, are here translated into requests to the model. All responses from the model are translated into POJOs and with whom the view is being populated. The controller is also responsible for switching views according to the user actions.
 
-As stated before the data access layer is realized by implementing the repository pattern, access to the repositories is provided through the main model.  Again only a interface to the repositories is returned to maximize flexibility.
+As stated before the \textbf{data access layer} is realized by implementing the repository pattern, access to the repositories is provided through the main model.  Again only a interface to the repositories is returned to maximize flexibility.
 
 \subsection{Ad-hoc implementation}
 \label{sec:ad-hoc}
-To ensure comparability the structure described in the previous section applies to the ad-hoc implementation as well. However two serious differences are realized: Firstly the different layers are \emph{not} connected by interfaces but rather by concrete implementations. Secondly no data access layer is being used, the functionality is provided by the data classes. Therefore asides from the basic getter and setter methods static methods for data retrieval and updating the persistent storage are supplied. This is shown by the sample code in section \ref{code:static-methods}. Figure \ref{fig:adhoc-model} shows the setup for the ad-hoc version of the application. 
+To ensure comparability the structure described in the previous section applies to the ad-hoc implementation as well. However two serious differences are realized: Firstly the different layers are \emph{not} connected by interfaces but rather by concrete implementations. Secondly no data access layer is being used, the functionality is provided by the data classes. Therefore asides from the basic getter and setter methods static methods for data retrieval and updating the persistent storage are supplied. This is shown by the sample code in section \ref{lst:static-methods}.
 
 
 \subsection{Experiment phases}
 After the setting of basic requirements more and more modifications and extensions being added. This should simulate an ongoing discussion process with the (virtual) stakeholders of the application, the extensions are called \emph{phases} and are described in detail in this section. The new requirements can be seen as a refinement of the use cases specified in the previous sections.
 
-\subsubsection{Phase 1: Basic requirements} 
+\subsection{Phase 1: Basic requirements} 
 For starters the application should provide a graphical user interface by using the Swing-library (section \ref{sec:swing}) and as data tier a PostgreSQL database (section \ref{sec:postgres}) should be used.
 
 \subsection{Phase 2: Support of a different graphical user interface library}
@@ -58,9 +58,10 @@ After meeting the basic requirements the virtual stakeholders are requesting the
 \subsection{Phase 3: Support of a different data tier implementation}
 During the process the stakeholders request that the application should add support for MongoDB (section \ref{sec:mongodb}). They want to allow the user to choose between the two databases as both implementations have advantages and disadvantages. 
 
-\subsection{Phase 4: Implementation of a cached controller}
-Several months after the deployment a customer reports performance issues and heavy load on their database server. Therefore it is decided to implement a caching algorithm for the controller to reduce expensive database calls. Again by starting the application with different arguments either the standard controller or the caching implementation should be used.
+%\subsection{Phase 4: Implementation of a cached controller}
+%Several months after the deployment a customer reports performance issues and heavy load on their database server. Therefore it is decided to implement a caching algorithm for the controller to reduce expensive database calls. Again by starting the application with different arguments either the standard controller or the caching implementation should be used.
 
+\clearpage
 \section{Phase 1: Basic Requirements}
 \label{sec:code-samples}
 In this section it is explained in detail how the two applications meet the requirements. This is only a short overview, the whole project is available on Github. For more information on the project structure see the appendix section.
@@ -69,11 +70,30 @@ In this section it is explained in detail how the two applications meet the requ
 
 \subsubsection{Database Access}
 As a entry point for all data tier accesses, a class \texttt{DBManager} was created. It defines all available persistent storage options and is implemented as a singleton. The class itself is abstract, because each data access layer implementation needs to provide implementations for providing the repositories.
-\lstinputlisting{content/code/dbmanager.java}
+\begin{lstlisting}[caption={DBManager singleton class. Used for instantiating the implementation of the chosen interface.}, captionpos=b, label={lst:dbmanager}]
+public abstract class DBManager implements RepositoryFactory
+{
+	private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
+	private static DBManager instance;
+	
+	public static DBManager get(String driver, String url, String username, String password)
+	{
+		switch(driver)
+		{
+		case DRIVER_POSTGRES:
+			if(instance == null) instance = new DBManagerPostgres(driver, url, username, password);
+			break;
+		default:
+			throw new UnsupportedOperationException("Not yet implemented");
+		}
+		return instance;
+	}
+}
+\end{lstlisting}
 
 The constructor of the PostgreSQL-database manager now initializes the connection based on the arguments provided. The interface \texttt{RepositoryFactory} is used to specify which methods each data access layer implementation has to override and which repositories there are. The overridden methods of the implementation invoke the constructor of the corresponding repository implementation and provides any data necessary for their work. In this case it is the Postgres-DBManager itself as it is often necessary for the repositories to load data by using other repositories.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snippet on how a DBManager implementation instantiates its repositories.}, captionpos=b]
 public class DBManagerPostgres extends DBManager
 {
 	...
@@ -90,12 +110,11 @@ public class DBManagerPostgres extends DBManager
 	}
 	...
 }
-
 \end{lstlisting}
 
 In the business code it is now very easy to invoke the methods. The main model holds the only instance of the DBManager, each submodel has a reference to the main model. 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snippet showing how repositories are used in business code. The main model holds the single instance of the DBManager. Each sub-model accesses it by using a getter-method.}, captionpos=b, label={lst:db-access-bp}]
 public void login(String username, char[] password) throws Exception
 {
 	UserRepository repo = mainModel.db().getUserRepository();
@@ -105,9 +124,9 @@ public void login(String username, char[] password) throws Exception
 \end{lstlisting}
 
 \subsubsection{UI Interaction}
-As stated before there is a main controller that instantiates the sub-controllers. Because a pairing is necessary between model and controller the main controller provides methods to do so. After the main model has instantiated all sub-models he pairs it with the controller. This process is called \emph{dependency injection}.
+As stated before there is a main controller that instantiates the sub-controllers. Because a pairing is necessary between model and controller the main controller provides methods to do so. After the main model has instantiated all sub-models he pairs it with the controller. This process is the process of \emph{dependency injection} as described in section \ref{sec:di}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snippet showing initialization code for the controller. The main model retrieves the main controller by calling a getter which is similarily implemented as the DBManager class shown in listing \ref{lst:dbmanager}. After that he calls a method that pairs the sub-model with the sub-controller, a code snippet showing this process can be seen in listing \ref{lst:pairing}.}, captionpos=b]
 private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
 frontend) throws Exception
 {
@@ -135,7 +154,7 @@ The method call seen in line 6 of the previous listing states a call to the stat
 
 The same process is repeated for the layer between controller and view. 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snipped showing pairing code between a sub-controller and a sub-view. The pairing between the model and controller layer works in a very similar way.}, captionpos=b, label={lst:pairing}]
 public class MainViewSwing
 {
 	...
@@ -157,7 +176,7 @@ As stated in section \ref{sec:ad-hoc} no repositories are used for the database 
 
 As no interface is used the main model instantiates the DBManager implementation directly. 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snipped showing database access in the ad-hoc program version. Database code is placed into the corresponding data class. Retrieval methods are static and take the corresponding DBManager as parameter. The reference to the DBManager is provided by a getter method of the main model, as in listing \ref{lst:db-access-bp}.}, captionpos=b]
 public void login(String username, char[] password) throws Exception
 {
 	User u = User.getByPrimaryKey(username, mainModel.db());
@@ -165,7 +184,7 @@ public void login(String username, char[] password) throws Exception
 }
 \end{lstlisting}
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snippet showing how the DBManager is instantiated. Again no interfaces but rather concrete implementations are used. The singleton class seen in listing \ref{lst:dbmanager} does not exist in the ad-hoc version.}, captionpos=b]
 public class MainModelImpl
 {
 	...
@@ -181,10 +200,26 @@ public class MainModelImpl
 }
 \end{lstlisting}
 
+\begin{lstlisting}[caption={Code snippet showing a database access methods in a data class. The retrieval method takes arguments necessary for the query and the database-manager object as parameters and is static, while the update method is not static and therefore performs the operation on the current object instance.}, captionpos=b, label={lst:static-methods}]
+public class User implements DBEntity
+{	...
+	public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception
+	{
+		...
+	}
+	
+	public void insertIntoDb(DBManagerPostgres db) throws Exception
+	{
+		...
+	}
+	...
+}
+\end{lstlisting}
+
 \subsubsection{UI Interaction}
 The only difference between the pairing process of the best practice implementation and the ad-hoc version is that no interfaces are used and thus the methods take the implementation  classes instead of the interface as parameters. 
-
-\begin{lstlisting}
+noticeable 
+\begin{lstlisting}[caption={Code snippet showing pairing code of the ad-hoc version of the program. It is noticeable that the pairing method takes a concrete implementation rather than an interface as a parameter. This differs from the best practice version seen in \ref{lst:pairing} which takes only the interface as parameter.}, captionpos=b]
 public class MainViewSwing
 {
 	...
@@ -197,14 +232,14 @@ public class MainViewSwing
 }
 \end{lstlisting}
 
-
+\clearpage
 \section{Phase 2: Support of a different graphical user interface library}
 After adding the second GUI differences between the two implementations are observable.
 
 \subsection{Best-Practice Code Samples}
-Due to the use of the interfaces aside from implementing the view itself only very little modifications have to be made. Only the ViewManager-singleton has to be adopted to support the new view \footnote{The internal structure of the JavaFX-Library needed the creation of a own thread. This is done by the call \texttt{launchFx()}}.
+Due to the use of the interfaces aside from implementing the view itself only very little modifications have to be made. Only the ViewManager-singleton has to be adopted to support the new view \footnote{The internal structure of the JavaFX-Library needed the creation of a own thread. This is done by the calling \texttt{launchFx()}}.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={View Manager after implementation of a second GUI. Only a case branch has to be added.}, captionpos=b]
 public class ViewManager
 {
 	private static MainView view;
@@ -234,7 +269,7 @@ public class ViewManager
 \label{sec:ad-hoc-javafx}
 Because the controllers do not rely on interfaces but on actual implementations now each call to a view class has to be differentiated which bloats the code. The following if-else statement is necessary at every call to a view. Obviously with more views the code is bloated even more, maybe even a switch-case would be necessary.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code snipped showing login-code after implementing a second GUI. Because no interface but concrete implementations are used each time a view access is needed the program is required to check for which of the two GUIs is currently active. Controller methods of the best pratice version do not change in any way.}, captionpos=b, label={lst:controller-switch}]
 	public class LoginControllerStandard
 	{
 	private LoginViewSwing viewSwing;
@@ -269,7 +304,7 @@ The support of a new data tier shows even more weaknesses of the ad-hoc implemen
 \subsection{Best-Practice Code Samples}
 With the best-practice program version again only very small changes to existing code were necessary. Only the DBManager static method had to be adopted to support the other database.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={DBManager implementation after support for a second database. Again only a branch of the switch-statement has to be added.}, captionpos=b]
 public abstract class DBManager implements RepositoryFactory
 {
 	private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
@@ -295,9 +330,10 @@ public abstract class DBManager implements RepositoryFactory
 \end{lstlisting}
 
 \subsection{Ad-hoc Code Samples}
+\label{sec:static-code-samples}
 After changing all data classes to support the other data tier implementation all model classes needed to be adopted as well. This is because it had to be differentiated which database implementation is currently active. 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code of the login-process after implementing support of the second database in the ad-hoc version of the program. Again because the application does not rely on interfaces as in listing \ref{lst:controller-switch} it has to be differentiated each time database access is needed. The methods for database code are overloaded.}, captionpos=b]
 public class LoginModelImpl
 {
 	...
