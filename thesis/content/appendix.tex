@@ -1,0 +1,15 @@
+\chapter{Source Code}
+All source code including this thesis is online available on Github \footnote{\href{https://github.com/Vallant/design-patterns-study.git}{https://github.com/Vallant/design-patterns-study.git}} under the GPLv3 licence. \footnote{\href{https://www.gnu.org/licenses/gpl-3.0.de.html}{https://www.gnu.org/licenses/gpl-3.0.de.html}}.
+
+The repository consists of a main branch, a thesis branch and 6 branches corresponding to the phases for each program implementation. The main branch contains the latest version of both applications as well as the latest version of the thesis branch. In the thesis branch naturally only tex sources for creating the thesis can be found. The branches corresponding to the phases are called \texttt{bpV\{1|2|3\}} (best-practice phase 1,2 or 3) and \texttt{monoV\{1|2|3\}} (monolithic phase 1,2 or 3 \footnote{The term monolithic was used in a early stage of development and was later dropped for \emph{ad-hoc}})
+
+In order to run the application, some pre-requirements have to be met. Firstly a PostgreSQL and a MongoDB database must be installed. Secondly the database initialization code that can be found in the directory \texttt{<repository-root>/src/db} needs to be imported into the corresponding DBMS. 
+
+The application itself needs JDK8 and JRE8 to run, all necessary libraries can be found in the directory \texttt{<repository-root>/src/libraries}. These libraries can be included if it is wanted to compile the source code. 
+
+After compiling the source code to a .jar file the program can be started by providing the following command:
+
+\texttt{java -jar <application-name> <driver> <url:port> <username> <password> <controller> <frontend>}
+
+from which \texttt{driver} can be either "\texttt{org.postgresql.Driver} or "\texttt{mongo}", \texttt{url:port} points to the location where the database is running (presumably this is localhost), \texttt{user} and \texttt{password} correspond with the database user of the chosen DBMS, \texttt{controller} must be "\texttt{standard}" at the moment and \texttt{frontend} can either be the string "\texttt{swing}" or "\texttt{javafx}".
+
