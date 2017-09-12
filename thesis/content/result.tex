@@ -1,11 +1,12 @@
 \chapter{Results}
+\label{sec:results}
 In order to make serious statements about the quality of the code and the effects of using the design patterns some indicators were chosen to compare the two application types. Because the two programs are similar in its work-flow and basic structure these comparisons are actually meaningful. Due to the use git version control bug-fixes do not influence the results. 
 
 This section only lists the findings while section \ref{sec:discussion} puts the results into context and explains them.
 
 \section{Lines of Code}
 \label{sec:line-count}
-In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} a chart line count development can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
+In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} the line count development can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
 
 \begin{table}[htbp]
 	\centering
@@ -79,13 +80,13 @@ The development of the file count is listed in this section. Table \ref{table:fi
 
 \begin{table}
 	\centering
-
 	\begin{tabular}{|c|c|c|c|c|} \hline
 		\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
 		Best practice & 96 & 125 & 131 \\ \hline
 		Ad-hoc & 59 & 88 & 89 \\ \hline
 	\end{tabular}
 	\caption{Total number of files for both program versions and all phases}
+	\label{table:files}
 \end{table}
 
 \begin{figure}

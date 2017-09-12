@@ -46,7 +46,7 @@ As stated before the \textbf{data access layer} is realized by implementing the 
 To ensure comparability the structure described in the previous section applies to the ad-hoc implementation as well. However two serious differences are realized: Firstly the different layers are \emph{not} connected by interfaces but rather by concrete implementations. Secondly no data access layer is being used, the functionality is provided by the data classes. Therefore asides from the basic getter and setter methods static methods for data retrieval and updating the persistent storage are supplied. This is shown by the sample code in section \ref{lst:static-methods}.
 
 
-\subsection{Experiment phases}
+\section{Experiment phases}
 After the setting of basic requirements more and more modifications and extensions being added. This should simulate an ongoing discussion process with the (virtual) stakeholders of the application, the extensions are called \emph{phases} and are described in detail in this section. The new requirements can be seen as a refinement of the use cases specified in the previous sections.
 
 \subsection{Phase 1: Basic requirements} 
@@ -71,15 +71,12 @@ In this section it is explained in detail how the two applications meet the requ
 \subsubsection{Database Access}
 As a entry point for all data tier accesses, a class \texttt{DBManager} was created. It defines all available persistent storage options and is implemented as a singleton. The class itself is abstract, because each data access layer implementation needs to provide implementations for providing the repositories.
 \begin{lstlisting}[caption={DBManager singleton class. Used for instantiating the implementation of the chosen interface.}, captionpos=b, label={lst:dbmanager}]
-public abstract class DBManager implements RepositoryFactory
-{
+public abstract class DBManager implements RepositoryFactory {
 	private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
 	private static DBManager instance;
 	
-	public static DBManager get(String driver, String url, String username, String password)
-	{
-		switch(driver)
-		{
+	public static DBManager get(String driver, String url, String username, String password) {
+		switch(driver) {
 		case DRIVER_POSTGRES:
 			if(instance == null) instance = new DBManagerPostgres(driver, url, username, password);
 			break;
@@ -94,29 +91,25 @@ public abstract class DBManager implements RepositoryFactory
 The constructor of the PostgreSQL-database manager now initializes the connection based on the arguments provided. The interface \texttt{RepositoryFactory} is used to specify which methods each data access layer implementation has to override and which repositories there are. The overridden methods of the implementation invoke the constructor of the corresponding repository implementation and provides any data necessary for their work. In this case it is the Postgres-DBManager itself as it is often necessary for the repositories to load data by using other repositories.
 
 \begin{lstlisting}[caption={Code snippet on how a DBManager implementation instantiates its repositories.}, captionpos=b]
-public class DBManagerPostgres extends DBManager
-{
+public class DBManagerPostgres extends DBManager {
 	...
 	@Override
-	public UserRepository getUserRepository()
-	{
+	public UserRepository getUserRepository() {
 		return new UserRepositoryPostgres(this);
 	}
 	
 	@Override
-	public ProjectRepository getProjectRepository()
-	{
+	public ProjectRepository getProjectRepository() {
 		return new ProjectRepositoryPostgres(this);
 	}
 	...
 }
 \end{lstlisting}
 
-In the business code it is now very easy to invoke the methods. The main model holds the only instance of the DBManager, each submodel has a reference to the main model. 
+In the business code it is now very easy to invoke the methods. The main model holds the only instance of the DBManager, each submodel has a reference to the main model. This process can be seen in listing \ref{lst:db-access-bp}.
 
 \begin{lstlisting}[caption={Code snippet showing how repositories are used in business code. The main model holds the single instance of the DBManager. Each sub-model accesses it by using a getter-method.}, captionpos=b, label={lst:db-access-bp}]
-public void login(String username, char[] password) throws Exception
-{
+public void login(String username, char[] password) throws Exception {
 	UserRepository repo = mainModel.db().getUserRepository();
 	User u = repo.getByPrimaryKey(username);
 	...
@@ -128,12 +121,9 @@ As stated before there is a main controller that instantiates the sub-controller
 
 \begin{lstlisting}[caption={Code snippet showing initialization code for the controller. The main model retrieves the main controller by calling a getter which is similarily implemented as the DBManager class shown in listing \ref{lst:dbmanager}. After that he calls a method that pairs the sub-model with the sub-controller, a code snippet showing this process can be seen in listing \ref{lst:pairing}.}, captionpos=b]
 private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
-frontend) throws Exception
-{
-
+frontend) throws Exception {
 	db = DBManager.get(driver, url, username, password);
 	ControllerManager.initInstance(controllerImpl, frontend);
-	
 	controller = ControllerManager.getInstance();
 	controller.setModel(this);
 	
@@ -142,24 +132,23 @@ frontend) throws Exception
 	...
 }
 
-private void pairLogin()
-{
+private void pairLogin() {
 	login.setMainModel(this);
 	controller.pairLogin(login);
 }
 
 \end{lstlisting}
 
-The method call seen in line 6 of the previous listing states a call to the static ControllerManager class. Similar to the DBManager class this is a singleton class that holds a switch case that instantiates the main controller based on the implementation provided by the arguments. After the method calls now the \texttt{LoginModel} class knows its main model and its controller. 
+The method call seen in line 5 of listing \ref{lst:db-manager} states a call to the static ControllerManager class. Similar to the DBManager class this is a singleton class that holds a switch case that instantiates the main controller based on the implementation provided by the arguments. After the method calls now the \texttt{LoginModel} class knows its main model and its controller. 
+
+\clearpage
 
 The same process is repeated for the layer between controller and view. 
 
 \begin{lstlisting}[caption={Code snipped showing pairing code between a sub-controller and a sub-view. The pairing between the model and controller layer works in a very similar way.}, captionpos=b, label={lst:pairing}]
-public class MainViewSwing
-{
+public class MainViewSwing {
 	...
-	public void pairLogin(LoginController controller)
-	{
+	public void pairLogin(LoginController controller) {
 		controller.setView(login);
 		login.setController(controller);
 	}
@@ -167,7 +156,6 @@ public class MainViewSwing
 }
 \end{lstlisting}
    
-
 \subsection{Ad-hoc Code Samples}
 In the first phase of the application not many differences can be observed. The flexibility introduced by the patterns shows its effect in the following phases. 
 
@@ -176,23 +164,20 @@ As stated in section \ref{sec:ad-hoc} no repositories are used for the database 
 
 As no interface is used the main model instantiates the DBManager implementation directly. 
 
-\begin{lstlisting}[caption={Code snipped showing database access in the ad-hoc program version. Database code is placed into the corresponding data class. Retrieval methods are static and take the corresponding DBManager as parameter. The reference to the DBManager is provided by a getter method of the main model, as in listing \ref{lst:db-access-bp}.}, captionpos=b]
-public void login(String username, char[] password) throws Exception
-{
-	User u = User.getByPrimaryKey(username, mainModel.db());
+\begin{lstlisting}[caption={Code snipped showing database access in the ad-hoc program version. All database code is placed into the corresponding data class, retrieval methods are static and take the corresponding DBManager as parameter. The reference to the DBManager is provided by a getter method of the main model, as in listing \ref{lst:db-access-bp}.}, captionpos=b]
+public void login(String username, char[] password) {
+	User u = User.getByPrimaryKey(username, mainModel.db()); 
 	...
 }
 \end{lstlisting}
 
 \begin{lstlisting}[caption={Code snippet showing how the DBManager is instantiated. Again no interfaces but rather concrete implementations are used. The singleton class seen in listing \ref{lst:dbmanager} does not exist in the ad-hoc version.}, captionpos=b]
-public class MainModelImpl
-{
+public class MainModelImpl {
 	...
 	private final DBManagerPostgres db;
 	
 	private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
-	frontend) throws Exception
-	{
+	frontend) throws Exception {
 		db = new DBManagerPostgres(driver, url, username, password);
 		...
 	}
@@ -201,15 +186,13 @@ public class MainModelImpl
 \end{lstlisting}
 
 \begin{lstlisting}[caption={Code snippet showing a database access methods in a data class. The retrieval method takes arguments necessary for the query and the database-manager object as parameters and is static, while the update method is not static and therefore performs the operation on the current object instance.}, captionpos=b, label={lst:static-methods}]
-public class User implements DBEntity
-{	...
-	public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception
-	{
+public class User implements DBEntity {	
+	...
+	public static User getByPrimaryKey(String loginName, DBManagerPostgres db) throws Exception {
 		...
 	}
 	
-	public void insertIntoDb(DBManagerPostgres db) throws Exception
-	{
+	public void insertIntoDb(DBManagerPostgres db) throws Exception {
 		...
 	}
 	...
@@ -220,11 +203,9 @@ public class User implements DBEntity
 The only difference between the pairing process of the best practice implementation and the ad-hoc version is that no interfaces are used and thus the methods take the implementation  classes instead of the interface as parameters. 
 noticeable 
 \begin{lstlisting}[caption={Code snippet showing pairing code of the ad-hoc version of the program. It is noticeable that the pairing method takes a concrete implementation rather than an interface as a parameter. This differs from the best practice version seen in \ref{lst:pairing} which takes only the interface as parameter.}, captionpos=b]
-public class MainViewSwing
-{
+public class MainViewSwing {
 	...
-	public void pairLogin(LoginControllerStandard controller)
-	{
+	public void pairLogin(LoginControllerStandard controller) {
 		controller.setView(login);
 		login.setController(controller);
 	}
@@ -233,22 +214,20 @@ public class MainViewSwing
 \end{lstlisting}
 
 \clearpage
+
 \section{Phase 2: Support of a different graphical user interface library}
-After adding the second GUI differences between the two implementations are observable.
+After adding the second GUI differences between the two implementations starting to be observable.
 
 \subsection{Best-Practice Code Samples}
-Due to the use of the interfaces aside from implementing the view itself only very little modifications have to be made. Only the ViewManager-singleton has to be adopted to support the new view \footnote{The internal structure of the JavaFX-Library needed the creation of a own thread. This is done by the calling \texttt{launchFx()}}.
+Due to the use of the interfaces aside from implementing the view itself only very little modifications have to be made. Only the ViewManager-singleton class has to be adopted to support the new view \footnote{The internal structure of the JavaFX-Library needed the creation of a own thread. This is done by the calling \texttt{launchFx()}}.
 
 \begin{lstlisting}[caption={View Manager after implementation of a second GUI. Only a case branch has to be added.}, captionpos=b]
-public class ViewManager
-{
+public class ViewManager {
 	private static MainView view;
 	
-	public static void initInstance(String frontend)
-	{
+	public static void initInstance(String frontend) {
 		assert (view == null);
-		switch(frontend)
-		{
+		switch(frontend) {
 			case "standard":
 				view = new MainViewSwing();
 				break;
@@ -267,27 +246,20 @@ public class ViewManager
 
 \subsection{Ad-hoc Code Samples}
 \label{sec:ad-hoc-javafx}
-Because the controllers do not rely on interfaces but on actual implementations now each call to a view class has to be differentiated which bloats the code. The following if-else statement is necessary at every call to a view. Obviously with more views the code is bloated even more, maybe even a switch-case would be necessary.
+Because the controllers do not rely on interfaces but upon actual implementations now each call to a view class has to be differentiated which bloats the code. The following if-else statement is necessary whenever a call to a view class is made. Obviously with more views the code is bloated even more, maybe then a switch-case would be used.
 
 \begin{lstlisting}[caption={Code snipped showing login-code after implementing a second GUI. Because no interface but concrete implementations are used each time a view access is needed the program is required to check for which of the two GUIs is currently active. Controller methods of the best pratice version do not change in any way.}, captionpos=b, label={lst:controller-switch}]
-	public class LoginControllerStandard
-	{
+public class LoginControllerStandard {
 	private LoginViewSwing viewSwing;
 	private LoginViewFX viewFX;
-	private LoginModelImpl model;
 	...
-	
-	public void loginClicked()
-	{
+	public void loginClicked() {
 		String username;
 		char[] password;
-		if(viewSwing != null)
-		{
+		if(viewSwing != null) {
 			username = viewSwing.getEnteredUsername();
 			password = viewSwing.getEnteredPassword();
-		}
-		else
-		{
+		} else {
 			username = viewFX.getEnteredUsername();
 			password = viewFX.getEnteredPassword();
 		}
@@ -302,19 +274,16 @@ Because the controllers do not rely on interfaces but on actual implementations 
 The support of a new data tier shows even more weaknesses of the ad-hoc implementation.
 
 \subsection{Best-Practice Code Samples}
-With the best-practice program version again only very small changes to existing code were necessary. Only the DBManager static method had to be adopted to support the other database.
+With the best-practice program version again only very small changes to existing code were necessary. Similar to phase 2 only the DBManager static method had to be adopted to support the other database.
 
 \begin{lstlisting}[caption={DBManager implementation after support for a second database. Again only a branch of the switch-statement has to be added.}, captionpos=b]
-public abstract class DBManager implements RepositoryFactory
-{
+public abstract class DBManager implements RepositoryFactory {
 	private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
 	private static final String DRIVER_MONGO = "mongo";
 	private static DBManager instance;
 	
-	public static DBManager get(String driver, String url, String username, String password)
-	{
-		switch(driver)
-		{
+	public static DBManager get(String driver, String url, String username, String password) {
+		switch(driver) {
 			case DRIVER_POSTGRES:
 				if(instance == null) instance = new DBManagerPostgres(driver, url, username, password);
 				break;
@@ -334,11 +303,9 @@ public abstract class DBManager implements RepositoryFactory
 After changing all data classes to support the other data tier implementation all model classes needed to be adopted as well. This is because it had to be differentiated which database implementation is currently active. 
 
 \begin{lstlisting}[caption={Code of the login-process after implementing support of the second database in the ad-hoc version of the program. Again because the application does not rely on interfaces as in listing \ref{lst:controller-switch} it has to be differentiated each time database access is needed. The methods for database code are overloaded.}, captionpos=b]
-public class LoginModelImpl
-{
+public class LoginModelImpl {
 	...
-	public void login(String username, char[] password) throws Exception
-	{
+	public void login(String username, char[] password) throws Exception {
 		User u = null;
 		if(mainModel.dbPostgres() != null)
 			u = User.getByPrimaryKey(username, mainModel.dbPostgres());

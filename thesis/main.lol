@@ -15,7 +15,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {3.5}Code snipped showing pairing code between a sub-controller and a sub-view. The pairing between the model and controller layer works in a very similar way.}{30}{lstlisting.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {3.6}Code snipped showing database access in the ad-hoc program version. Database code is placed into the corresponding data class. Retrieval methods are static and take the corresponding DBManager as parameter. The reference to the DBManager is provided by a getter method of the main model, as in listing \ref {lst:db-access-bp}.}{31}{lstlisting.3.6}
+\contentsline {lstlisting}{\numberline {3.6}Code snipped showing database access in the ad-hoc program version. All database code is placed into the corresponding data class, retrieval methods are static and take the corresponding DBManager as parameter. The reference to the DBManager is provided by a getter method of the main model, as in listing \ref {lst:db-access-bp}.}{30}{lstlisting.3.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {3.7}Code snippet showing how the DBManager is instantiated. Again no interfaces but rather concrete implementations are used. The singleton class seen in listing \ref {lst:dbmanager} does not exist in the ad-hoc version.}{31}{lstlisting.3.7}
 \defcounter {refsection}{0}\relax 

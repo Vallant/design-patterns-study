@@ -1,1 +1,24 @@
 \chapter{Conclusion}
+
+In the last chapters some interesting findings were gathered. Two program versions were compared, one following best practice guidelines in the sense of object oriented programming, the other one featured ad-hoc programming without paying attention to topics of software maintenance.
+
+Throughout the development process five major issues could be discovered:
+
+\begin{itemize}
+	\item \textbf{Number of files}: The best practice version of the application needed a higher number of files than the ad-hoc implementation throughout all phases.
+	\item \textbf{Lines of code}: The best practice version needed more lines of code in all phases.
+	\item \textbf{Lines per file}: The best practice versions files contained significantly less lines of code per file.
+	\item \textbf{Increase in code lines}: Especially in traversal from phase 1 to phase 2 the best practice implementation needed significantly less code additions.
+	\item \textbf{Touched files}: The number of touched or edited files during phase traversal was lower in the best practice program version.
+\end{itemize}
+
+It has to be said that the results gathered in section \ref{sec:results} may vary depending on the coding style, programming language, concrete use case and size of the project, furthermore the term \emph{code quality} does not have a unique definition. There are many different standpoints on what attributes a well written code should have, often depending on company coding policies. One factor that is not mentioned by intention in this thesis is the readability of the code as this is a very subjective matter and cannot be proven. 
+
+In terms of the definition used in this thesis, which mainly focuses on properties defined by guidelines of the object oriented programming the results support the hypothesis saying that the use of design patterns improves code quality in later stages of a project cycle. This is backed up by the lower number of files needing modification in the process of extending functionality and the lower number of lines added between phases 1 and 2. 
+
+At the same time in the first stage the initial programming effort for a clean implementation using well-known patterns is significantly higher, and even later on in the best practice implementation utilizes both a larger number of files and more lines of code, which on the other hand may increase the efforts for software maintenance.
+
+In conclusion it can be said that the use of design patterns can help to increase code quality if the requirements of a software project are likely to change, which is the common case especially for bigger applications. 
+
+As this work only focuses on a small number of design patterns and other literature does not come to clear results as well, further research is certainly necessary. If future work is focusing on existing software projects, challenges will likely include the difficulties in comparing different approaches applied in the compared applications. However if new research rather studies effects of design patterns by observing controlled experiments, as this thesis does, the main challenge will likely include the question if small scale results also apply for enterprise scale applications.
+
