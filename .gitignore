@@ -25,7 +25,7 @@ hs_err_pid*
 *.lot
 nbproject/
 manifest.mf
-build.xml
+#build.xml
 src/best-practice/dist/
 src/best-practice/build/
 src/best-practice/out/
