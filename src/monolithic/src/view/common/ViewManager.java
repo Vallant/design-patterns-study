@@ -19,7 +19,7 @@ public class ViewManager
     assert (view == null);
     switch(frontend)
     {
-      case "standard":
+      case "swing":
         view = new MainViewSwing();
         break;
       default:
