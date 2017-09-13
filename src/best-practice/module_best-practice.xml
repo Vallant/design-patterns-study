@@ -2,9 +2,9 @@
 <project name="module_best-practice" default="compile.module.best-practice">
   <dirname property="module.best-practice.basedir" file="${ant.file.module_best-practice}"/>
   
-  <property name="module.jdk.home.best-practice" value="${jdk.home.1.8}"/>
-  <property name="module.jdk.bin.best-practice" value="${jdk.bin.1.8}"/>
-  <property name="module.jdk.classpath.best-practice" value="jdk.classpath.1.8"/>
+  <property name="module.jdk.home.best-practice" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.best-practice" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.best-practice" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.best-practice" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
   
@@ -17,6 +17,7 @@
   
   <path id="best-practice.module.production.classpath">
     <path refid="${module.jdk.classpath.best-practice}"/>
+    <path refid="library.best-practice.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
@@ -29,6 +30,7 @@
   
   <path id="best-practice.runtime.production.module.classpath">
     <pathelement location="${best-practice.output.dir}"/>
+    <path refid="library.best-practice.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
@@ -42,6 +44,7 @@
   <path id="best-practice.module.classpath">
     <path refid="${module.jdk.classpath.best-practice}"/>
     <pathelement location="${best-practice.output.dir}"/>
+    <path refid="library.best-practice.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
@@ -55,6 +58,7 @@
   <path id="best-practice.runtime.module.classpath">
     <pathelement location="${best-practice.testoutput.dir}"/>
     <pathelement location="${best-practice.output.dir}"/>
+    <path refid="library.best-practice.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>

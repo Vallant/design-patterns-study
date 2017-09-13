@@ -17,64 +17,56 @@
   
   <path id="monolithic.module.production.classpath">
     <path refid="${module.jdk.classpath.monolithic}"/>
+    <path refid="library.monolithic.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
-    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
-<<<<<<< HEAD
-=======
     <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
     <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
->>>>>>> monoV2
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
   </path>
   
   <path id="monolithic.runtime.production.module.classpath">
     <pathelement location="${monolithic.output.dir}"/>
+    <path refid="library.monolithic.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
-    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
-<<<<<<< HEAD
-=======
     <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
     <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
->>>>>>> monoV2
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
   </path>
   
   <path id="monolithic.module.classpath">
     <path refid="${module.jdk.classpath.monolithic}"/>
     <pathelement location="${monolithic.output.dir}"/>
+    <path refid="library.monolithic.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
-    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
-<<<<<<< HEAD
-=======
     <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
     <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
->>>>>>> monoV2
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
   </path>
   
   <path id="monolithic.runtime.module.classpath">
     <pathelement location="${monolithic.testoutput.dir}"/>
     <pathelement location="${monolithic.output.dir}"/>
+    <path refid="library.monolithic.classpath"/>
     <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
     <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
-    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
-<<<<<<< HEAD
-=======
     <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
     <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
->>>>>>> monoV2
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
   </path>
   
   
