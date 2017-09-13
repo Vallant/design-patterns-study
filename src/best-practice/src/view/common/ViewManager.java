@@ -6,6 +6,7 @@
 package view.common;
 
 import view.interfaces.MainView;
+import view.javafx.MainViewFX;
 import view.swing.MainViewSwing;
 
 /**
@@ -23,8 +24,29 @@ public class ViewManager
       case "swing":
         view = new MainViewSwing();
         break;
+      case "javafx":
+        MainViewFX fx = MainViewFX.getInstance();
+        launchFx(fx);
+        break;
       default:
         throw new UnsupportedOperationException();
+    }
+  }
+
+  private static void launchFx(MainViewFX fx)
+  {
+    new Thread(fx::launchThis).start();
+    view = fx;
+    while(MainViewFX.getInstance().getMainStage() == null)
+    {
+      try
+      {
+        Thread.sleep(100);
+      }
+      catch(InterruptedException e)
+      {
+        e.printStackTrace();
+      }
     }
   }
 
