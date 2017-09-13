@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_best-practice" default="compile.module.best-practice">
+  <dirname property="module.best-practice.basedir" file="${ant.file.module_best-practice}"/>
+  
+  <property name="module.jdk.home.best-practice" value="${jdk.home.1.8}"/>
+  <property name="module.jdk.bin.best-practice" value="${jdk.bin.1.8}"/>
+  <property name="module.jdk.classpath.best-practice" value="jdk.classpath.1.8"/>
+  
+  <property name="compiler.args.best-practice" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="best-practice.output.dir" value="${module.best-practice.basedir}/out/production/best-practice"/>
+  <property name="best-practice.testoutput.dir" value="${module.best-practice.basedir}/out/test/best-practice"/>
+  
+  <path id="best-practice.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="best-practice.module.production.classpath">
+    <path refid="${module.jdk.classpath.best-practice}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+  </path>
+  
+  <path id="best-practice.runtime.production.module.classpath">
+    <pathelement location="${best-practice.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+  </path>
+  
+  <path id="best-practice.module.classpath">
+    <path refid="${module.jdk.classpath.best-practice}"/>
+    <pathelement location="${best-practice.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+  </path>
+  
+  <path id="best-practice.runtime.module.classpath">
+    <pathelement location="${best-practice.testoutput.dir}"/>
+    <pathelement location="${best-practice.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.best-practice">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.best-practice">
+    <patternset refid="excluded.from.module.best-practice"/>
+  </patternset>
+  
+  <path id="best-practice.module.sourcepath">
+    <dirset dir="${module.best-practice.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.best-practice" depends="compile.module.best-practice.production,compile.module.best-practice.tests" description="Compile module best-practice"/>
+  
+  <target name="compile.module.best-practice.production" description="Compile module best-practice; production classes">
+    <mkdir dir="${best-practice.output.dir}"/>
+    <javac destdir="${best-practice.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.best-practice}/javac">
+      <compilerarg line="${compiler.args.best-practice}"/>
+      <bootclasspath refid="best-practice.module.bootclasspath"/>
+      <classpath refid="best-practice.module.production.classpath"/>
+      <src refid="best-practice.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.best-practice"/>
+    </javac>
+    
+    <copy todir="${best-practice.output.dir}">
+      <fileset dir="${module.best-practice.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.best-practice.tests" depends="compile.module.best-practice.production" description="compile module best-practice; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.best-practice" description="cleanup module">
+    <delete dir="${best-practice.output.dir}"/>
+    <delete dir="${best-practice.testoutput.dir}"/>
+  </target>
+</project>
