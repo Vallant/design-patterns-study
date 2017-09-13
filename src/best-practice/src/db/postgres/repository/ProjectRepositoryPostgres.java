@@ -143,7 +143,7 @@ public class ProjectRepositoryPostgres implements ProjectRepository
 
     try(Connection con = db.getConnection())
     {
-      String sql = "SELECT NAME FROM PROJECT " +
+      String sql = "SELECT PROJECT.HASH,  PROJECT.ID, PROJECT.NAME, PROJECT.DESCRIPTION FROM PROJECT " +
                    "JOIN PROJECT_MEMBERS ON PROJECT_MEMBERS.USER_LOGIN_NAME = ? " +
                    "WHERE PROJECT.ID = PROJECT_MEMBERS.PROJECT_ID";
       PreparedStatement ps = con.prepareStatement(sql);
