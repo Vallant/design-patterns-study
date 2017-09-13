@@ -34,4 +34,8 @@ src/best-practice/*.iml
 src/monolithic/.idea/
 src/monolithic/out
 src/monolithic/*.iml
+src/monolithic/out/
+src/monolithic/.idea/
+src/monolithic/build
+src/monolithic/dist
 workspace.xml

@@ -54,26 +54,38 @@ public class ProjectModelImpl
 
   public ArrayList<ProjectMember> getOwnedProjects() throws Exception
   {
-    return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.dbPostgres());
+    else
+      return ProjectMember.getOwnedProject(user.getLoginName(), mainModel.dbMongo());
   }
 
 
   public ArrayList<ProjectMember> getInvolvedProjects() throws Exception
   {
-    return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.dbPostgres());
+    else
+      return ProjectMember.getInvolvedProjects(user.getLoginName(), mainModel.dbMongo());
   }
 
 
   public void leaveProject(ProjectMember member) throws Exception
   {
-    member.deleteFromDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      member.deleteFromDb(mainModel.dbPostgres());
+    else
+      member.deleteFromDb(mainModel.dbMongo());
     controller.refresh();
   }
 
 
   public void deleteProject(Project selectedProject) throws Exception
   {
-    selectedProject.deleteFromDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      selectedProject.deleteFromDb(mainModel.dbPostgres());
+    else
+      selectedProject.deleteFromDb(mainModel.dbMongo());
     controller.refresh();
     mainModel.refreshActivityBar();
 
@@ -82,9 +94,17 @@ public class ProjectModelImpl
 
   public void requestedDetailForProject(Project project) throws Exception
   {
-    ArrayList<ProjectMember> members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.db());
+    ArrayList<ProjectMember> members = null;
+    if(mainModel.dbPostgres() != null)
+      members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.dbPostgres());
+    else
+      members = ProjectMember.getMembersByProjectId(project.getId(), mainModel.dbMongo());
 
-    ArrayList<ProjectPhase> phases = ProjectPhase.getByProjectId(project.getId(), mainModel.db());
+    ArrayList<ProjectPhase> phases = null;
+    if(mainModel.dbPostgres() != null)
+      phases = ProjectPhase.getByProjectId(project.getId(), mainModel.dbPostgres());
+    else
+      phases = ProjectPhase.getByProjectId(project.getId(), mainModel.dbMongo());
 
     controller.showDetail(project, phases, members);
   }
@@ -93,9 +113,16 @@ public class ProjectModelImpl
   public void addProject(String name, String description) throws Exception
   {
     Project project = new Project(name, description);
-    project.insertIntoDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      project.insertIntoDb(mainModel.dbPostgres());
+    else
+      project.insertIntoDb(mainModel.dbMongo());
+
     ProjectMember pm = new ProjectMember(user, project, ProjectMember.ROLE.LEADER);
-    pm.insertIntoDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      pm.insertIntoDb(mainModel.dbPostgres());
+    else
+      pm.insertIntoDb(mainModel.dbMongo());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -104,7 +131,10 @@ public class ProjectModelImpl
   public void addPhase(Project project, String phaseName) throws Exception
   {
     ProjectPhase phase = new ProjectPhase(project, phaseName);
-    phase.insertIntoDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      phase.insertIntoDb(mainModel.dbPostgres());
+    else
+      phase.insertIntoDb(mainModel.dbMongo());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -112,7 +142,10 @@ public class ProjectModelImpl
 
   public void deletePhase(ProjectPhase projectPhase) throws Exception
   {
-    projectPhase.deleteFromDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      projectPhase.deleteFromDb(mainModel.dbPostgres());
+    else
+      projectPhase.deleteFromDb(mainModel.dbMongo());
     controller.refresh();
     mainModel.refreshActivityBar();
   }
@@ -121,7 +154,10 @@ public class ProjectModelImpl
   public void promoteToLeader(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.LEADER);
-    projectMember.updateInDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      projectMember.updateInDb(mainModel.dbPostgres());
+    else
+      projectMember.updateInDb(mainModel.dbMongo());
     controller.refresh();
   }
 
@@ -129,21 +165,30 @@ public class ProjectModelImpl
   public void degradeToMember(ProjectMember projectMember) throws Exception
   {
     projectMember.setRole(ProjectMember.ROLE.MEMBER);
-    projectMember.updateInDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      projectMember.updateInDb(mainModel.dbPostgres());
+    else
+      projectMember.updateInDb(mainModel.dbMongo());
     controller.refresh();
   }
 
 
   public void deleteMember(ProjectMember projectMember) throws Exception
   {
-    projectMember.deleteFromDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      projectMember.deleteFromDb(mainModel.dbPostgres());
+    else
+      projectMember.deleteFromDb(mainModel.dbMongo());
     controller.refresh();
   }
 
 
   public ArrayList<User> getAvailableUsersFor(int projectId) throws Exception
   {
-    return User.getAvailableUsersFor(projectId, mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      return User.getAvailableUsersFor(projectId, mainModel.dbPostgres());
+    else
+      return User.getAvailableUsersFor(projectId, mainModel.dbMongo());
   }
 
 
@@ -152,7 +197,10 @@ public class ProjectModelImpl
     for(User u : toAdd)
     {
       ProjectMember member = new ProjectMember(u, currentProject, ProjectMember.ROLE.MEMBER);
-      member.insertIntoDb(mainModel.db());
+      if(mainModel.dbPostgres() != null)
+        member.insertIntoDb(mainModel.dbPostgres());
+      else
+        member.insertIntoDb(mainModel.dbMongo());
     }
     controller.refresh();
   }
@@ -160,7 +208,10 @@ public class ProjectModelImpl
 
   public void updateProject(Project project) throws Exception
   {
-    project.updateInDb(mainModel.db());
+    if(mainModel.dbPostgres() != null)
+      project.updateInDb(mainModel.dbPostgres());
+    else
+      project.updateInDb(mainModel.dbMongo());
     controller.refresh();
   }
 
