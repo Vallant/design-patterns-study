@@ -8,6 +8,7 @@ package controller.standard;
 import data.User;
 import model.impl.*;
 import view.common.ViewManager;
+import view.javafx.MainViewFX;
 import view.swing.MainViewSwing;
 
 /**
@@ -15,7 +16,9 @@ import view.swing.MainViewSwing;
  */
 public class MainControllerStandard
 {
-  private MainViewSwing mainView;
+  private MainViewSwing mainViewSwing;
+  private MainViewFX mainViewFX;
+
   private MainModelImpl mainModel;
 
   private final LoginControllerStandard             login;
@@ -41,7 +44,17 @@ public class MainControllerStandard
   public void init(String frontend)
   {
     ViewManager.initInstance(frontend);
-    mainView = ViewManager.getInstance();
+    if(frontend.equals("swing"))
+    {
+      mainViewSwing = ViewManager.getInstanceSwing();
+      mainViewFX = null;
+    }
+    else
+    {
+      mainViewSwing = null;
+      mainViewFX = ViewManager.getInstanceFX();
+    }
+
   }
 
 
@@ -53,38 +66,76 @@ public class MainControllerStandard
 
   public void switchToLogin()
   {
-    assert (mainView != null);
-    mainView.hideAll();
+    assert (mainViewSwing != null || mainViewFX != null);
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideAll();
+      mainViewSwing.showLoginView();
+    }
+    else
+    {
+      mainViewFX.hideAll();
+      mainViewFX.showLoginView();
+    }
 
-    mainView.showLoginView();
   }
 
 
   public void switchToProjectView()
   {
-    mainView.hideCenterContent();
-    mainView.showProjectView();
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideCenterContent();
+      mainViewSwing.showProjectView();
+    }
+    else
+    {
+      mainViewFX.hideCenterContent();
+      mainViewFX.showProjectView();
+    }
+
   }
 
 
   public void switchToAdminView()
   {
-    mainView.hideCenterContent();
-    mainView.showAdminView();
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideCenterContent();
+      mainViewSwing.showAdminView();
+    }
+    else
+    {
+      mainViewFX.hideCenterContent();
+      mainViewFX.showAdminView();
+    }
+
   }
 
 
   public void switchToPersonalStatisticView()
   {
-    mainView.hideCenterContent();
-    mainView.showPersonalStatisticView();
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideCenterContent();
+      mainViewSwing.showPersonalStatisticView();
+    }
+    else
+    {
+      mainViewFX.hideCenterContent();
+      mainViewFX.showPersonalStatisticView();
+    }
+
     personalStatistic.refresh();
   }
 
 
   public void showActivityBar()
   {
-    mainView.showActivityBar();
+    if(mainViewSwing != null)
+      mainViewSwing.showActivityBar();
+    else
+      mainViewFX.showActivityBar();
   }
 
 
@@ -92,7 +143,10 @@ public class MainControllerStandard
   {
     login.setModel(model);
     model.setController(login);
-    mainView.pairLogin(login);
+    if(mainViewSwing != null)
+      mainViewSwing.pairLogin(login);
+    else
+      mainViewFX.pairLogin(login);
   }
 
 
@@ -100,7 +154,10 @@ public class MainControllerStandard
   {
     project.setModel(model);
     model.setController(project);
-    mainView.pairProject(project);
+    if(mainViewSwing != null)
+      mainViewSwing.pairProject(project);
+    else
+      mainViewFX.pairProject(project);
   }
 
 
@@ -108,19 +165,28 @@ public class MainControllerStandard
   {
     activityBar.setModel(model);
     model.setController(activityBar);
-    mainView.pairActivityBar(activityBar);
+    if(mainViewSwing != null)
+      mainViewSwing.pairActivityBar(activityBar);
+    else
+      mainViewFX.pairActivityBar(activityBar);
   }
 
 
   public void showError(Exception ex)
   {
-    mainView.showError(ex.getLocalizedMessage());
+    if(mainViewSwing != null)
+      mainViewSwing.showError(ex.getLocalizedMessage());
+    else
+      mainViewFX.showError(ex.getLocalizedMessage());
   }
 
 
   public void showSideBar(User.ROLE role)
   {
-    mainView.showSideBar(role);
+    if(mainViewSwing != null)
+      mainViewSwing.showSideBar(role);
+    else
+      mainViewFX.showSideBar(role);
   }
 
 
@@ -128,7 +194,10 @@ public class MainControllerStandard
   {
     sideBar.setModel(model);
     model.setController(sideBar);
-    mainView.pairSideBar(sideBar);
+    if(mainViewSwing != null)
+      mainViewSwing.pairSideBar(sideBar);
+    else
+      mainViewFX.pairSideBar(sideBar);
   }
 
 
@@ -136,7 +205,10 @@ public class MainControllerStandard
   {
     personalStatistic.setModel(model);
     model.setController(personalStatistic);
-    mainView.pairPersonalStatistic(personalStatistic);
+    if(mainViewSwing != null)
+      mainViewSwing.pairPersonalStatistic(personalStatistic);
+    else
+      mainViewFX.pairPersonalStatistic(personalStatistic);
   }
 
 
@@ -144,7 +216,10 @@ public class MainControllerStandard
   {
     projectStatistic.setModel(model);
     model.setController(projectStatistic);
-    mainView.pairProjectStatistic(projectStatistic);
+    if(mainViewSwing != null)
+      mainViewSwing.pairProjectStatistic(projectStatistic);
+    else
+      mainViewFX.pairProjectStatistic(projectStatistic);
   }
 
 
@@ -152,21 +227,42 @@ public class MainControllerStandard
   {
     settings.setModel(model);
     model.setController(settings);
-    mainView.pairSettings(settings);
+    if(mainViewSwing != null)
+      mainViewSwing.pairSettings(settings);
+    else
+      mainViewFX.pairSettings(settings);
   }
 
 
   public void switchToSettingsView()
   {
-    mainView.hideCenterContent();
-    mainView.showSettingsView();
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideCenterContent();
+      mainViewSwing.showSettingsView();
+    }
+    else
+    {
+      mainViewFX.hideCenterContent();
+      mainViewFX.showSettingsView();
+    }
+
   }
 
 
   public void switchToProjectStatisticView()
   {
-    mainView.hideCenterContent();
-    mainView.showProjectStatisticView();
+    if(mainViewSwing != null)
+    {
+      mainViewSwing.hideCenterContent();
+      mainViewSwing.showProjectStatisticView();
+    }
+    else
+    {
+      mainViewFX.hideCenterContent();
+      mainViewFX.showProjectStatisticView();
+    }
+
     projectStatistic.refresh();
   }
 

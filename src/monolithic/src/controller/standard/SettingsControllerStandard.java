@@ -2,6 +2,7 @@ package controller.standard;
 
 import data.User;
 import model.impl.SettingsModelImpl;
+import view.javafx.settings.SettingsViewFX;
 import view.swing.settings.SettingsViewSwing;
 
 import java.util.Arrays;
@@ -10,7 +11,8 @@ import java.util.Arrays;
 public class SettingsControllerStandard
 {
   private SettingsModelImpl model;
-  private SettingsViewSwing view;
+  private SettingsViewSwing viewSwing;
+  private SettingsViewFX viewFX;
   private User              user;
 
   public void setModel(SettingsModelImpl model)
@@ -19,28 +21,42 @@ public class SettingsControllerStandard
   }
 
 
-  public void setView(SettingsViewSwing view)
+  public void setViewSwing(SettingsViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
   }
 
+  public void setViewFX(SettingsViewFX viewFX)
+  {
+    this.viewFX = viewFX;
+  }
 
   public void refresh()
   {
-    view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
+
+    if(viewSwing != null)
+      viewSwing.setData(user.getFirstName(), user.getLastName(), user.getEmail());
+    else
+      viewFX.setData(user.getFirstName(), user.getLastName(), user.getEmail());
   }
 
 
   public void show(User user)
   {
     this.user = user;
-    view.show();
+    if(viewSwing != null)
+      viewSwing.show();
+    else
+      viewFX.show();
   }
 
 
   public void resetClicked()
   {
-    view.setData(user.getFirstName(), user.getLastName(), user.getEmail());
+    if(viewSwing != null)
+      viewSwing.setData(user.getFirstName(), user.getLastName(), user.getEmail());
+    else
+      viewFX.setData(user.getFirstName(), user.getLastName(), user.getEmail());
   }
 
 
@@ -48,11 +64,26 @@ public class SettingsControllerStandard
   {
 
     if(first.isEmpty() || last.isEmpty() || email.isEmpty())
-      view.showError("Please fill out all fields");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("Please fill out all fields");
+      else
+        viewFX.showError("Please fill out all fields");
+    }
     else if(old.length != 0 && (newPw.length == 0 || newPwAgain.length == 0))
-      view.showError("Please fill out all fields");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("Please fill out all fields");
+      else
+        viewFX.showError("Please fill out all fields");
+    }
     else if(!Arrays.equals(newPw, newPwAgain))
-      view.showError("The passwords do not match");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("The passwords do not match");
+      else
+        viewFX.showError("The passwords do not match");
+    }
     else
     {
       user.setFirstName(first);
@@ -70,7 +101,10 @@ public class SettingsControllerStandard
       }
       catch(Exception e)
       {
-        view.showError(e.getLocalizedMessage());
+        if(viewSwing != null)
+          viewSwing.showError(e.getLocalizedMessage());
+        else
+          viewFX.showError(e.getLocalizedMessage());
         e.printStackTrace();
       }
     }
@@ -79,6 +113,9 @@ public class SettingsControllerStandard
 
   public void updateSuccessful()
   {
-    view.updateSuccessful();
+    if(viewSwing != null)
+      viewSwing.updateSuccessful();
+    else
+      viewFX.updateSuccessful();
   }
 }

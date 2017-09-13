@@ -5,6 +5,7 @@ import data.Project;
 import data.ProjectMember;
 import data.ProjectPhase;
 import model.impl.ProjectStatisticModelImpl;
+import view.javafx.projectstatistic.ProjectStatisticViewFX;
 import view.swing.projectstatistic.ProjectStatisticViewSwing;
 
 import java.time.Duration;
@@ -15,7 +16,8 @@ public class ProjectStatisticControllerStandard
 {
 
   private ProjectStatisticModelImpl model;
-  private ProjectStatisticViewSwing view;
+  private ProjectStatisticViewSwing viewSwing;
+  private ProjectStatisticViewFX viewFX;
 
   private ArrayList<Project> projects;
 
@@ -34,27 +36,49 @@ public class ProjectStatisticControllerStandard
   }
 
 
-  public void setView(ProjectStatisticViewSwing view)
+  public void setViewSwing(ProjectStatisticViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
   }
 
+  public void setViewFX(ProjectStatisticViewFX viewFX)
+  {
+    this.viewFX = viewFX;
+  }
 
   public void refresh()
   {
     try
     {
-      model.projectPeriodChanged(view.getSelectedProjectPeriod());
-      if(currentPhase != null)
-        model.phaseDropDownChanged(currentPhase.getId(), view.getSelectedPhasePeriod(),
-          view.getSelectedUserPhase() == 0,
-          members.get(view.getSelectedUserPhase()));
-      if(activities != null)
+      if(viewSwing != null)
       {
-        assert currentPhase != null;
-        model.activityDropDownChanged(currentPhase.getId(), view.getSelectedActivityPeriod(),
-          view.getSelectedUserActivity() == 0, members.get(view.getSelectedUserActivity()));
+        model.projectPeriodChanged(viewSwing.getSelectedProjectPeriod());
+        if(currentPhase != null)
+          model.phaseDropDownChanged(currentPhase.getId(), viewSwing.getSelectedPhasePeriod(),
+            viewSwing.getSelectedUserPhase() == 0,
+            members.get(viewSwing.getSelectedUserPhase()));
+        if(activities != null)
+        {
+          assert currentPhase != null;
+          model.activityDropDownChanged(currentPhase.getId(), viewSwing.getSelectedActivityPeriod(),
+            viewSwing.getSelectedUserActivity() == 0, members.get(viewSwing.getSelectedUserActivity()));
+        }
       }
+      else
+      {
+        model.projectPeriodChanged(viewFX.getSelectedProjectPeriod());
+        if(currentPhase != null)
+          model.phaseDropDownChanged(currentPhase.getId(), viewFX.getSelectedPhasePeriod(),
+            viewFX.getSelectedUserPhase() == 0,
+            members.get(viewFX.getSelectedUserPhase()));
+        if(activities != null)
+        {
+          assert currentPhase != null;
+          model.activityDropDownChanged(currentPhase.getId(), viewFX.getSelectedActivityPeriod(),
+            viewFX.getSelectedUserActivity() == 0, members.get(viewFX.getSelectedUserActivity()));
+        }
+      }
+
     }
     catch(Exception e)
     {
@@ -76,7 +100,10 @@ public class ProjectStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -90,7 +117,10 @@ public class ProjectStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -107,7 +137,10 @@ public class ProjectStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -115,7 +148,10 @@ public class ProjectStatisticControllerStandard
 
   public void showProjectView()
   {
-    view.showProjectView();
+    if(viewSwing != null)
+      viewSwing.showProjectView();
+    else
+      viewFX.showProjectView();
     refresh();
   }
 
@@ -129,13 +165,16 @@ public class ProjectStatisticControllerStandard
     {
       projectNames.add(p.getName());
     }
-    view.setProjectData(projectNames, durations);
+    if(viewSwing != null)
+      viewSwing.setProjectData(projectNames, durations);
+    else
+      viewFX.setProjectData(projectNames, durations);
   }
 
 
   public void showPhaseView()
   {
-    view.showPhaseView();
+    viewSwing.showPhaseView();
   }
 
 
@@ -160,13 +199,19 @@ public class ProjectStatisticControllerStandard
 
     }
 
-    view.setPhaseData(phaseNames, durations, memberNames);
+    if(viewSwing != null)
+      viewSwing.setPhaseData(phaseNames, durations, memberNames);
+    else
+      viewFX.setPhaseData(phaseNames, durations, memberNames);
   }
 
 
   public void showActivityView()
   {
-    view.showActivityView();
+    if(viewSwing != null)
+      viewSwing.showActivityView();
+    else
+      viewFX.showActivityView();
   }
 
 
@@ -195,7 +240,10 @@ public class ProjectStatisticControllerStandard
 
     }
 
-    view.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
+    if(viewSwing != null)
+      viewSwing.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
+    else
+      viewFX.setActivityData(userNames, descriptions, comments, startTimes, endTimes, memberNames);
   }
 
 
@@ -207,7 +255,10 @@ public class ProjectStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }
@@ -232,7 +283,10 @@ public class ProjectStatisticControllerStandard
     }
     catch(Exception e)
     {
-      view.showError(e.getLocalizedMessage());
+      if(viewSwing != null)
+        viewSwing.showError(e.getLocalizedMessage());
+      else
+        viewFX.showError(e.getLocalizedMessage());
       e.printStackTrace();
     }
   }

@@ -8,6 +8,7 @@ package controller.standard;
 import data.User;
 import model.impl.LoginModelImpl;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import view.javafx.login.LoginViewFX;
 import view.swing.login.LoginViewSwing;
 
 import java.util.Arrays;
@@ -17,7 +18,8 @@ import java.util.Arrays;
  */
 public class LoginControllerStandard
 {
-  private LoginViewSwing view;
+  private LoginViewSwing viewSwing;
+  private LoginViewFX viewFX;
   private LoginModelImpl model;
 
   public LoginControllerStandard()
@@ -28,18 +30,38 @@ public class LoginControllerStandard
 
   public void resetPasswordClicked()
   {
-    view.switchToResetPassword();
+    viewSwing.switchToResetPassword();
   }
 
 
   public void loginClicked()
   {
-    String username = view.getEnteredUsername();
-    char[] password = view.getEnteredPassword();
+    String username;
+    char[] password;
+    if(viewSwing != null)
+    {
+      username = viewSwing.getEnteredUsername();
+      password = viewSwing.getEnteredPassword();
+    }
+    else
+    {
+      username = viewFX.getEnteredUsername();
+      password = viewFX.getEnteredPassword();
+    }
     if(username.isEmpty())
-      view.showError("Please provide a valid username");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("Please provide a valid username");
+      else
+        viewFX.showError("Please provide a valid username");
+    }
     else if(password.length == 0)
-      view.showError("Please provide a valid password");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("Please provide a valid password");
+      else
+        viewFX.showError("Please provide a valid password");
+    }
     else
       try
       {
@@ -48,34 +70,58 @@ public class LoginControllerStandard
       catch(Exception e)
       {
         e.printStackTrace();
-        view.showError(e.getLocalizedMessage());
+        if(viewSwing != null)
+          viewSwing.showError(e.getLocalizedMessage());
+        else
+          viewFX.showError(e.getLocalizedMessage());
       }
   }
 
 
   public void addUserClicked()
   {
-    view.switchToAddNewUser();
+    if(viewSwing != null)
+      viewSwing.switchToAddNewUser();
+    else
+      viewFX.switchToAddNewUser();
   }
 
 
   public void backToLoginClicked()
   {
-    view.switchToLogin();
+    if(viewSwing != null)
+      viewSwing.switchToLogin();
+    else
+      viewFX.switchToLogin();
   }
 
 
   public void addClicked()
   {
-    User u = view.getEnteredUser();
+    User u;
+    if(viewSwing != null)
+      u = viewSwing.getEnteredUser();
+    else
+      u = viewFX.getEnteredUser();
+
     if((u.getEmail().isEmpty() ||
         u.getFirstName().isEmpty() ||
         u.getLastName().isEmpty() ||
         u.getLoginName().isEmpty() ||
         u.getNewPassword().length == 0))
-      view.showError("Please fill all fields");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("Please fill all fields");
+      else
+        viewFX.showError("Please fill all fields");
+    }
     else if(!Arrays.equals(u.getNewPassword(), u.getNewPasswordAgain()))
-      view.showError("The passwords do not match");
+    {
+      if(viewSwing != null)
+        viewSwing.showError("The passwords do not match");
+      else
+        viewFX.showError("The passwords do not match");
+    }
     else
       try
       {
@@ -84,12 +130,14 @@ public class LoginControllerStandard
       catch(Exception e)
       {
         e.printStackTrace();
-        view.showError(e.getLocalizedMessage());
+        if(viewSwing != null)
+          viewSwing.showError(e.getLocalizedMessage());
+        else
+          viewFX.showError(e.getLocalizedMessage());
       }
 
 
   }
-
 
   public void resetClicked()
   {
@@ -97,21 +145,32 @@ public class LoginControllerStandard
   }
 
 
-  public void setView(LoginViewSwing view)
+  public void setViewSwing(LoginViewSwing viewSwing)
   {
-    this.view = view;
+    this.viewSwing = viewSwing;
+  }
+
+  public void setViewFX(LoginViewFX viewFX)
+  {
+    this.viewFX = viewFX;
   }
 
 
   public void showDialog(String message)
   {
-    view.showDialog(message);
+    if(viewSwing != null)
+      viewSwing.showDialog(message);
+    else
+      viewFX.showDialog(message);
   }
 
 
   public void loginFailed()
   {
-    view.showLoginFailed();
+    if(viewSwing != null)
+      viewSwing.showLoginFailed();
+    else
+      viewFX.showLoginFailed();
   }
 
   private boolean isValid(User u)

@@ -23,6 +23,11 @@
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
     <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+<<<<<<< HEAD
+=======
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+>>>>>>> monoV2
   </path>
   
   <path id="monolithic.runtime.production.module.classpath">
@@ -33,6 +38,11 @@
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
     <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+<<<<<<< HEAD
+=======
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+>>>>>>> monoV2
   </path>
   
   <path id="monolithic.module.classpath">
@@ -44,6 +54,11 @@
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
     <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+<<<<<<< HEAD
+=======
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+>>>>>>> monoV2
   </path>
   
   <path id="monolithic.runtime.module.classpath">
@@ -55,6 +70,11 @@
     <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
     <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
     <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+<<<<<<< HEAD
+=======
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+>>>>>>> monoV2
   </path>
   
   

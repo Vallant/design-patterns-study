@@ -23,7 +23,6 @@ hs_err_pid*
 *.log
 *.lof
 *.lot
-
 nbproject/
 manifest.mf
 build.xml
@@ -32,7 +31,7 @@ src/best-practice/build/
 src/best-practice/out/
 src/best-practice/.idea/*
 src/best-practice/*.iml
-
 src/monolithic/.idea/
 src/monolithic/out
+src/monolithic/*.iml
 workspace.xml
