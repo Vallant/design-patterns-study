@@ -33,4 +33,5 @@ build.xml
 src/best-practice/.idea/*
 src/best-practice/*.iml
 
+*.iml
 .idea/
