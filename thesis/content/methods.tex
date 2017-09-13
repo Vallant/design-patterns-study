@@ -119,7 +119,7 @@ public void login(String username, char[] password) throws Exception {
 \subsubsection{UI Interaction}
 As stated before there is a main controller that instantiates the sub-controllers. Because a pairing is necessary between model and controller the main controller provides methods to do so. After the main model has instantiated all sub-models he pairs it with the controller. This process is the process of \emph{dependency injection} as described in section \ref{sec:di}.
 
-\begin{lstlisting}[caption={Code snippet showing initialization code for the controller. The main model retrieves the main controller by calling a getter which is similarily implemented as the DBManager class shown in listing \ref{lst:dbmanager}. After that he calls a method that pairs the sub-model with the sub-controller, a code snippet showing this process can be seen in listing \ref{lst:pairing}.}, captionpos=b]
+\begin{lstlisting}[caption={Code snippet showing initialization code for the controller. The main model retrieves the main controller by calling a getter which is similarily implemented as the DBManager class shown in listing \ref{lst:dbmanager}. After that he calls a method that pairs the sub-model with the sub-controller, a code snippet showing this process can be seen in listing \ref{lst:pairing}.}, captionpos=b, label={lst:db-manager-mono}]
 private MainModelImpl(String driver, String url, String username, String password, String controllerImpl, String
 frontend) throws Exception {
 	db = DBManager.get(driver, url, username, password);
@@ -139,7 +139,7 @@ private void pairLogin() {
 
 \end{lstlisting}
 
-The method call seen in line 5 of listing \ref{lst:db-manager} states a call to the static ControllerManager class. Similar to the DBManager class this is a singleton class that holds a switch case that instantiates the main controller based on the implementation provided by the arguments. After the method calls now the \texttt{LoginModel} class knows its main model and its controller. 
+The method call seen in line 3 of listing \ref{lst:db-manager-mono} states a call to the static ControllerManager class. Similar to the DBManager class this is a singleton class that holds a switch case that instantiates the main controller based on the implementation provided by the arguments. After the method calls now the \texttt{LoginModel} class knows its main model and its controller. 
 
 \clearpage
 
