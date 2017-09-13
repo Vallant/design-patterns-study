@@ -1,0 +1,43 @@
+\chapter{Source Code}
+All source code including this thesis is online available on Github \footnote{\href{https://github.com/Vallant/design-patterns-study.git}{https://github.com/Vallant/design-patterns-study.git}} under the GPLv3 licence. \footnote{\href{https://www.gnu.org/licenses/gpl-3.0.de.html}{https://www.gnu.org/licenses/gpl-3.0.de.html}}.
+
+The repository consists of a main branch, a thesis branch and 6 branches corresponding to the phases for each program implementation. The main branch contains the latest version of both applications as well as the latest version of the thesis branch. In the thesis branch naturally only tex sources for creating the thesis can be found. The branches corresponding to the phases are called \texttt{bpV\{1|2|3\}} (best-practice phase 1,2 or 3) and \texttt{monoV\{1|2|3\}} (monolithic phase 1,2 or 3 \footnote{The term monolithic was used in a early stage of development and was later dropped in favour of \emph{ad-hoc}})
+
+In order to run the application, some pre-requirements have to be met. Firstly a PostgreSQL and a MongoDB database must be installed. Secondly the database initialization code that can be found in the directory \texttt{<repository-root>/src/db} needs to be imported into the corresponding DBMS. This code creates the necessary tables, columns, constraints etc. On more information about how to import and the code please refer to the documentation of the two DBMS.
+
+For compiling the application ant build scripts are available, the application jar can be compiled using the following command:
+
+\texttt{ant -f src/<program version>/build.xml}.
+
+
+To start the program it can be called using the command line utilizing the following command:
+
+\texttt{java -jar <application-name> <driver> <url:port> <username> <password> <controller> <frontend>}
+
+If the current working directory is the repository root, this means that the following commands are available, depending on the branch.
+
+\begin{footnotesize}
+	\texttt{java -jar src/monolithic/out/artifacts/monolithic\_jar/monolithic.jar mongo localhost postgres postgres standard javafx}
+	
+	\texttt{java -jar src/monolithic/out/artifacts/monolithic\_jar/monolithic.jar mongo localhost postgres postgres standard swing}
+	
+	\texttt{java -jar src/monolithic/out/artifacts/monolithic\_jar/monolithic.jar \\ org.postgresql.Driver jdbc:postgresql://localhost/casestudy  postgres postgres standard javafx} 
+	
+	\texttt{java -jar src/monolithic/out/artifacts/monolithic\_jar/monolithic.jar\\
+		org.postgresql.Driver jdbc:postgresql://localhost/casestudy  postgres postgres standard swing} 
+	
+	\texttt{java -jar src/best-practice/out/artifacts/best\_practice\_jar/best-practice.jar org.postgresql.Driver jdbc:postgresql://localhost/casestudy  postgres postgres standard javafx
+	}
+
+	\texttt{java -jar src/best-practice/out/artifacts/best\_practice\_jar/best-practice.jar mongo localhost  postgres postgres standard javafx
+	} 
+
+	\texttt{java -jar src/best-practice/out/artifacts/best\_practice\_jar/best-practice.jar org.postgresql.Driver jdbc:postgresql://localhost/casestudy  postgres postgres standard swing
+	} 
+
+	\texttt{java -jar src/best-practice/out/artifacts/best\_practice\_jar/best-practice.jar mongo localhost postgres postgres standard javafx
+	} 
+\end{footnotesize}
+
+
+

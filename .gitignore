@@ -39,3 +39,6 @@ src/monolithic/.idea/
 src/monolithic/build
 src/monolithic/dist
 workspace.xml
+
+*.iml
+.idea/
