@@ -24,6 +24,7 @@ import db.interfaces.RepositoryFactory;
 public abstract class DBManager implements RepositoryFactory
 {
   private static final String DRIVER_POSTGRES = "org.postgresql.Driver";
+  private static final String DRIVER_MONGO = "mongo";
   private static DBManager instance;
 
   public static DBManager get(String driver, String url, String username, String password)
@@ -32,6 +33,9 @@ public abstract class DBManager implements RepositoryFactory
     {
       case DRIVER_POSTGRES:
         if(instance == null) instance = new DBManagerPostgres(driver, url, username, password);
+        break;
+      case DRIVER_MONGO:
+        if(instance == null) instance = new DBManagerMongo(url, username, password);
         break;
       default:
         throw new UnsupportedOperationException("Not yet implemented");
