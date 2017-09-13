@@ -83,15 +83,15 @@
   
   <target name="compile.module.monolithic" depends="compile.module.monolithic.production,compile.module.monolithic.tests" description="Compile module monolithic"/>
   
-  <target name="compile.module.monolithic.production" depends="register.custom.compilers" description="Compile module monolithic; production classes">
+  <target name="compile.module.monolithic.production" description="Compile module monolithic; production classes">
     <mkdir dir="${monolithic.output.dir}"/>
-    <javac2 destdir="${monolithic.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.monolithic}/javac">
+    <javac destdir="${monolithic.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.monolithic}/javac">
       <compilerarg line="${compiler.args.monolithic}"/>
       <bootclasspath refid="monolithic.module.bootclasspath"/>
       <classpath refid="monolithic.module.production.classpath"/>
       <src refid="monolithic.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.monolithic"/>
-    </javac2>
+    </javac>
     
     <copy todir="${monolithic.output.dir}">
       <fileset dir="${module.monolithic.basedir}/src">
@@ -101,7 +101,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.monolithic.tests" depends="register.custom.compilers,compile.module.monolithic.production" description="compile module monolithic; test classes" unless="skip.tests"/>
+  <target name="compile.module.monolithic.tests" depends="compile.module.monolithic.production" description="compile module monolithic; test classes" unless="skip.tests"/>
   
   <target name="clean.module.monolithic" description="cleanup module">
     <delete dir="${monolithic.output.dir}"/>

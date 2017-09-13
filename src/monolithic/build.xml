@@ -83,18 +83,6 @@
   
   
   <!-- Global Libraries -->
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -119,6 +107,9 @@
     <property name="artifact.temp.output.monolithic:jar" value="${artifacts.temp.dir}/monolithic_jar"/>
     <mkdir dir="${artifact.temp.output.monolithic:jar}"/>
     <jar destfile="${temp.jar.path.monolithic.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+        <manifest>
+                <attribute name="Main-Class" value="model.impl.MainModelImpl"/>
+        </manifest>
       <zipfileset dir="${monolithic.output.dir}"/>
       <zipfileset src="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
       <zipfileset src="${basedir}/../libraries/commons-lang3-3.5.jar"/>
