@@ -107,6 +107,9 @@
     <property name="artifact.temp.output.best-practice:jar" value="${artifacts.temp.dir}/best_practice_jar"/>
     <mkdir dir="${artifact.temp.output.best-practice:jar}"/>
     <jar destfile="${temp.jar.path.best-practice.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+        <manifest>
+                <attribute name="Main-Class" value="model.impl.MainModelImpl"/>
+        </manifest>
       <zipfileset dir="${best-practice.output.dir}"/>
       <zipfileset src="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
       <zipfileset src="${basedir}/../libraries/commons-lang3-3.5.jar"/>
