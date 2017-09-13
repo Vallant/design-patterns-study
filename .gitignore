@@ -27,10 +27,16 @@ hs_err_pid*
 nbproject/
 manifest.mf
 build.xml
-/src/best-practice/dist/
-/src/best-practice/build/
 
+src/best-practice/dist/
+src/best-practice/build/
+src/best-practice/out/
 src/best-practice/.idea/*
 src/best-practice/*.iml
+src/monolithic/dist/
+src/monolithic/build/
+src/monolithic/out/
+src/monolitic/.idea/
+src/monolithic/*.iml
 
 .idea/

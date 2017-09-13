@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_monolithic" default="compile.module.monolithic">
+  <dirname property="module.monolithic.basedir" file="${ant.file.module_monolithic}"/>
+  
+  <property name="module.jdk.home.monolithic" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.monolithic" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.monolithic" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.monolithic" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="monolithic.output.dir" value="${module.monolithic.basedir}/out/production/monolithic"/>
+  <property name="monolithic.testoutput.dir" value="${module.monolithic.basedir}/out/test/monolithic"/>
+  
+  <path id="monolithic.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="monolithic.module.production.classpath">
+    <path refid="${module.jdk.classpath.monolithic}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+  </path>
+  
+  <path id="monolithic.runtime.production.module.classpath">
+    <pathelement location="${monolithic.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+  </path>
+  
+  <path id="monolithic.module.classpath">
+    <path refid="${module.jdk.classpath.monolithic}"/>
+    <pathelement location="${monolithic.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+  </path>
+  
+  <path id="monolithic.runtime.module.classpath">
+    <pathelement location="${monolithic.testoutput.dir}"/>
+    <pathelement location="${monolithic.output.dir}"/>
+    <pathelement location="${basedir}/../libraries/LGoodDatePicker-10.3.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-logging-1.2.jar"/>
+    <pathelement location="${basedir}/../libraries/commons-pool2-2.4.2.jar"/>
+    <pathelement location="${basedir}/../libraries/postgresql-42.0.0.jar"/>
+    <pathelement location="${basedir}/../libraries/jfxtras-all-8.0-r6-20170820.080158-445.jar"/>
+    <pathelement location="${basedir}/../libraries/mongo-java-driver-3.5.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.monolithic">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.monolithic">
+    <patternset refid="excluded.from.module.monolithic"/>
+  </patternset>
+  
+  <path id="monolithic.module.sourcepath">
+    <dirset dir="${module.monolithic.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.monolithic" depends="compile.module.monolithic.production,compile.module.monolithic.tests" description="Compile module monolithic"/>
+  
+  <target name="compile.module.monolithic.production" description="Compile module monolithic; production classes">
+    <mkdir dir="${monolithic.output.dir}"/>
+    <javac destdir="${monolithic.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.monolithic}/javac">
+      <compilerarg line="${compiler.args.monolithic}"/>
+      <bootclasspath refid="monolithic.module.bootclasspath"/>
+      <classpath refid="monolithic.module.production.classpath"/>
+      <src refid="monolithic.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.monolithic"/>
+    </javac>
+    
+    <copy todir="${monolithic.output.dir}">
+      <fileset dir="${module.monolithic.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.monolithic.tests" depends="compile.module.monolithic.production" description="compile module monolithic; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.monolithic" description="cleanup module">
+    <delete dir="${monolithic.output.dir}"/>
+    <delete dir="${monolithic.testoutput.dir}"/>
+  </target>
+</project>
