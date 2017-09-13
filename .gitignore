@@ -32,3 +32,7 @@ src/best-practice/build/
 src/best-practice/out/
 src/best-practice/.idea/*
 src/best-practice/*.iml
+
+src/monolithic/.idea/
+src/monolithic/out
+workspace.xml
