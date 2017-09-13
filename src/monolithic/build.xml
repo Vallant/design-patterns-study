@@ -107,6 +107,9 @@
     <property name="artifact.temp.output.monolithic:jar" value="${artifacts.temp.dir}/monolithic_jar"/>
     <mkdir dir="${artifact.temp.output.monolithic:jar}"/>
     <jar destfile="${temp.jar.path.monolithic.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+        <manifest>
+                <attribute name="Main-Class" value="model.impl.MainModelImpl"/>
+        </manifest>
       <zipfileset dir="${monolithic.output.dir}"/>
       <zipfileset src="${basedir}/../libraries/commons-dbcp2-2.1.1.jar"/>
       <zipfileset src="${basedir}/../libraries/commons-lang3-3.5.jar"/>
