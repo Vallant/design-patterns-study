@@ -1,21 +1,23 @@
 \chapter{Results}
 \label{sec:results}
-In order to make serious statements about the quality of the code and the effects of using the design patterns some indicators were chosen to compare the two application types. Because the two programs are similar in its work-flow and basic structure these comparisons are actually meaningful. Due to the use git version control bug-fixes do not influence the results. 
+In order to make serious statements about the quality of the code and the effects of using the design patterns some indicators were chosen to compare the two application types. Because the two programs are similar in its work-flow and basic structure these comparisons are actually meaningful.
 
 This section only lists the findings while section \ref{sec:discussion} puts the results into context and explains them.
 
 \section{Lines of Code}
 \label{sec:line-count}
-In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} the line count development can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
+In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} the  increase in lines of code can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
+
+Due to the use of interfaces in java a lot of annotations were necessary which in fact do not have any significance to the topic. Thus the adjusted line count excludes lines that only hold the \texttt{@Override}-Annotation.
 
 \begin{table}[htbp]
 	\centering
 
 	\begin{tabular}{|c|c|c|c|c|} \hline
 	\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
-	Best practice & 9264 & 12275 & 13306 \\ \hline
-	Best practice (adjusted) \footnote{Due to the use of interfaces in java a lot of annotations were necessary which in fact do not have any significance to the topic. Thus the adjusted line count excludes lines that only hold the \texttt{@Override}-Annotation.} & 8804 & 11764 & 12750 \\ \hline
-	Ad-hoc & 7572 & 11172 & 12168 \\ \hline
+	Best practice & 9264 & 12275 (+ 32\%)& 13306 (+ 8\%)\\ \hline
+	Best practice (adjusted) & 8804 & 11764 (+ 34\%)& 12750 (+ 8\%)\\ \hline
+	Ad-hoc & 7572 & 11172 (+ 48\%)& 12168 (+ 9\%)\\ \hline
 	\end{tabular}
 	\caption{Lines of code for both program versions and all phases}
 	\label{table:lines-of-code}
@@ -43,7 +45,7 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	
 	\addplot[
 	color=blue,
-	mark=square,
+	mark=x,
 	]
 	coordinates {
 		(1,9205.0)(2,12275.0)(3,13306.0)
@@ -51,7 +53,7 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	
 	\addplot[
 	color=green,
-	mark=square,
+	mark=*,
 	]
 	coordinates {
 		(1,8804)(2,11764)(3,12750)
@@ -69,7 +71,7 @@ In Table \ref{table:lines-of-code} the total lines programmed for both programs 
 	\end{axis}
 	
 	\end{tikzpicture}
-	\caption{Lines of Code for both program versions and all phases. The best practice implementation of the program both in the adjusted and original version consists of more code lines in all phases.}
+	\caption[Lines of Code for both program versions and all phases.]{Lines of Code for both program versions and all phases. The best practice implementation of the program both in the adjusted and original version consists of more code lines in all phases.}
 	\label{fig:lines-of-code}
 \end{figure}
 
@@ -95,7 +97,7 @@ The development of the file count is listed in this section. Table \ref{table:fi
 	\begin{tikzpicture}
 	\begin{axis}[
 	xlabel={Phases},
-	ylabel={Lines of Code},
+	ylabel={Total number of files},
 	y label style={at={(axis description cs:-0.1,.5)}},
 	xmin=0, xmax=4,
 	ymin=50, ymax=150,
@@ -145,7 +147,7 @@ The development of the file count is listed in this section. Table \ref{table:fi
 
 \section{Average line count per file}
 \label{sec:avg-line-count}
-Another interesting aspect of the data is the comparison of the average line count per file, as it can be seen in table \ref{table:avg-lines} and chart \ref{fig:avg-lines}. The results are rounded mathematically.
+Another interesting aspect of the data is the comparison of the average line count per file, as it can be seen in table \ref{table:avg-lines} and chart \ref{fig:avg-lines}. The results are rounded.
 
 \begin{table}
 	\centering
@@ -166,7 +168,7 @@ Another interesting aspect of the data is the comparison of the average line cou
 	\begin{tikzpicture}
 	\begin{axis}[
 	xlabel={Phases},
-	ylabel={Average lines of Code},
+	ylabel={Lines of Code per file},
 	y label style={at={(axis description cs:-0.1,.5)}},
 	xmin=0, xmax=4,
 	ymin=50, ymax=150,
@@ -207,6 +209,6 @@ Another interesting aspect of the data is the comparison of the average line cou
 	\end{axis}
 	
 	\end{tikzpicture}
-	\caption{Total number of files for both program versions and all phases}
+	\caption{Average lines of code per file for both program versions and all phases}
 	\label{fig:avg-lines}
 \end{figure}
