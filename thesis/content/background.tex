@@ -14,9 +14,9 @@ To encourage refactoring \footnote{Refactoring describes the process of re-writi
 Many programming languages provide different access levels varying from visible to all others (in the case of Java: \emph{public}), accessible only within the class (\emph{private}) or visible from within and derived classes (\emph{protected}). The latter access level can be problematic as they can effectively break the encapsulation. When many protected variables are declared it may happen that subclasses depend strongly on them. If this happens a change of the base class could lead to necessary changes in the subclasses, which is exactly what encapsulation tries to avoid and thus effectively breaks it\cite[p.19]{gof}.
 
 \subsection{Inheritance}
-Inheritance describes the concept of a child class inheriting all attributes, methods and other properties from a parent class. The child class is connected with the base trough a \emph{is-a}-relationship. The child is therefore a superset of the base class as it can be extended to meet the new requirements. This concept is important as it encourages developers to reuse existing code and in that way lower the risk of programming errors \cite{johnson91} and is often called \emph{white-box-reuse} as the internals of the base class in general are visible to the programmer \cite[p.19]{gof}. 
+Inheritance describes the concept of a child class inheriting all attributes, methods and other properties from a parent class. The child class is connected with the base trough a \emph{is-a}-relationship and can then be extended to meet the new requirements. This concept is important as it encourages developers to reuse existing code and in that way lower the risk of programming errors \cite{johnson91} and is often called \emph{white-box-reuse} as the internals of the base class in general are visible to the programmer \cite[p.19]{gof}. 
 
-A prominent problem often mentioned in this context is the \emph{Diamond Problem} in the sense of multiple inheritance. It describes a situation in which at least two parents of a derived class share a single base class \cite{truyen04}. If now a method of the topmost class is overridden by both ancestors of lowermost class, the question arises which of the two possible methods should be called. Some languages, such as Java or C\#, do not support multiple inheritance for this reason, while others explicitly allow it, such as C++ or Python. In this cases if a situation as described in the Diamond Problem arises the results can cause undefined behaviour.
+A prominent problem often mentioned in this context is the \emph{Diamond Problem} \cite{truyen04} in the sense of multiple inheritance. It describes a situation in which at least two parents of a derived class share a single base class . If now a method of the topmost class is overridden by both ancestors of lowermost class, the question arises which of the two possible methods should be called. Some languages, such as Java or C\#, do not support multiple inheritance for this reason, while others explicitly allow it, such as C++ or Python. In this cases if a situation as described in the Diamond Problem arises the results can cause undefined behaviour.
 
 \subsection{Polymorphism}
 
@@ -28,7 +28,7 @@ The other important kind is \emph{overloading} polymorphism which is used to pro
 
 \subsection{Single Responsibility Principle}
 \label{sec:srp}
-This important principle states that each class should only full-fill one particular purpose and as a result does only have one reason to change. The computer scientist D.L. Parnas wrote that in software development each design decision which is likely to change should be placed in a single, independent module and hides this decision from others \cite{srp}. When followed it avoids side effects on other responsibilities when changing the class. 
+This important principle states that each class should only full-fill one particular purpose and as a result does only have one reason to change. The computer scientist D.L. Parnas wrote that in software development each design decision which is likely to change should be placed in a single, independent module and hides this decision from others \cite{srp}. When software is programmed this way side effects when changing the classes can be reduced.
 
 A example of a class violating this concept could be a class that reads two numbers from the user, calculates the sum and prints the result. While this program seems quite simple three different responsibilities are placed in the same class. If either the means to provide the input, for presenting need to be modified or the algorithms should support other data types, the class need to be changed. The modifications may introduce errors to the other functionality, which could be avoided if the program fould conform the principle. This would require placing each responsibility in a independent module.
 \subsection{Open Closed Principle}
@@ -39,7 +39,7 @@ Inheritance addresses this problem as it empowers the programmer to add new feat
 
 
 \section{Design Patterns and Architectural Patterns}
-In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of books, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common. 
+In opposite to the previous chapter which describes rather abstract guidelines in the object oriented programming this section focuses on widespread methods which try to help solving common problems that might occur in bigger projects. They are called \emph{design patterns} and are subject to a large amount of resources and publications, of which the most famous is probably \emph{Design Patterns - Elements of Reusable Object-Oriented Software} by Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides and \emph{Patterns of Enterprise Application Architecture} by Martin Fowler. While the former book is more focused on general programming patterns, the latter one is more relevant for bigger businesses where a multi-tier architecture (see section \ref{sec:multi-tier}) is more common. 
 
 The main difference between architectural and design patterns lies in different phases they are applied at. Architectural patterns provide high-level strategies providing a big picture often describing the interaction between so-called \emph{components}, which can vary widely in its complexity and each of them providing a well-described service and fulfilling a certain purpose. Design patterns focuses more on the actual implementation and describes a way to solve a problem on class and interface level. 
 
@@ -60,16 +60,15 @@ Dependency Injection is a very common and important pattern that is used in obje
 \label{sec:mvc}
 The Model-View-Controller (MVC) is a pattern that describes a separation of a program in three layers, it is considered both a design and a architectural pattern, depending on the point of view.  Its goal is to improve flexibility and extensibility of an application which can help to improve maintainability. It consists of three components, from which the \emph{model} contains the business logic, the \emph{controller} processes interactions and the \emph{view} presents some kind of user interface \cite{mvc}.
 
-This pattern is not very well defined and is subject of constant discussions. While it is commonly agreed upon that the application should be split in the three layers, the data flows and connections between the components are described in many different ways. The original concept of MVC developed for Smalltalk as described before the model holds logic and data of the application \cite[p.4]{gof}. Views subscribe at the model for notifications on changes of data in order to be able to update and refresh themselves. The controller is responsible of managing user interaction, which includes switching between views and forwarding requests to the model. This situation can be seen in Figure \ref{fig:mvc-smalltalk}. This direct interaction between model and view is often not desirable, especially in the context of web applications, which leaves it deprecated today. 
+The modern understanding of the pattern is ambiguous making it subject of constant discussions. While it is commonly agreed upon that the application should be split in the three layers, the data flows and connections between the components are described in many different ways. The original concept of MVC developed for Smalltalk as described before the model holds logic and data of the application \cite[p.4]{gof}. Views subscribe at the model for notifications on changes of data in order to be able to update and refresh themselves. The controller is responsible of managing user interaction, which includes switching between views and forwarding requests to the model. This situation can be seen in Figure \ref{fig:mvc-smalltalk}. This direct interaction between model and view is often not desirable, especially in the context of web applications, which leaves it deprecated today. 
 
 \begin{figure}[htbp]
 	\centering
 
 	
-	\includegraphics[width=0.5\textwidth]{./content/pictures/mvc-smalltalk.jpg}
-	\caption{Classical Model-View-Controller concept as used in Smalltalk. Model and View know each other.}
+	\includegraphics[width=0.9\textwidth]{./content/pictures/mvc-smalltalk.jpg}
+	\caption[Classical Model-View-Controller concept as used in Smalltalk.]{Classical Model-View-Controller concept as used in Smalltalk. Model and View know each other.}
 	\label{fig:mvc-smalltalk}
-	\caption*{Source: \href{https://www.mimuw.edu.pl/\~sl/teaching/00\_01/Delfin\_EC/Overviews/MVC.htm}{https://www.mimuw.edu.pl}, accessed 5.9.2017}
 \end{figure}
 
 \subsection{Model-View-Presenter}
@@ -78,8 +77,8 @@ The Model-View-Presenter (MVP) pattern is similar to the MVC-model as it shares 
 \begin{figure}[htbp]
 	\centering
 
-	\includegraphics[width=0.5\textwidth]{./content/pictures/mvp.png}
-	\caption{Diagram of Model-View-Presenter. While the view again only holds the means for displaying the data and interacting, in opposite to the MVC-model it does not know about the model but only corresponds with the presenter. The presenter is responsible for gathering the necessary data from the model and forwards it to the view. The model does not know about the presenter.}
+	\includegraphics[width=0.7\textwidth]{./content/pictures/mvp.png}
+	\caption[Diagram of Model-View-Presenter.]{Diagram of Model-View-Presenter. The view only holds the means for displaying the data and interacting, in opposite to the MVC-model it does not know about the model, but only corresponds with the presenter. The presenter is responsible for gathering the necessary data from the model and forwards it to the view. The model does not know about the presenter.}
 	\label{fig:mvp}
 	\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=19794348}{https://commons.wikimedia.org/w/index.php?curid=19794348}, accessed on 5.9.2017}
 \end{figure}
@@ -90,8 +89,8 @@ After some years Martin Fowler drafted two design patterns that are closely conn
 \begin{figure}[htbp]
 	\centering
 
-	\includegraphics[width=0.5\textwidth]{./content/pictures/passive-view.png}
-	\caption{Basic diagrams of the Passive View (left) and Supervising Controller patterns (right). In the former as little logic as possible is placed in the view making it easy replaceable by a mock object for testing. Synchronization logic needs to be placed in the Presenter. In the latter view and model are connected trough data bindings empowering these two to perform synchronization tasks on their own. This simplifies the role of the presenter.}
+	\includegraphics[width=\textwidth]{./content/pictures/passive-view.png}
+	\caption[Basic diagrams of the Passive View and Supervising Controller patterns.]{Basic diagrams of the Passive View (left) and Supervising Controller patterns (right). In the former as little logic as possible is placed in the view making it easy replaceable by a mock object for testing. Synchronization logic needs to be placed in the Presenter. In the latter view and model are connected trough data bindings empowering these two to perform synchronization tasks on their own. This simplifies the role of the presenter.}
 	\label{fig:passive-view-supervision-controller}
 	\caption*{Source: \href{https://msdn.microsoft.com/en-us/library/ff709839.aspx}{https://msdn.microsoft.com/en-us/library/ff709839.aspx}, accessed 5.9.2017}
 \end{figure}
@@ -103,14 +102,13 @@ In the concept of passive view the model is not connected with the view, which i
 
 
 \subsection{Client-Server}
-The Client-Server model describes a way to separate tasks within a network. While the client, which can be any kind of computer program, requests a resource from the server. It is designated to be used within the internet and is still on of the cornerstones of current web infrastructure \cite[p. 3ff]{server} . A prominent example of the client-server model is the Domain-Name-System (DNS). When a user types in the domain name of a service he wants to access, the browser needs to translate the name into a IP-Address he can work with. In order to do that he sends a request to a DNS-Server, making him a client. While he does not need to know how exactly the resolving takes places he requires the server response to have a certain format described in the communication protocol. 
+The Client-Server model describes a way to separate tasks within a network. While the client, which can be any kind of computer program, requests a resource from the server. It is designated to be used within the internet and is still on of the cornerstones of current web infrastructure \cite[p. 3ff]{server}. A prominent example of the client-server model is the Domain-Name-System (DNS). When a user types in the domain name of a service he wants to access, the browser needs to translate the name into a IP-Address it can work with. In order to do that the browser sends a request to a DNS-Server, making it a client. While it does not need to know how exactly the resolving takes places he requires the server response to have a certain format described in the communication protocol. 
 
-There are several benefits of using this architecture. For starters it centralizes the administration which lowers the efforts of managing access rights, accounts and so on. Because the important data is in one place it is easier to create backups and ensure security policies. However a server is considered a \emph{Single Point of Failure}, meaning that a whole service will be unavailable if the server for any reason is not reachable, making it a worthy target of attacks. While the impact depends on the actual service built, scalability and extensibility are important factors. It is easier to extend the features provided by a service when using the client-server-model, while it reduces scalability as the hardware needs to be upgraded from time to time to meet a increased number of requests directed to the server.
+There are several benefits of using this architecture. For example it centralizes the administration which lowers the efforts of managing access rights, accounts and so on. Because the important data is in one place it is easier to create backups and ensure security policies. However a server is considered a \emph{Single Point of Failure}, meaning that a whole service will be unavailable if the server for any reason is not reachable, making it a worthy target of attacks. While the impact depends on the actual service built, scalability and extensibility are important factors. It is easier to extend the features provided by a service when using the client-server-model, while it reduces scalability as the hardware needs to be upgraded from time to time to meet a increased number of requests directed to the server.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./content/pictures/client-server.jpg}
-	\caption{Client-Server setup. The client sends a request to a server by messages defined in the protocol. The processing of the request is transparent to the client, it does not know about actions taken by the server and awaits a response in a certain format.}
-	\caption*{Source: \href{https://abcnetworking.wikispaces.com/Client+Server+Networking}{https://abcnetworking.wikispaces.com/Client+Server+Networking}, accessed on 6.9.2017}
+	\includegraphics[width=0.7\textwidth]{./content/pictures/client-server.jpg}
+	\caption[Client-Server setup.]{Client-Server setup. The client sends a request to a server by messages defined in the protocol. The processing of the request is transparent to the client, it does not know about actions taken by the server and awaits a response in a certain format.}
 \end{figure}
 
 \subsection{Peer-to-Peer}
@@ -118,23 +116,22 @@ Peer-to-Peer (P2P) infrastructure is the counterpart of client-server-models. No
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./content/pictures/P2P-network.jpg}
-	\caption{Peer-to-peer setup. Each peer has the same rights, no central server exists.}
+	\includegraphics[width=0.7\textwidth]{./content/pictures/P2P-network.jpg}
+	\caption[Peer-to-peer setup.]{Peer-to-peer setup. Each peer has the same role, no central server exists.}
 	\label{fig:p2p}
-	%\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=2551723}{https://commons.wikimedia.org/w/index.php?curid=2551723}, accessed on 6.9.2017}
+	\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=2551723}{https://commons.wikimedia.org/w/index.php?curid=2551723}, accessed on 6.9.2017}
 \end{figure}
 
 \subsection{Multi-Tier and Multi-Layer Architecture}
 \label{sec:multi-tier}
-Multi-Tier architecture is mostly mentioned in the context of web applications. In general it describes the separation of responsibilities on different \emph{physical} places \footnote{In this context physical separation means that there has to be going on any kind of communication between independent processes within the same machine or connected trough the internet.}. This is the main difference to a multi-layer-system where the responsibilities are separated but placed at the same process which indicates the use of interfaces. 
+Multi-Tier architecture is often mentioned in the context of web applications. In general it describes the separation of responsibilities on different \emph{physical} places \footnote{In this context physical separation means that there has to be going on any kind of communication between independent processes within the same machine or connected trough the internet.}. This is the main difference to a multi-layer-system where the responsibilities are separated but placed at the same process which indicates the use of interfaces. 
 
 A 3-Tier-Architecture nowadays refers mostly to the typical set-up of a web application as it can be seen in Figure \ref{fig:multi-tier}. It has to be noted that it is very common to use multi-tier and multi-layer architecture mutually. For example, the logic tier in the figure could use a data-access-layer to abstract the communication with the data tier. 
 
 \begin{figure}[htbp]
 	\centering
-
-	\includegraphics[width=0.5\textwidth]{./content/pictures/multi-tier.jpg}
-	\caption{Multi-Tier set-up. The tiers are physically separated.}
+	\includegraphics[width=\textwidth]{./content/pictures/multi-tier.jpg}
+	\caption[Multi-Tier set-up.]{Multi-Tier set-up. The tiers are physically separated.}
 	\label{fig:multi-tier}
 	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier\_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}
 \end{figure}
@@ -168,7 +165,7 @@ If it is wanted to refer from one table row to the a record from another table a
 \label{sec:mongodb}
 As a prominent example for NoSQL\footnote{Not only SQL}-databases MongoDB is a database engine written in C++ and published in 2009. In opposite to relational databases it persists the data in \emph{documents} which are structured in a JSON\footnote{JavaScript Object Notation, a syntax for exchanging data which is easy to read for humans and efficiently processable by machines. It is build around key-value-pairs which can be nested.}-like manner. 
 
-Documents can be stored in \emph{collections} which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.
+Documents can be stored in \emph{collections}, which are comparable to tables in SQL-databases. While all rows in tables possess the same columns this is not necessarily true for collections. Each document in a collection can hold arbitrary attributes which improves the flexibility while as a trade-off reducing data integrity. In opposite to relational databases in MongoDB foreign keys cannot be created, however each document is provided with a built-in unique identifier.
 
 \subsection{Caching}
 
@@ -177,7 +174,7 @@ Caching is the process to hold often needed data in memory to reduce the time ne
 In most of the cases placing the cache in the data access layer (see section \ref{sec:multi-tier}) leads to the simplest implementation as all data accesses are passing through here, however depending on the structure and needs of the application it may be necessary to implement the cache in the business code.
 
 \subsubsection{Caching strategies}
-There are two main types of caching policies: \emph{write-through} and \emph{write-back}. When performing write-trough-caching all data is first persisted and then immediately updated in the cache while blocking the operation until all necessary writes are completed. This ensures that at all times a up-to-date copy of the data is available \footnote{\href{http://searchsolidstatestorage.techtarget.com/answer/Comparing-write-through-write-back-and-write-around-caching}, accessed 10.9.2017}. 
+There are two main types of caching policies: \emph{write-through} and \emph{write-back}. When performing write-trough-caching all data is first persisted and then immediately updated in the cache while blocking the operation until all necessary writes are completed. This ensures that at all times a up-to-date copy of the data is available \footnote{\href{http://searchsolidstatestorage.techtarget.com/answer/Comparing-write-through-write-back-and-write-around-caching}{http://searchsolidstatestorage.techtarget.com/answer/Comparing-write-through-write-back-and-write-around-caching}, accessed 10.9.2017}. 
 
 The write-back-policy on the other hand also caches write accesses without directly persisting it. The write operation onto the data tier is being performed asynchronously, this may then happen when the system load is low and therefore the overall performance may be improved. However it is considered more dangerous in terms of data loss due to system crashes or other errors as the only valid copy of the data is only resided in the cache  \footnote{\href{http://www.computerweekly.com/feature/Write-through-write-around-write-back-Cache-explained}{http://www.computerweekly.com/feature/Write-through-write-around-write-back-Cache-explained}, accessed 10.9.2017}.
 
@@ -186,7 +183,7 @@ As memory is a scare resource it is necessary to limit caching space and thus no
 
 The best policy clearly would be to replace the cache entry that will be needed again the latest. As this is information that is not available the associated \textbf{Bélády's algorithm} is considered theoretical and is only used for measuring and comparing the performance of other policies.
 
-There are several possibilities which differ significantly depending on the data access pattern (list not exhaustive):
+There are several possibilities which differ significantly depending on the data access pattern (this list is not exhaustive):
 \begin{itemize}
 	\item \textbf{First-In, First-Out (FIFO)}: When caching with the FIFO policy as soon the cache runs full the \emph{oldest} entry will be replaced. This is typically implemented as a Queue because it reduces the efforts to keep track of the entries age.
 	\item \textbf{Least Recently Used (LRU)}: This algorithm keeps track of the last reference to cache entries. When a replacement is necessary it frees the page which reference dates back the longest. 
