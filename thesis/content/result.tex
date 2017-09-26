@@ -6,7 +6,7 @@ This section only lists the findings while section \ref{sec:discussion} puts the
 
 \section{Lines of Code}
 \label{sec:line-count}
-In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line on the different branches of the program. In figure \ref{fig:lines-of-code} the  increase in lines of code can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
+In Table \ref{table:lines-of-code} the total lines programmed for both programs and the phases are listed. This is counted by using simple command-line tools on the different branches of the program. In figure \ref{fig:lines-of-code} the  increase in lines of code can be seen. It is notable that the best practice implementation consists of more total lines of code in all phases. 
 
 Due to the use of interfaces in java a lot of annotations were necessary which in fact do not have any significance to the topic. Thus the adjusted line count excludes lines that only hold the \texttt{@Override}-Annotation.
 
@@ -28,7 +28,7 @@ Due to the use of interfaces in java a lot of annotations were necessary which i
 
 	\begin{tikzpicture}
 	\begin{axis}[
-	height=0.7\textwidth,
+	height=0.6\textwidth,
 	xlabel={Phases},
 	ylabel={Lines of Code},
 	y label style={at={(axis description cs:-0.1,.5)}},
@@ -212,3 +212,74 @@ Another interesting aspect of the data is the comparison of the average line cou
 	\caption{Average lines of code per file for both program versions and all phases}
 	\label{fig:avg-lines}
 \end{figure}
+
+\section{Code Complexity Analysis with SonarQube}
+\label{sec:complexity}
+By using the static code analysis tool \emph{SonarQube}\footnote{\href{http://www.sonarqube.org/}{http://www.sonarqube.org/}, accessed 25.9.2017, Open Source and licensed under LGPLv3} it is possible to get additional information about the code complexity in terms of cyclomatic complexity. This metric was invented by Thomas J McCabe in 1976 and counts the independent paths that exist in a program or module \cite{cyclo}. In the case of SonarQube this means that the Java-statements \texttt{if}, \texttt{for}, \texttt{while}, \texttt{case}, \texttt{catch}, \texttt{throw}, \texttt{return}, \texttt{\&\&}, \texttt{||} and \texttt{?} increase the complexity\footnote{For more details please refer to the documentation at the tools website under \href{https://docs.sonarqube.org/display/SONAR/Metrics+-+Complexity}{https://docs.sonarqube.org/display/SONAR/Metrics+-+Complexity}, accessed 25.9.2017.}
+
+After analysing the code the following results could be obtained. Table \ref{table:total-complexity} shows the overall complexity of the two implementations and its associated chart \ref{fig:total-complexity} visualizes the data. Table \ref{table:file-complexity} also states the complexity of the code per source code file.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|c|c|c|} \hline
+		\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
+		Best Practice & 795 & 1089 (+ 36\%)& 1191 (+ 9\%)\\ \hline
+		Ad-Hoc & 779 & 1205 (+ 55\%)& 1335 (+ 10\%)\\ \hline
+	\end{tabular}
+	\caption{Overall Code complexity.}
+	\label{table:total-complexity}
+\end{table}
+
+\begin{figure}[htbp]
+	
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel={Phases},
+	ylabel={Code Complexity},
+	y label style={at={(axis description cs:-0.1,.5)}},
+	xmin=0, xmax=4,
+	ymin=700, ymax=1500,
+	xtick={1,2,3},
+	ytick={700, 900, 1100, 1300, 1500},
+	legend pos=south east,
+	ymajorgrids=true,
+	grid style=dashed,
+	scaled ticks=false, 
+	tick label style={/pgf/number format/fixed} 
+	]
+	
+	\addplot[
+	color=blue,
+	mark=square,
+	]
+	coordinates {
+		(1,795)(2,1089)(3,1191)
+	};
+	
+	\addplot[
+	color=red,
+	mark=square,
+	]
+	coordinates {
+		(1,779)(2,1205)(3,1335)
+	};
+	\legend{Best Practice , Ad-hoc}
+	
+	\end{axis}
+	
+	\end{tikzpicture}
+	\caption{Overall code complexity both program versions and all phases}
+	\label{fig:total-complexity}
+\end{figure}
+
+\begin{table}[htbp]
+		\centering
+	\begin{tabular}{|c|c|c|c|} \hline
+		\textbf{Program version} &\textbf{Phase 1} & \textbf{Phase 2} & \textbf{Phase 3} \\ \hline
+		Best Practice & 8,3 & 8,7 & 9,1 \\ \hline
+		Ad-Hoc & 13,2 & 13,7 & 15,0 \\ \hline
+	\end{tabular}
+	\caption{Code complexity per file}
+	\label{table:file-complexity}
+\end{table}
