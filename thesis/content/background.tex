@@ -16,7 +16,7 @@ Many programming languages provide different access levels varying from visible 
 \subsection{Inheritance}
 Inheritance describes the concept of a child class inheriting all attributes, methods and other properties from a parent class. The child class is connected with the base trough a \emph{is-a}-relationship and can then be extended to meet the new requirements. This concept is important as it encourages developers to reuse existing code and in that way lower the risk of programming errors \cite{johnson91} and is often called \emph{white-box-reuse} as the internals of the base class in general are visible to the programmer \cite[p.19]{gof}. 
 
-A prominent problem often mentioned in this context is the \emph{Diamond Problem}\cite{truyen04} in the sense of multiple inheritance. It describes a situation in which at least two parents of a derived class share a single base class . If now a method of the topmost class is overridden by both ancestors of lowermost class, the question arises which of the two possible methods should be called. Some languages, such as Java or C\#, do not support multiple inheritance for this reason, while others explicitly allow it, such as C++ or Python. In this cases if a situation as described in the Diamond Problem arises the results can cause undefined behaviour.
+A prominent problem often mentioned in this context is the \emph{Diamond Problem} \cite{truyen04} in the sense of multiple inheritance. It describes a situation in which at least two parents of a derived class share a single base class . If now a method of the topmost class is overridden by both ancestors of lowermost class, the question arises which of the two possible methods should be called. Some languages, such as Java or C\#, do not support multiple inheritance for this reason, while others explicitly allow it, such as C++ or Python. In this cases if a situation as described in the Diamond Problem arises the results can cause undefined behaviour.
 
 \subsection{Polymorphism}
 
@@ -66,7 +66,7 @@ The modern understanding of the pattern is ambiguous making it subject of consta
 	\centering
 
 	
-	\includegraphics[width=0.5\textwidth]{./content/pictures/mvc-smalltalk.jpg}
+	\includegraphics[width=0.7\textwidth]{./content/pictures/mvc-smalltalk.jpg}
 	\caption[Classical Model-View-Controller concept as used in Smalltalk.]{Classical Model-View-Controller concept as used in Smalltalk. Model and View know each other.}
 	\label{fig:mvc-smalltalk}
 	\caption*{Source: \href{https://www.mimuw.edu.pl/\~sl/teaching/00\_01/Delfin\_EC/Overviews/MVC.htm}{https://www.mimuw.edu.pl}, accessed 5.9.2017}
@@ -78,7 +78,7 @@ The Model-View-Presenter (MVP) pattern is similar to the MVC-model as it shares 
 \begin{figure}[htbp]
 	\centering
 
-	\includegraphics[width=0.5\textwidth]{./content/pictures/mvp.png}
+	\includegraphics[width=0.7\textwidth]{./content/pictures/mvp.png}
 	\caption[Diagram of Model-View-Presenter.]{Diagram of Model-View-Presenter. The view only holds the means for displaying the data and interacting, in opposite to the MVC-model it does not know about the model, but only corresponds with the presenter. The presenter is responsible for gathering the necessary data from the model and forwards it to the view. The model does not know about the presenter.}
 	\label{fig:mvp}
 	\caption*{Source: \href{https://commons.wikimedia.org/w/index.php?curid=19794348}{https://commons.wikimedia.org/w/index.php?curid=19794348}, accessed on 5.9.2017}
@@ -103,7 +103,7 @@ In the concept of passive view the model is not connected with the view, which i
 
 
 \subsection{Client-Server}
-The Client-Server model describes a way to separate tasks within a network. While the client, which can be any kind of computer program, requests a resource from the server. It is designated to be used within the internet and is still on of the cornerstones of current web infrastructure \cite[p. 3ff]{server} . A prominent example of the client-server model is the Domain-Name-System (DNS). When a user types in the domain name of a service he wants to access, the browser needs to translate the name into a IP-Address it can work with. In order to do that the browser sends a request to a DNS-Server, making it a client. While it does not need to know how exactly the resolving takes places he requires the server response to have a certain format described in the communication protocol. 
+The Client-Server model describes a way to separate tasks within a network. While the client, which can be any kind of computer program, requests a resource from the server. It is designated to be used within the internet and is still on of the cornerstones of current web infrastructure \cite[p. 3ff]{server}. A prominent example of the client-server model is the Domain-Name-System (DNS). When a user types in the domain name of a service he wants to access, the browser needs to translate the name into a IP-Address it can work with. In order to do that the browser sends a request to a DNS-Server, making it a client. While it does not need to know how exactly the resolving takes places he requires the server response to have a certain format described in the communication protocol. 
 
 There are several benefits of using this architecture. For example it centralizes the administration which lowers the efforts of managing access rights, accounts and so on. Because the important data is in one place it is easier to create backups and ensure security policies. However a server is considered a \emph{Single Point of Failure}, meaning that a whole service will be unavailable if the server for any reason is not reachable, making it a worthy target of attacks. While the impact depends on the actual service built, scalability and extensibility are important factors. It is easier to extend the features provided by a service when using the client-server-model, while it reduces scalability as the hardware needs to be upgraded from time to time to meet a increased number of requests directed to the server.
 \begin{figure}[htbp]
@@ -132,7 +132,7 @@ A 3-Tier-Architecture nowadays refers mostly to the typical set-up of a web appl
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.7\textwidth]{./content/pictures/multi-tier.jpg}
+	\includegraphics[width=\textwidth]{./content/pictures/multi-tier.jpg}
 	\caption[Multi-Tier set-up.]{Multi-Tier set-up. The tiers are physically separated.}
 	\label{fig:multi-tier}
 	\caption*{Source: \href{https://en.wikipedia.org/wiki/Multitier\_architecture}{https://en.wikipedia.org/wiki/Multitier\_architecture}, accessed on 6.9.2017}

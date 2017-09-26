@@ -2,7 +2,7 @@
 In order to compare the effects of using design patterns as stated before an application is being developed. This section describes the requirements of the program in detail and presents how the two versions are being implemented.
 
 \section{Domain Description}
-The application provides a time-tracking solution for small businesses. The basic work-flow includes users (members), projects, project phases, project members and activities. 
+The application provides a time-tracking solution for small businesses. The basic work-flow includes users (members), projects, project phases, project members and activities. A diagram of this can be seen in figure \ref{fig:data-diagram}.
 
 \begin{itemize}
 	\item \textbf{User}: A user is considered employee of the firm. She can participate in existing projects or create new projects on her own.
@@ -11,6 +11,13 @@ The application provides a time-tracking solution for small businesses. The basi
 	\item \textbf{Project Member}: A user is considered project member of a specific project as soon he participates or leads it. Two roles exist, he can either be leader or member. A project leader has the responsibility of maintaining project specific data, such as description, phases and assigning project members. He is \emph{not} allowed to create new users. After creating a new project, one is automatically project leader. A project leader is allowed to monitor the statistics of his projects including the workloads of the project members. As a simple member one is allowed to add, delete and modify activities created by the user and is only allowed to perform this actions for projects he is assigned to. He is also only allowed to monitor his own statistics for projects he participates.
 	\item \textbf{Activity}: A activity represents a workload that is done by a specific member in a specific phase for a specific project.
 \end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./content/pictures/data-diagram.jpg}
+	\caption[Diagram of data-class relations.]{Diagram of data-class relations.}
+	\label{fig:data-diagram}
+\end{figure}
 
 \subsubsection{Use-Cases}
 To specify in depth how the program should work the following use-cases are set.
@@ -27,6 +34,7 @@ To specify in depth how the program should work the following use-cases are set.
 
 \item \textbf{Settings:} Utilizing the associated button of the left side bar the main panel provides means to change the password, email-address and name.
 \end{enumerate}
+
 
 \section{Experimental set-up}
 Two applications were developed both serving and meeting the requirements stated in the previous section. The programs must not differ in its features, behaviour or appearance, the difference has to be in the code. 
@@ -52,12 +60,43 @@ After the setting of basic requirements more and more modifications and extensio
 \subsection{Phase 1: Basic requirements} 
 Initially the application should provide a graphical user interface by using the Swing-library (section \ref{sec:swing}) and a PostgreSQL database (section \ref{sec:postgres}) should be used as data tier.
 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./content/pictures/bpV1.jpg}
+	\caption[Architectual Diagram of the best practice implementation in phase 1.]{Architectural Diagram of the best practice implementation in phase 1. All layers are 
+	accessed using interfaces, the model layer accesses the databases through a separate data access layer in form of a repository interface.}
+	\label{fig:bpV1}
+\end{figure}
+
+\begin{figure}[htbp]
+		\centering
+	\includegraphics[width=0.4\textwidth]{./content/pictures/monoV1.jpg}
+	\caption[Architectual Diagram of the ad-hoc implementation in phase 1.]{Architectural Diagram of the ad-hoc implementation in phase 1. No interfaces are used, all accesses are performed on concrete implementations.}
+	\label{fig:monoV1}
+\end{figure}
+
+
+
 \subsection{Phase 2: Support of a different graphical user interface library}
 After meeting the basic requirements the virtual stakeholders are requesting the support of a different GUI library, namely JavaFX (section \ref{sec:javafx}). By providing application start-up arguments the user should be able to decide which GUI should be presented to him. All other use-cases and requirements regarding the work flow apply nevertheless.
 
 \subsection{Phase 3: Support of a different data tier implementation}
 During the process the stakeholders request that the application should add support for MongoDB (section \ref{sec:mongodb}). They want to allow the user to choose between the two databases as both implementations have advantages and disadvantages. 
 
+\begin{figure}[htbp]
+		\centering
+	\includegraphics[width=0.5\textwidth]{./content/pictures/bpV3.jpg}
+	\caption[Architectual Diagram of the best practice implementation in phase 3.]{Architectural Diagram of the best practice implementation in phase 3. As all layers are accessed using interfaces, the accesses of the model layer do not differ from phase 1. Only a new implementation of the repository interface needs to be added. The same situation occurs at the controller layer, where only a different view-interface implementation needs to be created.}
+	\label{fig:bpV3}
+\end{figure}
+
+\begin{figure}[htbp]
+		\centering
+	\includegraphics[width=0.5\textwidth]{./content/pictures/monoV3.jpg}
+	\caption[Architectual Diagram of the ad-hoc implementation in phase 3.]{Architectural Diagram of the ad-hoc implementation in phase 3. As no interfaces are used, the model layer need to be able to access both the PostgreSQL and MongoDB database. The controller needs to access both the Swing and JavaFX view.}
+	\label{fig:monoV3}
+\end{figure}
 %\subsection{Phase 4: Implementation of a cached controller}
 %Several months after the deployment a customer reports performance issues and heavy load on their database server. Therefore it is decided to implement a caching algorithm for the controller to reduce expensive database calls. Again by starting the application with different arguments either the standard controller or the caching implementation should be used.
 
@@ -269,7 +308,7 @@ public class LoginControllerStandard {
 }
 \end{lstlisting}
 
-
+\clearpage
 \section{Phase 3: Support of a different data tier implementation}
 The support of a new data tier shows even more weaknesses of the ad-hoc implementation.
 

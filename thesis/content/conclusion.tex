@@ -2,14 +2,15 @@
 
 In the last chapters some interesting findings were gathered. Two program versions were compared, one following best practice guidelines in the sense of object oriented programming, the other one featured ad-hoc programming without paying attention to topics of software maintenance.
 
-Throughout the development process five major issues could be discovered:
+Throughout the development process six major issues could be discovered:
 
 \begin{itemize}
 	\item \textbf{Number of files}: The best practice version of the application needed a higher number of files than the ad-hoc implementation throughout all phases.
 	\item \textbf{Lines of code}: The best practice version needed more lines of code in all phases.
 	\item \textbf{Lines per file}: The best practice versions files contained notably less lines of code per file.
 	\item \textbf{Increase in code lines}: Especially in transition from phase 1 to phase 2 the best practice implementation needed considerably less code additions.
-	\item \textbf{Touched files}: The number of touched or edited files during phase traversal was lower in the best practice program version.
+	\item \textbf{Touched files}: The number of touched or edited files during phase transition was lower in the best practice program version.
+	\item \textbf{Code Complexity}: The ad-hoc implementations code complexity increases more rapidly during the phase transitions and lays considerably above the complexity of the best practice program version.
 \end{itemize}
 
 It has to be said that the results gathered in section \ref{sec:results} may vary depending on the coding style, programming language, concrete use case and size of the project, furthermore the term \emph{code quality} does not have a unique definition. There are many different standpoints on what attributes a well written code should have, often depending on company coding policies. One factor that is not mentioned by intention in this thesis is the readability of the code as this is a very subjective matter and is therefore not considered. 
